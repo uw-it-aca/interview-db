@@ -1,7 +1,6 @@
 from django.conf import settings
 import json
 
-
 def _get_article_data():
     data_dir = settings.THRIVE_OUTPUT
     summary_path = data_dir + "/summary.json"

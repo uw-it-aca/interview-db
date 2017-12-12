@@ -1,7 +1,7 @@
 <div class="message">
     Title: <div class="title">{{ article.title }}</div>
     <div class="image">
-        <img src="{% templatetag openblock %} static '{{ article.image.url }}'{% templatetag closeblock %}}" />
+        <img src="{{ article.image_static_string|safe }}" />
     </div>
     Short: <div class="short_body">{{ article.short_body }}</div>
     Long: <div class="long_body">{{ article.long_body }}</div>

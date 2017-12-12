@@ -37,7 +37,7 @@ class Article(models.Model):
     short_body = models.TextField(blank=True,
                                   null=True)
     long_body = models.TextField()
-    image = models.ImageField(upload_to='thrive_images')
+    image = models.ImageField(upload_to='hx_toolkit_images')
 
     category = models.ForeignKey(Category,
                                  on_delete=models.PROTECT)
