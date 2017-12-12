@@ -1,0 +1,30 @@
+<div class="message">
+    Title: <div class="title">{{ article.title }}</div>
+    <div class="image">
+        <img src="{% templatetag openblock %} static '{{ article.image.url }}'{% templatetag closeblock %}}" />
+    </div>
+    Short: <div class="short_body">{{ article.short_body }}</div>
+    Long: <div class="long_body">{{ article.long_body }}</div>
+    {%  if article.related_links.all %}
+    <div>
+        <p>Related Links</p>
+        <ul>
+            {% for link in article.related_links.all %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {%  if article.related_articles.all %}
+    <div>
+        <p>Related Articles</p>
+        <ul>
+            {% for article in article.related_articles.all %}
+                <li><a href="{{ article.slug }}">{{ article.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+</div>
