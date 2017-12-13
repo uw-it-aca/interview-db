@@ -26,11 +26,13 @@ class Command(BaseCommand):
         with open(summary_path, 'w') as summary_file:
                 summary_file.write(summary_json_data.encode('utf-8'))
 
+        load_static_string = "{% load static %}"
         articles = Article.objects.all()
         for article in articles:
             rel_path = self._move_image(article.image.path)
             image_static_string = self._get_static_string(rel_path)
             setattr(article, 'image_static_string', image_static_string)
+            setattr(article, 'load_static_string', load_static_string)
 
             article_html = render_article_html(article)
             article_path = article_dir + article.get_article_filename()

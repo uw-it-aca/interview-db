@@ -1,5 +1,6 @@
 from django.conf import settings
 import json
+from django.template.loader import render_to_string
 
 def _get_article_data():
     data_dir = settings.THRIVE_OUTPUT
@@ -38,3 +39,9 @@ def get_article_by_id(article_id):
             return article_data
     except IOError:
         return None
+
+
+def get_rendered_article(article_file):
+    data_dir = settings.THRIVE_OUTPUT
+    article_path = data_dir + "/articles/" + article_file
+    return render_to_string('biology.html')
