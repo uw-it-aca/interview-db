@@ -34,11 +34,19 @@ class Command(BaseCommand):
             setattr(article, 'image_static_string', image_static_string)
             setattr(article, 'load_static_string', load_static_string)
 
-            article_html = render_article_html(article)
+            article_long_html = render_article_html(article)
+
+            base = settings.BASE_DIR
+            article_dir = base + "/hx_toolkit/templates/hx_toolkit_output/"
             article_path = article_dir + article.get_article_filename()
             with open(article_path, 'w+') as article_file:
-                article_file.write(article_html.encode('utf-8'))
+                article_file.write(article_long_html.encode('utf-8'))
 
+            if article.short_body:
+                article_short_html = render_article_html(article, True)
+                article_path = article_dir + article.get_article_filename(True)
+                with open(article_path, 'w+') as article_file:
+                    article_file.write(article_short_html.encode('utf-8'))
 
     def _move_image(self, image_path):
         filename = os.path.basename(image_path)
@@ -53,7 +61,6 @@ class Command(BaseCommand):
         rel_path = '{}/{}'.format(images_dir, filename)
 
         return rel_path
-
 
     def _get_static_string(self, image_path):
         string = "{% static '" + image_path + "' %}"

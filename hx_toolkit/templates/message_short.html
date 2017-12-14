@@ -6,7 +6,6 @@
         <img src="{{ article.image_static_string|safe }}" />
     </div>
     Short: <div class="short_body">{{ article.short_body }}</div>
-    Long: <div class="long_body">{{ article.long_body }}</div>
     {%  if article.related_links.all %}
     <div>
         <p>Related Links</p>

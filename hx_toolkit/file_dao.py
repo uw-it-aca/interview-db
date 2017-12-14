@@ -41,7 +41,9 @@ def get_article_by_id(article_id):
         return None
 
 
-def get_rendered_article(article_file):
-    data_dir = settings.THRIVE_OUTPUT
-    article_path = data_dir + "/articles/" + article_file
-    return render_to_string('biology.html')
+def get_rendered_article_by_id(article_id, is_short=False):
+    if is_short:
+        article_file = "hx_toolkit_output/" + article_id + "_short.html"
+    else:
+        article_file = "hx_toolkit_output/" + article_id + "_long.html"
+    return render_to_string(article_file)
