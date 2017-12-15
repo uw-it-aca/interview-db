@@ -2,6 +2,7 @@ from django.conf import settings
 import json
 from django.template.loader import render_to_string
 
+
 def _get_article_data():
     data_dir = settings.THRIVE_OUTPUT
     summary_path = data_dir + "/summary.json"
