@@ -6,7 +6,6 @@ from django.template.loader import render_to_string
 def _get_article_data():
     data_dir = settings.THRIVE_OUTPUT
     summary_path = data_dir + "/summary.json"
-    print summary_path
 
     with open(summary_path, 'r') as summary_file:
         json_data = summary_file.read()
@@ -14,19 +13,9 @@ def _get_article_data():
         return thrive_data
 
 
-def get_article_links_by_category(category_slug):
+def get_article_links_by_category():
     thrive_data = _get_article_data()
-    article_links = []
-    try:
-        category_articles = thrive_data['category'][category_slug]
-        for article in category_articles:
-            article_links.append({'id': article['slug'],
-                                  'title': article['title']})
-
-    except KeyError:
-        return None
-
-    return article_links
+    return thrive_data['category']
 
 
 def get_article_by_id(article_id):
@@ -58,3 +47,4 @@ def get_article_by_phase_quarter_week(phase, quarter, week):
         return get_rendered_article_by_id(article, True)
     except KeyError:
         return None
+
