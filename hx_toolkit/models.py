@@ -27,10 +27,10 @@ class Article(models.Model):
         ('C', 'Phase C'),
     )
     QUARTER_CHOICES = (
-        ('Au', 'Autumn'),
-        ('Wi', 'Winter'),
-        ('Sp', 'Spring'),
-        ('Su', 'Summer')
+        ('autumn', 'Autumn'),
+        ('winter', 'Winter'),
+        ('spring', 'Spring'),
+        ('summer', 'Summer')
     )
 
     title = models.CharField(max_length=255)
@@ -50,9 +50,11 @@ class Article(models.Model):
                              blank=True,
                              null=True)
     quarter = models.CharField(choices=QUARTER_CHOICES,
-                               max_length=2,
+                               max_length=6,
                                blank=True,
                                null=True)
+
+    # range btwn -2 and 14 weeks
     week = models.IntegerField(blank=True,
                                null=True)
     related_articles = models.ManyToManyField("self",

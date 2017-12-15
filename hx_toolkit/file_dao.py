@@ -48,3 +48,13 @@ def get_rendered_article_by_id(article_id, is_short=False):
     else:
         article_file = "hx_toolkit_output/" + article_id + "_long.html"
     return render_to_string(article_file)
+
+
+def get_article_by_phase_quarter_week(phase, quarter, week):
+    article_data = _get_article_data()
+    try:
+        article = article_data['time'][phase][quarter][str(week)]['slug']
+
+        return get_rendered_article_by_id(article, True)
+    except KeyError:
+        return None

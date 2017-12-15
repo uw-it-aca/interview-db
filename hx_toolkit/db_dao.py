@@ -37,8 +37,7 @@ def create_article_data():
                                                       quarter=quarter[0])
             article_by_week = {}
             for article in quarter_articles:
-                article_by_week.setdefault(article.week, [])\
-                    .append(article.article_title_data())
+                article_by_week[article.week] = article.article_title_data()
             if len(article_by_week):
                 article_by_quarter.setdefault(quarter[0], {})
                 article_by_quarter[quarter[0]] = article_by_week
