@@ -65,5 +65,3 @@ class Command(BaseCommand):
     def _get_static_string(self, image_path):
         string = "{% static '" + image_path + "' %}"
         return string
-
-
