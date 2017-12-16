@@ -17,8 +17,8 @@ before_script:
   - python manage.py migrate
 
 script:
-  - pep8 myuw/ --exclude=hx_toolkit/migrations
-  - FORCE_VIEW_TESTS=1 coverage run --source=myuw/ --omit=myuw/migrations/* manage.py test myuw
+  - pep8 hx_toolkit/ --exclude=hx_toolkit/migrations
+  - FORCE_VIEW_TESTS=1 coverage run --source=hx_toolkit/ --omit=hx_toolkit/migrations/* manage.py test hx_toolkit
   - coveralls-lcov -v -n coverage/lcov.info > js-coverage.json
 after_script:
   - coveralls --merge=js-coverage.json
