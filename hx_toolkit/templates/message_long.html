@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="myuw-article-meta">
-                <a href="">Husky Experience</a>: Thrive - {{ article.category.title }}
+                <a href="/husky_experience/">Husky Experience</a>: Thrive - {{ article.category.title }}
             </div>
             <h2 class="myuw-heading-page">{{ article.title }}</h2>
         </div>
@@ -31,7 +31,7 @@
                 <h3 class="myuw-heading-page">Related Topic</h3>
                 <ul>
                     {% for article in article.related_articles.all %}
-                        <li><a href="{{ article.slug }}">{{ article.title }}</a></li>
+                        <li><a href="/husky_experience?article={{ article.slug }}">{{ article.title }}</a></li>
                     {% endfor %}
                 </ul>
             {% endif %}
