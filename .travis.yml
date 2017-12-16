@@ -25,11 +25,11 @@ before_deploy:
 - find hx_toolkit/ -name \*.pyc -exec rm {} \;
 - echo $TRAVIS_TAG > hx_toolkit/VERSION
 deploy:
-  provider: pypitest
+  provider: pypi
   user: uw-it-axdd
   skip_cleanup: true
   password:
-    secure: X13UIAmiPRmr0furxG8jErrzww8snWbjVP3GfR+d5tfPBPi+BjRbVQHDGavF2SkTft7kBjcV6yx1bv6bmlLZSWTGod8I7xo/Ks/5xEfbE+cLZk5Z6AC+9yt90+41c4ZRyMtkhH2nX1kv6bgbFDwtatxga/gKlzKNbhLnXwxgajuTuz9uKMKxBtcRDgB71GLzhcKKuiwBSLKEDozcjhgLA46y53E4CVnXU4Czt/BWleSJRh6OOvfg9Ty8qRYA1fIg0cTOejWUHl/WV+nelUjms6RDHc91VnO2XAZeEurRrDlMHjken2QtAEjAe4qna55hG7HzCoAlaOzd2QHkgIGzb7nxz1DrmlkS07VxcbhpBevfvETixA2KGlufvBCh5JMK7jpsbVNu62HtCzC7AzeN/OIgw2J9/T0mVc1R7fv7+J0ukJYEQnnzpNqoig960hpnS/TmBSNSXZnqgj1AHwC0QM1i9XDbNe4WkaFPMkOnLkdH3EtQ4bXkuruGNS+3VEjF1yytMgpqDkjAQoBihq1ov5DSNCEuL4kbB+03sgBwQV9R39kVQ4rb2FJMyk16t9XlYIqcf0qSfALqVe5pXkl5dhNme0bEv2/2Grf/7+lqwu1XsNtlkdzX/R4Fps6Nuq4XqjkWyx/AHglKo7ekL0VZtN2uA9BPUjY0uWe5IKUi5do=
+    secure: UMNHhsgTds1bj1ITSpXbUGReyLy9gRjW73VWgBqkzwD2Gx2vOc1PGC7UyeeAmiMKKr1+QQCdeecDxm7tAunPdaNEWpTKCG/3TZm/MkTtqa+x6N+jXj8OgzVkoo8w20Bmu1+xEGq/svqtU09aBbjF/JWx+i7qBrGr+K/38SibMiJSEJPSY7DrYRuqk0KyM5UO9Z1KY0hv47Bq+97vPeSvYWVqNl2IjrtLQCCnnbFeuYDmRIfm/Qgj89wW5w5Hx+dwiNqDwmQbCcX4v3mZGq5bmK4wM4jx5req+4moCJZYQ9MaQSo1tvCZA8GarGg9L8LOjXTXDaEImi7UqP9nUSjZNzxsaiBwSs9iV/isl9EQzKub4yror/I4x3R1+3C4yhtXI8DBbO9r1wdxQsUUor19Hq6VIsd1Og1biseY4sblaC5Z4fZYJ7ai9grJOVx0ctZADu3OE9S+s2mLJVY8QjNFa8vKNeVpOgdPGbd7jDDNIvQJYWPwcGXvye2/f/pY14U/C/haxBvh2SVI8XqoFVUzkH9KvhBcKO1c8L2XbfNdIb67stX1aS7lEYxdgd2c1tN+DJ7DUj+M9/2f9QNmu5uwTkYP7QziLhBhscR7TwtJszPp9xnyJBVN8xas6uZP6f+ySJeF7X7IijxhTEoT+yDrCpov66MMkcQ9ycNxz0u32bQ=
   on:
     tags: true
     python: '2.7'
