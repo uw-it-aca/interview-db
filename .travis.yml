@@ -1,0 +1,25 @@
+sudo: false
+language: python
+services:
+  - mysql
+python:
+  - "2.7"
+env:
+  matrix:
+    - DB=sqlite3
+install:
+  - pip install -r requirements.txt
+before_script:
+  - pip install coverage
+  - pip install python-coveralls
+  - pip install pep8
+  - cp travis-ci/manage.py manage.py
+  - python manage.py migrate
+
+script:
+  - pep8 myuw/ --exclude=hx_toolkit/migrations
+  - FORCE_VIEW_TESTS=1 coverage run --source=myuw/ --omit=myuw/migrations/* manage.py test myuw
+  - coveralls-lcov -v -n coverage/lcov.info > js-coverage.json
+after_script:
+  - coveralls --merge=js-coverage.json
+notifications:
