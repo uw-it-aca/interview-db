@@ -16,7 +16,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 url = "https://github.com/uw-it-aca/hx_toolkit"
 setup(
-    name='uw_hx_toolkit',
+    name='UW_HX_Toolkit',
     version=VERSION,
     packages=['hx_toolkit'],
     author="UW-IT AXDD",
