@@ -47,4 +47,3 @@ def get_article_by_phase_quarter_week(phase, quarter, week):
         return get_rendered_article_by_id(article, True)
     except KeyError:
         return None
-
