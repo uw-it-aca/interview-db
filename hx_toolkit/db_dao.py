@@ -1,5 +1,4 @@
 from hx_toolkit.models import Article, Category
-from django.core import serializers
 
 
 def get_articles_by_category(category_slug):
