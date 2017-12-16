@@ -1,25 +1,35 @@
 sudo: false
 language: python
 services:
-  - mysql
+- mysql
 python:
-  - "2.7"
+- '2.7'
 env:
   matrix:
-    - DB=sqlite3
+  - DB=sqlite3
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
 before_script:
-  - pip install coverage
-  - pip install python-coveralls
-  - pip install pep8
-  - cp travis-ci/manage.py manage.py
-  - python manage.py migrate
-
+- pip install coverage
+- pip install python-coveralls
+- pip install pep8
+- cp travis-ci/manage.py manage.py
+- python manage.py migrate
 script:
-  - pep8 hx_toolkit/ --exclude=hx_toolkit/migrations
-  - FORCE_VIEW_TESTS=1 coverage run --source=hx_toolkit/ --omit=hx_toolkit/migrations/* manage.py test hx_toolkit
-#  - coveralls-lcov -v -n coverage/lcov.info > js-coverage.json
+- pep8 hx_toolkit/ --exclude=hx_toolkit/migrations
+- FORCE_VIEW_TESTS=1 coverage run --source=hx_toolkit/ --omit=hx_toolkit/migrations/*
+  manage.py test hx_toolkit
 after_script:
-  - coveralls --merge=js-coverage.json
-notifications:
+- coveralls --merge=js-coverage.json
+before_deploy:
+- find sqlshare_client/ -name \*.pyc -exec rm {} \;
+- echo $TRAVIS_TAG > sqlshare_client/VERSION
+deploy:
+  provider: pypi
+  user: uw-it-axdd
+  skip_cleanup: true
+  password:
+    secure: GhX+VjGHYV0Fr4yYqogB+8vpxrGQ8l1AHiDQU9eBi57Ck8/ZJiIrzaxpBjvrKWi49a3Ro4P05v+JVLuqjbHoRGIN+FYbDtfklxjyr/9OjRJtBGR86JtxeNJDoPnC35M+q7QU+7pq+JkT11ExdR7IZ9aWoWa6fASrRkWG+JB9TxN5aaqPxjZp1lmwtuCarm88pg29R/lXGtjgSEr+tGZtqwsBb6jnxhj2E4V55XkIqVLdWmOx5xGeTTlJ8LlyxDZmWzAruAlxHY1rLgu80uBxeA+ClmJb+JQav72koU8R4WJKTTQjymbYteEV1pgf32aexr9/06EAAT4fucSB+qNGNkY1HE1mFUcj54SDdbEh76coJ03ngKDLhx1hHM+dOE0casLBbkmELHYWC4MS9eJ5MJcvEnFTvfFpE6SZQNnLkKJtKeDc/EivmyNWYXBR8RFF+IfcU1af0edUJNnlFZbpqy2HXLDNZsiLIkEA11YjJpUeiDVhctiIwDVPOLMQSCPdrdEH4hvuOEiDisINYdUPNCxCnVur8Wt55C4Fv+8WyQCr0WuRRTTMRmTJudyLSQiwALVu01bu25QdKx9lH/vzaUSWjwuRwEEIqEbG1JX6eP1ktr6MUKmOWTSVYBuiMgV2qv4IKNp2nXQy08eo5F/H2FGsJNo9jJapjsYhECIcfl4=
+  on:
+    tags: true
+    python: '2.7'
