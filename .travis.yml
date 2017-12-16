@@ -22,8 +22,8 @@ script:
 after_script:
 - coveralls --merge=js-coverage.json
 before_deploy:
-- find sqlshare_client/ -name \*.pyc -exec rm {} \;
-- echo $TRAVIS_TAG > sqlshare_client/VERSION
+- find hx_toolkit/ -name \*.pyc -exec rm {} \;
+- echo $TRAVIS_TAG > hx_toolkit/VERSION
 deploy:
   provider: pypi
   user: uw-it-axdd
