@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from hx_toolkit.db_dao import get_article_by_slug, create_article_data
-from hx_toolkit.file_dao import APP_BASE_DIR, STATIC_OUTPUT_DIR, ARTICLE_OUTPUT_DIR
+from hx_toolkit.file_dao import STATIC_OUTPUT_DIR, ARTICLE_OUTPUT_DIR
 from hx_toolkit.views import render_article_html
 from hx_toolkit.models import Article
 from django.conf import settings
@@ -12,7 +12,6 @@ import shutil
 class Command(BaseCommand):
     IMAGE_OUTPUT_DIR = STATIC_OUTPUT_DIR + 'images/'
     IMAGE_REL_DIR = 'hx_toolkit_output/images/'
-
 
     def handle(self, *args, **options):
         # Ensure directories exist and are empty
@@ -36,15 +35,14 @@ class Command(BaseCommand):
 
             article_long_html = render_article_html(article)
 
-            article_path = ARTICLE_OUTPUT_DIR \
-                           + article.get_article_filename()
+            article_path = ARTICLE_OUTPUT_DIR + article.get_article_filename()
             with open(article_path, 'w+') as article_file:
                 article_file.write(article_long_html.encode('utf-8'))
 
             if article.short_body:
                 article_short_html = render_article_html(article, True)
-                article_path = ARTICLE_OUTPUT_DIR \
-                               + article.get_article_filename(True)
+                article_path = ARTICLE_OUTPUT_DIR + \
+                               article.get_article_filename(True)
                 with open(article_path, 'w+') as article_file:
                     article_file.write(article_short_html.encode('utf-8'))
 
