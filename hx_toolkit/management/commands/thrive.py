@@ -41,8 +41,8 @@ class Command(BaseCommand):
 
             if article.short_body:
                 article_short_html = render_article_html(article, True)
-                article_path = ARTICLE_OUTPUT_DIR + \
-                               article.get_article_filename(True)
+                article_filename = article.get_article_filename(True)
+                article_path = ARTICLE_OUTPUT_DIR + article_filename
                 with open(article_path, 'w+') as article_file:
                     article_file.write(article_short_html.encode('utf-8'))
 
