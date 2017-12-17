@@ -14,10 +14,11 @@ class Command(BaseCommand):
         data_dir = settings.THRIVE_OUTPUT
         article_dir = data_dir + "/articles/"
 
-        # Ensure article dir exists and is empty
-        if os.path.exists(article_dir):
+        # Ensure data & article dirs exist and are empty
+        if not os.path.exists(article_dir):
+            os.makedirs(article_dir)
+        else:
             shutil.rmtree(article_dir)
-        os.mkdir(article_dir)
 
         summary_data = create_article_data()
         summary_json_data = json.dumps(summary_data)
@@ -49,13 +50,19 @@ class Command(BaseCommand):
                     article_file.write(article_short_html.encode('utf-8'))
 
     def _move_image(self, image_path):
+        print image_path
         filename = os.path.basename(image_path)
         base = settings.BASE_DIR
         images_dir = 'hx_toolkit_images'
+        target_dir ='{}/hx_toolkit/static/{}/'.format(base,
+                                                      images_dir)
+        print target_dir
+        if not os.path.exists(target_dir):
+            os.makedirs(target_dir)
+        else:
+            shutil.rmtree(target_dir)
 
-        new_path = '{}/hx_toolkit/static/{}/{}'.format(base,
-                                                       images_dir,
-                                                       filename)
+        new_path = target_dir + filename
         shutil.copyfile(image_path, new_path)
 
         rel_path = '{}/{}'.format(images_dir, filename)
