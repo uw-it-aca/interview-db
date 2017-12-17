@@ -2,11 +2,13 @@ from django.conf import settings
 import json
 from django.template.loader import render_to_string
 
+APP_BASE_DIR = settings.BASE_DIR + '/hx_toolkit/'
+STATIC_OUTPUT_DIR = APP_BASE_DIR + 'static/hx_toolkit_output/'
+ARTICLE_OUTPUT_DIR = APP_BASE_DIR + 'templates/hx_toolkit_output/'
+
 
 def _get_article_data():
-    base = settings.BASE_DIR
-    data_dir = base + "/hx_toolkit/hx_toolkit_output"
-    summary_path = data_dir + "/summary.json"
+    summary_path = STATIC_OUTPUT_DIR + "/summary.json"
 
     with open(summary_path, 'r') as summary_file:
         json_data = summary_file.read()
@@ -22,7 +24,7 @@ def get_article_links_by_category():
 def get_article_by_id(article_id):
     data_dir = settings.THRIVE_OUTPUT
 
-    article_path = data_dir + "/articles/" + article_id + ".html"
+    article_path = ARTICLE_OUTPUT_DIR + article_id + ".html"
 
     try:
         with open(article_path, 'r') as article_file:
@@ -34,9 +36,9 @@ def get_article_by_id(article_id):
 
 def get_rendered_article_by_id(article_id, is_short=False):
     if is_short:
-        article_file = "hx_toolkit_output/" + article_id + "_short.html"
+        article_file = ARTICLE_OUTPUT_DIR + article_id + "_short.html"
     else:
-        article_file = "hx_toolkit_output/" + article_id + "_long.html"
+        article_file = ARTICLE_OUTPUT_DIR + article_id + "_long.html"
     return render_to_string(article_file)
 
 
