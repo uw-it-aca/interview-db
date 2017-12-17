@@ -12,6 +12,7 @@ class Command(BaseCommand):
     APP_BASE_DIR = settings.BASE_DIR + '/hx_toolkit/'
     STATIC_OUTPUT_DIR = APP_BASE_DIR + 'static/hx_toolkit_output/'
     IMAGE_OUTPUT_DIR = STATIC_OUTPUT_DIR + 'images/'
+    IMAGE_REL_DIR = 'hx_toolkit_output/images/'
     ARTICLE_OUTPUT_DIR = APP_BASE_DIR + 'templates/hx_toolkit_output/'
 
     def handle(self, *args, **options):
@@ -54,7 +55,7 @@ class Command(BaseCommand):
         new_path = self.IMAGE_OUTPUT_DIR + filename
         shutil.copyfile(image_path, new_path)
 
-        rel_path = '{}/{}'.format(self.IMAGE_OUTPUT_DIR, filename)
+        rel_path = self.IMAGE_REL_DIR + filename
 
         return rel_path
 
