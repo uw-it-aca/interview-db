@@ -11,21 +11,17 @@ import shutil
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
+        """
+        TODO: possibly refactor this path to be inside thrive and not require
+        a settings key
+         """
         data_dir = settings.THRIVE_OUTPUT
-        article_dir = data_dir + "/articles/"
-
-        # Ensure data & article dirs exist and are empty
-        if not os.path.exists(article_dir):
-            os.makedirs(article_dir)
-        else:
-            shutil.rmtree(article_dir)
-
         summary_data = create_article_data()
         summary_json_data = json.dumps(summary_data)
         summary_path = data_dir + "/summary.json"
 
         with open(summary_path, 'w') as summary_file:
-                summary_file.write(summary_json_data.encode('utf-8'))
+            summary_file.write(summary_json_data.encode('utf-8'))
 
         load_static_string = "{% load static %}"
         articles = Article.objects.all()
@@ -39,6 +35,7 @@ class Command(BaseCommand):
 
             base = settings.BASE_DIR
             article_dir = base + "/hx_toolkit/templates/hx_toolkit_output/"
+            self._create_or_empty_dir(article_dir)
             article_path = article_dir + article.get_article_filename()
             with open(article_path, 'w+') as article_file:
                 article_file.write(article_long_html.encode('utf-8'))
@@ -50,17 +47,12 @@ class Command(BaseCommand):
                     article_file.write(article_short_html.encode('utf-8'))
 
     def _move_image(self, image_path):
-        print image_path
         filename = os.path.basename(image_path)
         base = settings.BASE_DIR
         images_dir = 'hx_toolkit_images'
         target_dir ='{}/hx_toolkit/static/{}/'.format(base,
                                                       images_dir)
-        print target_dir
-        if not os.path.exists(target_dir):
-            os.makedirs(target_dir)
-        else:
-            shutil.rmtree(target_dir)
+        self._create_or_empty_dir(target_dir)
 
         new_path = target_dir + filename
         shutil.copyfile(image_path, new_path)
@@ -72,3 +64,10 @@ class Command(BaseCommand):
     def _get_static_string(self, image_path):
         string = "{% static '" + image_path + "' %}"
         return string
+
+    def _create_or_empty_dir(self, dir_path):
+        try:
+            shutil.rmtree(dir_path)
+        except OSError:
+            pass
+        os.makedirs(dir_path)
