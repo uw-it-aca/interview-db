@@ -4,7 +4,8 @@ from django.template.loader import render_to_string
 
 
 def _get_article_data():
-    data_dir = settings.THRIVE_OUTPUT
+    base = settings.BASE_DIR
+    data_dir = base + "/hx_toolkit/hx_toolkit_output"
     summary_path = data_dir + "/summary.json"
 
     with open(summary_path, 'r') as summary_file:

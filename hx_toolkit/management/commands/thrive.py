@@ -9,16 +9,19 @@ import shutil
 
 
 class Command(BaseCommand):
+    APP_BASE_DIR = settings.BASE_DIR + '/hx_toolkit/'
+    STATIC_OUTPUT_DIR = APP_BASE_DIR + 'static/hx_toolkit_output/'
+    IMAGE_OUTPUT_DIR = STATIC_OUTPUT_DIR + 'images/'
+    ARTICLE_OUTPUT_DIR = APP_BASE_DIR + 'templates/hx_toolkit_output/'
 
     def handle(self, *args, **options):
-        """
-        TODO: possibly refactor this path to be inside thrive and not require
-        a settings key
-         """
-        data_dir = settings.THRIVE_OUTPUT
+        # Ensure directories exist and are empty
+        self._create_or_empty_dir(self.STATIC_OUTPUT_DIR)
+        self._create_or_empty_dir(self.IMAGE_OUTPUT_DIR)
+        self._create_or_empty_dir(self.ARTICLE_OUTPUT_DIR)
         summary_data = create_article_data()
         summary_json_data = json.dumps(summary_data)
-        summary_path = data_dir + "/summary.json"
+        summary_path = self.STATIC_OUTPUT_DIR + "/summary.json"
 
         with open(summary_path, 'w') as summary_file:
             summary_file.write(summary_json_data.encode('utf-8'))
@@ -33,31 +36,25 @@ class Command(BaseCommand):
 
             article_long_html = render_article_html(article)
 
-            base = settings.BASE_DIR
-            article_dir = base + "/hx_toolkit/templates/hx_toolkit_output/"
-            self._create_or_empty_dir(article_dir)
-            article_path = article_dir + article.get_article_filename()
+            article_path = self.ARTICLE_OUTPUT_DIR \
+                           + article.get_article_filename()
             with open(article_path, 'w+') as article_file:
                 article_file.write(article_long_html.encode('utf-8'))
 
             if article.short_body:
                 article_short_html = render_article_html(article, True)
-                article_path = article_dir + article.get_article_filename(True)
+                article_path = self.ARTICLE_OUTPUT_DIR \
+                               + article.get_article_filename(True)
                 with open(article_path, 'w+') as article_file:
                     article_file.write(article_short_html.encode('utf-8'))
 
     def _move_image(self, image_path):
         filename = os.path.basename(image_path)
-        base = settings.BASE_DIR
-        images_dir = 'hx_toolkit_images'
-        target_dir ='{}/hx_toolkit/static/{}/'.format(base,
-                                                      images_dir)
-        self._create_or_empty_dir(target_dir)
 
-        new_path = target_dir + filename
+        new_path = self.IMAGE_OUTPUT_DIR + filename
         shutil.copyfile(image_path, new_path)
 
-        rel_path = '{}/{}'.format(images_dir, filename)
+        rel_path = '{}/{}'.format(self.IMAGE_OUTPUT_DIR, filename)
 
         return rel_path
 
