@@ -20,7 +20,7 @@ def get_article_links_by_category():
 
 def _get_category_by_id(id):
     try:
-        path = SUMMARY_LINKS_DIR + id + ".html"
+        path = 'hx_toolkit_output/summary/' + id + ".html"
         with open(path, 'r') as category_file:
             category_data = category_file.read()
             return category_data
@@ -42,14 +42,14 @@ def get_article_by_id(article_id):
 
 
 def get_rendered_article_by_id(article_id):
-    article_file = ARTICLE_BY_SLUG_DIR + article_id + ".html"
+    article_file = "hx_toolkit_output/by_id/" + article_id + ".html"
     return render_to_string(article_file)
 
 
 def get_article_by_phase_quarter_week(phase, quarter, week):
     week = str(week)
 
-    path = ARTICLE_BY_WEEK_DIR + phase + "/" + quarter + "/" + week + ".html"
+    path = "hx_toolkit_output/weekly/" + phase + "/" + quarter + "/" + week + ".html"
 
     try:
         with open(path, 'r') as article_file:
