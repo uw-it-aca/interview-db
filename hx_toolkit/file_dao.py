@@ -5,6 +5,9 @@ from django.template.loader import render_to_string
 APP_BASE_DIR = settings.BASE_DIR + '/hx_toolkit/'
 STATIC_OUTPUT_DIR = APP_BASE_DIR + 'static/hx_toolkit_output/'
 ARTICLE_OUTPUT_DIR = APP_BASE_DIR + 'templates/hx_toolkit_output/'
+ARTICLE_BY_SLUG_DIR = ARTICLE_OUTPUT_DIR + "by_id/"
+ARTICLE_BY_WEEK_DIR = ARTICLE_OUTPUT_DIR + "weekly/"
+SUMMARY_LINKS_DIR = ARTICLE_OUTPUT_DIR + "summary/"
 
 
 def _get_article_data():
