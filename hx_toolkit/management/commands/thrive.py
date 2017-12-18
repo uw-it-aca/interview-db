@@ -23,15 +23,14 @@ class Command(BaseCommand):
             setattr(article, 'image_static_string', image_static_string)
             setattr(article, 'load_static_string', load_static_string)
 
-            category_slug = article.category.slug
-            articles_by_category.setdefault(category_slug, [])
+            cs = article.category.slug
+            articles_by_category.setdefault(cs, [])
 
-            articles_by_category[category_slug].append({'slug': article.slug,
-                                                        'title': article.title})
+            articles_by_category[cs].append({'slug': article.slug,
+                                             'title': article.title})
 
             article_long_html = render_article_html(article)
             article_short_html = render_article_html(article, True)
-
 
             # save article by slug
             article_path = ARTICLE_BY_SLUG_DIR + article.get_article_filename()
