@@ -48,8 +48,9 @@ def get_rendered_article_by_id(article_id):
 
 def get_article_by_phase_quarter_week(phase, quarter, week):
     week = str(week)
+    root = "hx_toolkit_output/weekly/"
 
-    path = "hx_toolkit_output/weekly/" + phase + "/" + quarter + "/" + week + ".html"
+    path = root + phase + "/" + quarter + "/" + week + ".html"
 
     try:
         with open(path, 'r') as article_file:
