@@ -10,18 +10,22 @@ ARTICLE_BY_WEEK_DIR = ARTICLE_OUTPUT_DIR + "weekly/"
 SUMMARY_LINKS_DIR = ARTICLE_OUTPUT_DIR + "summary/"
 
 
-def _get_article_data():
-    summary_path = STATIC_OUTPUT_DIR + "/summary.json"
-
-    with open(summary_path, 'r') as summary_file:
-        json_data = summary_file.read()
-        thrive_data = json.loads(json_data)
-        return thrive_data
-
-
 def get_article_links_by_category():
-    thrive_data = _get_article_data()
-    return thrive_data['category']
+    category_data = {'know-yourself': _get_category_by_id('know-yourself'),
+                     'make-your-way': _get_category_by_id('make-your-way'),
+                     'make-sense': _get_category_by_id('make-sense')
+                     }
+    return category_data
+
+
+def _get_category_by_id(id):
+    try:
+        path = SUMMARY_LINKS_DIR + id + ".html"
+        with open(path, 'r') as category_file:
+            category_data = category_file.read()
+            return category_data
+    except IOError:
+        return None
 
 
 def get_article_by_id(article_id):
@@ -37,19 +41,19 @@ def get_article_by_id(article_id):
         return None
 
 
-def get_rendered_article_by_id(article_id, is_short=False):
-    if is_short:
-        article_file = ARTICLE_OUTPUT_DIR + article_id + "_short.html"
-    else:
-        article_file = ARTICLE_OUTPUT_DIR + article_id + "_long.html"
+def get_rendered_article_by_id(article_id):
+    article_file = ARTICLE_BY_SLUG_DIR + article_id + ".html"
     return render_to_string(article_file)
 
 
 def get_article_by_phase_quarter_week(phase, quarter, week):
-    article_data = _get_article_data()
-    try:
-        article = article_data['time'][phase][quarter][str(week)]['slug']
+    week = str(week)
 
-        return get_rendered_article_by_id(article, True)
-    except KeyError:
+    path = ARTICLE_BY_WEEK_DIR + phase + "/" + quarter + "/" + week + ".html"
+
+    try:
+        with open(path, 'r') as article_file:
+            article_data = article_file.read()
+            return article_data
+    except IOError:
         return None

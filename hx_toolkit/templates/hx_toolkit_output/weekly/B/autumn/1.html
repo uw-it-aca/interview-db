@@ -1,4 +1,4 @@
-{{ article.load_static_string }}
+{% load static %}
 
 <div class="row">
     <div class="col-md-8">
@@ -8,11 +8,11 @@
             <p class="myuw-card-tagline">Weekly thoughts on making the most of your Husky Experience</p>
 
             <div class="myuw-article-teaser-wrapper">
-                <img class="myuw-article-teaser-wrapper" src="{{ article.image_static_string|safe }}" />
+                <img class="myuw-article-teaser-wrapper" src="{% static 'hx_toolkit_output/images/ColumnsAndGolfers.ca1925.1983.10.589-X2_F7wbUDs.jpg' %}" />
 
                 <div class="myuw-article-teaser">
-                    <h4><span class="myuw-highlight">{{ article.title }}</span></h4>
-                    <p><span class="myuw-highlight">{{ article.short_body }}<a href="/husky_experience?article={{ article.slug }}">Here is the link to the article.</a></span></p>
+                    <h4><span class="myuw-highlight">2nd Quarter</span></h4>
+                    <p><span class="myuw-highlight">Sort body<a href="/husky_experience?article=2nd-quarter">Here is the link to the article.</a></span></p>
                 </div>
             </div>
         </div>

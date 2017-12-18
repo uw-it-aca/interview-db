@@ -74,7 +74,4 @@ class Article(models.Model):
         return data
 
     def get_article_filename(self, is_short=False):
-        if is_short:
-            return self.slug + "_short.html"
-        else:
-            return self.slug + "_long.html"
+        return self.slug + ".html"
