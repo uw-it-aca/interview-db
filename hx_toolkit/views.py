@@ -11,6 +11,5 @@ def render_article_html(article, is_short=False):
 
 def render_category_links(links):
     template = 'summary_links.html'
-    print links
     links_string = render_to_string(template, {'links': links})
     return links_string

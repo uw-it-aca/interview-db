@@ -53,7 +53,6 @@ class Command(BaseCommand):
             self._save_html(rendered_links, SUMMARY_LINKS_DIR +
                             category + ".html")
 
-
     def _save_html(self, html, path):
         with open(path, 'w+') as article_file:
             article_file.write(html.encode('utf-8'))
@@ -81,34 +80,6 @@ class Command(BaseCommand):
         """
         articles = Article.objects.all()
         self._render_articles(articles)
-
-        # summary_data = create_article_data()
-        # summary_json_data = json.dumps(summary_data)
-        # summary_path = STATIC_OUTPUT_DIR + "/summary.json"
-        #
-        # with open(summary_path, 'w') as summary_file:
-        #     summary_file.write(summary_json_data.encode('utf-8'))
-        #
-        # load_static_string = "{% load static %}"
-        # articles = Article.objects.all()
-        # for article in articles:
-        #     # rel_path = self._move_image(article.image.path)
-        #     # image_static_string = self._get_static_string(rel_path)
-        #     # setattr(article, 'image_static_string', image_static_string)
-        #     # setattr(article, 'load_static_string', load_static_string)
-        #
-        #     article_long_html = render_article_html(article)
-        #
-        #     article_path = ARTICLE_OUTPUT_DIR + article.get_article_filename()
-        #     with open(article_path, 'w+') as article_file:
-        #         article_file.write(article_long_html.encode('utf-8'))
-        #
-        #     if article.short_body:
-        #         article_short_html = render_article_html(article, True)
-        #         article_filename = article.get_article_filename(True)
-        #         article_path = ARTICLE_OUTPUT_DIR + article_filename
-        #         with open(article_path, 'w+') as article_file:
-        #             article_file.write(article_short_html.encode('utf-8'))
 
     def _move_image(self, image_path):
         filename = os.path.basename(image_path)
