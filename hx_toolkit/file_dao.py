@@ -27,6 +27,7 @@ def _get_category_by_id(id):
     except IOError:
         return None
 
+
 def get_article_by_id(article_id):
     data_dir = settings.THRIVE_OUTPUT
 
