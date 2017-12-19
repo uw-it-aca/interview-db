@@ -9,6 +9,9 @@
 
             <div class="myuw-article-teaser-wrapper">
                 <img class="myuw-article-teaser-wrapper" src="{{ article.image_static_string|safe }}" />
+                {% if article.image_credit %}
+                    <p>article.image_credit</p>
+                {% endif %}
 
                 <div class="myuw-article-teaser">
                     <h4><span class="myuw-highlight">{{ article.title }}</span></h4>

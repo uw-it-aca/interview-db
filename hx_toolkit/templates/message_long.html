@@ -14,6 +14,9 @@
 
             <figure class="myuw-article-heroimage">
                 <img src="{{ article.image_static_string|safe }}">
+                {% if article.image_credit %}
+                    <p>article.image_credit</p>
+                {% endif %}
             </figure>
 
             {{ article.long_body | safe}}
