@@ -16,7 +16,7 @@
                 <img src="{{ article.image_static_string|safe }}">
             </figure>
 
-            {{ article.long_body }}
+            {{ article.long_body | safe}}
 
             {%  if article.related_links.all %}
                 <h3 class="myuw-heading-page">Resources</h3>
