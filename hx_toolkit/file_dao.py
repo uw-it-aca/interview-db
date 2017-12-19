@@ -1,6 +1,5 @@
 from django.conf import settings
-import json
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string, TemplateDoesNotExist
 
 APP_BASE_DIR = settings.BASE_DIR + '/hx_toolkit/'
 STATIC_OUTPUT_DIR = APP_BASE_DIR + 'static/hx_toolkit_output/'
@@ -20,18 +19,14 @@ def get_article_links_by_category():
 
 
 def _get_category_by_id(id):
+    path = 'hx_toolkit_output/summary/' + id + ".html"
     try:
-        path = 'hx_toolkit_output/summary/' + id + ".html"
-        with open(path, 'r') as category_file:
-            category_data = category_file.read()
-            return category_data
-    except IOError:
+        return render_to_string(path)
+    except TemplateDoesNotExist:
         return None
 
 
 def get_article_by_id(article_id):
-    data_dir = settings.THRIVE_OUTPUT
-
     article_path = ARTICLE_OUTPUT_DIR + article_id + ".html"
 
     try:
