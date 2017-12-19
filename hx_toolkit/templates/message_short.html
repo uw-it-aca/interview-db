@@ -8,7 +8,18 @@
             <p class="myuw-card-tagline">Weekly thoughts on making the most of your Husky Experience</p>
 
             <div class="myuw-article-teaser-wrapper">
-                <img class="myuw-article-teaser-wrapper" src="{{ article.image_static_string|safe }}" />
+                {%  with img=article.image_srcset_paths%}
+                    <img class="myuw-card-image-full"
+                         srcset="{{ img.480|safe }} 480w,
+                             {{ img.650|safe }} 650w,
+                             {{ img.780|safe }} 780w,
+                             {{ img.1000|safe }} 1000w"
+                         sizes="(max-width: 767px) 480px,
+                            650px"
+                         src="{{ img.650|safe }}"
+                         alt="">
+                {% endwith %}
+
                 {% if article.image_credit %}
                     <p>article.image_credit</p>
                 {% endif %}
