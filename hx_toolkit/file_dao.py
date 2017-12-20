@@ -49,8 +49,6 @@ def get_article_by_phase_quarter_week(phase, quarter, week):
     path = root + phase + "/" + quarter + "/" + week + ".html"
 
     try:
-        with open(path, 'r') as article_file:
-            article_data = article_file.read()
-            return article_data
-    except IOError:
+        return render_to_string(path)
+    except TemplateDoesNotExist:
         return None
