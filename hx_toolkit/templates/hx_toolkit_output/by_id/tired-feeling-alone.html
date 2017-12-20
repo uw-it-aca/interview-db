@@ -13,7 +13,18 @@
         <div class="col-md-8">
 
             <figure class="myuw-article-heroimage">
-                <img src="{% static 'hx_toolkit_output/images/tired_feeling_alone.jpg' %}">
+                
+                    <img class="myuw-card-image-full"
+                         srcset="{% static 'hx_toolkit_output/images/tired_feeling_alone_480.jpg' %} 480w,
+                             {% static 'hx_toolkit_output/images/tired_feeling_alone_650.jpg' %} 650w,
+                             {% static 'hx_toolkit_output/images/tired_feeling_alone_780.jpg' %} 780w,
+                             {% static 'hx_toolkit_output/images/tired_feeling_alone_1000.jpg' %} 1000w"
+                         sizes="(max-width: 767px) 100vw,
+                            650px"
+                         src="{% static 'hx_toolkit_output/images/tired_feeling_alone_650.jpg' %}"
+                         alt="None">
+                
+                
             </figure>
 
             <p>One thing we've heard from students is that it's a lot easier to make friends with people who share your interests once you're in a major. Until then, however, it can be challenging, especially if you’re taking large lecture courses where it may be difficult to get to know your classmates.</p>
@@ -43,7 +54,7 @@
                 <h3 class="myuw-heading-page">Related Topic</h3>
                 <ul>
                     
-                        <li><a href="/husky_experience?article=jobs-come-through-people-you-know">Jobs Come Through People You Know</a></li>
+                        <li><a href="/husky_experience?article=plan-your-life-accident">Plan Your Life by Accident</a></li>
                     
                 </ul>
             

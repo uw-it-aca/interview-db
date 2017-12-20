@@ -13,7 +13,18 @@
         <div class="col-md-8">
 
             <figure class="myuw-article-heroimage">
-                <img src="{% static 'hx_toolkit_output/images/you_are_your_network.jpg' %}">
+                
+                    <img class="myuw-card-image-full"
+                         srcset="{% static 'hx_toolkit_output/images/you_are_your_network_480.jpg' %} 480w,
+                             {% static 'hx_toolkit_output/images/you_are_your_network_650.jpg' %} 650w,
+                             {% static 'hx_toolkit_output/images/you_are_your_network_780.jpg' %} 780w,
+                             {% static 'hx_toolkit_output/images/you_are_your_network_1000.jpg' %} 1000w"
+                         sizes="(max-width: 767px) 100vw,
+                            650px"
+                         src="{% static 'hx_toolkit_output/images/you_are_your_network_650.jpg' %}"
+                         alt="None">
+                
+                
             </figure>
 
             <p>Imagine networking is like spinning a web: you are at the center and want to gather around you people with different strengths, personalities, connections and ways of relating to you. Job search gurus describe 10 types of people to weave into your web:</p>
@@ -39,6 +50,10 @@
                 <ul>
                     
                         <li><a href="/husky_experience?article=jobs-come-through-people-you-know">Jobs Come Through People You Know</a></li>
+                    
+                        <li><a href="/husky_experience?article=your-friends-your-success">Your Friends, Your Success</a></li>
+                    
+                        <li><a href="/husky_experience?article=first-impressions-matter">First Impressions Matter</a></li>
                     
                 </ul>
             

@@ -13,7 +13,18 @@
         <div class="col-md-8">
 
             <figure class="myuw-article-heroimage">
-                <img src="{% static 'hx_toolkit_output/images/no_time_to_be_healthy.jpg' %}">
+                
+                    <img class="myuw-card-image-full"
+                         srcset="{% static 'hx_toolkit_output/images/no_time_to_be_healthy_480.jpg' %} 480w,
+                             {% static 'hx_toolkit_output/images/no_time_to_be_healthy_650.jpg' %} 650w,
+                             {% static 'hx_toolkit_output/images/no_time_to_be_healthy_780.jpg' %} 780w,
+                             {% static 'hx_toolkit_output/images/no_time_to_be_healthy_1000.jpg' %} 1000w"
+                         sizes="(max-width: 767px) 100vw,
+                            650px"
+                         src="{% static 'hx_toolkit_output/images/no_time_to_be_healthy_650.jpg' %}"
+                         alt="None">
+                
+                
             </figure>
 
             <p>The college lifestyle doesn’t exactly encourage discipline when it comes to getting a good night’s sleep, exercising, and eating healthy. Especially if you’re crazy busy or feeling stressed, the last thing you probably want to hear is someone reminding you to take care of your health. But you probably know this already: when you prioritize your health, tasks that seem overwhelming suddenly become manageable. And over time, you’re likely to be happier and better able to handle your work and other challenges if you attend to your wellness.</p>
@@ -47,6 +58,13 @@
                 </ul>
             
 
+            
+                <h3 class="myuw-heading-page">Related Topic</h3>
+                <ul>
+                    
+                        <li><a href="/husky_experience?article=bouncing-back">Bouncing Back</a></li>
+                    
+                </ul>
             
 
         </div>

@@ -13,7 +13,18 @@
         <div class="col-md-8">
 
             <figure class="myuw-article-heroimage">
-                <img src="{% static 'hx_toolkit_output/images/falling_love_with_class.jpg' %}">
+                
+                    <img class="myuw-card-image-full"
+                         srcset="{% static 'hx_toolkit_output/images/falling_love_with_class_480.jpg' %} 480w,
+                             {% static 'hx_toolkit_output/images/falling_love_with_class_650.jpg' %} 650w,
+                             {% static 'hx_toolkit_output/images/falling_love_with_class_780.jpg' %} 780w,
+                             {% static 'hx_toolkit_output/images/falling_love_with_class_1000.jpg' %} 1000w"
+                         sizes="(max-width: 767px) 100vw,
+                            650px"
+                         src="{% static 'hx_toolkit_output/images/falling_love_with_class_650.jpg' %}"
+                         alt="None">
+                
+                
             </figure>
 
             <p>No matter your major (yes, some courses you just must take), choosing your classess continues to be a way to explore new ideas, challenge yourself, and be immersed in different worlds. You can make those NWs and VLPAs work for you! Here are some ideas: </p>
@@ -35,6 +46,19 @@
                 </ul>
             
 
+            
+                <h3 class="myuw-heading-page">Related Topic</h3>
+                <ul>
+                    
+                        <li><a href="/husky_experience?article=solve-world-problems">Solve World Problems</a></li>
+                    
+                        <li><a href="/husky_experience?article=do-majors-jobs">Do Majors = Jobs?</a></li>
+                    
+                        <li><a href="/husky_experience?article=plan-your-life-accident">Plan Your Life by Accident</a></li>
+                    
+                        <li><a href="/husky_experience?article=what-if-grade-didnt-matter">What If the Grade Didn&#39;t Matter?</a></li>
+                    
+                </ul>
             
 
         </div>
