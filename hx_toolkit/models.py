@@ -37,9 +37,12 @@ class Article(models.Model):
     short_body = models.TextField(blank=True,
                                   null=True)
     long_body = models.TextField()
+
     image = models.ImageField(upload_to='hx_toolkit_images')
     image_credit = models.TextField(blank=True,
                                     null=True)
+    image_alt_text = models.TextField(blank=True,
+                                      null=True)
 
     category = models.ForeignKey(Category,
                                  on_delete=models.PROTECT)
