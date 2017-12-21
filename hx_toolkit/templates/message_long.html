@@ -35,14 +35,14 @@
             <h3 class="myuw-heading-page">Related Topics</h3>
             <ul>
                 {% for article in article.related_articles.all %}
-                    <li><a href="/husky_experience_message?article={{ article.slug }}">{{ article.title }}</a></li>
+                    <li><a href="/husky_experience?article={{ article.slug }}">{{ article.title }}</a></li>
                 {% endfor %}
             </ul>
         {% endif %}
 
         <div class="myuw-article-footer">
             <h3 class="myuw-article-footer-title">About the Husky Experience Toolkit</h3>
-            <p>The <a href="#">Husky Experience Toolkit</a> is designed to help you make the most of your time at UW, wherever you are in your university career. The articles address four interconnected dimensions of the Husky Experience: Know Yourself, Know the World, Make Your Way, and Weave it Together.
+            <p>The <a href="/husky_experience">Husky Experience Toolkit</a> is designed to help you make the most of your time at UW, wherever you are in your university career. The articles address four interconnected dimensions of the Husky Experience: Know Yourself, Know the World, Make Your Way, and Weave it Together.
             </p>
         </div>
     </div>
