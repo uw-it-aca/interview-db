@@ -44,7 +44,8 @@ class Command(BaseCommand):
             article_short_html = render_article_html(article, True)
 
             # save article by slug
-            article_path = self.ARTICLE_BY_SLUG_DIR + article.get_article_filename()
+            article_filename  = article.get_article_filename()
+            article_path = self.ARTICLE_BY_SLUG_DIR + article_filename
             self._save_html(article_long_html, article_path)
 
             # save article by week path
