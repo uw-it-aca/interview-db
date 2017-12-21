@@ -1,12 +1,4 @@
-from django.conf import settings
 from django.template.loader import render_to_string, TemplateDoesNotExist
-
-APP_BASE_DIR = settings.BASE_DIR + '/hx_toolkit/'
-STATIC_OUTPUT_DIR = APP_BASE_DIR + 'static/hx_toolkit_output/'
-ARTICLE_OUTPUT_DIR = APP_BASE_DIR + 'templates/hx_toolkit_output/'
-ARTICLE_BY_SLUG_DIR = ARTICLE_OUTPUT_DIR + "by_id/"
-ARTICLE_BY_WEEK_DIR = ARTICLE_OUTPUT_DIR + "weekly/"
-SUMMARY_LINKS_DIR = ARTICLE_OUTPUT_DIR + "summary/"
 
 
 def get_article_links_by_category():
@@ -23,17 +15,6 @@ def _get_category_by_id(id):
     try:
         return render_to_string(path)
     except TemplateDoesNotExist:
-        return None
-
-
-def get_article_by_id(article_id):
-    article_path = ARTICLE_OUTPUT_DIR + article_id + ".html"
-
-    try:
-        with open(article_path, 'r') as article_file:
-            article_data = article_file.read()
-            return article_data
-    except IOError:
         return None
 
 
