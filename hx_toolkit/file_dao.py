@@ -12,7 +12,7 @@ SUMMARY_LINKS_DIR = ARTICLE_OUTPUT_DIR + "summary/"
 def get_article_links_by_category():
     category_data = {'know-yourself': _get_category_by_id('know-yourself'),
                      'make-your-way': _get_category_by_id('make-your-way'),
-                     'make-sense': _get_category_by_id('make-sense'),
+                     'weave-together': _get_category_by_id('weave-together'),
                      'know-world': _get_category_by_id('know-world')
                      }
     return category_data
