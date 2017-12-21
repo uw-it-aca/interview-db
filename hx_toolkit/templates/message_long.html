@@ -19,9 +19,9 @@
                 <p class="myuw-image-credit">Photo: {{ article.image_credit }}</p>
             {% endif %}
         </figure>
-
+        <div class="myuw-article-body">
         {{ article.long_body | safe}}
-
+        </div>
         {%  if article.related_links.all %}
             <h3 class="myuw-heading-page">Resources</h3>
             <ul>
@@ -32,7 +32,7 @@
         {% endif %}
 
         {%  if article.related_articles.all %}
-            <h3 class="myuw-heading-page">Related Topic</h3>
+            <h3 class="myuw-heading-page">Related Topics</h3>
             <ul>
                 {% for article in article.related_articles.all %}
                     <li><a href="/husky_experience?article={{ article.slug }}">{{ article.title }}</a></li>
