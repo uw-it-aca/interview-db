@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from hx_toolkit.db_dao import get_article_by_slug, create_article_data
-from hx_toolkit.file_dao import STATIC_OUTPUT_DIR, ARTICLE_OUTPUT_DIR, \
-    ARTICLE_BY_SLUG_DIR, ARTICLE_BY_WEEK_DIR, SUMMARY_LINKS_DIR
+from django.conf import settings
 from hx_toolkit.views import render_article_html, render_category_links
 from hx_toolkit.models import Article
 import json
@@ -11,6 +10,12 @@ from PIL import Image
 
 
 class Command(BaseCommand):
+    APP_BASE_DIR = settings.BASE_DIR + '/hx_toolkit/'
+    STATIC_OUTPUT_DIR = APP_BASE_DIR + 'static/hx_toolkit_output/'
+    ARTICLE_OUTPUT_DIR = APP_BASE_DIR + 'templates/hx_toolkit_output/'
+    ARTICLE_BY_SLUG_DIR = ARTICLE_OUTPUT_DIR + "by_id/"
+    ARTICLE_BY_WEEK_DIR = ARTICLE_OUTPUT_DIR + "weekly/"
+    SUMMARY_LINKS_DIR = ARTICLE_OUTPUT_DIR + "summary/"
     IMAGE_OUTPUT_DIR = STATIC_OUTPUT_DIR + 'images/'
     IMAGE_REL_DIR = 'hx_toolkit_output/images/'
     IMAGE_WIDTHS = [480, 650, 780, 1000]
@@ -39,12 +44,13 @@ class Command(BaseCommand):
             article_short_html = render_article_html(article, True)
 
             # save article by slug
-            article_path = ARTICLE_BY_SLUG_DIR + article.get_article_filename()
+            article_filename = article.get_article_filename()
+            article_path = self.ARTICLE_BY_SLUG_DIR + article_filename
             self._save_html(article_long_html, article_path)
 
             # save article by week path
             if article.phase:
-                week_path = ARTICLE_BY_WEEK_DIR + \
+                week_path = self.ARTICLE_BY_WEEK_DIR + \
                             article.phase + "/" + \
                             article.quarter + "/"
                 if not os.path.exists(week_path):
@@ -55,7 +61,7 @@ class Command(BaseCommand):
         for category in articles_by_category:
             links = articles_by_category[category]
             rendered_links = render_category_links(links)
-            self._save_html(rendered_links, SUMMARY_LINKS_DIR +
+            self._save_html(rendered_links, self.SUMMARY_LINKS_DIR +
                             category + ".html")
 
     def _save_html(self, html, path):
@@ -64,12 +70,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Ensure directories exist and are empty
-        self._create_or_empty_dir(STATIC_OUTPUT_DIR)
+        self._create_or_empty_dir(self.STATIC_OUTPUT_DIR)
         self._create_or_empty_dir(self.IMAGE_OUTPUT_DIR)
-        self._create_or_empty_dir(ARTICLE_OUTPUT_DIR)
-        self._create_or_empty_dir(ARTICLE_BY_SLUG_DIR)
-        self._create_or_empty_dir(ARTICLE_BY_WEEK_DIR)
-        self._create_or_empty_dir(SUMMARY_LINKS_DIR)
+        self._create_or_empty_dir(self.ARTICLE_OUTPUT_DIR)
+        self._create_or_empty_dir(self.ARTICLE_BY_SLUG_DIR)
+        self._create_or_empty_dir(self.ARTICLE_BY_WEEK_DIR)
+        self._create_or_empty_dir(self.SUMMARY_LINKS_DIR)
 
         """
         Article File Structure
