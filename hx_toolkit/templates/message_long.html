@@ -32,7 +32,7 @@
         {% endif %}
 
         {%  if article.related_articles.all %}
-            <h3 class="myuw-heading-page">Related Topics</h3>
+            <h3 class="myuw-heading-page">Related Articles</h3>
             <ul>
                 {% for article in article.related_articles.all %}
                     <li><a href="/husky_experience?article={{ article.slug }}">{{ article.title }}</a></li>
