@@ -17,7 +17,7 @@
     {% endwith %}
 
     <div class="myuw-article-teaser">
-        <h4><span class="myuw-highlight">{{ article.title }}</span></h4>
-        <p><span class="myuw-highlight">{{ article.short_body | safe }} <a class="myuw-highlight-followup-link" href="/husky_experience_message?article={{ article.slug }}">Read more</a></span></p>
+        <h4 class="myuw-article-teaser-title"><span class="myuw-highlight"><a href="/husky_experience_message?article={{ article.slug }}">{{ article.title }}</a></span></h4>
+        <p><span class="myuw-highlight">{{ article.short_body | safe }}<a class="myuw-link-card-teaser" href="/husky_experience_message?article={{ article.slug }}">Read more</a></span></p>
     </div>
 </div>
