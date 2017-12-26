@@ -20,7 +20,7 @@ script:
 - FORCE_VIEW_TESTS=1 coverage run hx_toolkit/tests.py --source=hx_toolkit/ --omit=hx_toolkit/migrations/*
   manage.py test hx_toolkit
 after_script:
-- coveralls --merge=js-coverage.json
+- coveralls
 before_deploy:
 - find hx_toolkit/ -name \*.pyc -exec rm {} \;
 - echo $TRAVIS_TAG > hx_toolkit/VERSION
