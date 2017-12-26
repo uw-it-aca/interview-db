@@ -13,11 +13,12 @@ before_script:
 - pip install coverage
 - pip install python-coveralls
 - pip install pep8
+- pip install nose2
 - cp travis-ci/manage.py manage.py
 - python manage.py migrate
 script:
 - pep8 hx_toolkit/ --exclude=hx_toolkit/migrations
-- FORCE_VIEW_TESTS=1 coverage run hx_toolkit/tests.py --source=hx_toolkit/ --omit=hx_toolkit/migrations/*
+- FORCE_VIEW_TESTS=1 coverage run --source=hx_toolkit/ --omit=hx_toolkit/migrations/*
   manage.py test hx_toolkit
 after_script:
 - coveralls
