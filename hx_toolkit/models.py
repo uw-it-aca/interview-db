@@ -63,8 +63,9 @@ class Article(models.Model):
     week = models.IntegerField(blank=True,
                                null=True)
     related_articles = models.ManyToManyField("self",
-                                              related_name='related_articles',
-                                              blank=True)
+                                              related_name='related_article',
+                                              blank=True,
+                                              symmetrical=False)
     related_links = models.ManyToManyField(ResourceLink,
                                            blank=True)
 
