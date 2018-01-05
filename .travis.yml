@@ -13,6 +13,7 @@ before_script:
 - pip install coverage
 - pip install python-coveralls
 - pip install pep8
+- pip install nose2
 - cp travis-ci/manage.py manage.py
 - python manage.py migrate
 script:
@@ -20,7 +21,7 @@ script:
 - FORCE_VIEW_TESTS=1 coverage run --source=hx_toolkit/ --omit=hx_toolkit/migrations/*
   manage.py test hx_toolkit
 after_script:
-- coveralls --merge=js-coverage.json
+- coveralls
 before_deploy:
 - find hx_toolkit/ -name \*.pyc -exec rm {} \;
 - echo $TRAVIS_TAG > hx_toolkit/VERSION
