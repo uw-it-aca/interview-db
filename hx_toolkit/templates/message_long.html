@@ -35,7 +35,7 @@
             <h3 class="myuw-heading-page">Related Articles</h3>
             <ul>
                 {% for article in article.related_articles.all %}
-                    <li><a href="/husky_experience?article={{ article.slug }}">{{ article.title }}</a></li>
+                    <li><a href="/husky_experience_message?article={{ article.slug }}">{{ article.title }}</a></li>
                 {% endfor %}
             </ul>
         {% endif %}
