@@ -102,7 +102,7 @@ ENV/
 
 bin/
 db.sqlite3
-hx_toolkit_images/
+interview_db_images/
 include/
 manage.py
 pip-selfcheck.json

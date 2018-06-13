@@ -3,22 +3,22 @@ from setuptools import setup
 
 README = """
 See the README on `GitHub
-<https://github.com/uw-it-aca/hx_toolkit>`_.
+<https://github.com/uw-it-aca/interview_db>`_.
 """
 
 # The VERSION file is created by travis-ci, based on the tag name
-version_path = 'hx_toolkit/VERSION'
+version_path = 'interview_db/VERSION'
 VERSION = open(os.path.join(os.path.dirname(__file__), version_path)).read()
 VERSION = VERSION.replace("\n", "")
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
-url = "https://github.com/uw-it-aca/hx_toolkit"
+url = "https://github.com/uw-it-aca/interview_db"
 setup(
-    name='UW_HX_Toolkit',
+    name='UW_interview_db',
     version=VERSION,
-    packages=['hx_toolkit'],
+    packages=['interview_db'],
     author="UW-IT AXDD",
     author_email="aca-it@uw.edu",
     include_package_data=True,

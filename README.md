@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/uw-it-aca/interview-db.svg?branch=0.0.0.b3)](https://travis-ci.org/uw-it-aca/interview-db)
-[![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/interview-db/badge.svg?branch=master)](https://coveralls.io/github/uw-it-aca/interview-db?branch=master)
-# Interview-db
+[![Build Status](https://travis-ci.org/uw-it-aca/interview_db.svg?branch=0.0.0.b3)](https://travis-ci.org/uw-it-aca/interview_db)
+[![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/interview_db/badge.svg?branch=master)](https://coveralls.io/github/uw-it-aca/interview_db?branch=master)
+# interview_db
 
 App to collect and tag interview data, artifacts, and stories for publishing using the Django Admin app.
 
@@ -20,36 +20,36 @@ Step-by-step
 
     $ easy_install virtualenv
 
-Checkout the master of the interview-db project:
+Checkout the master of the interview_db project:
 
-    $ git clone git@github.com:jcivjan/interview-db.git
+    $ git clone git@github.com:jcivjan/interview_db.git
 
-    OR https://github.com/jcivjan/interview-db.git
+    OR https://github.com/jcivjan/interview_db.git
     
-Turn interview-db into a virtualenv:
+Turn interview_db into a virtualenv:
 
     $ virtualenv gradepage   
 
 Activate your virtualenv:
 
-    cd interview-db
+    cd interview_db
     source bin/activate
     
 Install required Python packages with pip:
 
     $ pip install -r requirements.txt
 
-Create a django project in the interview-db dir:
+Create a django project in the interview_db dir:
 
     $ django-admin.py startproject project .
 
     That '.' at the end is important!
 
-Modify at least the following settings in interview-db/settings.py:
+Modify at least the following settings in interview_db/settings.py:
 
     Add to your INSTALLED_APPS:
 
-        'interview-db',
+        'interview_db',
 
 Create the intervies-db database
 

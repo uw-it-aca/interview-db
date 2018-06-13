@@ -1,2 +1,2 @@
-include README.md hx_toolkit/VERSION
-recursive-include hx_toolkit *
+include README.md interview_db/VERSION
+recursive-include interview_db *

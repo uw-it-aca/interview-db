@@ -17,14 +17,14 @@ before_script:
 - cp travis-ci/manage.py manage.py
 - python manage.py migrate
 script:
-- pep8 hx_toolkit/ --exclude=hx_toolkit/migrations
-- FORCE_VIEW_TESTS=1 coverage run --source=hx_toolkit/ --omit=hx_toolkit/migrations/*
-  manage.py test hx_toolkit
+- pep8 interview_db/ --exclude=interview_db/migrations
+- FORCE_VIEW_TESTS=1 coverage run --source=interview_db/ --omit=interview_db/migrations/*
+  manage.py test interview_db
 after_script:
 - coveralls
 before_deploy:
-- find hx_toolkit/ -name \*.pyc -exec rm {} \;
-- echo $TRAVIS_TAG > hx_toolkit/VERSION
+- find interview_db/ -name \*.pyc -exec rm {} \;
+- echo $TRAVIS_TAG > interview_db/VERSION
 deploy:
   provider: pypi
   user: uw-it-aca
