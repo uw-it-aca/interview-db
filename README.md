@@ -49,7 +49,7 @@ Modify at least the following settings in interview-db/settings.py:
 
     Add to your INSTALLED_APPS:
 
-        'hx_toolkit',
+        'interview-db',
 
 Create the intervies-db database
 
