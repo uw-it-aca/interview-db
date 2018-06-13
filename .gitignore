@@ -99,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+bin/
+db.sqlite3
+hx_toolkit_images/
+include/
+manage.py
+pip-selfcheck.json
+project/
