@@ -107,3 +107,5 @@ include/
 manage.py
 pip-selfcheck.json
 project/
+migrations/
+

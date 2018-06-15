@@ -1,5 +1,81 @@
 from django.db import models
 
+class StudentType(models.Model):
+    TYPES = (
+        ('Commuter', 'Commuter'),
+        ('Exchange', 'Exchange'),
+        ('First-Gen', 'First-Gen'),
+        ('International', 'International'),
+        ('LGBTQ', 'LGBTQ'),
+        ('Other Minority', 'Minority'),
+        ('Transfer', 'Transfer'),
+    )  
+    
+    type = models.CharField(choices=TYPES,
+                               max_length=15,
+                               unique=True,
+                               blank=True,
+                               null=True)
+    
+
+    def __unicode__(self):
+        return self.type
+
+class Student(models.Model):  
+    GENDER = (
+        ('m', 'Male'),
+        ('f', 'Female'),
+        ('o', 'Other')
+    )  
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    publication_name = models.CharField(max_length=255)
+    uw_netID = models.CharField(max_length=10)
+    email = models.EmailField(max_length=255,
+                                blank=True,
+                                null=True)
+    artifacts_url = models.URLField()
+    gender = models.CharField(choices=GENDER,
+                               max_length=1,
+                               blank=True,
+                               null=True)
+    student_type = models.ManyToManyField(StudentType,
+                                           blank=True)                                          
+    
+                                 
+    def __unicode__(self):
+        return self.last_name
+        
+               
+class Interview(models.Model):
+    student = models.ForeignKey(Student,
+                                 on_delete=models.PROTECT)
+
+    def __unicode__(self):
+        return self.title
+        
+class Story(models.Model):
+    url = models.URLField()
+    title = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.title
+        
+class Coding(models.Model):
+    url = models.URLField()
+    title = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.title
+
+class SubCode(models.Model):
+    url = models.URLField()
+    title = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.title
+        
+
 
 class ResourceLink(models.Model):
     url = models.URLField()
