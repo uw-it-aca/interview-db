@@ -22,36 +22,36 @@ Step-by-step
 
     $ easy_install virtualenv
 
-Checkout the master of the interview_db project:
+Checkout the master of the interview-db project:
 
-    $ git clone git@github.com:jcivjan/interview_db.git
+    $ git clone git@github.com:jcivjan/interview-db.git
 
-    OR https://github.com/jcivjan/interview_db.git
+    OR https://github.com/jcivjan/interview-db.git
     
-Turn interview_db into a virtualenv:
+Turn interview-db into a virtualenv:
 
-    $ virtualenv gradepage   
+    $ virtualenv interview-db   
 
 Activate your virtualenv:
 
-    cd interview_db
+    cd interview-db
     source bin/activate
     
 Install required Python packages with pip:
 
     $ pip install -r requirements.txt
 
-Create a django project in the interview_db dir:
+Create a django project in the interview-db dir:
 
     $ django-admin.py startproject project .
 
     That '.' at the end is important!
 
-Modify at least the following settings in interview_db/settings.py:
+Modify at least the following settings in interview-db/settings.py:
 
     Add to your INSTALLED_APPS:
 
-        'interview_db',
+        'interview-db',
 
 Create the intervies-db database
 
