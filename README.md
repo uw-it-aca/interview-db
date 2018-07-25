@@ -22,19 +22,19 @@ Step-by-step
 
     $ easy_install virtualenv
 
-Checkout the master of the interview_db project:
+Checkout the master of the interview-db project:
 
-    $ git clone git@github.com:jcivjan/interview_db.git
+    $ git clone git@github.com:jcivjan/interview-db.git
 
-    OR https://github.com/jcivjan/interview_db.git
+    OR https://github.com/jcivjan/interview-db.git
     
-Turn interview_db into a virtualenv:
+Turn interview-db into a virtualenv:
 
-    $ virtualenv gradepage   
+    $ virtualenv interview-db   
 
 Activate your virtualenv:
 
-    cd interview_db
+    cd interview-db
     source bin/activate
     
 Install required Python packages with pip:
@@ -60,5 +60,9 @@ Create the intervies-db database
 You should now be able to run your development server:
 
     $ python manage.py runserver 0.0.0.0:<your port>
+
+Create a super user for /admin access:
+
+    $ python manage.py createsuperuser
 
 

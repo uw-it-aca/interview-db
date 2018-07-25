@@ -23,8 +23,8 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django==1.10.5',
-        'Pillow==5.0.0'
+        'Django==2.0.7',
+        'Pillow'
     ],
     license='Apache License, Version 2.0',
     description=('An application for managing and serving HXT content'),
