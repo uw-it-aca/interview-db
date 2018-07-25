@@ -1,7 +1,9 @@
 from django.db import models
+from django import forms
+
 
 class StudentType(models.Model):
-    TYPES = (
+    TYPE = (
         ('Commuter', 'Commuter'),
         ('Exchange', 'Exchange'),
         ('First-Gen', 'First-Gen'),
@@ -9,43 +11,75 @@ class StudentType(models.Model):
         ('LGBTQ', 'LGBTQ'),
         ('Other Minority', 'Minority'),
         ('Transfer', 'Transfer'),
-    )  
-    
-    type = models.CharField(choices=TYPES,
-                               max_length=15,
-                               unique=True,
+    ) 
+
+    type = models.CharField(choices=TYPE,
+                               max_length=100,
                                blank=True,
-                               null=True)
-    
+                               null=True
+                               )
 
     def __unicode__(self):
-        return self.type
-
+        return unicode(self.type)
+        
 class Student(models.Model):  
     GENDER = (
         ('m', 'Male'),
         ('f', 'Female'),
         ('o', 'Other')
-    )  
+    )
+    YEAR = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8')        
+    )
+    YEAR_LEFT = (
+        ('< 1', '< 1'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6')      
+    )
+
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    publication_name = models.CharField(max_length=255)
-    uw_netID = models.CharField(max_length=10)
+    uw_netid = models.CharField(max_length=10)
     email = models.EmailField(max_length=255,
                                 blank=True,
                                 null=True)
+                                
+    image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True)
+    image_alt_text = models.CharField(max_length=255, blank=True, null=True)
     artifacts_url = models.URLField()
+    
     gender = models.CharField(choices=GENDER,
                                max_length=1,
                                blank=True,
                                null=True)
     student_type = models.ManyToManyField(StudentType,
-                                           blank=True)                                          
+                                           blank=True)  
+                                           
+    current_year = models.CharField(choices=YEAR,
+                               max_length=1,
+                               blank=True)
+    year_until_graduation = models.CharField(choices=YEAR_LEFT,
+                               max_length=2,
+                               blank=True)
+    
+    
+    Disclosure_form = models.BooleanField(default=False)                                     
     
                                  
     def __unicode__(self):
         return self.last_name
-        
+
                
 class Interview(models.Model):
     student = models.ForeignKey(Student,
