@@ -19,8 +19,8 @@ class StudentType(models.Model):
                                null=True
                                )
 
-    def __unicode__(self):
-        return unicode(self.type)
+    def __str__(self):
+        return self.type
         
 class Student(models.Model):  
     GENDER = (
@@ -77,7 +77,7 @@ class Student(models.Model):
     Disclosure_form = models.BooleanField(default=False)                                     
     
                                  
-    def __unicode__(self):
+    def __str__(self):
         return self.last_name
 
                
@@ -85,28 +85,28 @@ class Interview(models.Model):
     student = models.ForeignKey(Student,
                                  on_delete=models.PROTECT)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
         
 class Story(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
         
 class Coding(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 class SubCode(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
         
 
@@ -115,7 +115,7 @@ class ResourceLink(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -123,7 +123,7 @@ class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -179,7 +179,7 @@ class Article(models.Model):
     related_links = models.ManyToManyField(ResourceLink,
                                            blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def article_title_data(self):
