@@ -41,17 +41,17 @@ Install required Python packages with pip:
 
     $ pip install -r requirements.txt
 
-Create a django project in the interview-db dir:
+Create a django project in the interview_db dir:
 
     $ django-admin.py startproject project .
 
     That '.' at the end is important!
 
-Modify at least the following settings in interview-db/settings.py:
+Modify at least the following settings in interview_db/settings.py:
 
     Add to your INSTALLED_APPS:
 
-        'interview-db',
+        'interview_db',
 
 Create the intervies-db database
 
@@ -60,5 +60,9 @@ Create the intervies-db database
 You should now be able to run your development server:
 
     $ python manage.py runserver 0.0.0.0:<your port>
+
+Create a super user for /admin access:
+
+    $ python manage.py createsuperuser
 
 
