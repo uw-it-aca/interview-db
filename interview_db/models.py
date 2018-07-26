@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.template.defaultfilters import truncatechars
 
 
 class StudentType(models.Model):
@@ -93,7 +94,7 @@ class Student(models.Model):
     major = models.ManyToManyField(Major)                                   
                                  
     def __str__(self):
-        return self.last_name
+        return str(self.last_name) + ", " + str(self.first_name)
 
                
 class Interview(models.Model):
@@ -154,9 +155,12 @@ class Story(models.Model):
     story = models.TextField()
     code = models.ForeignKey(Coding,on_delete=models.PROTECT)
     subcode = models.ForeignKey(SubCode,on_delete=models.PROTECT)
-    related_resource_links = models.ManyToManyField(ResourceLink,blank=True,
-                                  null=True)
+    related_resource_links = models.ManyToManyField(ResourceLink,blank=True)
 
     def __str__(self):
         return str(self.id)
+    
+    @property
+    def short_story(self):
+        return truncatechars(self.story, 150)
 
