@@ -120,19 +120,31 @@ class Interview(models.Model):
         
 class Coding(models.Model):
     code = models.CharField(max_length=500)
+    definition = models.CharField(max_length=5000)
 
     def __str__(self):
         return self.code
 
 class SubCode(models.Model):
     subcode = models.CharField(max_length=255)
+    definition = models.CharField(max_length=5000)
 
     def __str__(self):
         return self.subcode
 
+class ResourceCategory(models.Model):
+    resource_category = models.CharField(max_length=500)
+    definition = models.CharField(max_length=5000)
+
+    def __str__(self):
+        return self.resource_category
+
 class ResourceLink(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255)
+    description = models.CharField(max_length=5000)
+    category = models.ForeignKey(ResourceCategory,on_delete=models.PROTECT)
+    
 
     def __str__(self):
         return self.title

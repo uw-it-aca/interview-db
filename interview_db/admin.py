@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import StudentType, Major, Location, Student, Interview, Story, Coding, SubCode, ResourceLink
+from .models import StudentType, Major, Location, Student, Interview, Story, Coding, SubCode, ResourceCategory, ResourceLink
 
 @admin.register(StudentType)
 class StudentTypeAdmin(admin.ModelAdmin):
@@ -56,7 +56,15 @@ class SubCodeAdmin(admin.ModelAdmin):
         Return empty perms dict thus hiding the model from admin index.
         """
         return {}
-        
+
+@admin.register(ResourceCategory)
+class ResourceCategoryAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
 @admin.register(ResourceLink)
 class ResourceLinkAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
