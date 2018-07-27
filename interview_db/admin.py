@@ -35,12 +35,11 @@ class StudentAdmin (admin.ModelAdmin):
             'fields': ('image','image_alt_text','artifacts_url','follow_up_consent')
         }),
         ('Student Attributes', {
-            'fields': ('major','student_type','current_year','year_until_graduation')
+            'fields': ('major','student_type','current_year','year_until_graduation','standing')
         }),
     )
-    list_display = ('last_name','first_name','email','follow_up_consent')
-    
-
+    list_display = ('last_name','first_name', 'declared_major', 'email','follow_up_consent')
+    list_filter = ('major',)
     
 @admin.register(Interview)
 class InterviewAdmin (admin.ModelAdmin):

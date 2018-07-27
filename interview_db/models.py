@@ -46,6 +46,14 @@ class Student(models.Model):
         ('f', 'Female'),
         ('o', 'Other')
     )
+    STANDING = (
+        ('Fr', 'Freshman'),
+        ('So', 'Sophmore'),
+        ('Jr', 'Junior'),
+        ('Sr', 'Senior'),
+        ('Ma', 'Masters'),
+        ('Ph', 'PhD')       
+    )
     YEAR = (
         ('1', '1'),
         ('2', '2'),
@@ -91,10 +99,17 @@ class Student(models.Model):
     year_until_graduation = models.CharField(choices=YEAR_LEFT,
                                max_length=2,
                                blank=True)
+    standing = models.CharField(choices=STANDING,
+                               max_length=2,
+                               blank=True)
     major = models.ManyToManyField(Major)                                   
                                  
     def __str__(self):
         return str(self.last_name) + ", " + str(self.first_name)
+    
+    def declared_major(self):
+        return ','.join([ major.major for major in self.major.all() ])
+        
 
                
 class Interview(models.Model):
@@ -163,4 +178,7 @@ class Story(models.Model):
     @property
     def short_story(self):
         return truncatechars(self.story, 150)
+        
+    class Meta:
+        verbose_name_plural = "Stories"
 
