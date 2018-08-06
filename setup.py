@@ -27,7 +27,7 @@ setup(
         'Pillow'
     ],
     license='Apache License, Version 2.0',
-    description=('An application for managing and serving HXT content'),
+    description=('App to collect and tag interview data, artifacts, and stories for publishing using the Django Admin app.'),
     long_description=README,
     url=url,
     classifiers=[
