@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.forms import ModelForm
 from django.template.defaultfilters import truncatechars
 
 
@@ -171,14 +172,17 @@ class Story(models.Model):
     code = models.ForeignKey(Coding,on_delete=models.PROTECT)
     subcode = models.ForeignKey(SubCode,on_delete=models.PROTECT)
     related_resource_links = models.ManyToManyField(ResourceLink,blank=True)
+    story_order_position = models.IntegerField()
 
     def __str__(self):
         return str(self.id)
-    
+            
     @property
     def short_story(self):
         return truncatechars(self.story, 150)
         
     class Meta:
         verbose_name_plural = "Stories"
+        unique_together = ('interview','story_order_position')
+        
 

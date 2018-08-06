@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django import forms
+from django.forms import ModelForm
+from django.core.exceptions import ValidationError
 from .models import StudentType, Major, Location, Student, Interview, Story, Coding, SubCode, ResourceCategory, ResourceLink
 
 @admin.register(StudentType)
@@ -53,8 +56,9 @@ class InterviewAdmin (admin.ModelAdmin):
 
 @admin.register(Story)
 class StoryAdmin (admin.ModelAdmin):
-    list_display = ('get_first_name', 'get_last_name', 'get_date', 'short_story','code','subcode')
-    list_filter = ('code','subcode')
+    list_display = ('get_first_name', 'get_last_name', 'get_date', 'short_story','code','subcode', 'story_order_position')
+    list_filter = ('code','subcode', 'interview')
+    list_editable = ('story_order_position',)
     
     def get_first_name(self,obj):
         return obj.interview.student.first_name
@@ -67,7 +71,27 @@ class StoryAdmin (admin.ModelAdmin):
     def get_date(self,obj):
         return obj.interview.date
     get_date.short_description = 'Date'
+    
 
+class StoryForm(ModelForm):
+    class Meta:
+        model = Story
+        fields = ['story_order_position']
+        exclude = ['interview']
+            
+    def clean(self):
+        cleaned_data = super(StoryForm, self).clean()
+        story_position = cleaned_data.get('story_order_position')
+        
+        if story_position:
+            try:
+                Story.objects.get(
+                    story_position=story_order_position
+                )
+            except Story.DoesNotExist:
+                pass
+            else:
+                raise forms.ValidationError(_("Your story positions must be unique for each interview."))
 
 @admin.register(Coding)
 class CodingAdmin(admin.ModelAdmin):
