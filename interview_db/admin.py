@@ -73,25 +73,24 @@ class StoryAdmin (admin.ModelAdmin):
     get_date.short_description = 'Date'
     
 
-class StoryForm(ModelForm):
+class StoryForm(forms.ModelForm):
     class Meta:
         model = Story
-        fields = ['story_order_position']
         exclude = ['interview']
             
     def clean(self):
-        cleaned_data = super(StoryForm, self).clean()
-        story_position = cleaned_data.get('story_order_position')
-        
-        if story_position:
-            try:
-                Story.objects.get(
-                    story_position=story_order_position
-                )
-            except Story.DoesNotExist:
-                pass
-            else:
-                raise forms.ValidationError(_("Your story positions must be unique for each interview."))
+        cleaned_data = self.cleaned_data
+
+        try:
+            Story.objects.get(story_order_position=cleaned_data['story_order_position'], interview=self.interview)
+        except Story.DoesNotExist:
+            pass
+        else:
+            raise ValidationError('Your story positions must be unique for each interview.')
+
+        # Always return cleaned_data
+        return cleaned_data
+
 
 @admin.register(Coding)
 class CodingAdmin(admin.ModelAdmin):
