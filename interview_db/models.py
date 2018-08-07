@@ -175,7 +175,7 @@ class Story(models.Model):
     story_order_position = models.IntegerField()
 
     def __str__(self):
-        return str(self.id)
+        return str(self.interview) + ": " + str(self.story_order_position)
             
     @property
     def short_story(self):
