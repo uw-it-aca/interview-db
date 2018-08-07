@@ -52,10 +52,12 @@ class InterviewAdmin (admin.ModelAdmin):
     def get_followup(self,obj):
         return obj.student.follow_up_consent
     get_followup.short_description = 'Follow up'
-    
-
+        
 @admin.register(Story)
 class StoryAdmin (admin.ModelAdmin):
+    class Meta:
+        model = Story
+        exclude = ['interview']
     list_display = ('get_first_name', 'get_last_name', 'get_date', 'short_story','code','subcode', 'story_order_position')
     list_filter = ('code','subcode', 'interview')
     list_editable = ('story_order_position',)
@@ -70,26 +72,8 @@ class StoryAdmin (admin.ModelAdmin):
     
     def get_date(self,obj):
         return obj.interview.date
-    get_date.short_description = 'Date'
-    
+    get_date.short_description = 'Date'   
 
-class StoryForm(forms.ModelForm):
-    class Meta:
-        model = Story
-        exclude = ['interview']
-            
-    def clean(self):
-        cleaned_data = self.cleaned_data
-
-        try:
-            Story.objects.get(story_order_position=cleaned_data['story_order_position'], interview=self.interview)
-        except Story.DoesNotExist:
-            pass
-        else:
-            raise ValidationError('Your story positions must be unique for each interview.')
-
-        # Always return cleaned_data
-        return cleaned_data
 
 
 @admin.register(Coding)
