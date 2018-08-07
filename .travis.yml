@@ -22,15 +22,3 @@ script:
   manage.py test interview_db
 after_script:
 - coveralls
-before_deploy:
-- find interview_db/ -name \*.pyc -exec rm {} \;
-- echo $TRAVIS_TAG > interview_db/VERSION
-deploy:
-  provider: pypi
-  user: uw-it-aca
-  skip_cleanup: true
-  password:
-    secure: PghEbVpzDt7WHtjw2SbyB18/cpMRsQBkk9W/73/j3utXglOoAfQhafuzIGImPyFxmzGbNVYRiDRjxzh0GvHIX8A8ys1kTq/GQxsrdoNkrQQXVKRBYz9KsysD103t8TlokRjQcBGZZltHRLAX/fm9Ennke5siYvC68veCTGJdtu+6mLpC7rlNegTZQnyv9aHvvL2OLDqhjItYMeZ4g2cnIJBPeq92y/TB3v8IppuBPlEPOtLYvOCY1rEcP1rapK+uQIFdOJ2xoOnaKcaq65zBufQLfTqN+AjhBfwtsjy0tPXsKStlPBA8ZUSAER5pEWd8aexMyB3ee+iTh9Mp0QO0RFHI7rWrS957QavucwVlrHXeAkrmAZBfCvOm1xrfqbZvWPKDrwB/B54d89/Iur+8qyNsh0IlV0gfzdCtctC0YAcowQx3p3ioIHsLKRy2L4DdXqTu8N2cLQnBpRDaRA5ihL1RiCdLWKN7zE664XDfaHWeOgBRFYE/j7FRwE2uKCq7DtwEMHxFRxU5zNEKAMS9ivp+fyxFg2xuuQKJ4JSyx9QvSI9HdOADLcDYJhnTF2T9h2eQVC3b6nq90DKC9f1xTlvrBtlVJM51GZjMS8IXA8fO0iIi605JioZ9LEyfvTOSP9ims1mL/T+uRsMQByt4DkfJlkfHashG+2Viwv7czQM=
-  on:
-    tags: true
-    python: '2.7'
