@@ -23,7 +23,7 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django==2.0.7',
+        'Django==1.11.15',
         'Pillow'
     ],
     license='Apache License, Version 2.0',
