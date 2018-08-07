@@ -24,9 +24,9 @@ Step-by-step
 
 Checkout the master of the interview-db project:
 
-    $ git clone git@github.com:jcivjan/interview-db.git
+    $ git clone git@github.com:uw-it-aca/interview-db.git
 
-    OR https://github.com/jcivjan/interview-db.git
+    OR https://github.com/uw-it-aca/interview-db.git
     
 Turn interview-db into a virtualenv:
 
