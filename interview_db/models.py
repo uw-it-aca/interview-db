@@ -26,11 +26,11 @@ class StudentType(models.Model):
         
 class Major(models.Model):
 
-    major = models.CharField(max_length=255,
-                               )
+    full_title = models.CharField(max_length=255)
+    major_abbreviation = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.major
+        return self.major_abbreviation
         
 class Location(models.Model):
 
@@ -83,8 +83,8 @@ class Student(models.Model):
                                 null=True)
                                 
     image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True)
-    image_alt_text = models.CharField(max_length=255, blank=True, null=True)
-    artifacts_url = models.URLField()
+    image_alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Describe the image in detail so that a non-sighted user might also get that personal connection.")
+    artifacts_url = models.URLField(help_text="URL for Google Drive folder where student artifacts are stored.")
     follow_up_consent = models.BooleanField()
     
     gender = models.CharField(choices=GENDER,
@@ -103,13 +103,14 @@ class Student(models.Model):
     standing = models.CharField(choices=STANDING,
                                max_length=2,
                                blank=True)
-    major = models.ManyToManyField(Major)                                   
+    major = models.ManyToManyField(Major) 
+    intended_major = models.BooleanField(blank=True)                                  
                                  
     def __str__(self):
         return str(self.last_name) + ", " + str(self.first_name)
     
     def declared_major(self):
-        return ','.join([ major.major for major in self.major.all() ])
+        return ','.join([ major.major_abbreviation for major in self.major.all() ])
         
 
                
