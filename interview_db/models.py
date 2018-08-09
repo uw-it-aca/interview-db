@@ -131,7 +131,9 @@ class Interview(models.Model):
 	release_conditions = models.TextField(blank=True,
                                   null=True)
 	interview_notes_url = models.URLField(blank=True,
-                                  null=True)
+                                  null=True,
+                                  help_text="Direct URL for transcribed interview, edited for publication."
+                                  )
 	    
 	def __str__(self):
 	    return str(self.student) + ": " + str(self.date)
@@ -159,9 +161,11 @@ class ResourceCategory(models.Model):
 
 class ResourceLink(models.Model):
     url = models.URLField()
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=5000)
-    category = models.ForeignKey(ResourceCategory,on_delete=models.PROTECT)
+    title = models.CharField(max_length=255, 
+                                help_text="The text used as the link to the resource.")
+    description = models.CharField(max_length=5000,
+                                        help_text="Provide a <strong>brief</strong> description. Something that could be the title attribute of the link.")
+    category = models.ForeignKey(ResourceCategory,on_delete=models.PROTECT, help_text="See our <a href='https://docs.google.com/document/d/1nDEYzdfqIDRQwOEKhRHZiiX8hHj4OxiTlNbYmF4dZUQ/edit?usp=sharing'>category guidelines</> for resource links.")
     
 
     def __str__(self):
@@ -169,11 +173,17 @@ class ResourceLink(models.Model):
 
 class Story(models.Model):
     interview = models.ForeignKey(Interview,on_delete=models.PROTECT)
-    story = models.TextField()
-    code = models.ForeignKey(Coding,on_delete=models.PROTECT)
-    subcode = models.ForeignKey(SubCode,on_delete=models.PROTECT)
-    related_resource_links = models.ManyToManyField(ResourceLink,blank=True)
-    story_order_position = models.IntegerField()
+    story = models.TextField(help_text="Stories should be understandable and interesting all on their own.")
+    code = models.ForeignKey(Coding,on_delete=models.PROTECT,
+                                help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>code definitions</>."
+                                )
+    subcode = models.ForeignKey(SubCode,on_delete=models.PROTECT, 
+                                    help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>sub-code definitions</>."
+                                    )
+    related_resource_links = models.ManyToManyField(ResourceLink,blank=True,
+                                                        help_text="Select any resources that would be useful or relevant in this situation, whether mentioned in the story or not.<br/>"
+                                                        )
+    story_order_position = models.IntegerField(help_text="Logical position of story within context of other stories w/in interview. <strong>Must be unique</strong> to other stories of the same interview!")
 
     def __str__(self):
         return str(self.interview) + ": " + str(self.story_order_position)
