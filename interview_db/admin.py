@@ -44,6 +44,11 @@ class StudentAdmin (admin.ModelAdmin):
     list_display = ('last_name','first_name', 'declared_major', 'email','follow_up_consent')
     list_filter = ('major',)
     
+    class Media:
+        css = {
+            'all': ('css/admin.css',)
+        }
+    
 @admin.register(Interview)
 class InterviewAdmin (admin.ModelAdmin):
     list_display = ('date','student', 'get_followup', 'release_form')
@@ -73,7 +78,11 @@ class StoryAdmin (admin.ModelAdmin):
     def get_date(self,obj):
         return obj.interview.date
     get_date.short_description = 'Date'   
-
+    
+    class Media:
+        css = {
+            'all': ('css/admin.css',)
+        }
 
 
 @admin.register(Coding)
