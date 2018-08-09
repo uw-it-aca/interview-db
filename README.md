@@ -52,6 +52,10 @@ Modify at least the following settings in interview_db/settings.py:
     Add to your INSTALLED_APPS:
 
         'interview_db',
+        
+    Add 
+        MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA')
+        MEDIA_URL = '/media/'
 
 Create the intervies-db database
 
