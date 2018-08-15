@@ -29,7 +29,7 @@ class LocationAdmin(admin.ModelAdmin):
         return {}
         
 @admin.register(Student)
-class StudentAdmin (admin.ModelAdmin):
+class StudentAdmin (admin.ModelAdmin):    
     fieldsets = (
         (None, {
             'fields': ('first_name','last_name','uw_netid','email')

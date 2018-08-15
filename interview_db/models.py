@@ -31,6 +31,9 @@ class Major(models.Model):
 
     def __str__(self):
         return self.major_abbreviation
+    
+    class Meta:
+        ordering = ['major_abbreviation',]
         
 class Location(models.Model):
 
@@ -39,6 +42,9 @@ class Location(models.Model):
 
     def __str__(self):
         return self.location
+    
+    class Meta:
+        ordering = ['location',]
 
         
 class Student(models.Model):  
@@ -156,6 +162,9 @@ class ResourceCategory(models.Model):
 
     def __str__(self):
         return self.resource_category
+    
+    class Meta:
+        ordering = ['resource_category',]
 
 class ResourceLink(models.Model):
     url = models.URLField()
@@ -168,6 +177,10 @@ class ResourceLink(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['title',]
+    
 
 class Story(models.Model):
     interview = models.ForeignKey(Interview,on_delete=models.PROTECT)
