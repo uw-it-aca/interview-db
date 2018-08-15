@@ -108,4 +108,4 @@ manage.py
 pip-selfcheck.json
 project/
 migrations/
-
+.DS_Store

@@ -81,9 +81,6 @@ class Student(models.Model):
     email = models.EmailField(max_length=255,
                                 blank=True,
                                 null=True)
-                                
-    image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True)
-    image_alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Describe the image in detail so that a non-sighted user might also get that personal connection.")
     artifacts_url = models.URLField(help_text="URL for Google Drive folder where student artifacts are stored.")
     follow_up_consent = models.BooleanField()
     
@@ -132,9 +129,10 @@ class Interview(models.Model):
                                   null=True)
 	interview_notes_url = models.URLField(blank=True,
                                   null=True,
-                                  help_text="Direct URL for transcribed interview, edited for publication."
-                                  )
-	    
+                                  help_text="Direct URL for transcribed interview, edited for publication.")
+	image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True)
+	image_alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Describe the image in detail so that a non-sighted user might also get that personal connection.")
+	
 	def __str__(self):
 	    return str(self.student) + ": " + str(self.date)
         

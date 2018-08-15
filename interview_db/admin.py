@@ -35,7 +35,7 @@ class StudentAdmin (admin.ModelAdmin):
             'fields': ('first_name','last_name','uw_netid','email')
         }),
         ('Artifacts', {
-            'fields': ('image','image_alt_text','artifacts_url','follow_up_consent')
+            'fields': ('artifacts_url','follow_up_consent')
         }),
         ('Student Attributes', {
             'fields': (('major','intended_major'),'student_type','current_year','year_until_graduation','standing')
