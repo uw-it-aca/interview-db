@@ -89,6 +89,12 @@ class Student(models.Model):
                                 null=True)
     artifacts_url = models.URLField(help_text="URL for Google Drive folder where student artifacts are stored.")
     follow_up_consent = models.BooleanField()
+    no_identifying_photo = models.BooleanField(help_text="No photo of face can be published.")
+    no_real_name = models.BooleanField(help_text="Cannot publish real name.")
+    no_publishing_stories = models.BooleanField(help_text="Stories and artifacts can only be used internally for research.")
+    other_publishing_restrictions = models.BooleanField(help_text="They had other restrictions on the use of their data.")
+    other_publishing_restrictions_notes = models.TextField(blank=True,
+                                null=True)
     
     gender = models.CharField(choices=GENDER,
                                max_length=1,

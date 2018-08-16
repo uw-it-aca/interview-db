@@ -37,6 +37,9 @@ class StudentAdmin (admin.ModelAdmin):
         ('Artifacts', {
             'fields': ('artifacts_url','follow_up_consent')
         }),
+        ('Privacy Settings', {
+            'fields': ('no_identifying_photo','no_real_name','no_publishing_stories',('other_publishing_restrictions','other_publishing_restrictions_notes'))
+        }),
         ('Student Attributes', {
             'fields': (('major','intended_major'),'student_type','current_year','year_until_graduation','standing')
         }),
