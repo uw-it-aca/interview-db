@@ -37,9 +37,6 @@ class StudentAdmin (admin.ModelAdmin):
         ('Artifacts', {
             'fields': ('artifacts_url','follow_up_consent')
         }),
-        ('Privacy Settings', {
-            'fields': ('no_identifying_photo','no_real_name','no_publishing_stories',('other_publishing_restrictions','other_publishing_restrictions_notes'))
-        }),
         ('Student Attributes', {
             'fields': (('major','intended_major'),'student_type','current_year','year_until_graduation','standing')
         }),
@@ -50,12 +47,27 @@ class StudentAdmin (admin.ModelAdmin):
 
 @admin.register(Interview)
 class InterviewAdmin (admin.ModelAdmin):
-    list_display = ('date','student', 'get_followup', 'release_form')
+    fieldsets = (
+        (None, {
+            'fields': (('student','date'),('interview_quarter','interview_location'))
+        }),
+        ('Artifacts', {
+            'fields': (('image','image_is_not_identifying'),'image_alt_text','interview_notes_url')
+        }),
+        ('Permission to Publish', {
+            'fields': ('signed_release_form',)
+        }),
+        ('Publishing Restrictions', {
+            'fields': ('no_identifying_photo','no_real_name','no_publishing_stories',('other_publishing_restrictions','other_publishing_restrictions_notes'))
+        }),
+    )
+    list_display = ('date','student', 'get_followup', 'signed_release_form')
     list_filter = ('student','date')
     
     def get_followup(self,obj):
         return obj.student.follow_up_consent
-    get_followup.short_description = 'Follow up'
+    get_followup.short_description = 'Follow up'    
+    
         
 @admin.register(Story)
 class StoryAdmin (admin.ModelAdmin):
