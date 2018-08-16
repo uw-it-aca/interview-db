@@ -99,7 +99,7 @@ class Student(models.Model):
     current_year = models.CharField(choices=YEAR,
                                max_length=1,
                                blank=True)
-    year_until_graduation = models.CharField(choices=YEAR_LEFT,
+    years_until_graduation = models.CharField(choices=YEAR_LEFT,
                                max_length=2,
                                blank=True)
     standing = models.CharField(choices=STANDING,

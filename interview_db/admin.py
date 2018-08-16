@@ -35,10 +35,13 @@ class StudentAdmin (admin.ModelAdmin):
             'fields': ('first_name','last_name','uw_netid','email')
         }),
         ('Artifacts', {
-            'fields': ('artifacts_url','follow_up_consent')
+            'fields': ('artifacts_url',)
+        }),
+        ('Follow Up', {
+            'fields': ('follow_up_consent',)
         }),
         ('Student Attributes', {
-            'fields': (('major','intended_major'),'student_type','current_year','year_until_graduation','standing')
+            'fields': (('major','intended_major'),'student_type',('current_year','years_until_graduation'),'standing')
         }),
     )
     list_display = ('last_name','first_name', 'declared_major', 'email','follow_up_consent')
