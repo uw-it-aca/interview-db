@@ -46,6 +46,10 @@ class StudentAdmin (admin.ModelAdmin):
     )
     list_display = ('last_name','first_name', 'declared_major', 'email','follow_up_consent')
     list_filter = ('major',)
+    class Media:
+        css = {
+            'all': ('css/admin.css',)
+        }
     
 
 @admin.register(Interview)
@@ -66,11 +70,13 @@ class InterviewAdmin (admin.ModelAdmin):
     )
     list_display = ('date','student', 'get_followup', 'signed_release_form')
     list_filter = ('student','date')
-    
     def get_followup(self,obj):
         return obj.student.follow_up_consent
     get_followup.short_description = 'Follow up'    
-    
+    class Media:
+        css = {
+            'all': ('css/admin.css',)
+        }
         
 @admin.register(Story)
 class StoryAdmin (admin.ModelAdmin):
@@ -104,6 +110,10 @@ class StoryAdmin (admin.ModelAdmin):
         return obj.interview.date
     get_date.short_description = 'Date'   
     
+    class Media:
+        css = {
+            'all': ('css/admin.css',)
+        }
 
 
 @admin.register(Coding)
