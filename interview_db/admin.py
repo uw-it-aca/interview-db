@@ -74,6 +74,17 @@ class InterviewAdmin (admin.ModelAdmin):
         
 @admin.register(Story)
 class StoryAdmin (admin.ModelAdmin):
+    fieldsets = (
+        (None, {
+            'fields': ('interview','story')
+        }),
+        ('Story Metadata', {
+            'fields': (('code','subcode'), 'story_order_position')
+        }),
+        ('Related Resources', {
+            'fields': ('related_resource_links',)
+        }),
+    )
     class Meta:
         model = Story
         exclude = ['interview']
