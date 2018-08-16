@@ -88,8 +88,7 @@ class Student(models.Model):
                                 blank=True,
                                 null=True)
     artifacts_url = models.URLField(help_text="URL for Google Drive folder where student artifacts are stored.")
-    follow_up_consent = models.BooleanField()
-    
+    follow_up_consent = models.BooleanField()    
     gender = models.CharField(choices=GENDER,
                                max_length=1,
                                blank=True,
@@ -100,7 +99,7 @@ class Student(models.Model):
     current_year = models.CharField(choices=YEAR,
                                max_length=1,
                                blank=True)
-    year_until_graduation = models.CharField(choices=YEAR_LEFT,
+    years_until_graduation = models.CharField(choices=YEAR_LEFT,
                                max_length=2,
                                blank=True)
     standing = models.CharField(choices=STANDING,
@@ -130,18 +129,20 @@ class Interview(models.Model):
 	interview_quarter = models.CharField(choices=QUARTER,max_length=2)
 	interview_location = models.ManyToManyField(Location,
                                            blank=True)
-	release_form = models.BooleanField()
-	release_conditions = models.TextField(blank=True,
-                                  null=True)
+	signed_release_form = models.BooleanField()
 	interview_notes_url = models.URLField(blank=True,
                                   null=True,
                                   help_text="Direct URL for transcribed interview, edited for publication.")
 	image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True)
+	image_is_not_identifying = models.BooleanField(help_text="This image doesn't include the student's face.")
 	image_alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Describe the image in detail so that a non-sighted user might also get that personal connection.")
-	
-	def __str__(self):
-	    return str(self.student) + ": " + str(self.date)
-        
+	no_identifying_photo = models.BooleanField(help_text="No photo of face can be published.")
+	no_real_name = models.BooleanField(help_text="Cannot publish real name.")
+	no_publishing_stories = models.BooleanField(help_text="Stories and artifacts can only be used internally for research.")
+	other_publishing_restrictions = models.BooleanField(help_text="They had other restrictions on the use of their data.")
+	other_publishing_restrictions_notes = models.TextField(blank=True,null=True)
+	def __str__(self):return str(self.student)+": "+str(self.date)
+
 class Coding(models.Model):
     code = models.CharField(max_length=500)
     definition = models.CharField(max_length=5000)

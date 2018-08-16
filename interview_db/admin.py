@@ -35,10 +35,13 @@ class StudentAdmin (admin.ModelAdmin):
             'fields': ('first_name','last_name','uw_netid','email')
         }),
         ('Artifacts', {
-            'fields': ('artifacts_url','follow_up_consent')
+            'fields': ('artifacts_url',)
+        }),
+        ('Follow Up', {
+            'fields': ('follow_up_consent',)
         }),
         ('Student Attributes', {
-            'fields': (('major','intended_major'),'student_type','current_year','year_until_graduation','standing')
+            'fields': (('major','intended_major'),'student_type',('current_year','years_until_graduation'),'standing')
         }),
     )
     list_display = ('last_name','first_name', 'declared_major', 'email','follow_up_consent')
@@ -47,15 +50,41 @@ class StudentAdmin (admin.ModelAdmin):
 
 @admin.register(Interview)
 class InterviewAdmin (admin.ModelAdmin):
-    list_display = ('date','student', 'get_followup', 'release_form')
+    fieldsets = (
+        (None, {
+            'fields': (('student','date'),('interview_quarter','interview_location'))
+        }),
+        ('Artifacts', {
+            'fields': (('image','image_is_not_identifying'),'image_alt_text','interview_notes_url')
+        }),
+        ('Permission to Publish', {
+            'fields': ('signed_release_form',)
+        }),
+        ('Publishing Restrictions', {
+            'fields': ('no_identifying_photo','no_real_name','no_publishing_stories',('other_publishing_restrictions','other_publishing_restrictions_notes'))
+        }),
+    )
+    list_display = ('date','student', 'get_followup', 'signed_release_form')
     list_filter = ('student','date')
     
     def get_followup(self,obj):
         return obj.student.follow_up_consent
-    get_followup.short_description = 'Follow up'
+    get_followup.short_description = 'Follow up'    
+    
         
 @admin.register(Story)
 class StoryAdmin (admin.ModelAdmin):
+    fieldsets = (
+        (None, {
+            'fields': ('interview','story')
+        }),
+        ('Story Metadata', {
+            'fields': (('code','subcode'), 'story_order_position')
+        }),
+        ('Related Resources', {
+            'fields': ('related_resource_links',)
+        }),
+    )
     class Meta:
         model = Story
         exclude = ['interview']
