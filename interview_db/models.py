@@ -59,8 +59,8 @@ class Student(models.Model):
     follow_up_consent = models.BooleanField()    
                                      
                                  
-    def __str__(self):
-        return str(self.last_name) + ", " + str(self.first_name)
+    def __unicode__(self):
+        return self.last_name + ", " + self.first_name
     
         
 
