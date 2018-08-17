@@ -40,12 +40,8 @@ class StudentAdmin (admin.ModelAdmin):
         ('Follow Up', {
             'fields': ('follow_up_consent',)
         }),
-        ('Student Attributes', {
-            'fields': (('major','intended_major'),'student_type',('current_year','years_until_graduation'),'standing')
-        }),
     )
-    list_display = ('last_name','first_name', 'declared_major', 'email','follow_up_consent')
-    list_filter = ('major',)
+    list_display = ('last_name','first_name', 'email','follow_up_consent')
     class Media:
         css = {
             'all': ('css/admin.css',)
@@ -61,6 +57,9 @@ class InterviewAdmin (admin.ModelAdmin):
         ('Artifacts', {
             'fields': (('image','image_is_not_identifying'),'image_alt_text','interview_notes_url')
         }),
+        ('Student Attributes', {
+            'fields': (('major','intended_major'),'student_type',('current_year','years_until_graduation'),'standing')
+        }),
         ('Permission to Publish', {
             'fields': ('signed_release_form',)
         }),
@@ -68,8 +67,8 @@ class InterviewAdmin (admin.ModelAdmin):
             'fields': ('no_identifying_photo','no_real_name','no_publishing_stories',('other_publishing_restrictions','other_publishing_restrictions_notes'))
         }),
     )
-    list_display = ('date','student', 'get_followup', 'signed_release_form')
-    list_filter = ('student','date')
+    list_display = ('date','student', 'declared_major', 'get_followup', 'signed_release_form')
+    list_filter = ('student','major','date')
     def get_followup(self,obj):
         return obj.student.follow_up_consent
     get_followup.short_description = 'Follow up'    

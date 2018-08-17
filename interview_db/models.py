@@ -48,20 +48,34 @@ class Location(models.Model):
 
         
 class Student(models.Model):  
-    GENDER = (
-        ('m', 'Male'),
-        ('f', 'Female'),
-        ('o', 'Other')
+
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255, blank=True, null=True)
+    uw_netid = models.CharField(max_length=10)
+    email = models.EmailField(max_length=255,
+                                blank=True,
+                                null=True)
+    artifacts_url = models.URLField(help_text="URL for Google Drive folder where student artifacts are stored.")
+    follow_up_consent = models.BooleanField()    
+                                     
+                                 
+    def __str__(self):
+        return str(self.last_name) + ", " + str(self.first_name)
+    
+        
+
+               
+class Interview(models.Model):
+	YEAR_LEFT = (
+        ('< 1', '< 1'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6')      
     )
-    STANDING = (
-        ('Fr', 'Freshman'),
-        ('So', 'Sophmore'),
-        ('Jr', 'Junior'),
-        ('Sr', 'Senior'),
-        ('Ma', 'Masters'),
-        ('Ph', 'PhD')       
-    )
-    YEAR = (
+	YEAR = (
         ('1', '1'),
         ('2', '2'),
         ('3', '3'),
@@ -71,53 +85,15 @@ class Student(models.Model):
         ('7', '7'),
         ('8', '8')        
     )
-    YEAR_LEFT = (
-        ('< 1', '< 1'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
-        ('6', '6')      
+	STANDING = (
+        ('Fr', 'Freshman'),
+        ('So', 'Sophmore'),
+        ('Jr', 'Junior'),
+        ('Sr', 'Senior'),
+        ('Ma', 'Masters'),
+        ('Ph', 'PhD')       
     )
-
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255, blank=True, null=True)
-    uw_netid = models.CharField(max_length=10, blank=True, null=True)
-    email = models.EmailField(max_length=255,
-                                blank=True,
-                                null=True)
-    artifacts_url = models.URLField(help_text="URL for Google Drive folder where student artifacts are stored.")
-    follow_up_consent = models.BooleanField()    
-    gender = models.CharField(choices=GENDER,
-                               max_length=1,
-                               blank=True,
-                               null=True)
-    student_type = models.ManyToManyField(StudentType,
-                                           blank=True)  
-                                           
-    current_year = models.CharField(choices=YEAR,
-                               max_length=1,
-                               blank=True)
-    years_until_graduation = models.CharField(choices=YEAR_LEFT,
-                               max_length=3,
-                               blank=True)
-    standing = models.CharField(choices=STANDING,
-                               max_length=2,
-                               blank=True)
-    major = models.ManyToManyField(Major) 
-    intended_major = models.BooleanField(blank=True)                                  
-                                 
-    def __str__(self):
-        return str(self.last_name) + ", " + str(self.first_name)
-    
-    def declared_major(self):
-        return ','.join([ major.major_abbreviation for major in self.major.all() ])
-        
-
-               
-class Interview(models.Model):
-	QUARTER = (
+    	QUARTER = (
 		('au', 'Autumn'),
 		('wi', 'Winter'),
 		('sp', 'Spring'),
@@ -136,12 +112,27 @@ class Interview(models.Model):
 	image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True)
 	image_is_not_identifying = models.BooleanField(help_text="This image doesn't include the student's face.")
 	image_alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Describe the image in detail so that a non-sighted user might also get that personal connection.")
+	intended_major = models.BooleanField(blank=True)
+	major = models.ManyToManyField(Major) 
+	standing = models.CharField(choices=STANDING,
+                               max_length=2,
+                               blank=True)
+	years_until_graduation = models.CharField(choices=YEAR_LEFT,
+                               max_length=3,
+                               blank=True)
+	current_year = models.CharField(choices=YEAR,
+                               max_length=1,
+                               blank=True)
+	student_type = models.ManyToManyField(StudentType,
+                                           blank=True)   
 	no_identifying_photo = models.BooleanField(help_text="No photo of face can be published.")
 	no_real_name = models.BooleanField(help_text="Cannot publish real name.")
 	no_publishing_stories = models.BooleanField(help_text="Stories and artifacts can only be used internally for research.")
 	other_publishing_restrictions = models.BooleanField(help_text="They had other restrictions on the use of their data.")
 	other_publishing_restrictions_notes = models.TextField(blank=True,null=True)
+	def declared_major(self):return ','.join([ major.major_abbreviation for major in self.major.all() ])
 	def __str__(self):return str(self.student)+": "+str(self.date)
+	
 
 class Coding(models.Model):
     code = models.CharField(max_length=500)
