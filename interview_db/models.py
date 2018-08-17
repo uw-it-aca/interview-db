@@ -82,8 +82,8 @@ class Student(models.Model):
     )
 
     first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    uw_netid = models.CharField(max_length=10)
+    last_name = models.CharField(max_length=255, blank=True, null=True)
+    uw_netid = models.CharField(max_length=10, blank=True, null=True)
     email = models.EmailField(max_length=255,
                                 blank=True,
                                 null=True)
