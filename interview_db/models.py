@@ -100,7 +100,7 @@ class Student(models.Model):
                                max_length=1,
                                blank=True)
     years_until_graduation = models.CharField(choices=YEAR_LEFT,
-                               max_length=2,
+                               max_length=3,
                                blank=True)
     standing = models.CharField(choices=STANDING,
                                max_length=2,
