@@ -60,7 +60,7 @@ class Student(models.Model):
                                      
                                  
     def __unicode__(self):
-        return self.last_name + ", " + self.first_name
+        return unicode(self.last_name) + ", " + unicode(self.first_name)
     
         
 
