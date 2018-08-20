@@ -109,7 +109,7 @@ class Interview(models.Model):
 	interview_notes_url = models.URLField(blank=True,
                                   null=True,
                                   help_text="Direct URL for transcribed interview, edited for publication.")
-	image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True)
+	image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True, help_text="Image should be 1875 x 2882 (any orientation), saved as an optimized High Quality (60) JPEG.")
 	image_is_not_identifying = models.BooleanField(help_text="This image doesn't include the student's face.")
 	image_alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Describe the image in detail so that a non-sighted user might also get that personal connection.")
 	intended_major = models.BooleanField(blank=True)
