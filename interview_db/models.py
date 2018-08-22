@@ -62,7 +62,8 @@ class Student(models.Model):
     def __unicode__(self):
         return unicode(self.last_name) + ", " + unicode(self.first_name)
     
-        
+    class Meta:
+        ordering = ['last_name',]
 
                
 class Interview(models.Model):
