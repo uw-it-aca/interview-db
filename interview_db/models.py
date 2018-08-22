@@ -90,6 +90,7 @@ class Interview(models.Model):
         ('So', 'Sophmore'),
         ('Jr', 'Junior'),
         ('Sr', 'Senior'),
+        ('Al', 'Alumni - undergrad'),
         ('Ma', 'Masters'),
         ('Ph', 'PhD')       
     )
