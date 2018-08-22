@@ -68,7 +68,7 @@ class InterviewAdmin (admin.ModelAdmin):
         }),
     )
     list_display = ('date','student', 'declared_major', 'get_followup', 'signed_release_form')
-    list_filter = ('student','major','date')
+    list_filter = ('major','standing', 'student_type', 'date')
     def get_followup(self,obj):
         return obj.student.follow_up_consent
     get_followup.short_description = 'Follow up'    
