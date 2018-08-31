@@ -1,0 +1,19 @@
+{% if code_list %}
+    <ul>
+        {% for code in code_list %}
+        <li>{{code.code}}
+        <ul>
+            {% for subcode in code.story_set.all %}
+            <li>{{subcode}}</li>
+            {% endfor %} 
+            
+        </ul>
+        
+        </li>
+        {% endfor %} 
+    </ul>
+{% else %}
+    <p>
+        There are no student stories available.
+    </p>
+{% endif %}

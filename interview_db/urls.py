@@ -1,8 +1,7 @@
-from django.conf import settings
-from django.conf.urls.static import static
 from django.conf.urls import url
-from django.contrib import admin
+from . import views
 
+app_name = 'interview_db'
 urlpatterns = [
-    url('admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^$', views.IndexView.as_view(), name="home"),
+] 
