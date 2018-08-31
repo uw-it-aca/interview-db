@@ -166,7 +166,7 @@ class ResourceLink(models.Model):
                                 help_text="The text used as the link to the resource.")
     description = models.CharField(max_length=5000,
                                         help_text="Provide a <strong>brief</strong> description. Something that could be the title attribute of the link.")
-    category = models.ForeignKey(ResourceCategory,on_delete=models.PROTECT, help_text="See our <a href='https://docs.google.com/document/d/1nDEYzdfqIDRQwOEKhRHZiiX8hHj4OxiTlNbYmF4dZUQ/edit?usp=sharing'>category guidelines</> for resource links.")
+    category = models.ForeignKey(ResourceCategory,on_delete=models.PROTECT, help_text="See our <a href='https://docs.google.com/document/d/1nDEYzdfqIDRQwOEKhRHZiiX8hHj4OxiTlNbYmF4dZUQ/edit?usp=sharing'>category guidelines</a> for resource links.")
     
 
     def __str__(self):
@@ -180,10 +180,10 @@ class Story(models.Model):
     interview = models.ForeignKey(Interview,on_delete=models.PROTECT)
     story = models.TextField(help_text="Stories should be understandable and interesting all on their own.")
     code = models.ForeignKey(Coding,on_delete=models.PROTECT,
-                                help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>code definitions</>."
+                                help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>code definitions</a>."
                                 )
     subcode = models.ForeignKey(SubCode,on_delete=models.PROTECT, 
-                                    help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>sub-code definitions</>."
+                                    help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>sub-code definitions</a>."
                                     )
     related_resource_links = models.ManyToManyField(ResourceLink,blank=True,
                                                         help_text="Select any resources that would be useful or relevant in this situation, whether mentioned in the story or not.<br/>"
