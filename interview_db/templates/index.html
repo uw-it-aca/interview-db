@@ -1,14 +1,19 @@
 {% if code_list %}
     <ul>
         {% for code in code_list %}
-        <li>{{code.code}}
-        <ul>
-            {% for subcode in code.story_set.all %}
-            <li>{{subcode}}</li>
-            {% endfor %} 
-            
-        </ul>
-        
+        <li>{{code.code}} {{code.story_set.count}}
+       {% if code.story_set %}
+            <ul>
+                {% for each in code.story_set.all %}
+                <li>{{each.subcode}}
+                <ul>
+                    <li>{{each.story}} [{{each.interview}}]</li>
+                </ul>
+                
+                </li>
+                {% endfor %} 
+            </ul>
+        {% endif %}
         </li>
         {% endfor %} 
     </ul>

@@ -1,0 +1,15 @@
+{% if story_list %}
+<h2>{{ interview }}</h2>
+
+    <ul>
+        {% for story in story_list %}
+        <li>
+            {{story.story}}
+        </li>
+        {% endfor %} 
+    </ul>
+{% else %}
+    <p>
+        There are no student stories available.
+    </p>
+{% endif %}

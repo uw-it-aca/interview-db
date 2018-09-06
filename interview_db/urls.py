@@ -4,4 +4,5 @@ from . import views
 app_name = 'interview_db'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name="home"),
+    url(r'interviews.html', views.InterviewView.as_view(), name="interviews"),
 ] 
