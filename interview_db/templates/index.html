@@ -7,24 +7,24 @@ Topics
 {% block content %}
 
     {% if code_list %}
-        <ul>
-            {% for code in code_list %}
-            <li>{{code.code}} [<em>{{code.story_set.count}} stories</em>]
-           {% if code.story_set %}
+        {% for code in code_list %}
+            {% if code.story_set.all %}
                 <ul>
-                    {% for each in code.story_set.all %}
-                    <li>{{each.subcode}}
-                    <ul>
-                        <li>{{each.story}} <em>{{each.interview.student.first_name}} {{each.interview.student.last_name|make_list|first}} : {{each.interview.date}}</em></li>
-                    </ul>
-                    
+                    <li>{{code.code}} [<em>{{code.story_set.count}} stories</em>]
+                        <ul>
+                            {% for each in code.story_set.all %}
+                            <li>{{each.subcode}}
+                            <ul>
+                                <li>{{each.story}} <em>{{each.interview.student.first_name}} {{each.interview.student.last_name|make_list|first}} : {{each.interview.date}}</em></li>
+                            </ul>
+                            
+                            </li>
+                            {% endfor %} 
+                        </ul>
                     </li>
-                    {% endfor %} 
                 </ul>
             {% endif %}
-            </li>
-            {% endfor %} 
-        </ul>
+        {% endfor %} 
     {% else %}
         <p>
             There are no student stories available.
