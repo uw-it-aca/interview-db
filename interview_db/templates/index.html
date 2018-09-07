@@ -1,24 +1,30 @@
-{% if code_list %}
-    <ul>
-        {% for code in code_list %}
-        <li>{{code.code}} {{code.story_set.count}}
-       {% if code.story_set %}
-            <ul>
-                {% for each in code.story_set.all %}
-                <li>{{each.subcode}}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if code_list %}
+        <ul>
+            {% for code in code_list %}
+            <li>{{code.code}} {{code.story_set.count}}
+           {% if code.story_set %}
                 <ul>
-                    <li>{{each.story}} [{{each.interview}}]</li>
+                    {% for each in code.story_set.all %}
+                    <li>{{each.subcode}}
+                    <ul>
+                        <li>{{each.story}} <em>{{each.interview.student.first_name}} {{each.interview.student.last_name|make_list|first}} : {{each.interview.date}}</em></li>
+                    </ul>
+                    
+                    </li>
+                    {% endfor %} 
                 </ul>
-                
-                </li>
-                {% endfor %} 
-            </ul>
-        {% endif %}
-        </li>
-        {% endfor %} 
-    </ul>
-{% else %}
-    <p>
-        There are no student stories available.
-    </p>
-{% endif %}
+            {% endif %}
+            </li>
+            {% endfor %} 
+        </ul>
+    {% else %}
+        <p>
+            There are no student stories available.
+        </p>
+    {% endif %}
+
+{% endblock %}
