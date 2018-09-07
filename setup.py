@@ -24,7 +24,9 @@ setup(
     include_package_data=True,
     install_requires=[
         'Django==1.11.15',
-        'Pillow'
+        'Pillow',
+        'django-compressor',
+        'django-pyscss',
     ],
     license='Apache License, Version 2.0',
     description=('App to collect and tag interview data, artifacts, and stories for publishing using the Django Admin app.'),
