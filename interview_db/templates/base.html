@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+    <head>
+        <title>{% block title %}UW Student Experience Interview Project{% endblock %}</title>
+        {% include "include/head.html" %}
+    </head>
+
+    <body {% if request.is_mobile or request.is_tablet %}data-mobile="true"{% endif %}>
+
+        <div class="idb-app-container" >
+            <div class="idb-header" >
+                <h1>{% block header %}Student Experience Interview Project{% endblock %}</h1>
+            </div>
+            <nav>{% block main-nav %}<a href="interviews.html">Interviews</a>{% endblock %}</nav>
+            <div class="idb-content-container">
+                {% block content %}{% endblock %}
+            </div>
+
+            <div id="footer" class="idb-footer" role="contentinfo">
+                <div style="margin-left:20px;float:left;">&copy; UW-IT, AXDD <a href="http://www.washington.edu/online/privacy/" title="UW Privacy Policy">Privacy</a> <a href="http://www.washington.edu/online/terms/" style="margin-left:5px;" title="UW Terms & Conditions of Use">Terms</a></div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -192,6 +192,9 @@ class Story(models.Model):
 
     def __str__(self):
         return str(self.interview) + ": " + str(self.story_order_position)
+    
+    def __str__(subcode):
+        return str(subcode.subcode)
             
     @property
     def short_story(self):
@@ -200,5 +203,5 @@ class Story(models.Model):
     class Meta:
         verbose_name_plural = "Stories"
         unique_together = ('interview','story_order_position')
-        
+        ordering = ['story_order_position']
 
