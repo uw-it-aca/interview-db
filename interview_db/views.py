@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 
-from .models import Coding, SubCode, Story
+from .models import Coding, Interview
 
 
 class IndexView(ListView):
@@ -13,6 +13,6 @@ class IndexView(ListView):
 
 class InterviewView(ListView):
     template_name = 'interview.html'
-    context_object_name = 'story_list'
+    context_object_name = 'interview_list'
     def get_queryset(self):
-        return Story.objects.order_by('interview','story_order_position')
+        return Interview.objects.order_by('student')

@@ -1,13 +1,18 @@
-{% if story_list %}
-<h2>{{ interview }}</h2>
-
-    <ul>
-        {% for story in story_list %}
+{% if interview_list %}
+{% for interview in interview_list %}
+<div style=" padding-bottom:40px; clear:both; min-height:250px;">
+<h2 >{{ interview.student }} </h2>
+<h3>{{ interview.date }}</h3>
+{% if interview.image %}<img src="../media/{{ interview.image }}" style="width:100px; float:left; margin: 0 40px 0 20px;">{% endif %}
+    <ul >
+        {% for story in interview.story_set.all %}
         <li>
-            {{story.story}}
+            {{story.story}}<br/><em>{{ story.code }}, <strong>{{ story.subcode }}</strong></em>
         </li>
         {% endfor %} 
     </ul>
+</div>
+{% endfor %} 
 {% else %}
     <p>
         There are no student stories available.

@@ -203,5 +203,5 @@ class Story(models.Model):
     class Meta:
         verbose_name_plural = "Stories"
         unique_together = ('interview','story_order_position')
-        
+        ordering = ['story_order_position']
 
