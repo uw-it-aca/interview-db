@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
+{% block header %}
+Topics
+{% endblock %}
+
 {% block content %}
 
     {% if code_list %}
         <ul>
             {% for code in code_list %}
-            <li>{{code.code}} {{code.story_set.count}}
+            <li>{{code.code}} [<em>{{code.story_set.count}} stories</em>]
            {% if code.story_set %}
                 <ul>
                     {% for each in code.story_set.all %}
