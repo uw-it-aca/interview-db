@@ -12,7 +12,7 @@ Interviews
     {% if interview_list %}
     {% for interview in interview_list %}
     {% if interview.story_set.all %}
-    <div class="idb-interview-list-container" >
+    <div class="idb-list-container" >
     {% if interview.image %}<img src="../media/{{ interview.image }}">{% endif %}
     <div><h2>{{ interview.student.first_name }} {{ interview.student|make_list|first }}. </h2>
     <h3 class="idb-header">{{ interview.date }}</h3>

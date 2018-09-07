@@ -9,13 +9,16 @@ Topics
     {% if code_list %}
         {% for code in code_list %}
             {% if code.story_set.all %}
+            <div class="idb-list-container"> 
                 <h2 class="idb-header">{{code.code}}</h2> <span><em>stories: {{code.story_set.count}}</em></span>
                             {% for each in code.story_set.all %}
-                            <h3>{{each.subcode}}</h3>
+                            <div class="idb-story-container"><strong>{{each.subcode}}</strong>
                             <ul>
                                 <li>{{each.story}}<br/><span class="idb-story-note"><em>{{each.interview.student.first_name}} {{each.interview.student.last_name|make_list|first}} : {{each.interview.date}}</em></span></li>
                             </ul>
+                            </div>
                             {% endfor %} 
+            </div>
             {% endif %}
         {% endfor %} 
     {% else %}
