@@ -11,10 +11,12 @@ Interviews
 {% block content %}
     {% if interview_list %}
     {% for interview in interview_list %}
-    <div class="idb-interview-list-container" >
+    {% if interview.story_set.all %}
+    <div class="idb-list-container" >
     {% if interview.image %}<img src="../media/{{ interview.image }}">{% endif %}
-    <div><h2 >{{ interview.student.first_name }} {{ interview.student|make_list|first }}. </h2>
-    <h3>{{ interview.date }}</h3>
+    <div><h2>{{ interview.student.first_name }} {{ interview.student|make_list|first }}. </h2>
+    <h3 class="idb-header">{{ interview.date }}</h3>
+    <span><em>stories: {{interview.story_set.count}}</em></span>
     </div>
         <ul >
             {% for story in interview.story_set.all %}
@@ -24,6 +26,7 @@ Interviews
             {% endfor %} 
         </ul>
     </div>
+     {% endif %}
     {% endfor %} 
     {% else %}
         <p>
