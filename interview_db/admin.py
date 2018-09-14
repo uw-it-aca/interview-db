@@ -2,7 +2,8 @@ from django.contrib import admin
 from django import forms
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
-from .models import StudentType, Major, Location, Student, Interview, Story, Coding, SubCode, ResourceCategory, ResourceLink
+from django.contrib.admin.views.main import ChangeList
+from .models import StudentType, Major, Location, Student, Interview, Story, Coding, Code, SubCode, ResourceCategory, ResourceLink
 
 @admin.register(StudentType)
 class StudentTypeAdmin(admin.ModelAdmin):
@@ -77,6 +78,34 @@ class InterviewAdmin (admin.ModelAdmin):
             'all': ('css/admin.css',)
         }
         
+@admin.register(Coding)
+class CodingAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+class CodingInline(admin.StackedInline):
+    model = Coding
+    extra = 0
+        
+@admin.register(SubCode)
+class SubCodeAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+        
+@admin.register(Code)
+class CodeAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+
 @admin.register(Story)
 class StoryAdmin (admin.ModelAdmin):
     fieldsets = (
@@ -84,19 +113,25 @@ class StoryAdmin (admin.ModelAdmin):
             'fields': ('interview','story')
         }),
         ('Story Metadata', {
-            'fields': (('code','subcode'), 'story_order_position')
+            'fields': ('story_order_position',)
         }),
         ('Related Resources', {
             'fields': ('related_resource_links',)
         }),
     )
+    inlines = [CodingInline]
+    
     class Meta:
         model = Story
         exclude = ['interview']
-    list_display = ('get_first_name', 'get_last_name', 'get_date', 'short_story','code','subcode', 'story_order_position')
-    list_filter = ('code','subcode', 'interview')
+    list_display = ('get_first_name', 'get_last_name', 'get_date', 'short_story', 'story_order_position')
+    list_filter = (
+        ('interview', admin.RelatedOnlyFieldListFilter),
+        ('code'),
+        ('subcode')
+        )
     list_editable = ('story_order_position',)
-    
+        
     def get_first_name(self,obj):
         return obj.interview.student.first_name
     get_first_name.short_description = 'First'
@@ -114,22 +149,6 @@ class StoryAdmin (admin.ModelAdmin):
             'all': ('css/admin.css',)
         }
 
-
-@admin.register(Coding)
-class CodingAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-        
-@admin.register(SubCode)
-class SubCodeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
 
 @admin.register(ResourceCategory)
 class ResourceCategoryAdmin(admin.ModelAdmin):
