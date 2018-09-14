@@ -103,7 +103,6 @@ ENV/
 bin/
 db.sqlite3
 interview_db_images/
-include/
 manage.py
 pip-selfcheck.json
 project/
