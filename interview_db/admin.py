@@ -127,8 +127,8 @@ class StoryAdmin (admin.ModelAdmin):
     list_display = ('get_first_name', 'get_last_name', 'get_date', 'short_story', 'story_order_position')
     list_filter = (
         ('interview', admin.RelatedOnlyFieldListFilter),
-        ('code'),
-        ('subcode')
+        ('code', admin.RelatedOnlyFieldListFilter),
+        ('subcode', admin.RelatedOnlyFieldListFilter)
         )
     list_editable = ('story_order_position',)
         
