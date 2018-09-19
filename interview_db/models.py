@@ -136,20 +136,6 @@ class Interview(models.Model):
 	def __str__(self):return str(self.student)+": "+str(self.date)
 	
 
-class Coding(models.Model):
-    code = models.CharField(max_length=500)
-    definition = models.CharField(max_length=5000)
-
-    def __str__(self):
-        return self.code
-
-class SubCode(models.Model):
-    subcode = models.CharField(max_length=255)
-    definition = models.CharField(max_length=5000)
-
-    def __str__(self):
-        return self.subcode
-
 class ResourceCategory(models.Model):
     resource_category = models.CharField(max_length=500)
     definition = models.CharField(max_length=5000)
@@ -175,26 +161,33 @@ class ResourceLink(models.Model):
     class Meta:
         ordering = ['title',]
     
+class SubCode(models.Model):
+    subcode = models.CharField(max_length=255)
+    definition = models.CharField(max_length=5000)
 
+    def __str__(self):
+        return self.subcode
+
+class Code(models.Model):
+    topic = models.CharField(max_length=20)
+    code = models.CharField(max_length=255)
+    definition = models.TextField(max_length=5000)
+
+    def __str__(self):
+        return str(self.topic) + " - " + str(self.code)
+        
 class Story(models.Model):
     interview = models.ForeignKey(Interview,on_delete=models.PROTECT)
     story = models.TextField(help_text="Stories should be understandable and interesting all on their own.")
-    code = models.ForeignKey(Coding,on_delete=models.PROTECT,
-                                help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>code definitions</a>."
-                                )
-    subcode = models.ForeignKey(SubCode,on_delete=models.PROTECT, 
-                                    help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>sub-code definitions</a>."
-                                    )
     related_resource_links = models.ManyToManyField(ResourceLink,blank=True,
                                                         help_text="Select any resources that would be useful or relevant in this situation, whether mentioned in the story or not.<br/>"
                                                         )
     story_order_position = models.IntegerField(help_text="Logical position of story within context of other stories w/in interview. <strong>Must be unique</strong> to other stories of the same interview!")
+    code = models.ManyToManyField(Code, through='Coding')
+    subcode = models.ManyToManyField(SubCode, through='Coding')
 
     def __str__(self):
         return str(self.interview) + ": " + str(self.story_order_position)
-    
-    def __str__(subcode):
-        return str(subcode.subcode)
             
     @property
     def short_story(self):
@@ -204,4 +197,16 @@ class Story(models.Model):
         verbose_name_plural = "Stories"
         unique_together = ('interview','story_order_position')
         ordering = ['story_order_position']
+        
+class Coding(models.Model):
+    code = models.ForeignKey(Code,on_delete=models.PROTECT, 
+                                    help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>code definitions</a>."
+                                    )
+    subcode = models.ForeignKey(SubCode,on_delete=models.PROTECT,)
+
+    story = models.ForeignKey(Story, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return str(self.code) + " > " + str(self.subcode)
+
 

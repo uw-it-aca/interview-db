@@ -21,7 +21,10 @@ Interviews
         <ul >
             {% for story in interview.story_set.all %}
             <li class="idb-story-container">
-                {{story.story}}<br/><em>{{ story.code }}, <strong>{{ story.subcode }}</strong></em>
+                {{story.story}}
+                {% for each in story.coding_set.all %}<br/><em>
+                {{ each.code }}, <strong>{{ each.subcode}}</strong></em>
+                {% endfor %}                  
             </li>
             {% endfor %} 
         </ul>
