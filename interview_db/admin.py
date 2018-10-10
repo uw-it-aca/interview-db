@@ -42,7 +42,7 @@ class StudentAdmin (admin.ModelAdmin):
             'fields': ('follow_up_consent',)
         }),
     )
-    list_display = ('last_name','first_name', 'email','follow_up_consent')
+    list_display = ('first_name','last_name', 'email','follow_up_consent')
     class Media:
         css = {
             'all': ('css/admin.css',)

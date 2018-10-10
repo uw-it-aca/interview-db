@@ -60,10 +60,10 @@ class Student(models.Model):
                                      
                                  
     def __unicode__(self):
-        return unicode(self.last_name) + ", " + unicode(self.first_name)
+        return unicode(self.first_name) + " " + unicode(self.last_name)
     
     class Meta:
-        ordering = ['last_name',]
+        ordering = ['first_name',]
 
                
 class Interview(models.Model):
@@ -132,9 +132,15 @@ class Interview(models.Model):
 	no_publishing_stories = models.BooleanField(help_text="Stories and artifacts can only be used internally for research.")
 	other_publishing_restrictions = models.BooleanField(help_text="They had other restrictions on the use of their data.")
 	other_publishing_restrictions_notes = models.TextField(blank=True,null=True)
-	def declared_major(self):return ','.join([ major.major_abbreviation for major in self.major.all() ])
-	def __str__(self):return str(self.student)+": "+str(self.date)
 	
+	def __str__(self):
+            return str(self.student)+ ": " +str(self.date)
+        class Meta:
+            ordering = ['student','-date']
+        
+	def declared_major(self):
+    	    return ','.join([ major.major_abbreviation for major in self.major.all() ])
+   
 
 class ResourceCategory(models.Model):
     resource_category = models.CharField(max_length=500)
