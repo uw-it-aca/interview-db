@@ -56,7 +56,7 @@ class InterviewAdmin (admin.ModelAdmin):
             'fields': (('student','date'),('interview_quarter','interview_location'))
         }),
         ('Artifacts', {
-            'fields': (('image','image_is_not_identifying'),'image_alt_text','interview_notes_url')
+            'fields': (('image','image_is_not_identifying'),'image_alt_text','interview_notes_url','pull_quote')
         }),
         ('Student Attributes', {
             'fields': (('major','intended_major'),'student_type',('current_year','years_until_graduation'),'standing')
