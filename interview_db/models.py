@@ -108,6 +108,7 @@ class Interview(models.Model):
 	interview_location = models.ManyToManyField(Location,
                                            blank=True)
 	signed_release_form = models.BooleanField()
+	pull_quote = models.TextField(max_length=200, help_text="A brief, 200 character or less, quote from interview that will engage people.")
 	interview_notes_url = models.URLField(blank=True,
                                   null=True,
                                   help_text="Direct URL for transcribed interview, edited for publication.")
