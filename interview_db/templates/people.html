@@ -15,8 +15,8 @@ Students
     {% if interview.story_set.all %}
     <li>
     <div class="idb-list-container people-container" >
-    {% if interview.image %}<img src="../media/{{ interview.image }}">{% endif %}
-    <div><h2>{{ interview.pull_quote }}</h2>
+    {% if interview.image %}<img src="../media/{{ interview.image }}">{% else %}<img src="../media/interview_db_images/no-image.jpg">{% endif %}
+    <div class="person-container"><h2>{{ interview.pull_quote }}</h2>
    <p>{{ interview.student.first_name }} {{ interview.student.last_name|make_list|first }}. </p>
    <p><em>{{ interview.get_standing_display }}, {{ interview.major.all|join:", " }}{% if interview.student_type.all %}, {{ interview.student_type.all|join:", " }}{% endif %}</em></p>      
    </div>
