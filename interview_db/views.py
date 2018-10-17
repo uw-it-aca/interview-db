@@ -16,3 +16,9 @@ class InterviewView(ListView):
     context_object_name = 'interview_list'
     def get_queryset(self):
         return Interview.objects.order_by('student')
+        
+class PeopleView(ListView):
+    template_name = 'people.html'
+    context_object_name = 'interview_list'
+    def get_queryset(self):
+        return Interview.objects.order_by('student')
