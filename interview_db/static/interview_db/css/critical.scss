@@ -1,6 +1,13 @@
 .idb-app-container {
     width: 90%;
     margin: 0 auto; 
+    ul {
+        list-style: none;
+    }
+}
+
+nav a {
+    padding:0 15px;
 }
 
 ul {
@@ -21,8 +28,20 @@ ul {
     clear:both; 
     img {
         width:100px;
-        float:right;∂
+        float:right;
     }
+    &.people-container {
+        padding: 30px 0;
+        min-height: 220px;
+        img {
+            width: 150px;
+            float:left;
+            margin-right:30px;
+        }
+    }
+    ul{
+            list-style: inherit;
+        }
 }
     
 .idb-story-container {

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block header %}
-Interviews
+Students
 {% endblock %}
 
 {% block main-nav %}
-<a href="/">Topics</a>
+<a href="/">Topics</a><a href="interviews.html">Interviews</a>
 {% endblock %}
 
 {% block content %}
@@ -14,11 +14,11 @@ Interviews
     {% for interview in interview_list %}
     {% if interview.story_set.all %}
     <li>
-    <div class="idb-list-container" >
+    <div class="idb-list-container people-container" >
     {% if interview.image %}<img src="../media/{{ interview.image }}">{% endif %}
-    <div><h2>"{{ interview.pull_quote }}"</h2>
+    <div><h2>{{ interview.pull_quote }}</h2>
    <p>{{ interview.student.first_name }} {{ interview.student.last_name|make_list|first }}. </p>
-   <p><em>{{ interview.get_standing_display }}, {{ interview.major.all|join:", " }}{% if interview.student_type %}, {{ interview.student_type.all|join:", " }}{% endif %}</em></p>      
+   <p><em>{{ interview.get_standing_display }}, {{ interview.major.all|join:", " }}{% if interview.student_type.all %}, {{ interview.student_type.all|join:", " }}{% endif %}</em></p>      
    </div>
    </li>
    {% endif %}
