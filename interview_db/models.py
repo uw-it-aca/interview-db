@@ -2,6 +2,7 @@ from django.db import models
 from django import forms
 from django.forms import ModelForm
 from django.template.defaultfilters import truncatechars
+from django.urls import reverse
 
 
 class StudentType(models.Model):
@@ -143,7 +144,6 @@ class Interview(models.Model):
     	    return ','.join([ major.major_abbreviation for major in self.major.all() ])
 
 	def get_absolute_url(self):
-            from django.urls import reverse
             return reverse('interview_db:interview', args=(), kwargs={'interview_id': str(self.id)})   
 
 class ResourceCategory(models.Model):
@@ -185,6 +185,9 @@ class Code(models.Model):
 
     def __str__(self):
         return str(self.topic) + " - " + str(self.code)
+    
+    def get_absolute_url(self):
+            return reverse('interview_db:code', args=(), kwargs={'code_id': str(self.id)})  
         
 class Story(models.Model):
     interview = models.ForeignKey(Interview,on_delete=models.PROTECT)

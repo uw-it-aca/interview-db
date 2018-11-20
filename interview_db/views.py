@@ -33,3 +33,9 @@ def interview(request, interview_id):
     return render(request, 'interview.html', {
         'interview': interview
         })
+
+def code(request, code_id):
+    code = get_object_or_404(Code, pk=code_id)
+    return render(request, 'topic.html', {
+        'code': code
+        })

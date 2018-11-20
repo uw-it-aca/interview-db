@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block header %}
-Interviews
-{% endblock %}
-
 {% block content %}
     {% if interview_list %}
     {% for interview in interview_list %}
@@ -19,7 +15,7 @@ Interviews
             <li class="idb-story-container">
                 {{story.story}}
                 {% for each in story.coding_set.all %}<br/><em>
-                {{ each.code }}, <strong>{{ each.subcode}}</strong></em>
+                <a href="{{ each.code.get_absolute_url }}" title="All stories tagged: {{ each.code }}">{{ each.code }}, <strong>{{ each.subcode}}</strong></a></em>
                 {% endfor %}                  
             </li>
             {% endfor %} 

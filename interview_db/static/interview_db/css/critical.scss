@@ -10,6 +10,10 @@ nav a, nav span {
     padding:0 15px;
 }
 
+nav span {
+    font-weight: bold;
+}
+
 ul {
     margin: 10px 0;
 }
@@ -29,7 +33,6 @@ a.idb-list-container {
 }
 
 .idb-list-container {
-    padding-bottom:40px; 
     clear:both; 
     img {
         width:100px;
@@ -56,7 +59,7 @@ a.idb-list-container {
 }
     
 .idb-story-container {
-    margin: 15px 125px 15px 0;
+    margin: 15px 125px 45px 0;
     }
 
 .idb-footer {

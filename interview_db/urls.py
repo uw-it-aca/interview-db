@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'topics.html', views.TopicsView.as_view(), name="topics"),
     url(r'^interview/(?P<interview_id>\d+)/$',
         views.interview, name='interview'),
+    url(r'^topic/(?P<code_id>\d+)/$',
+        views.code, name='code'),
 ] 
