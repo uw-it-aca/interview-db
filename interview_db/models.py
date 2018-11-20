@@ -141,7 +141,10 @@ class Interview(models.Model):
         
 	def declared_major(self):
     	    return ','.join([ major.major_abbreviation for major in self.major.all() ])
-   
+
+	def get_absolute_url(self):
+            from django.urls import reverse
+            return reverse('interview_db:interview', args=(), kwargs={'interview_id': str(self.id)})   
 
 class ResourceCategory(models.Model):
     resource_category = models.CharField(max_length=500)

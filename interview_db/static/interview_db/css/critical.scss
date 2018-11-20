@@ -6,7 +6,7 @@
     }
 }
 
-nav a {
+nav a, nav span {
     padding:0 15px;
 }
 
@@ -23,6 +23,11 @@ ul {
     margin:10px 0 20px;
 }
 
+a.idb-list-container {
+    text-decoration: none;
+    color:inherit;
+}
+
 .idb-list-container {
     padding-bottom:40px; 
     clear:both; 
@@ -33,6 +38,7 @@ ul {
     &.people-container {
         padding: 30px 0;
         min-height: 220px;
+        display: block;
         img {
             width: 150px;
             float:left;
@@ -40,6 +46,9 @@ ul {
         .person-container {
             margin-left: 190px;
         }
+        &:hover,&:focus {
+                background-color:lavender;
+            }
     }
     ul{
             list-style: inherit;
