@@ -7,7 +7,7 @@ class IndexView(ListView):
     template_name = 'index.html'
     context_object_name = 'code_list'
     def get_queryset(self):
-        return Code.objects.order_by('code')
+        return Code.objects.order_by('topic')
         
 
 class InterviewsView(ListView):
@@ -26,7 +26,7 @@ class TopicsView(ListView):
     template_name = 'topics.html'
     context_object_name = 'code_list'
     def get_queryset(self):
-        return Code.objects.order_by('code')
+        return Code.objects.order_by('topic')
         
 def interview(request, interview_id):
     interview = get_object_or_404(Interview, pk=interview_id)

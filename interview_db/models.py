@@ -187,7 +187,7 @@ class Code(models.Model):
     definition = models.TextField(max_length=5000)
     
     class Meta:
-        ordering = ['topic',] 
+        ordering = ['topic','code'] 
 
     def __str__(self):
         return str(self.topic) + " - " + str(self.code)
