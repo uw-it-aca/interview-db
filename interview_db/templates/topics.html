@@ -15,7 +15,7 @@ Topics
                             {% if each.subcode %}
                             <div class="idb-story-container"><strong>{{each.subcode}}</strong>
                                 <ul>
-                                    <li>{{each.story.story}}<br/><span class="idb-story-note"><em>{{each.story.interview.student.first_name}} {{each.story.interview.student.last_name|make_list|first}} : {{each.story.interview.date}}</em></span></li>    
+                                    <li>{{each.story.story}}<br/><span class="idb-story-note"><a href="{{ each.story.interview.get_absolute_url }}" title="Read {{ each.story.interview.student.first_name }} {{ each.story.interview.student.last_name|make_list|first }}'s full interview: {{ each.story.interview.date }}" ><em>{{each.story.interview.student.first_name}} {{each.story.interview.student.last_name|make_list|first}} : {{each.story.interview.date}}</em></a></span></li>    
                                      
                                 </ul> 
                             </div>
