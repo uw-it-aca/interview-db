@@ -14,7 +14,7 @@
             <div class="idb-header" >
                 <h1>Student Experience Interview Project: {% block header %}{% endblock %}</h1>
             </div>
-            <nav>{% block main-nav %}<a href="interviews.html">Interviews</a><a href="people.html">Students</a>{% endblock %}</nav>
+            <nav>{% block main-nav %}{% if request.path == '/people.html'%}<span>Students</span>{% else %}<a href="/people.html">Students</a>{% endif %}{% if request.path == '/topics.html'%}<span>Topics</span>{% else %}<a href="/topics.html">Topics</a>{% endif %}{% if request.path == '/interviews.html'%}<span>All Interviews</span>{% else %}<a href="/interviews.html">All Interviews</a>{% endif %}{% endblock %}</nav>
             <div class="idb-content-container">
                 {% block content %}{% endblock %}
             </div>

@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
 {% block header %}
-Interview
+Interviews
 {% endblock %}
 
 {% block content %}
+    {% if interview_list %}
+    {% for interview in interview_list %}
     {% if interview.story_set.all %}
     <div class="idb-list-container" >
     {% if interview.image %}<img src="/../media/{{ interview.image }}">{% else %}<img src="/../media/interview_db_images/no-image.jpg">{% endif %}
-    <div><h2>{{ interview.student.first_name }} {{ interview.student.last_name|first }}. </h2>
+    <div><h2>{{ interview.student.first_name }} {{ interview.student.last_name|make_list|first }}. </h2>
     <h3 class="idb-header">{{ interview.date }}</h3>
     <span><em>stories: {{interview.story_set.count}}</em></span>
     </div>
@@ -23,6 +25,8 @@ Interview
             {% endfor %} 
         </ul>
     </div>
+     {% endif %}
+    {% endfor %} 
     {% else %}
         <p>
             There are no student stories available.
