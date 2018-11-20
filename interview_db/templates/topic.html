@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+Topic
+{% endblock %}
+
+{% block content %}
+
+    {% if code.story_set.all %}
+    <div class="idb-list-container"> 
+        <h2 class="idb-header">{{code}}</h2> <span><em>stories: {{code.story_set.count}}</em></span>
+                    {% for each in code.coding_set.all %}
+                    {% if each.subcode %}
+                    <div class="idb-story-container"><strong><a href="{{ each.story.interview.get_absolute_url }}" title="Read {{ each.story.interview.student.first_name }} {{ each.story.interview.student.last_name|make_list|first }}'s full interview: {{ each.story.interview.date }}" >{{each.story.interview.student.first_name}} {{each.story.interview.student.last_name|make_list|first}} : {{each.story.interview.date}}</a></strong>
+                        <ul>
+                            <li>{{each.story.story}}<br/><span class="idb-story-note"><em>{{each.subcode}}</em></span></li>    
+                             
+                        </ul> 
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                   
+    </div>
+    {% else %}
+    <p>
+    There are no student stories available.
+    </p>
+    {% endif %}
+
+{% endblock %}
