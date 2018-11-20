@@ -174,7 +174,10 @@ class ResourceLink(models.Model):
 class SubCode(models.Model):
     subcode = models.CharField(max_length=255)
     definition = models.CharField(max_length=5000)
-
+    
+    class Meta:
+        ordering = ['subcode',] 
+        
     def __str__(self):
         return self.subcode
 
@@ -182,12 +185,15 @@ class Code(models.Model):
     topic = models.CharField(max_length=20)
     code = models.CharField(max_length=255)
     definition = models.TextField(max_length=5000)
+    
+    class Meta:
+        ordering = ['topic',] 
 
     def __str__(self):
         return str(self.topic) + " - " + str(self.code)
     
     def get_absolute_url(self):
-            return reverse('interview_db:code', args=(), kwargs={'code_id': str(self.id)})  
+            return reverse('interview_db:code', args=(), kwargs={'code_id': str(self.id)}) 
         
 class Story(models.Model):
     interview = models.ForeignKey(Interview,on_delete=models.PROTECT)
@@ -221,5 +227,8 @@ class Coding(models.Model):
 
     def __str__(self):
         return str(self.code) + " > " + str(self.subcode)
+    
+    class Meta:
+        ordering = ['code',] 
 
 
