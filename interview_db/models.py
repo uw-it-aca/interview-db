@@ -12,7 +12,6 @@ class StudentType(models.Model):
         ('First-Gen', 'First-Gen'),
         ('International', 'International'),
         ('LGBTQ', 'LGBTQ'),
-        ('Other Minority', 'Minority'),
         ('Transfer', 'Transfer'),
     ) 
 
