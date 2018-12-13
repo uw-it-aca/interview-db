@@ -14,9 +14,9 @@
             {% for story in interview.story_set.all %}
             <li class="idb-story-container">
                 {{story.story}}
-                {% for each in story.coding_set.all %}<br/><em>
-                <a href="{{ each.code.get_absolute_url }}" title="All stories tagged: {{ each.code }}">{{ each.code }}, <strong>{{ each.subcode}}</strong></a></em>
-                {% endfor %}                  
+                <p>{% for each in story.coding_set.all %}<em>
+                <a href="{{ each.code.get_absolute_url }}" title="All stories tagged: {{ each.code }}">{{ each.code }}, <strong>{{ each.subcode}}</strong></a></em><br/>
+                {% endfor %} </p>                 
             </li>
             {% endfor %} 
         </ul>
