@@ -1,19 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    {% if code_list %}
-        {% for code in code_list %}
-            {% if code.story_set.all %}
-            <div class="idb-list-container"> 
-                <h2 class="idb-header"> <a href="{{ code.get_absolute_url }}">{{code}}</a></h2> <span><em>stories: {{code.story_set.count}}</em></span>              
-            </div>
-            {% endif %}
-        {% endfor %} 
+    {% if interview_list %}
+    <ul>
+    {% for interview in interview_list %}
+    {% if interview.story_set.all %}
+    <li>
+    <a href="{{ interview.get_absolute_url }}" class="idb-list-container people-container" title="Read {{ interview.student.first_name }} {{ interview.student.last_name|make_list|first }}'s full interview: {{ interview.date }}" >
+    {% if interview.image %}<img src="/../media/{{ interview.image }}">{% else %}<img src="/../media/interview_db_images/no-image.jpg">{% endif %}
+    <div class="person-container"><h2>{{ interview.pull_quote }}</h2>
+   <p>{{ interview.student.first_name }} {{ interview.student.last_name|make_list|first }}. <br/>
+   <em>{{ interview.get_standing_display }}, {{ interview.major.all|join:", " }}{% if interview.student_type.all %}, {{ interview.student_type.all|join:", " }}{% endif %}</em></p>    
+    </div>
+     </a>
+   </li>
+   {% endif %}
+    {% endfor %} 
     {% else %}
         <p>
-            There are no topics available.
+            There are no students available.
         </p>
+    </ul>
     {% endif %}
 
 {% endblock %}
