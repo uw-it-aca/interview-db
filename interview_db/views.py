@@ -5,9 +5,9 @@ from .models import Code, Interview
 
 class IndexView(ListView):
     template_name = 'index.html'
-    context_object_name = 'code_list'
+    context_object_name = 'interview_list'
     def get_queryset(self):
-        return Code.objects.order_by('topic','code')
+        return Interview.objects.order_by('student')
         
 
 class InterviewsView(ListView):
