@@ -23,7 +23,7 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django==1.11.15',
+        'Django<2.1',
         'Pillow',
         'django-compressor',
         'django-pyscss',

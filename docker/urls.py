@@ -1,4 +1,6 @@
-from django.urls import re_path, include
+from django.urls import path 
+from django.contrib import admin
+
 urlpatterns = [
-    re_path(r'^', include('prereq_map.urls'))
+    path('admin/', admin.site.urls),
 ]
