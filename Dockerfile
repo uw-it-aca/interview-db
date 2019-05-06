@@ -1,7 +1,7 @@
 FROM acait/django-container:feature-refactor
 
 USER root
-RUN apt-get update && apt-get install mysql-client -y
+RUN apt-get update && apt-get install mysql-client libmysqlclient-dev -y
 USER acait
 
 ADD --chown=acait:acait interview_db/VERSION interview_db/
