@@ -17,7 +17,7 @@ COMPRESS_PRECOMPILERS = (
 
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
-COMPRESS_OUTPUT_DIR = ''
+COMPRESS_OUTPUT_DIR = '/static'
 
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
