@@ -1,4 +1,4 @@
-FROM acait/django-container:develop
+FROM acait/django-container:feature-refactor
 RUN apt-get update && apt-get install mysql-client -y
 RUN mkdir /app/logs
 ADD interview_db/VERSION /app/interview_db/
