@@ -9,8 +9,9 @@ ADD --chown=acait:acait setup.py /app/
 ADD --chown=acait:acait requirements.txt /app/
 
 RUN . /app/bin/activate && pip install -r requirements.txt && pip install mysqlclient
-RUN . /app/bin/activate && python manage.py compress && python manage.py collectstatic --no-input
 ADD --chown=acait:acait . /app/
 
 ADD --chown=acait:acait docker /app/project/
+
+RUN . /app/bin/activate && python manage.py compress && python manage.py collectstatic --no-input
 
