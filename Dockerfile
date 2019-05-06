@@ -4,6 +4,7 @@ USER root
 RUN apt-get update && apt-get install mysql-client -y
 USER acait
 
+ADD --chown=acait:acait interview_db/VERSION interview_db/
 ADD --chown=acait:acait setup.py /app/
 ADD --chown=acait:acait requirements.txt /app/
 
