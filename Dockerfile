@@ -13,4 +13,3 @@ ADD --chown=acait:acait . /app/
 
 ADD --chown=acait:acait docker /app/project/
 
-CMD ["/start.sh" ]
