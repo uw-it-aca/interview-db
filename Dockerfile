@@ -13,5 +13,5 @@ ADD --chown=acait:acait . /app/
 
 ADD --chown=acait:acait docker /app/project/
 
-RUN . /app/bin/activate && python manage.py compress && python manage.py collectstatic --no-input
+RUN . /app/bin/activate && python manage.py compress && python manage.py collectstatic --noinput
 
