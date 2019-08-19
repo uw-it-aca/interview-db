@@ -17,7 +17,13 @@ COMPRESS_PRECOMPILERS = (
 
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
-COMPRESS_OUTPUT_DIR = ''
+COMPRESS_OUTPUT_DIR = '/static'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
