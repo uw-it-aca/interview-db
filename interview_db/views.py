@@ -1,30 +1,34 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.list import ListView
 from .models import Code, Interview
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-
-class IndexView(ListView):
+class IndexView(LoginRequiredMixin, ListView):
     template_name = 'index.html'
     context_object_name = 'interview_list'
+    login_url = '/accounts/login/'
     def get_queryset(self):
         return Interview.objects.order_by('student')
         
 
-class InterviewsView(ListView):
+class InterviewsView(LoginRequiredMixin, ListView):
     template_name = 'interviews.html'
     context_object_name = 'interview_list'
+    login_url = '/accounts/login/'
     def get_queryset(self):
         return Interview.objects.order_by('student')
         
-class PeopleView(ListView):
+class PeopleView(LoginRequiredMixin, ListView):
     template_name = 'people.html'
     context_object_name = 'interview_list'
+    login_url = '/accounts/login/'
     def get_queryset(self):
         return Interview.objects.order_by('student')
 
-class TopicsView(ListView):
+class TopicsView(LoginRequiredMixin, ListView):
     template_name = 'topics.html'
     context_object_name = 'code_list'
+    login_url = '/accounts/login/'
     def get_queryset(self):
         return Code.objects.order_by('topic','code')
         
