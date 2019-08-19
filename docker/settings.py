@@ -7,6 +7,12 @@ INSTALLED_APPS += [
     'compressor',
 ]
 
+TEMPLATES += [
+    {
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+    },
+]
+
 COMPRESS_ROOT = '/static'
 
 COMPRESS_PRECOMPILERS = (
