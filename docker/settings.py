@@ -59,3 +59,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 MIDDLEWARE.remove('django.contrib.auth.middleware.PersistentRemoteUserMiddleware')
+
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'

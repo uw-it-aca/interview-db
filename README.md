@@ -56,8 +56,10 @@ Modify at least the following settings in interview_db/settings.py:
     Add 
         MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA')
         MEDIA_URL = '/media/'
+        LOGOUT_REDIRECT_URL = 'home'
+        LOGIN_REDIRECT_URL = 'home'
 
-Create the intervies-db database
+Create the interviews-db database
 
     $ python manage.py migrate
 
