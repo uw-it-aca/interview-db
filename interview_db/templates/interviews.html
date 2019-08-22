@@ -5,7 +5,7 @@
     {% for interview in interview_list %}
     {% if interview.story_set.all %}
     <div class="idb-list-container" >
-    {% if interview.image %}<img src="/../media/{{ interview.image }}">{% else %}<img src="/../media/interview_db_images/no-image.jpg">{% endif %}
+    {% if interview.image %}<img src="../media/{{ interview.image }}">{% else %}<img src="../media/interview_db_images/no-image.jpg">{% endif %}
     <div><h2><a href="{{ interview.get_absolute_url }}" title="Read {{ interview.student.first_name }} {{ interview.student.last_name|make_list|first }}'s full interview: {{ interview.date }}" >{{ interview.student.first_name }} {{ interview.student.last_name|make_list|first }}.</a></h2>
     <h3 class="idb-header">{{ interview.date }}</h3>
     <span><em>stories: {{interview.story_set.count}}</em></span>

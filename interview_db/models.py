@@ -61,8 +61,8 @@ class Student(models.Model):
         help_text="URL for Google Drive folder where student artifacts are stored.")
     follow_up_consent = models.BooleanField()
 
-    def __unicode__(self):
-        return unicode(self.first_name) + " " + unicode(self.last_name)
+    def __str__(self):
+        return str(self.first_name) + " " + str(self.last_name)
 
     class Meta:
         ordering = ['first_name', ]
