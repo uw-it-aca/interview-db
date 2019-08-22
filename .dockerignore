@@ -18,3 +18,8 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.bin/
+.git/
+include/
+lib/
+project/
