@@ -3,14 +3,12 @@
 *docker-compose*
 node_modules
 
-.Python
 build/
 develop-eggs/
 dist/
 downloads/
 eggs/
 .eggs/
-lib64/
 parts/
 sdist/
 var/
@@ -20,6 +18,15 @@ wheels/
 *.egg
 .bin/
 .git/
-include/
-lib/
-project/
+
+
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
