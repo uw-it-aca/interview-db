@@ -2,6 +2,9 @@ from .base_settings import *
 
 ALLOWED_HOSTS = ['*']
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG= os.getenv("ENV", "prod") == "localdev"
+
 INSTALLED_APPS += [
     'interview_db',
     'compressor',
