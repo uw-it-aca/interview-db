@@ -27,7 +27,7 @@ resources:
   requests:
     cpu: 200m
 image:
-  repository: registry.hub.docker.com/acait/prereqmap
+  repository: registry.hub.docker.com/acait/interview
   tag: IMAGE_TAG
 metrics:
   enabled: true
