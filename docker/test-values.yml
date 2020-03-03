@@ -1,0 +1,43 @@
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    interview-db.axdd:
+      host: interview-db.axdd.s.uw.edu
+      paths: 
+        - "/"
+database:
+  engine: mysql
+  name: interview-db
+  hostname: interview-db-db-service
+  secretName: interview-db-db
+externalService:
+  enabled: true
+  name: interview-db-test-db-service
+  type: ClusterIP
+  serviceAddress: 172.18.0.14 
+  servicePort: 3306
+repo: interview-db
+instance: test
+targetAverageUtilization: 90
+resources:
+  limits:
+    cpu: 600m
+  requests:
+    cpu: 200m
+image:
+  repository: registry.hub.docker.com/acait/interview
+  tag: IMAGE_TAG
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+environmentVariables:
+  - name: ENV
+    value: dev
+environmentVariablesSecrets:
+  djangoSecret:
+    name: DJANGO_SECRET
+    secretName: interview-db-django-secret
+    secretKey: django-secret

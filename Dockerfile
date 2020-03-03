@@ -1,4 +1,4 @@
-FROM acait/django-container:feature-refactor
+FROM acait/django-container:1.0.21
 
 USER root
 RUN apt-get update && apt-get install mysql-client libmysqlclient-dev -y
