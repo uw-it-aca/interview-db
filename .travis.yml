@@ -21,6 +21,8 @@ install:
 before_script:
 - pip install coverage
 - pip install coveralls
+script:
+- echo "no tests!"
 after_success:
 - cp /tmp/.coverage.* .
 - coverage combine
