@@ -1,24 +1,37 @@
-sudo: false
+sudo: required
 language: python
-services:
-- mysql
 python:
-- '2.7'
+- 3.6
+services:
+- docker
+os:
+- linux
 env:
-  matrix:
-  - DB=sqlite3
+  global:
+  - RELEASE_NAME="interview-db"
+  - DJANGO_APP="interview_db"
+  - COMMIT_HASH="$(git rev-parse --short=7 HEAD)"
+  - IMAGE_TAG="${RELEASE_NAME}:${COMMIT_HASH}"
+  - secure: "Yz/dIz3oqT4a3dik6ZFmTUBS62NhXk+uWOXawppvf/ObRvrQgLovFk+7JaPjoMDPFch4MP7eiWDloNM9ahHRLx6trqWmSaTGKD7iWZ+bc3PaQbc0hQoBT9oC3cRM3kM01WdgjYRJ7QLHeCDeEX/ug3JD1gMHm9RGIKKiA9cpz9Ff9XXZn70KR2SET30cgXmL3hDl4mTcVfZWFGSwUn806LTrz6W5nPnxnEC33towsQ5nPvImQyn/ECiDxk2PxTjt89GoGzRaBx9+0jdjzNGu6J2p00TXITTiS+9Q2gaZNAVKYLJqw9neH5PEKlYD4CMIT3d9j7focIWQ2lxO/4w89lQB//0f2Dx2z5PCiZcxrjuiWENF+4tXqexNFZd3kHuPNxscWg8wuTo2i2uxlicqVWBW4FIx2giDCXVgzquz8lkNHtizZwcdk9d59wzfHhgdVllxBmYq1dFqYmSsmxI8T9zWnAmAaScSMgZ+4V0dnfxbsgAnP16+m8qf0WCTMg+XY/mBL0ddOOI/Qp8iy8Zc8ejYv86aVHytAJgttkccBU2BK7/aJ/WMjlrE/NZZPAtJzxvk3Hd3b5TtATIqrwlm7/6sjdJyu0cxbm2wFsKanH+EJD9I8Xu1W+AT+BDZtPxA6PnjWV0eapFFsppZyJb5QNBuPbfKgS9q36iuRPJUqRo="
+  - secure: "crA7d1AStf54g2hcOhKt125KbTsL7Yp1lWVd3OU4AASkTA/DqhMj6WmhBkW7jbjjbpSHyVmvZt9vZ1/w+sEnhiPrGaHnMfHrPbdwHJ3LmsQn9jRO9oLi/hGJKQ1P06Z1o5F5if6XGLRuOEaksRjkrKSecOfJ8Ce09fo6bHyhfpV1fn2ecc15qg25z84Zf9fDduLyrAoFdOF1K0b9CxR14GHkWoVOKmT4B39nAcm3xYnlHxq4xlHF1IIqkmODa+sXwdMbZPslHDi3hHbC+8HsdkGVv7U4bRdqAAzQH5k47OSB5kAk7bLMZ82h+L0BbM10lzwm9acz/A6M9ZL3BsKk7moeJ+ygUsUZlDINKeqBvzp3cfTOI2fI7hS8Zn2xK5sN6LsWE6Ba65XxewtMepL0hkYlo1ysYOpAJgQSo60FC0pC39pZYowYDZWq3KBJIRxGOVt+IutMOjMPZUs+Mitxk+6q005rb/5qKh0vUeC4TrC6Jejo4ocSGbTNrUVmAqx2HM9B2NjbooUoJ4vyojGYmn1kjmRzNrloK+kHx7cPn8+6OkNo8pJicVIZpKPActj7dghzQ91TpEOUlzJxvK82uzR2n5Hm/xeT4rz/ehKZ41Zw9UgTj2g5/cAEOLux5a+FF+MCS6I68eJ5rSAnPXSSUjtcdL+YlFXGIRFSVDR3jjw="
+  - secure: "DC6EFmLGr9Y743mYMYWUOBwbLdwfEQ+k32zlA/BzArPxJdCKfbENfDrNwLDOAJ9/0GCsMaA8v1xFA86RVmAIIRdx+B8tAIxY/muhEO19YqDvHfURPRIkYtkpSSM32fWvcSx11Db3BPxCa+9ynr7G6L3JVZAVsVRTtfVdY4ejwgMUXpw1anH2EfRuTdQ93i5Z+Z53ZQK9OSGRVHO6x+RrJWMuDS/N3sz/gmG5gMxc8q8F/Gri7/+dCzVLg5rU5Rl00qLWT4Yg7Xuf8nuIfDTn3+KLpnnM/JeNH6NVGRL4DqOpy/Q9O1QJidIvkqE8OP07AYWINLopEIYgJbLpHsqtJxO0FnWp1Vpr0B/3B2a1dcp6pXReO73ax2V8DD83R50etJtXbPveu+2kAJeZlp4lejO82lGso2oyt70dsBzYg9702ekNmgVAJxt4Q1aeh/9/utstvvPfXVghq/HQ3Klos3UvJdaNwKeKuXYZPoxSoexXYw0bsIxr/ZZkGb6xD79uAk98u7w8WsBC4dgKv5uP0UbgA2zyUNhrMvqCltcEKgzBNMpLtuWX3c8iS3yzKwBQvbLS9Wws768UFxY6jMA7/gT3Cmu74odGIZtVR6/WFDIfPxC5QBPYeJCwHDxD7bnuyhJ9AiM1eY0xDAHfwt6OmkPtX3G7UEwK0UQgjxfM7pw="
+ 
 install:
-- pip install -r requirements.txt
+- docker build -t "$IMAGE_TAG" .
 before_script:
 - pip install coverage
-- pip install python-coveralls
-- pip install pep8
-- pip install nose2
-- cp travis-ci/manage.py manage.py
-- python manage.py migrate
+- pip install coveralls
 script:
-- pep8 interview_db/ --exclude=interview_db/migrations
-- FORCE_VIEW_TESTS=1 coverage run --source=interview_db/ --omit=interview_db/migrations/*
-  manage.py test interview_db
-after_script:
+- docker run -u root -it -v /tmp:/coverage -e DJANGO_APP="$DJANGO_APP" "$IMAGE_TAG"
+  bash -c ". ./travis-ci/test.sh"
+after_success:
+- cp /tmp/.coverage.* .
+- coverage combine
 - coveralls
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [[ "$TRAVIS_BRANCH" =~ ^(develop|master)$
+  ]]; then curl -Ls https://raw.githubusercontent.com/uw-it-aca/gcp-app-deploy/master/travis-ci/deploy.sh
+  | bash; fi
+cache:
+  directories:
+  - "$HOME/helm"
+  - "$HOME/kubeval"
