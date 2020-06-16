@@ -31,4 +31,5 @@ Create a super user for /admin access:
     $ docker exec -it interview-db_app_1 /bin/bash
     $ . bin/activate
     $ python manage.py createsuperuser
+       <Create the superuser>
     $ exit
