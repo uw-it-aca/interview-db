@@ -27,7 +27,7 @@ resources:
   requests:
     cpu: 200m
 image:
-  repository: registry.hub.docker.com/acait/interview
+  repository: registry.hub.docker.com/acait/interview-db
   tag: IMAGE_TAG
 metrics:
   enabled: true
