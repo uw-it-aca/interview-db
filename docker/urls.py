@@ -4,7 +4,9 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-urlpatterns = [
+from .base_urls import *
+
+urlpatterns += [
     url('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     re_path(r'^', include('interview_db.urls')),
