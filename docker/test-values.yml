@@ -9,7 +9,7 @@ ingress:
         - "/"
 database:
   engine: mysql
-  name: interview-test
+  name: interview_test
   hostname: interview-db-db-service
   secretName: interview-db.axdd.s.uw.edu-db
 externalService:
