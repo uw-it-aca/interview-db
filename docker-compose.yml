@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+    app:
+        restart: always
+        build: .
+        volumes:
+            - ./interview_db:/app/interview_db
+            - ./docker/settings.py:/app/project/settings.py
+            - ./docker/urls.py:/app/project/urls.py
+        ports:
+            - "${RUNSERVER_PORT:-8000}:8000"
+        stdin_open: true
+        tty: true

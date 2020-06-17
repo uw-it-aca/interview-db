@@ -9,12 +9,12 @@ ingress:
         - "/"
 database:
   engine: mysql
-  name: interview-db
+  name: interview-test
   hostname: interview-db-db-service
-  secretName: interview-db-db
+  secretName: interview-db.axdd.s.uw.edu-db
 externalService:
   enabled: true
-  name: interview-db-test-db-service
+  name: interview-db-db-service
   type: ClusterIP
   serviceAddress: 172.18.0.14 
   servicePort: 3306
@@ -39,5 +39,5 @@ environmentVariables:
 environmentVariablesSecrets:
   djangoSecret:
     name: DJANGO_SECRET
-    secretName: interview-db-django-secret
+    secretName: interview-db.axdd.s.uw.edu-secrets
     secretKey: django-secret
