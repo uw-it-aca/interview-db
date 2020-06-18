@@ -36,6 +36,8 @@ metrics:
 environmentVariables:
   - name: ENV
     value: dev
+  - name: AUTH
+    value: SAML
 environmentVariablesSecrets:
   djangoSecret:
     name: DJANGO_SECRET
