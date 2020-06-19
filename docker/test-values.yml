@@ -2,9 +2,9 @@ ingress:
   enabled: true
   tls:
     notify:
-      secretName: test.notify.uw.edu-ingress-cert
+      secretName: interview-db.axdd.s.uw.edu-ingress-cert
       hosts:
-        - test.notify.uw.edu
+        - interview-db.axdd.s.uw.edu
   hosts:
     interview-db.axdd:
       host: interview-db.axdd.s.uw.edu
