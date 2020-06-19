@@ -1,12 +1,8 @@
 from django.conf import settings
-from django.contrib import admin
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic.list import ListView
 
-from uw_saml.views import LoginView, LogoutView
 from uw_saml.decorators import group_required
 
 from .models import Code, Interview
@@ -60,13 +56,3 @@ def code(request, code_id):
     return render(request, 'topic.html', {
         'code': code
         })
-
-
-class SAMLAdminSite(admin.AdminSite):
-    def login(self, request, extra_context=None):
-        return LoginView.as_view(extra_context=extra_context)(request)
-
-    def logout(self, request, extra_context=None):
-        return LogoutView.as_view(extra_context=extra_context)(request)
-
-site = SAMLAdminSite(name="SAMLAdminSite")
