@@ -11,6 +11,10 @@ INSTALLED_APPS += [
     'compressor',
 ]
 
+MIDDLEWARE += [
+    'interview_db.middleware.SAMLGroupExecute',
+]
+
 COMPRESS_ROOT = '/static'
 
 COMPRESS_PRECOMPILERS = (
@@ -49,4 +53,20 @@ MEDIA_URL = '/media/'
 INTERVIEW_DB_AUTHZ_GROUPS = {
     'admin': os.getenv("ID_ADMIN_GROUP", 'u_test_admin'),
     'front-end': os.getenv("ID_FRONT_END_GROUP", 'u_test_front_end'),
+}
+
+if os.getenv("AUTH", "NONE") == "SAML_MOCK":
+    MOCK_SAML_ATTRIBUTES['isMemberOf'] = [
+        INTERVIEW_DB_AUTHZ_GROUPS['admin'],
+        INTERVIEW_DB_AUTHZ_GROUPS['front-end'],
+    ]
+
+def set_is_staff(request, flag):
+    request.user.is_staff = flag
+
+SAML_GROUP_EXECUTE_MAPPING = {
+    (INTERVIEW_DB_AUTHZ_GROUPS['admin'], ): {
+        "=" : (lambda request: set_is_staff(request, True)),
+        "!=" : (lambda request: set_is_staff(request, False)),
+    }
 }
