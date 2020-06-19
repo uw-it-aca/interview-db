@@ -42,7 +42,7 @@ environmentVariables:
   - name: ENV
     value: dev
   - name: AUTH
-    value: SAML_DJANGO_LOGIN
+    value: SAML
   - name: ID_ADMIN_GROUP
     value: u_jcivjan_sip-admin
   - name: ID_FRONT_END_GROUP
