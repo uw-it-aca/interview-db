@@ -24,7 +24,7 @@
                 <div style="float:right;">
                     {% if user.is_authenticated %}
                     {{ user.username }}:
-                    <a href="{% url 'logout' %}">logout</a>
+                    <a href="{% url 'saml_logout' %}">logout</a>
                     {% endif %}
                 </div>
                 </div>

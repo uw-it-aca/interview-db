@@ -1,8 +1,10 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic.list import ListView
-from .models import Code, Interview
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
+from django.views.generic.list import ListView
+
+from .models import Code, Interview
 
 @method_decorator(login_required(), name='dispatch')
 class IndexView(ListView):
