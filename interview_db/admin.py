@@ -2,10 +2,29 @@ from django.contrib import admin
 from django import forms
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
+from django.conf import settings
 from django.contrib.admin.views.main import ChangeList
 from .models import StudentType, Major, Location, Student, Interview, Story, Coding, Code, SubCode, ResourceCategory, ResourceLink
 
-@admin.register(StudentType)
+from uw_saml.views import LoginView, LogoutView
+from uw_saml.utils import is_member_of_group
+
+
+admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
+
+class SAMLAdminSite(admin.AdminSite):
+    def has_permission(self, request):
+        return is_member_of_group(request, admin_group)
+
+    def login(self, request, extra_context=None):
+        return LoginView.as_view(extra_context=extra_context)(request)
+
+    def logout(self, request, extra_context=None):
+        return LogoutView.as_view(extra_context=extra_context)(request)
+
+saml_admin_site = SAMLAdminSite(name='SAMLAdmin')
+
+@admin.register(StudentType, site=saml_admin_site)
 class StudentTypeAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -13,7 +32,7 @@ class StudentTypeAdmin(admin.ModelAdmin):
         """
         return {}
         
-@admin.register(Major)
+@admin.register(Major, site=saml_admin_site)
 class MajorAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -21,7 +40,7 @@ class MajorAdmin(admin.ModelAdmin):
         """
         return {}
 
-@admin.register(Location)
+@admin.register(Location, site=saml_admin_site)
 class LocationAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -29,7 +48,7 @@ class LocationAdmin(admin.ModelAdmin):
         """
         return {}
         
-@admin.register(Student)
+@admin.register(Student, site=saml_admin_site)
 class StudentAdmin (admin.ModelAdmin):    
     fieldsets = (
         (None, {
@@ -49,7 +68,7 @@ class StudentAdmin (admin.ModelAdmin):
         }
     
 
-@admin.register(Interview)
+@admin.register(Interview, site=saml_admin_site)
 class InterviewAdmin (admin.ModelAdmin):
     fieldsets = (
         (None, {
@@ -78,7 +97,7 @@ class InterviewAdmin (admin.ModelAdmin):
             'all': ('css/admin.css',)
         }
         
-@admin.register(Coding)
+@admin.register(Coding, site=saml_admin_site)
 class CodingAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -89,7 +108,7 @@ class CodingInline(admin.StackedInline):
     model = Coding
     extra = 0
         
-@admin.register(SubCode)
+@admin.register(SubCode, site=saml_admin_site)
 class SubCodeAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -97,7 +116,7 @@ class SubCodeAdmin(admin.ModelAdmin):
         """
         return {}
         
-@admin.register(Code)
+@admin.register(Code, site=saml_admin_site)
 class CodeAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -106,7 +125,7 @@ class CodeAdmin(admin.ModelAdmin):
         return {}
 
 
-@admin.register(Story)
+@admin.register(Story, site=saml_admin_site)
 class StoryAdmin (admin.ModelAdmin):
     fieldsets = (
         (None, {
@@ -150,7 +169,7 @@ class StoryAdmin (admin.ModelAdmin):
         }
 
 
-@admin.register(ResourceCategory)
+@admin.register(ResourceCategory, site=saml_admin_site)
 class ResourceCategoryAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -158,7 +177,7 @@ class ResourceCategoryAdmin(admin.ModelAdmin):
         """
         return {}
 
-@admin.register(ResourceLink)
+@admin.register(ResourceLink, site=saml_admin_site)
 class ResourceLinkAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """

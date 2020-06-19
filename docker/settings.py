@@ -1,13 +1,20 @@
 from .base_settings import *
+import os
 
 ALLOWED_HOSTS = ['*']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG= os.getenv("ENV", "prod") == "localdev"
 
+INSTALLED_APPS[INSTALLED_APPS.index('django.contrib.admin')] = 'interview_db.apps.SAMLAdminConfig'
+
 INSTALLED_APPS += [
     'interview_db',
     'compressor',
+]
+
+MIDDLEWARE += [
+    'interview_db.middleware.SAMLGroupExecute',
 ]
 
 COMPRESS_ROOT = '/static'
@@ -42,29 +49,27 @@ ADMIN_REORDER = (
     ('app2',('Interview')),
 )
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-MIDDLEWARE.remove('django.contrib.auth.middleware.PersistentRemoteUserMiddleware')
-
 MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA')
 MEDIA_URL = '/media/'
 
-LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/'
+INTERVIEW_DB_AUTHZ_GROUPS = {
+    'admin': os.getenv("ID_ADMIN_GROUP", 'u_test_admin'),
+    'front-end': os.getenv("ID_FRONT_END_GROUP", 'u_test_front_end'),
+}
+
+if os.getenv("AUTH", "NONE") == "SAML_MOCK":
+    MOCK_SAML_ATTRIBUTES['isMemberOf'] = [
+        INTERVIEW_DB_AUTHZ_GROUPS['admin'],
+        INTERVIEW_DB_AUTHZ_GROUPS['front-end'],
+    ]
+
+def set_superuser(request, flag):
+    request.user.is_staff = flag
+    request.user.is_superuser = flag
+
+SAML_GROUP_EXECUTE_MAPPING = {
+    (INTERVIEW_DB_AUTHZ_GROUPS['admin'], ): {
+        "=" : (lambda request: set_superuser(request, True)),
+        "!=" : (lambda request: set_superuser(request, False)),
+    }
+}

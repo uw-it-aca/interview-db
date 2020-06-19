@@ -25,6 +25,7 @@ setup(
     install_requires=[
         'Django<2.1',
         'Pillow',
+        'UW-Django-SAML2',
         'django-compressor',
         'django-pyscss',
         'django-prometheus',
