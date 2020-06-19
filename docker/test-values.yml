@@ -37,7 +37,11 @@ environmentVariables:
   - name: ENV
     value: dev
   - name: AUTH
-    value: SAML
+    value: SAML_DJANGO_LOGIN
+  - name: ID_ADMIN_GROUP
+    value: u_jcivjan_sip-admin
+  - name: ID_FRONT_END_GROUP
+    value: u_jcivjan_sip-frontend
 environmentVariablesSecrets:
   djangoSecret:
     name: DJANGO_SECRET

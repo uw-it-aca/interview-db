@@ -6,7 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class IndexView(LoginRequiredMixin, ListView):
     template_name = 'index.html'
     context_object_name = 'interview_list'
-    login_url = '/accounts/login/'
     def get_queryset(self):
         return Interview.objects.order_by('student')
         
@@ -14,21 +13,18 @@ class IndexView(LoginRequiredMixin, ListView):
 class InterviewsView(LoginRequiredMixin, ListView):
     template_name = 'interviews.html'
     context_object_name = 'interview_list'
-    login_url = '/accounts/login/'
     def get_queryset(self):
         return Interview.objects.order_by('student')
         
 class PeopleView(LoginRequiredMixin, ListView):
     template_name = 'people.html'
     context_object_name = 'interview_list'
-    login_url = '/accounts/login/'
     def get_queryset(self):
         return Interview.objects.order_by('student')
 
 class TopicsView(LoginRequiredMixin, ListView):
     template_name = 'topics.html'
     context_object_name = 'code_list'
-    login_url = '/accounts/login/'
     def get_queryset(self):
         return Code.objects.order_by('topic','code')
         
