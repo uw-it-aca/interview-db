@@ -52,7 +52,7 @@ environmentVariables:
   - name: CLUSTER_CNAME
     value: interview-db.axdd.s.uw.edu
   - name: SAML_USER_ATTRIBUTE
-    value: eppn
+    value: uwnetid
 environmentVariablesSecrets:
   djangoSecret:
     name: DJANGO_SECRET
