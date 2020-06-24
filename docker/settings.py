@@ -6,15 +6,9 @@ ALLOWED_HOSTS = ['*']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG= os.getenv("ENV", "prod") == "localdev"
 
-INSTALLED_APPS[INSTALLED_APPS.index('django.contrib.admin')] = 'interview_db.apps.SAMLAdminConfig'
-
 INSTALLED_APPS += [
     'interview_db',
     'compressor',
-]
-
-MIDDLEWARE += [
-    'interview_db.middleware.SAMLGroupExecute',
 ]
 
 COMPRESS_ROOT = '/static'
@@ -62,14 +56,3 @@ if os.getenv("AUTH", "NONE") == "SAML_MOCK":
         INTERVIEW_DB_AUTHZ_GROUPS['admin'],
         INTERVIEW_DB_AUTHZ_GROUPS['front-end'],
     ]
-
-def set_superuser(request, flag):
-    request.user.is_staff = flag
-    request.user.is_superuser = flag
-
-SAML_GROUP_EXECUTE_MAPPING = {
-    (INTERVIEW_DB_AUTHZ_GROUPS['admin'], ): {
-        "=" : (lambda request: set_superuser(request, True)),
-        "!=" : (lambda request: set_superuser(request, False)),
-    }
-}
