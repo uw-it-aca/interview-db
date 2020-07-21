@@ -29,6 +29,7 @@ setup(
         'django-compressor',
         'django-pyscss',
         'django-prometheus',
+        'psycopg2-binary',
     ],
     license='Apache License, Version 2.0',
     description=('App to collect and tag interview data, artifacts, and stories for publishing using the Django Admin app.'),
