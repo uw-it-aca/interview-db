@@ -13,16 +13,16 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 database:
-  engine: postgres
-  name: interview-db-test
-  hostname: interview-db-v1
+  engine: mysql
+  name: interview_test
+  hostname: interview-db-db-service
   secretName: interview-db.axdd.s.uw.edu-db
 externalService:
   enabled: true
-  name: interview-db-v1
+  name: interview-db-db-service
   type: ClusterIP
-  serviceAddress: 34.82.13.31
-  servicePort: 5432
+  serviceAddress: 172.18.0.14 
+  servicePort: 3306
 repo: interview-db
 instance: test
 targetAverageUtilization: 90
