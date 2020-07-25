@@ -50,6 +50,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA')
 MEDIA_URL = '/media/'
 
 if not DEBUG:
+    MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(os.getenv('GCS_BUCKET_NAME'))
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')
     GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
