@@ -66,3 +66,11 @@ environmentVariablesSecrets:
     name: IDP_CERT
     secretName: interview-db.axdd.s.uw.edu-saml-cert
     secretKey: idp-cert
+  gcsBucketServiceAccount:
+    name: GCS_BUCKET_SERVICE_ACCOUNT
+    secretName: interview-db.axdd.s.uw.edu-gcs-bucket
+    secretKey: service-account
+  gcsBucketName:
+    name: GCS_BUCKET_NAME
+    secretName: interview-db.axdd.s.uw.edu-gcs-bucket
+    secretKey: bucket-name

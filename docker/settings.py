@@ -1,5 +1,8 @@
 from .base_settings import *
 import os
+import json
+
+from google.oauth2 import service_account
 
 ALLOWED_HOSTS = ['*']
 
@@ -45,6 +48,13 @@ ADMIN_REORDER = (
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA')
 MEDIA_URL = '/media/'
+
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
+        json.loads(os.getenv('GCS_BUCKET_SERVICE_ACCOUNT'))
+    )
 
 INTERVIEW_DB_AUTHZ_GROUPS = {
     'admin': os.getenv("ID_ADMIN_GROUP", 'u_test_admin'),
