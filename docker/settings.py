@@ -56,6 +56,7 @@ if not DEBUG:
         json.loads(os.getenv('GCS_BUCKET_SERVICE_ACCOUNT'))
     )
     GS_CACHE_CONTROL = "public, max-age=604800"
+    GS_DEFAULT_ACL = "publicRead"
 
 INTERVIEW_DB_AUTHZ_GROUPS = {
     'admin': os.getenv("ID_ADMIN_GROUP", 'u_test_admin'),
