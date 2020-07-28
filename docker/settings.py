@@ -4,7 +4,7 @@ import json
 
 from google.oauth2 import service_account
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [os.getenv('CLUSTER_CNAME', '*')]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG= os.getenv("ENV", "prod") == "localdev"
