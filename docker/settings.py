@@ -8,14 +8,6 @@ from google.oauth2 import service_account
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("ENV", "prod") == "localdev"
 
-ALLOWED_HOSTS = [
-    os.getenv('CLUSTER_CNAME'),
-    socket.gethostbyname(os.getenv('HOSTNAME', socket.gethostname())),
-]
-
-if DEBUG:
-    ALLOWED_HOSTS = ['*']
-
 INSTALLED_APPS += [
     'interview_db',
     'compressor',
