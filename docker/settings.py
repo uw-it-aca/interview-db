@@ -1,13 +1,20 @@
 from .base_settings import *
 import os
+import socket
 import json
 
 from google.oauth2 import service_account
 
-ALLOWED_HOSTS = [os.getenv('CLUSTER_CNAME', '*')]
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG= os.getenv("ENV", "prod") == "localdev"
+DEBUG = os.getenv("ENV", "prod") == "localdev"
+
+ALLOWED_HOSTS = [
+    os.getenv('CLUSTER_CNAME'),
+    socket.gethostbyname(os.getenv('HOSTNAME', socket.gethostname())),
+]
+
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS += [
     'interview_db',
