@@ -8,29 +8,34 @@ ingress:
   hosts:
     interview-db.axdd:
       host: interview-db.axdd.s.uw.edu
-      paths: 
+      paths:
         - "/"
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+affinity:
+   podsSpanNodes: true
+lifecycle:
+  enabled: true
+  preStop:
+    enabled: true
+readiness:
+  enabled: true
 database:
   engine: mysql
   name: interview_test
   hostname: interview-db-db-service
-  secretName: interview-db.axdd.s.uw.edu-db
+  secretName: interview-db.axdd.s.uw.edu-sql-secrets
 externalService:
   enabled: true
   name: interview-db-db-service
   type: ClusterIP
-  serviceAddress: 172.18.0.14 
+  serviceAddress: 172.18.0.14
   servicePort: 3306
+gcsCredentials:
+  mounted: true
+  secretName: interview-db.axdd.s.uw.edu-gcs-credentials
 repo: interview-db
 instance: test
-targetAverageUtilization: 90
-resources:
-  limits:
-    cpu: 600m
-  requests:
-    cpu: 200m
 image:
   repository: registry.hub.docker.com/acait/interview-db
   tag: IMAGE_TAG
@@ -38,6 +43,38 @@ metrics:
   enabled: true
   serviceMonitor:
     enabled: true
+externalSecrets:
+  enabled: true
+  secrets:
+    - name: interview-db.axdd.s.uw.edu-secrets
+      externalKey: axdd/kv/data/interview-db/test/secrets
+      data:
+        - name: django-secret
+          property: django-secret
+        - name: storage-bucket-name
+          property: storage-bucket-name
+    - name: interview-db.axdd.s.uw.edu-sql-secrets
+      externalKey: axdd/kv/data/interview-db/test/sql-secrets
+      data:
+        - name: username
+          property: username
+        - name: password
+          property: password
+    - name: interview-db.axdd.s.uw.edu-gcs-credentials
+      externalKey: axdd/kv/data/interview-db/test/gcs-credentials
+      data:
+        - name: credentials.json
+          property: credentials.json
+    - name: interview-db.axdd.s.uw.edu-ic-certs
+      externalKey: axdd/kv/data/interview-db/test/ic-certs
+      data:
+        - name: interview-db.axdd.s.uw.edu-ic.cert
+          property: interview-db.axdd.s.uw.edu-ic.cert
+    - name: interview-db.axdd.s.uw.edu-uw-idp-cert
+      externalKey: axdd/kv/data/idp-cert
+      data:
+        - name: uw-idp-cert
+          property: cert
 environmentVariables:
   - name: ENV
     value: dev
@@ -60,17 +97,13 @@ environmentVariablesSecrets:
     secretKey: django-secret
   samlSpCertSecret:
     name: SP_CERT
-    secretName: interview-db.axdd.s.uw.edu-saml-cert
-    secretKey: sp-cert
+    secretName: interview-db.axdd.s.uw.edu-ic-certs
+    secretKey: interview-db.axdd.s.uw.edu-ic.cert
   samlIdpCertSecret:
     name: IDP_CERT
-    secretName: interview-db.axdd.s.uw.edu-saml-cert
-    secretKey: idp-cert
-  gcsBucketServiceAccount:
-    name: GCS_BUCKET_SERVICE_ACCOUNT
-    secretName: interview-db.axdd.s.uw.edu-gcs-bucket
-    secretKey: service-account
+    secretName: interview-db.axdd.s.uw.edu-idp-cert
+    secretKey: uw-idp-cert
   gcsBucketName:
     name: GCS_BUCKET_NAME
-    secretName: interview-db.axdd.s.uw.edu-gcs-bucket
-    secretKey: bucket-name
+    secretName: interview-db.axdd.s.uw.edu-secrets
+    secretKey: storage-bucket-name
