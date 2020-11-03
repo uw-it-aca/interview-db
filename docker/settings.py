@@ -1,8 +1,5 @@
 from .base_settings import *
 import os
-import socket
-import json
-
 from google.oauth2 import service_account
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -39,7 +36,7 @@ COMPRESS_CSS_FILTERS = [
 COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter',
 ]
- 
+
 ADMIN_REORDER = (
     ('app1',('Student','Story')),
     ('app2',('Interview')),
@@ -51,9 +48,8 @@ MEDIA_URL = '/media/'
 if not DEBUG:
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')
-    GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
-        json.loads(os.getenv('GCS_BUCKET_SERVICE_ACCOUNT'))
-    )
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        '/gcs/credentials.json')
     GS_CACHE_CONTROL = "public, max-age=604800"
     GS_DEFAULT_ACL = "publicRead"
 
