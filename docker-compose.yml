@@ -1,16 +1,21 @@
-version: "3"
+version: "3.4"
 
 services:
-    app:
-        environment: 
-            AUTH: ${AUTH:-SAML_MOCK}
-        restart: always
-        build: .
-        volumes:
-            - ./interview_db:/app/interview_db
-            - ./docker/settings.py:/app/project/settings.py
-            - ./docker/urls.py:/app/project/urls.py
-        ports:
-            - "${RUNSERVER_PORT:-8000}:8000"
-        stdin_open: true
-        tty: true
+  app:
+    environment:
+      ENV:  localdev
+      PORT: 8000
+      AUTH: SAML_MOCK
+    restart: always
+    container_name: app-interview-db
+    build:
+      context: .
+      target: app-container
+    volumes:
+      - ./interview_db:/app/interview_db
+      - ./docker/settings.py:/app/project/settings.py
+      - ./docker/urls.py:/app/project/urls.py
+    ports:
+      - "${RUNSERVER_PORT:-8000}:8000"
+    stdin_open: true
+    tty: true

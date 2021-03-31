@@ -12,6 +12,7 @@ ingress:
         - "/"
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/client-body-buffer-size: "16K"
 affinity:
    podsSpanNodes: true
 lifecycle:
@@ -19,6 +20,8 @@ lifecycle:
   preStop:
     enabled: true
 readiness:
+  enabled: true
+securityPolicy:
   enabled: true
 database:
   engine: mysql
@@ -37,7 +40,7 @@ gcsCredentials:
 repo: interview-db
 instance: test
 image:
-  repository: registry.hub.docker.com/acait/interview-db
+  repository: gcr.io/uwit-mci-axdd/interview-db
   tag: IMAGE_TAG
 metrics:
   enabled: true
