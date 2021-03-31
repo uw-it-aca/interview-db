@@ -1,10 +1,7 @@
+from .base_urls import *
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
-from uw_saml.decorators import group_required
-
-from .base_urls import *
 from interview_db.admin import saml_admin_site
 
 urlpatterns += [
