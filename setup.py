@@ -6,7 +6,6 @@ See the README on `GitHub
 <https://github.com/uw-it-aca/interview_db>`_.
 """
 
-# The VERSION file is created by travis-ci, based on the tag name
 version_path = 'interview_db/VERSION'
 VERSION = open(os.path.join(os.path.dirname(__file__), version_path)).read()
 VERSION = VERSION.replace("\n", "")
@@ -23,10 +22,14 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django<2.1',
+        'Django~=2.2',
         'Pillow',
+        'UW-Django-SAML2',
         'django-compressor',
         'django-pyscss',
+        'django-prometheus',
+        'django-storages[google]',
+        'google-auth',
     ],
     license='Apache License, Version 2.0',
     description=('App to collect and tag interview data, artifacts, and stories for publishing using the Django Admin app.'),
@@ -37,6 +40,6 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.0',
+        'Programming Language :: Python :: 3.6',
     ],
 )

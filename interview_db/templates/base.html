@@ -20,7 +20,14 @@
             </div>
 
             <div id="footer" class="idb-footer" role="contentinfo">
-                <div style="margin-left:20px;float:left;">&copy; UW-IT, AXDD <a href="http://www.washington.edu/online/privacy/" title="UW Privacy Policy">Privacy</a> <a href="http://www.washington.edu/online/terms/" style="margin-left:5px;" title="UW Terms & Conditions of Use">Terms</a></div>
+                <div style="margin-left:20px;float:left; width:100%;">&copy; UW-IT, AXDD <a href="http://www.washington.edu/online/privacy/" title="UW Privacy Policy">Privacy</a> <a href="http://www.washington.edu/online/terms/" style="margin-left:5px;" title="UW Terms & Conditions of Use">Terms</a>
+                <div style="float:right;">
+                    {% if user.is_authenticated %}
+                    {{ user.username }}:
+                    <a href="{% url 'saml_logout' %}">logout</a>
+                    {% endif %}
+                </div>
+                </div>
             </div>
         </div>
     </body>

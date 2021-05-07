@@ -1,3 +1,6 @@
+# Copyright 2021 UW-IT, University of Washington
+# SPDX-License-Identifier: Apache-2.0
+
 from django.db import models
 from django import forms
 from django.forms import ModelForm
@@ -61,8 +64,8 @@ class Student(models.Model):
         help_text="URL for Google Drive folder where student artifacts are stored.")
     follow_up_consent = models.BooleanField()
 
-    def __unicode__(self):
-        return unicode(self.first_name) + " " + unicode(self.last_name)
+    def __str__(self):
+        return str(self.first_name) + " " + str(self.last_name)
 
     class Meta:
         ordering = ['first_name', ]

@@ -107,3 +107,6 @@ manage.py
 pip-selfcheck.json
 project/
 .DS_Store
+
+# VS Code
+.vscode

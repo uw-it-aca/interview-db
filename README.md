@@ -1,6 +1,8 @@
-[![Build Status](https://travis-ci.org/uw-it-aca/interview_db.svg?branch=0.0.0.b3)](https://travis-ci.org/uw-it-aca/interview_db)
-[![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/interview_db/badge.svg?branch=master)](https://coveralls.io/github/uw-it-aca/interview_db?branch=master)
-# interview_db
+# interview-db
+
+[![Build Status](https://github.com/uw-it-aca/interview-db/workflows/tests/badge.svg?branch=develop)](https://github.com/uw-it-aca/interview-db/actions)
+[![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/interview-db/badge.svg?branch=develop)](https://coveralls.io/github/uw-it-aca/interview-db?branch=develop)
+
 
 App to collect and tag interview data, artifacts, and stories for publishing using the Django Admin app.
 
@@ -8,65 +10,28 @@ App to collect and tag interview data, artifacts, and stories for publishing usi
 ## Installation
 Prerequisites
 
-    A Python installation (2.5 or greater)
-    pip or easy_install
-    git
+1. Install [docker](https://docs.docker.com/get-docker/)
+2. Install [docker-compose](https://docs.docker.com/compose/install/)
+3. Clone project with
+    3.1. ```$ git clone git@github.com:uw-it-aca/interview-db.git``` (SSH)
+    3.2. ```$ git clone https://github.com/uw-it-aca/interview-db.git``` (HTTPS)
+4. For development checkout the `develop` branch
 
-Step-by-step
+        $ git checkout develop
 
-    If you don't have it already, install virtualenv:
+Start a server:
+1. With default port (8000)
 
-    $ pip install virtualenv
+        $ docker-compose up --build
 
-    if you don't have pip, you may be able to:
+2. With custom port
 
-    $ easy_install virtualenv
-
-Checkout the master of the interview-db project:
-
-    $ git clone git@github.com:uw-it-aca/interview-db.git
-
-    OR https://github.com/uw-it-aca/interview-db.git
-    
-Turn interview-db into a virtualenv:
-
-    $ virtualenv interview-db   
-
-Activate your virtualenv:
-
-    cd interview-db
-    source bin/activate
-    
-Install required Python packages with pip:
-
-    $ pip install -r requirements.txt
-
-Create a django project in the interview_db dir:
-
-    $ django-admin.py startproject project .
-
-    That '.' at the end is important!
-
-Modify at least the following settings in interview_db/settings.py:
-
-    Add to your INSTALLED_APPS:
-
-        'interview_db',
-        
-    Add 
-        MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA')
-        MEDIA_URL = '/media/'
-
-Create the intervies-db database
-
-    $ python manage.py migrate
-
-You should now be able to run your development server:
-
-    $ python manage.py runserver 0.0.0.0:<your port>
+        $ RUNSERVER_PORT=<custom port> docker-compose up --build
 
 Create a super user for /admin access:
 
+    $ docker exec -it interview-db_app_1 /bin/bash
+    $ . bin/activate
     $ python manage.py createsuperuser
-
-
+       <Create the superuser>
+    $ exit

@@ -1,36 +1,73 @@
+# Copyright 2021 UW-IT, University of Washington
+# SPDX-License-Identifier: Apache-2.0
+
 from django.contrib import admin
 from django import forms
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
+from django.conf import settings
 from django.contrib.admin.views.main import ChangeList
+from django.http import HttpResponse, HttpResponseRedirect
+
+from uw_saml.views import LoginView, LogoutView
+from uw_saml.utils import is_member_of_group
+
 from .models import StudentType, Major, Location, Student, Interview, Story, Coding, Code, SubCode, ResourceCategory, ResourceLink
 
-@admin.register(StudentType)
-class StudentTypeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-        
-@admin.register(Major)
-class MajorAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 
-@admin.register(Location)
-class LocationAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+class SAMLAdminSite(admin.AdminSite):
+    def has_permission(self, request):
+        return is_member_of_group(request, admin_group)
+
+    def login(self, request, extra_context=None):
+        if request.method == 'GET' and self.has_permission(request):
+            # Already logged-in, redirect to admin index
+            index_path = reverse('admin:index', current_app=self.name)
+            return HttpResponseRedirect(index_path)
         
-@admin.register(Student)
-class StudentAdmin (admin.ModelAdmin):    
+        if 'samlUserdata' in request.session:
+            return HttpResponse('Unauthorized', status=401)
+
+        return LoginView.as_view(extra_context=extra_context)(request)
+
+    def logout(self, request, extra_context=None):
+        return LogoutView.as_view(extra_context=extra_context)(request)
+
+saml_admin_site = SAMLAdminSite(name='SAMLAdmin')
+
+class SAMLModelAdmin(admin.ModelAdmin):
+    has_access = True
+
+    def has_view_permission(self, request, obj=None):
+        return self.has_access and is_member_of_group(request, admin_group)
+    
+    def has_add_permission(self, request):
+        return self.has_access and is_member_of_group(request, admin_group)
+    
+    def has_change_permission(self, request, obj=None):
+        return self.has_access and is_member_of_group(request, admin_group)
+
+    def has_delete_permission(self, request, obj=None):
+        return self.has_access and is_member_of_group(request, admin_group)
+
+    def has_module_permission(self, request):
+        return self.has_access and is_member_of_group(request, admin_group)
+
+@admin.register(StudentType, site=saml_admin_site)
+class StudentTypeAdmin(SAMLModelAdmin):
+    has_access = False
+        
+@admin.register(Major, site=saml_admin_site)
+class MajorAdmin(SAMLModelAdmin):
+    has_access = False
+
+@admin.register(Location, site=saml_admin_site)
+class LocationAdmin(SAMLModelAdmin):
+    has_access = False
+        
+@admin.register(Student, site=saml_admin_site)
+class StudentAdmin (SAMLModelAdmin):    
     fieldsets = (
         (None, {
             'fields': ('first_name','last_name','uw_netid','email')
@@ -49,8 +86,8 @@ class StudentAdmin (admin.ModelAdmin):
         }
     
 
-@admin.register(Interview)
-class InterviewAdmin (admin.ModelAdmin):
+@admin.register(Interview, site=saml_admin_site)
+class InterviewAdmin (SAMLModelAdmin):
     fieldsets = (
         (None, {
             'fields': (('student','date'),('interview_quarter','interview_location'))
@@ -78,36 +115,40 @@ class InterviewAdmin (admin.ModelAdmin):
             'all': ('css/admin.css',)
         }
         
-@admin.register(Coding)
-class CodingAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+@admin.register(Coding, site=saml_admin_site)
+class CodingAdmin(SAMLModelAdmin):
+    has_access = False
+
 class CodingInline(admin.StackedInline):
     model = Coding
     extra = 0
+
+    def has_view_permission(self, request, obj=None):
+        return is_member_of_group(request, admin_group)
+    
+    def has_add_permission(self, request):
+        return is_member_of_group(request, admin_group)
+    
+    def has_change_permission(self, request, obj=None):
+        return is_member_of_group(request, admin_group)
+
+    def has_delete_permission(self, request, obj=None):
+        return is_member_of_group(request, admin_group)
+
+    def has_module_permission(self, request):
+        return is_member_of_group(request, admin_group)
         
-@admin.register(SubCode)
-class SubCodeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+@admin.register(SubCode, site=saml_admin_site)
+class SubCodeAdmin(SAMLModelAdmin):
+    has_access = False
         
-@admin.register(Code)
-class CodeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+@admin.register(Code, site=saml_admin_site)
+class CodeAdmin(SAMLModelAdmin):
+    has_access = False
 
 
-@admin.register(Story)
-class StoryAdmin (admin.ModelAdmin):
+@admin.register(Story, site=saml_admin_site)
+class StoryAdmin (SAMLModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('interview','story')
@@ -149,19 +190,10 @@ class StoryAdmin (admin.ModelAdmin):
             'all': ('css/admin.css',)
         }
 
+@admin.register(ResourceCategory, site=saml_admin_site)
+class ResourceCategoryAdmin(SAMLModelAdmin):
+    has_access = False
 
-@admin.register(ResourceCategory)
-class ResourceCategoryAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-@admin.register(ResourceLink)
-class ResourceLinkAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+@admin.register(ResourceLink, site=saml_admin_site)
+class ResourceLinkAdmin(SAMLModelAdmin):
+    has_access = False
