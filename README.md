@@ -1,7 +1,7 @@
 # interview-db
 
-[![Build Status](https://github.com/uw-it-aca/interview-db/workflows/tests/badge.svg?branch=develop)](https://github.com/uw-it-aca/interview-db/actions)
-[![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/interview-db/badge.svg?branch=develop)](https://coveralls.io/github/uw-it-aca/interview-db?branch=develop)
+[![Build Status](https://github.com/uw-it-aca/interview-db/workflows/Build%2C%20Test%20and%20Deploy/badge.svg?branch=main)](https://github.com/uw-it-aca/interview-db/actions)
+[![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/interview-db/badge.svg?branch=main)](https://coveralls.io/github/uw-it-aca/interview-db?branch=main)
 
 
 App to collect and tag interview data, artifacts, and stories for publishing using the Django Admin app.
