@@ -1,3 +1,6 @@
+# Copyright 2021 UW-IT, University of Washington
+# SPDX-License-Identifier: Apache-2.0
+
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
