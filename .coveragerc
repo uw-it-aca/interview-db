@@ -1,0 +1,8 @@
+[run]
+source = interview-db
+parallel = True
+
+[paths]
+source =
+  interview_db/
+  /app/interview_db/
