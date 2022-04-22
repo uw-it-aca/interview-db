@@ -3,12 +3,16 @@ import os
 from google.oauth2 import service_account
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("ENV", "prod") == "localdev"
+DEBUG = os.getenv('ENV', 'prod') == 'localdev'
 
+INSTALLED_APPS.remove('django.contrib.admin')
 INSTALLED_APPS += [
-    'interview_db',
+    'project.apps.InterviewAdminConfig',
+    'interview_db.apps.InterviewConfig',
     'compressor',
 ]
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 COMPRESS_ROOT = '/static'
 
@@ -50,15 +54,15 @@ if not DEBUG:
     GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')
     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
         '/gcs/credentials.json')
-    GS_CACHE_CONTROL = "public, max-age=604800"
-    GS_DEFAULT_ACL = "publicRead"
+    GS_CACHE_CONTROL = 'public, max-age=604800'
+    GS_DEFAULT_ACL = 'publicRead'
 
 INTERVIEW_DB_AUTHZ_GROUPS = {
     'admin': os.getenv("ID_ADMIN_GROUP", 'u_test_admin'),
     'front-end': os.getenv("ID_FRONT_END_GROUP", 'u_test_front_end'),
 }
 
-if os.getenv("AUTH", "NONE") == "SAML_MOCK":
+if os.getenv('AUTH', 'NONE') == 'SAML_MOCK':
     MOCK_SAML_ATTRIBUTES['isMemberOf'] = [
         INTERVIEW_DB_AUTHZ_GROUPS['admin'],
         INTERVIEW_DB_AUTHZ_GROUPS['front-end'],
