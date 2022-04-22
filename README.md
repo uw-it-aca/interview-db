@@ -15,7 +15,11 @@ Prerequisites
 3. Clone project with
     3.1. ```$ git clone git@github.com:uw-it-aca/interview-db.git``` (SSH)
     3.2. ```$ git clone https://github.com/uw-it-aca/interview-db.git``` (HTTPS)
-4. For development checkout the `develop` branch
+4. Go into your interview-db folder
+
+        $ cd interview-db
+        
+5. For development checkout the `develop` branch
 
         $ git checkout develop
 
