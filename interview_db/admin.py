@@ -82,7 +82,7 @@ class StudentAdmin (SAMLModelAdmin):
     list_display = ('first_name','last_name', 'email','follow_up_consent')
     class Media:
         css = {
-            'all': ('css/admin.css',)
+            'all': ('interview_db/css/admin.css',)
         }
     
 
@@ -112,7 +112,7 @@ class InterviewAdmin (SAMLModelAdmin):
     get_followup.short_description = 'Follow up'    
     class Media:
         css = {
-            'all': ('css/admin.css',)
+            'all': ('interview_db/css/admin.css',)
         }
         
 @admin.register(Coding, site=saml_admin_site)
@@ -187,7 +187,7 @@ class StoryAdmin (SAMLModelAdmin):
     
     class Media:
         css = {
-            'all': ('css/admin.css',)
+            'all': ('interview_db/css/admin.css',)
         }
 
 @admin.register(ResourceCategory, site=saml_admin_site)
