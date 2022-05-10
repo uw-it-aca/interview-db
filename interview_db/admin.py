@@ -42,7 +42,7 @@ class SAMLModelAdmin(admin.ModelAdmin):
     def has_view_permission(self, request, obj=None):
         return self.has_access and is_member_of_group(request, admin_group)
     
-    def has_add_permission(self, request):
+    def has_add_permission(self, request, obj=None):
         return self.has_access and is_member_of_group(request, admin_group)
     
     def has_change_permission(self, request, obj=None):
@@ -126,7 +126,7 @@ class CodingInline(admin.StackedInline):
     def has_view_permission(self, request, obj=None):
         return is_member_of_group(request, admin_group)
     
-    def has_add_permission(self, request):
+    def has_add_permission(self, request, obj=None):
         return is_member_of_group(request, admin_group)
     
     def has_change_permission(self, request, obj=None):
