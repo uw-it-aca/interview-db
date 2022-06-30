@@ -19,6 +19,8 @@
         <link rel="stylesheet" href="{% static "interview_db/css/desktop.scss" %}" type="text/x-scss">
         <title>{% block title %}UW Student Experience Interview Project{% endblock %}</title>
 
+        <!-- vite css bundle -->
+        {% vite_styles 'interview_db_vue/main.js' %}
     </head>
 
     <body {% if request.is_mobile or request.is_tablet %}data-mobile="true"{% endif %}>
@@ -43,5 +45,16 @@
                 </div>
             </div>
         </div>
+    </body>
+
+    <body {% if google_analytics %}data-google-analytics="{{ google_analytics }}"{% endif %} {% if logout_url %}data-logout-url="{{ logout_url }}"{% endif %} data-django-debug="{{ django_debug|lower}}" class="bg-light">
+    {% csrf_token %}
+
+    <!-- vue app will be injected here -->
+    <div id="app"></div>
+
+    <!-- vite js bundle -->
+    {% vite_scripts 'interview_db_vue/main.js' %}
+
     </body>
 </html>

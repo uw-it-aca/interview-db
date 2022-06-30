@@ -8,13 +8,16 @@
     </template>
 
     <template #description>
-      <p class="p-0 col-md-8 lead">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget
-        pulvinar est. Sed gravida neque justo, pellentesque finibus velit
-        scelerisque eu. Curabitur et dolor luctus, convallis magna at, mollis
-        purus. Nunc tincidunt risus quis nisl bibendum volutpat. Praesent ut
-        tincidunt ex.
-      </p>
+      <div class="p-0 col-md-8 lead">
+        <HelloWorld />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget
+          pulvinar est. Sed gravida neque justo, pellentesque finibus velit
+          scelerisque eu. Curabitur et dolor luctus, convallis magna at, mollis
+          purus. Nunc tincidunt risus quis nisl bibendum volutpat. Praesent ut
+          tincidunt ex.
+        </p>
+      </div>
     </template>
 
     <template #content>
@@ -29,7 +32,7 @@
                 >Django-Container (1.4.0)</a
               >
             </li>
-            <li>Webpack (5.x)</li>
+            <li>Vite (2.9.x)</li>
           </ul>
 
           <h2>Development</h2>
@@ -51,8 +54,7 @@
         <div class="col-md-6">
           <h2>Testing</h2>
           <ul>
-            <li>Jest (27.x)</li>
-            <li>Vue-Jest (27.x)</li>
+            <li>Vitest (0.10.x)</li>
             <li>Vue Test Utils (2.x)</li>
           </ul>
 
@@ -140,11 +142,13 @@
 
 <script>
 import Layout from "../layout.vue";
+import HelloWorld from "../components/hello-world.vue";
 
 export default {
   name: "PagesHome",
   components: {
     layout: Layout,
+    HelloWorld,
   },
   data() {
     return {
