@@ -5,6 +5,6 @@ from django.conf.urls.static import static
 from interview_db.admin import saml_admin_site
 
 urlpatterns += [
-    path('admin/', saml_admin_site.urls),
-    re_path(r'^', include('interview_db.urls')),
+    path("admin/", saml_admin_site.urls),
+    re_path(r"^", include("interview_db.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
