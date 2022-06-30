@@ -31,11 +31,13 @@ FROM app-prewebpack-container as app-container
 COPY --chown=acait:acait --from=node-bundler /app/app_name/static /app/app_name/static
 
 RUN . /app/bin/activate && \
-  python manage.py collectstatic --noinput && \
-  python manage.py compress -f
+  python manage.py collectstatic --noinput
 
 FROM gcr.io/uwit-mci-axdd/django-test-container:${DJANGO_CONTAINER_VERSION} as app-test-container
 
 ENV NODE_PATH=/app/lib/node_modules
 COPY --from=app-container /app/ /app/
 COPY --from=app-container /static/ /static/
+
+ENV NODE_ENV=development
+RUN npm install
