@@ -85,3 +85,13 @@ if os.getenv('AUTH', 'NONE') == 'SAML_MOCK':
         INTERVIEW_DB_AUTHZ_GROUPS['admin'],
         INTERVIEW_DB_AUTHZ_GROUPS['front-end'],
     ]
+
+if os.getenv("ENV") == "localdev":
+    DEBUG = True
+
+if os.getenv("ENV") == "localdev":
+    VITE_MANIFEST_PATH = os.path.join(
+        BASE_DIR, "app_name", "static", "manifest.json"
+    )
+else:
+    VITE_MANIFEST_PATH = os.path.join(os.sep, "static", "manifest.json")
