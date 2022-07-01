@@ -4,6 +4,7 @@
 from django.conf import settings
 from django.urls import re_path
 from django.views.generic import TemplateView
+from interview_db.views import DefaultPageView
 from . import views
 
 app_name = "interview_db"
@@ -26,8 +27,7 @@ if settings.DEBUG:
         ),
     ]
 
-urlpatterns = [
-    re_path(r'^$', views.IndexView.as_view(), name="home"),
+urlpatterns += [
     re_path(r'interviews.html', views.InterviewsView.as_view(), name="interviews"),
     re_path(r'people.html', views.PeopleView.as_view(), name="people"),
     re_path(r'topics.html', views.TopicsView.as_view(), name="topics"),
@@ -35,4 +35,7 @@ urlpatterns = [
         views.interview, name='interview'),
     re_path(r'^topic/(?P<code_id>\d+)/$',
         views.code, name='code'),
+    re_path(r"^(customize|page2|page3)$", DefaultPageView.as_view()),
+    re_path(r'^$', TemplateView.as_view(template_name="vue.html"), name="home"),
+    # re_path(r'^$', views.IndexView.as_view(), name="home"),
 ] 
