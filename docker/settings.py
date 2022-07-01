@@ -91,7 +91,7 @@ if os.getenv("ENV") == "localdev":
 
 if os.getenv("ENV") == "localdev":
     VITE_MANIFEST_PATH = os.path.join(
-        BASE_DIR, "app_name", "static", "manifest.json"
+        BASE_DIR, "interview_db", "static", "manifest.json"
     )
 else:
     VITE_MANIFEST_PATH = os.path.join(os.sep, "static", "manifest.json")

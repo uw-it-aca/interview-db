@@ -1,35 +1,19 @@
 <template>
-  <div class="container-xl">
-    <div class="px-3">
-      <header
-        class="d-flex justify-content-between align-items-center pb-3 my-4 border-bottom"
-      >
-        <div class="h4 flex-fill">
-          <i class="bi bi-clipboard-fill me-2 text-purple"></i>
-          <a href="/" class="text-reset text-decoration-none">{{ appName }}</a>
-        </div>
-        <div class="me-3">
-          <nav class="nav">nav here</nav>
-        </div>
-      </header>
-
-      <main>
-        <h1>
-          <slot name="title">
-            {{ pageTitle }}
-          </slot>
-        </h1>
-
-        <slot name="description" />
-        <hr class="mb-5 w-25 d-inline-block" />
+  <header>
+    <h1>Interview DB</h1>
+  </header>
+    <nav>
+    <ul>
+    <li><router-link to="/customize">Customize</router-link></li>
+    <li><router-link to="/">Home</router-link></li>
+    </ul>
+    </nav>
+    <main>
         <slot name="content" />
-      </main>
-
-      <footer class="pt-2 mt-5 mb-3 text-muted border-top">
-        Copyright &copy; {{ new Date().getFullYear() }} University of Washington
-      </footer>
-    </div>
-  </div>
+    </main>
+    <footer>
+    Copyright &copy; 2012-2013
+    </footer>
 </template>
 
 <script>

@@ -28,7 +28,7 @@ RUN npm run build
 
 FROM app-prewebpack-container as app-container
 
-COPY --chown=acait:acait --from=node-bundler /app/app_name/static /app/app_name/static
+COPY --chown=acait:acait --from=node-bundler /app/interview_db/static /app/interview_db/static
 
 RUN . /app/bin/activate && \
   python manage.py collectstatic --noinput && \

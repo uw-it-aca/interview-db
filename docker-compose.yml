@@ -31,8 +31,8 @@ services:
       VUE_DEVTOOLS: "True"
       BUNDLE_ANALYZER: "True"
     volumes:
-      - ./app_name:/app/interview_db # expose main django app so vite can output bundles here
-      - ./app_name_vue:/app/interview_db_vue
+      - ./interview_db:/app/interview_db # expose main django app so vite can output bundles here
+      - ./interview_db_vue:/app/interview_db_vue
       - statics-volume:/static
     command: npm run watch
     stdin_open: true
