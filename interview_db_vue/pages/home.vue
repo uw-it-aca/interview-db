@@ -1,9 +1,8 @@
 // home.vue
 
 <template>
-  <layout>
+  <layout :page-title="pageTitle">
     <!-- page content -->
-
     <template #content>
       <p>Hello World</p>
     </template>
@@ -22,7 +21,7 @@ export default {
   },
   data() {
     return {
-      pageTitle: "Getting started",
+      pageTitle: "Home",
     };
   },
   methods: {},

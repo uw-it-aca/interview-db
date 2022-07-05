@@ -84,7 +84,7 @@ export default {
   },
   data() {
     return {
-      pageTitle: "Customizing your app",
+      pageTitle: "Collections",
     };
   },
   methods: {},

@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       // minimum application setup overrides
-      appName: "AXDD Django+Vue",
+      appName: "Interview DB",
       // automatically set year
       currentYear: new Date().getFullYear(),
     };
