@@ -2,18 +2,19 @@
   <header>
     <h1>Interview DB</h1>
   </header>
-    <nav>
+  <nav>
     <ul>
-    <li><router-link to="/customize">Customize</router-link></li>
-    <li><router-link to="/">Home</router-link></li>
+      <li><router-link to="/">Home</router-link></li>
+      <li><router-link to="/collections">Collections</router-link></li>
+      <li><router-link to="/students">Students</router-link></li>
+      <li><router-link to="/about">About Us</router-link></li>
     </ul>
-    </nav>
-    <main>
-        <slot name="content" />
-    </main>
-    <footer>
-    Copyright &copy; 2012-2013
-    </footer>
+  </nav>
+  <main>
+    <slot name="content" />
+  </main>
+  <footer>
+  </footer>
 </template>
 
 <script>

@@ -1,4 +1,4 @@
-// about.vue
+// collections.vue
 
 <template>
   <layout :page-title="pageTitle">
