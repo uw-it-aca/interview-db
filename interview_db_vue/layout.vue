@@ -1,7 +1,4 @@
 <template>
-  <header>
-    <h1>Interview DB</h1>
-  </header>
   <nav>
     <ul>
       <li><router-link to="/">Home</router-link></li>
@@ -10,7 +7,8 @@
       <li><router-link to="/about">About Us</router-link></li>
     </ul>
   </nav>
-  <main>
+   <main>
+    <slot name="title" />
     <slot name="content" />
   </main>
   <footer>

@@ -3,8 +3,8 @@
 <template>
   <layout :page-title="pageTitle">
     <!-- page content -->
-    <template #content>
-      <p>Hello World</p>
+    <template #title>
+      <h1>Husky Voices</h1>
     </template>
   </layout>
 </template>
@@ -17,7 +17,7 @@ export default {
   name: "PagesHome",
   components: {
     layout: Layout,
-    "nancy-hello": HelloWorld,
+    "some-component": HelloWorld,
   },
   data() {
     return {
