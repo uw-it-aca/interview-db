@@ -2,13 +2,14 @@
   <nav>
     <ul>
       <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/collections">Collections</router-link></li>
       <li><router-link to="/students">Students</router-link></li>
+      <li><router-link to="/collections">Collections</router-link></li>
       <li><router-link to="/about">About Us</router-link></li>
     </ul>
   </nav>
-   <main>
+  <main>
     <slot name="title" />
+    <slot name="description" />
     <slot name="content" />
   </main>
   <footer>

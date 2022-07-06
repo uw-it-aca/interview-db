@@ -1,4 +1,5 @@
-// hello-world.vue
+// student-card.vue
+// student interview cards to show on home page
 
 <template>
   <div>Hello world</div>
@@ -6,7 +7,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "StudentCard",
   data() {
     return {};
   },
