@@ -6,18 +6,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="{% static 'interview_db/img/favicon.png' %}">
+  {% load compress %}
 
-    <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@400;500;700&family=Open+Sans:ital,wght@0,400;0,700;1,400&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="cleartype" content="on">
+  
+  <!-- critical (above the fold styles) -->
+  {% compress css inline %}
+  <link rel="stylesheet" href="{% static "vendor/css/normalize-3.0.1.min.css" %}">
+  <link rel="stylesheet" href="{% static "interview_db/css/critical.scss" %}" type="text/x-scss">
+  <link rel="stylesheet" href="{% static "interview_db/css/mobile.scss" %}" type="text/x-scss">
+  <link rel="stylesheet" href="{% static "interview_db/css/desktop.scss" %}" type="text/x-scss">
+  {% endcompress %}
+  <!-- async (mobile + desktop) -->
+  {% compress css %}
+  {% endcompress %}
 
-
-    <!-- vite css bundle -->
-    {% vite_styles 'interview_db_vue/main.js' %}
+  <!-- vite css bundle -->
+  {% vite_styles 'interview_db_vue/main.js' %}
 </head>
 
 <body {% if google_analytics %}data-google-analytics="{{ google_analytics }}"{% endif %} {% if logout_url %}data-logout-url="{{ logout_url }}"{% endif %} data-django-debug="{{ django_debug|lower}}" class="bg-light">

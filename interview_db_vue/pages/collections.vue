@@ -4,16 +4,12 @@
   <layout :page-title="pageTitle">
     <!-- page content -->
     <template #title>
-      {{ pageTitle }}
+      <h1>{{ pageTitle }}</h1>
     </template>
 
     <template #description>
       <p class="p-0 col-md-8 lead">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget
-        pulvinar est. Sed gravida neque justo, pellentesque finibus velit
-        scelerisque eu. Curabitur et dolor luctus, convallis magna at, mollis
-        purus. Nunc tincidunt risus quis nisl bibendum volutpat. Praesent ut
-        tincidunt ex.
+        Collections of stories
       </p>
     </template>
 
@@ -76,7 +72,7 @@ import Layout from "../layout.vue";
 import HelloWorld from "../components/hello-world.vue";
 
 export default {
-  name: "PagesCustomize",
+  name: "PagesCollections",
   components: {
     layout: Layout,
     "hello-world": HelloWorld,
