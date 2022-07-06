@@ -39,9 +39,8 @@ urlpatterns += [
         name="interview",
     ),
     re_path(r"^topic/(?P<code_id>\d+)/$", views.code, name="code"),
-    re_path(r"^(collections|students|about)$", DefaultPageView.as_view()),
+    re_path(r"^(students|collections|about)$", DefaultPageView.as_view()),
     re_path(
         r"^$", TemplateView.as_view(template_name="vue.html"), name="home"
     ),
-    # re_path(r'^$', views.IndexView.as_view(), name="home"),
 ]

@@ -6,18 +6,20 @@
     <template #title>
       <h1>Husky Voices</h1>
     </template>
+
+    <template #description>
+      <p>Telling the stories of UW Students<br>through authentic, personal,<br>spontaneous interviews</p>
+    </template>
   </layout>
 </template>
 
 <script>
 import Layout from "../layout.vue";
-import HelloWorld from "../components/hello-world.vue";
 
 export default {
   name: "PagesHome",
   components: {
     layout: Layout,
-    "some-component": HelloWorld,
   },
   data() {
     return {
