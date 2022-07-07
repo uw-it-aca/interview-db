@@ -1,10 +1,7 @@
-@use "sass:map";
-@import "axdd-components/src/assets/css/theme";
+// import entire bootstrap library
 
-// https://getbootstrap.com/docs/5.1/customize/options/
-// TODO: enable bootstrap options for the app
-// $enable-cssgrid: true;
-// $enable-gradients: true;
+@use "sass:map";
+@import "node_modules/bootstrap/scss/bootstrap";
 
 // app custom colors
 $custom-colors: (
@@ -59,6 +56,6 @@ $utilities: (
   color: purple;
 }
 
-// import bootstrap and bootstrap-icons
+// MARK: import bootstrap and bootstrap-icons last
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";

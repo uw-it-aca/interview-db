@@ -7,7 +7,7 @@
       <li><router-link to="/about">About Us</router-link></li>
     </ul>
   </nav>
-  <main>
+  <main class="p-3">
     <slot name="title" />
     <slot name="description" />
     <slot name="content" />
