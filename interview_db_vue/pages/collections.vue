@@ -4,14 +4,21 @@
   <layout :page-title="pageTitle">
     <!-- page content -->
     <template #title>
-      <h1>{{ pageTitle }}</h1>
-    </template>
-
-    <template #description>
-      <p>Collections of stories collected from diverse<br>groups of students</p>
+      <h1 class="visually-hidden">{{ pageTitle }}</h1>
     </template>
 
     <template #content>
+      <div class="row">
+        <div class="col p-5 mb-4 bg-info">
+          <div class="py-5">
+            <h2 class="display-5 fw-bold text-center">Collections</h2>
+            <h5 class="text-center">
+              Collections of stories collected from diverse<br>groups of students
+            </h5>
+          </div>
+        </div>
+      </div>
+      
       <!-- image on left side -->
       <div class="card">
         <div class="row g-0">

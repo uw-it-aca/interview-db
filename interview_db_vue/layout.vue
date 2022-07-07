@@ -1,8 +1,8 @@
 <template>
   <div class="container py-4">
-    <header class="pb-3 mb-4 border-bottom">
+    <header class="bg-light pb-3 mb-4">
       <nav>
-        <ul class="nav nav-pills justify-content-end">
+        <ul class="nav justify-content-end">
           <li class="nav-item">
             <router-link class="nav-link" active-class="active" aria-current="page" to="/">Home</router-link>
           </li>
