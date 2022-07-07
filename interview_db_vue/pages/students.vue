@@ -4,21 +4,20 @@
   <layout :page-title="pageTitle">
     <!-- page content -->
     <template #title>
-      <h1>{{ pageTitle }}</h1>
-    </template>
-
-    <template #description>
-      <p>Sort interviews by student<br>characteristics</p>
+      <h1 class="visually-hidden">{{ pageTitle }}</h1>
     </template>
 
     <template #content>
-      <p class="p-0 col-md-8 lead">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget
-        pulvinar est. Sed gravida neque justo, pellentesque finibus velit
-        scelerisque eu. Curabitur et dolor luctus, convallis magna at, mollis
-        purus. Nunc tincidunt risus quis nisl bibendum volutpat. Praesent ut
-        tincidunt ex.
-      </p>
+      <div class="row">
+        <div class="col p-5 mb-4 bg-info">
+          <div class="py-5">
+            <h2 class="display-5 fw-bold text-center">Student Interviews</h2>
+            <h5 class="text-center">
+              Sort interviews by student<br>characteristics
+            </h5>
+          </div>
+        </div>
+      </div>
     </template>
   </layout>
 </template>

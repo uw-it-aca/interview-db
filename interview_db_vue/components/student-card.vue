@@ -2,29 +2,31 @@
 // student interview cards to show on home page
 
 <template>
-  <div class="text-center">
-    <svg
-      class="bd-placeholder-img rounded-circle"
-      width="140"
-      height="140"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="Placeholder: 140x140"
-      preserveAspectRatio="xMidYMid slice"
-      focusable="false"
-    >
-      <title>Placeholder</title>
-      <rect width="100%" height="100%" fill="#777" />
-      <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-    </svg>
+  <div class="bg-light pb-1 pt">
+    <div class="text-center">
+      <svg
+        class="bd-placeholder-img rounded-circle"
+        width="140"
+        height="140"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Placeholder: 140x140"
+        preserveAspectRatio="xMidYMid slice"
+        focusable="false"
+      >
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill="#777" />
+        <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+      </svg>
 
-    <h2 class="fw-normal">{{ firstName }}</h2>
-    <p>
-      Some representative placeholder content for the three columns of text
-      below the carousel. This is the first column.
-    </p>
-    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-  </div>
+      <h2 class="fw-normal">{{ firstName }}</h2>
+      <h4>{{ year + "," + " " + major }}</h4>
+
+      <p class="mx-4">"{{ quote }}"</p>
+        
+      <p><a class="btn btn-secondary" href="#">Read full story ></a></p>
+    </div>
+    </div>
 </template>
 
 <script>
@@ -35,6 +37,21 @@ export default {
       type: String,
       required: true,
       default: "Joe",
+    },
+    year: {
+      type: String,
+      required: true,
+      default: "Freshman",
+    },
+    major: {
+      type: Array,
+      required: true,
+      default: "Communications",
+    },
+    quote: {
+      type: String,
+      required: true,
+      default: "Some quote about really cool things wow I want to make games for other people so they can enjoy them too"
     },
   },
   data() {
