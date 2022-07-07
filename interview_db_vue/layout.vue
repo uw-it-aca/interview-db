@@ -1,19 +1,30 @@
 <template>
-  <nav>
-    <ul class="nav justify-content-end">
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/students">Students</router-link></li>
-      <li><router-link to="/collections">Collections</router-link></li>
-      <li><router-link to="/about">About Us</router-link></li>
-    </ul>
-  </nav>
-  <main class="p-3">
-    <slot name="title" />
-    <slot name="description" />
-    <slot name="content" />
-  </main>
-  <footer>
-  </footer>
+  <div class="container py-4">
+    <header class="pb-3 mb-4 border-bottom">
+      <nav>
+        <ul class="nav nav-pills justify-content-end">
+          <li class="nav-item">
+            <router-link class="nav-link" active-class="active" aria-current="page" to="/">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Students</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About Us</router-link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <slot name="title" />
+      <slot name="description" />
+      <slot name="content" />
+    </main>
+    <footer class="pt-3 mt-4 text-muted border-top">&copy; 2022</footer>
+  </div>
 </template>
 
 <script>
