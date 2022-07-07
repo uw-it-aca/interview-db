@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <ul>
+    <ul class="nav justify-content-end">
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="/students">Students</router-link></li>
       <li><router-link to="/collections">Collections</router-link></li>
