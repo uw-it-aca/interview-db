@@ -4,11 +4,11 @@
   <layout :page-title="pageTitle">
     <!-- page content -->
     <template #title>
-      <h1>Husky Voices</h1>
+      <h1><i class="bi-alarm"></i> Husky Voices</h1>
     </template>
 
     <template #description>
-      <p>Telling the stories of UW Students<br>through authentic, personal,<br>spontaneous interviews</p>
+      <p class="bg-foo p-3 text-white rounded bg-bar-hover text-warning-hover shadow-sm">Telling the stories of UW Students<br>through authentic, personal,<br>spontaneous interviews</p>
     </template>
   </layout>
 </template>
