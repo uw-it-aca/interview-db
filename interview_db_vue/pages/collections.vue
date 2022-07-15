@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col p-5 mb-4 bg-info">
           <div class="py-5">
-            <h2 class="display-5 fw-bold text-center">Collections</h2>
+            <h2 class="display-5 fw-bold text-center text-uppercase">Collections</h2>
             <h5 class="text-center">
               Collections of stories collected from diverse<br>groups of students
             </h5>

@@ -20,7 +20,7 @@
       </svg>
 
       <h2 class="fw-normal">{{ firstName }}</h2>
-      <h4>{{ year + "," + " " + major }}</h4>
+      <h4 class="text-uppercase">{{ year + "," + " " + major }}</h4>
 
       <p class="mx-4">"{{ quote }}"</p>
         
