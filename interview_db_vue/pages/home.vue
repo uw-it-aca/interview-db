@@ -8,76 +8,77 @@
     </template>
 
     <template #content>
-      <div class="row">
-        <div class="col p-5 mb-4 bg-info">
-          <div class="py-5">
-            <h2 class="display-5 fw-bold text-center">Husky Voices</h2>
-            <h5 class="text-center">
+      <div class="card overflow-hidden border-0 rounded-0 mb-5">
+        <img class="card-img rounded-0" src="../css/quad.png" alt="Image of UW quad">
+        <div class="card-img-overlay d-flex flex-column justify-content-center">
+          <div class="row justify-content-center text-center text-white">
+            <h2 class="display-5 fw-bold mb-4"><em>Husky Voices</em></h2>
+            <h6 class="display-4 fs-4">
               Telling the stories of UW Students<br />through authentic,
               personal,<br />spontaneous interviews
-            </h5>
+            </h6>
           </div>
         </div>
       </div>
 
-      <div class="row justify-content-center mb-4">
-        <div class="col-3"><StudentCard :first-name="'Amanda'"/></div>
-        <div class="col-3"><StudentCard :first-name="'Anna'"/></div>
-        <div class="col-3"><StudentCard :first-name="'Caleb'"/></div>
-      </div>
-
-      <div class="container">
-        <div class="row">
-          <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" alt=""> -->
-          <div class="col bg-info p-5">
-            <div class="row">
-              <div class="col">
-                <h2 class="text-center mb-4">Our Interviews</h2>
-              </div>
-            </div>
-            <div class="row justify-content-center mb-4">
-              <div class="col-3 text-center mb-2">
-                <h4 class="mb-4">01.<br>Meet a stranger</h4>
-                <p>We like to go to the HUB and ByGeorge, or the Quad on a sunny day. Bonus points if the student isn't wearing headphones</p>
-              </div>
-              <div class="col-3 text-center mb-2">
-                <h4 class="mb-4">02.<br>Have a chat</h4>
-                <p>We work from a bank of questions but we make up others on the fly. We want to hear about your experiences at the University.</p>
-              </div>
-              <div class="col-3 text-center mb-2">
-                <h4 class="mb-4">03.<br>Transcribe</h4>
-                <p>We take out the "likes" and "ums" to edit for clarity and readability. We share the final transcripts on the website.</p>
-              </div>
-            </div>
-            <h5 class="text-center"><router-link to="/about">Read more about our process ></router-link></h5>
-          </div>
+      <div class="row justify-content-center mb-5">
+        <div class="col-3">
+          <StudentCard :first-name="'Amanda'" />
+        </div>
+        <div class="col-3">
+          <StudentCard :first-name="'Anna'" />
+        </div>
+        <div class="col-3">
+          <StudentCard :first-name="'Caleb'" />
         </div>
       </div>
 
-      <div class="row justify-content-center mb-4 text-center">
-        <div class="col-4">
+      <div class="row mb-5"><ProcessCard /></div>
+
+      <div class="row justify-content-center mb-5 text-center">
+        <div class="col-4 mx-5">
           <router-link to="/students"></router-link>
-          <div class="h-100 p-3 bg-light">
-            <div class="pb-5">
+          <div class="h-100 p-5 bg-light">
+            <div class="pb-5 display-4 fs-5">
               <p class="mb-1">Filter interviews by</p>
-              <h2>Student</h2>
+              <h2 class="display-4 fs-1">Student</h2>
             </div>
-            <p class="mx-2">
+            <p class="w-75 mx-auto display-4 fs-5">
               Filter student interviews by major, year, or characteristics
             </p>
           </div>
         </div>
-        <div class="col-4">
-          <router-link to="/collections"></router-link>
-          <div class="h-100 p-3 bg-light">
+        <div class="col-4 mx-5">
+          <router-link to="/students"></router-link>
+          <div class="h-100 p-5 bg-light">
             <div class="pb-5">
-              <p class="mb-1">Read a</p>
-              <h2>Collection</h2>
-              </div>
-            <p class="mx-2">
+              <p class="mb-1 display-4 fs-5">Read a</p>
+              <h2 class="display-4 fs-1">Collection</h2>
+            </div>
+            <p class="w-75 mx-auto display-4 fs-5">
               Stories from diverse students with similar themes
             </p>
           </div>
+        </div>
+      </div>
+
+      <div class="row bg-info mb-5">
+        <div class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+              <div class="carousel-item active justify-content-center">
+                <StudentCarousel :first-name="'Kevin'"/>
+              </div>
+            <div class="carousel-item justify-content-center">
+              <StudentCarousel :first-name="'Amanda'"/>
+            </div>
+            <div class="carousel-item justify-content-center">
+              <StudentCarousel />
+            </div>
+          </div>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+          </a>
         </div>
       </div>
 
@@ -88,12 +89,16 @@
 <script>
 import Layout from "../layout.vue";
 import StudentCard from "../components/student-card.vue";
+import ProcessCard from "../components/process.vue";
+import StudentCarousel from "../components/carousel.vue";
 
 export default {
   name: "PagesHome",
   components: {
     layout: Layout,
     StudentCard,
+    ProcessCard,
+    StudentCarousel,
   },
   data() {
     return {

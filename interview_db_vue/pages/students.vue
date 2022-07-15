@@ -18,6 +18,12 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="row justify-content-end"><StudentListing :first-name="'Amanda'"/></div>
+        <div class="row justify-content-end"><StudentListing :first-name="'Anna'"/></div>
+        <div class="row justify-content-end"><StudentListing :first-name="'Caleb'"/></div>
+      </div>
     </template>
   </layout>
 </template>
@@ -25,12 +31,14 @@
 <script>
 import { Card } from "axdd-components";
 import Layout from "../layout.vue";
+import StudentListing from "../components/student-listing.vue"
 
 export default {
   name: "PagesStudents",
   components: {
     layout: Layout,
     "axdd-card": Card,
+    StudentListing,
   },
   data() {
     return {
