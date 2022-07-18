@@ -19,30 +19,25 @@
         </div>
       </div>
 
-      <!-- <div class="row">
-        <div class="row">
-          
-          <div class="col-3 justify-content-center">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-3 justify-content-center">
+          <StudentFilter />
+        </div>
 
-          <div class="col-9 justify-content-end">
-            <StudentListing :first-name="'Amanda'"/>
+        <div class="col-9 justify-content-end px-0">
+          <div class="card-columns justify-content-end">
+            <StudentListing :first-name="'Amanda'" class="justify-content-end" />
           </div>
-        </div> -->
+        </div>
+      </div>
 
-        <div class="row justify-content-end"><StudentListing :first-name="'Anna'"/></div>
-        <div class="row justify-content-end"><StudentListing :first-name="'Caleb'"/></div>
-      <!-- </div> -->
+      <div class="row">
+        <div class="col-3 justify-content-center"></div>
+        <div class="col-9 justify-content-end">
+          <StudentListing :first-name="'Caleb'" />
+          <StudentListing :first-name="'Anna'" />
+        </div>
+      </div>
     </template>
   </layout>
 </template>
@@ -50,7 +45,8 @@
 <script>
 import { Card } from "axdd-components";
 import Layout from "../layout.vue";
-import StudentListing from "../components/student-listing.vue"
+import StudentListing from "../components/student/student-listing.vue";
+import StudentFilter from "../components/student-filter.vue";
 
 export default {
   name: "PagesStudents",
@@ -58,6 +54,7 @@ export default {
     layout: Layout,
     "axdd-card": Card,
     StudentListing,
+    StudentFilter,
   },
   data() {
     return {
