@@ -97,7 +97,7 @@
 
 <script>
 import Layout from "../layout.vue";
-import StudentCard from "../components/student-card.vue";
+import StudentCard from "../components/student/student-card.vue";
 import ProcessCard from "../components/process.vue";
 import StudentCarousel from "../components/carousel.vue";
 

@@ -3,11 +3,11 @@
 // and full student interviews page
 
 <template>
-  <div class="card w-50 mb-5 border-0 rounded-0">
+  <div class="card w-50 mb-5 rounded-0">
     <div class="card-body">
       <div class="row g-0">
         <div class="col-2">
-          <img src="../css/quad.png"
+          <img src="../../css/quad.png"
           class="img-fluid"
           style="border-radius:50%; height:70px; width:70px; object-fit:cover;">
         </div>
