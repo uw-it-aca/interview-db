@@ -3,19 +3,21 @@
 // and full student interviews page
 
 <template>
-  <div class="card w-50">
-    <div class="row">
-      <div class="col-1">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" class="img-fluid">
-      </div>
-      <div class="col-5">
-        <div class="card-body">
-          <h2 class="fw-normal">{{ firstName }}</h2>
-          <h4 class="text-uppercase">{{ year + "," + " " + major }}</h4>
-
-          <p>"{{ quote }}"</p>
-        
-          <p><a class="btn btn-secondary" href="#">Read full story ></a></p>
+  <div class="card w-50 mb-5 border-0 rounded-0">
+    <div class="card-body">
+      <div class="row g-0">
+        <div class="col-2">
+          <img src="../css/quad.png"
+          class="img-fluid"
+          style="border-radius:50%; height:70px; width:70px; object-fit:cover;">
+        </div>
+        <div class="col-9">
+            <div class="mb-3">
+              <h2 class="card-title display-3 fs-3 mb-1">{{ firstName }}</h2>
+              <p class="card-subtitle text-uppercase display-6 fs-6 text-info">{{ major + "," + " " + year }}</p>
+            </div>
+            <p class="card-text display-4 fs-5">"{{ quote }}"</p>
+            <p class="card-text mb-2"><router-link to="/">Read full interview ></router-link></p>
         </div>
       </div>
     </div>
