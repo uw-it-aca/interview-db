@@ -9,10 +9,11 @@
 
     <template #content>
       <div class="row">
-        <div class="col p-5 mb-4 bg-info">
+        <div class="col p-5 bg-info">
           <div class="py-5">
-            <h2 class="display-5 fw-bold text-center">About Us</h2>
-            <h5 class="text-center">
+            <h2 class="display-3 fs-2 text-center mb-4">Real Students, Real Stories</h2>
+            <h5 class="text-center display-4 fs-4">
+              
             </h5>
           </div>
         </div>

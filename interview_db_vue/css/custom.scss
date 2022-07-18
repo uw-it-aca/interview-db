@@ -9,6 +9,10 @@ $custom-colors: (
   "bar": lime,
 );
 
+li a {
+  text-decoration: none;
+}
+
 // bootstrap theme + utility merging
 $theme-colors: map-merge($theme-colors, $custom-colors);
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");

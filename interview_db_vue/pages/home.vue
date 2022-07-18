@@ -33,54 +33,63 @@
         </div>
       </div>
 
-      <div class="row mb-5"><ProcessCard /></div>
+      <div class="row mb-5">
+        <ProcessCard />
+      </div>
 
       <div class="row justify-content-center mb-5 text-center">
         <div class="col-4 mx-5">
-          <router-link to="/students"></router-link>
-          <div class="h-100 p-5 bg-light">
-            <div class="pb-5 display-4 fs-5">
-              <p class="mb-1">Filter interviews by</p>
-              <h2 class="display-4 fs-1">Student</h2>
+          <router-link to="/students">
+            <div class="h-100 p-5 bg-light">
+              <div class="pb-5 display-4 fs-5">
+                <p class="mb-1">Filter interviews by</p>
+                <h2 class="display-4 fs-1">Student</h2>
+              </div>
+              <p class="w-75 mx-auto display-4 fs-5">
+                Filter student interviews by major, year, or characteristics
+              </p>
             </div>
-            <p class="w-75 mx-auto display-4 fs-5">
-              Filter student interviews by major, year, or characteristics
-            </p>
-          </div>
+          </router-link>
         </div>
         <div class="col-4 mx-5">
-          <router-link to="/students"></router-link>
-          <div class="h-100 p-5 bg-light">
-            <div class="pb-5">
-              <p class="mb-1 display-4 fs-5">Read a</p>
-              <h2 class="display-4 fs-1">Collection</h2>
+          <router-link to="/collections" tag="div">
+            <div class="h-100 p-5 bg-light">
+              <div class="pb-5">
+                <p class="mb-1 display-4 fs-5">Read a</p>
+                <h2 class="display-4 fs-1">Collection</h2>
+              </div>
+              <p class="w-75 mx-auto display-4 fs-5">
+                Stories from diverse students with similar themes
+              </p>
             </div>
-            <p class="w-75 mx-auto display-4 fs-5">
-              Stories from diverse students with similar themes
-            </p>
-          </div>
+          </router-link>
         </div>
       </div>
 
-      <div class="row bg-info mb-5">
-        <div class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-              <div class="carousel-item active justify-content-center">
-                <StudentCarousel :first-name="'Kevin'"/>
-              </div>
-            <div class="carousel-item justify-content-center">
-              <StudentCarousel :first-name="'Amanda'"/>
-            </div>
-            <div class="carousel-item justify-content-center">
-              <StudentCarousel />
-            </div>
+
+      
+
+      <!-- <div class="row mb-5 justify-content-center mx-auto text-center"> </div> -->
+      <div class="carousel slide justify-content-center mx-auto text-center" data-ride="carousel">
+        <div class="carousel-inner justify-content-center mx-auto">
+          <div class="carousel-item active">
+            <StudentCarousel :first-name="'Kevin'" />
           </div>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only"></span>
-          </a>
+          <div class="carousel-item">
+            <StudentCarousel :first-name="'Amanda'" />
+          </div>
+          <div class="carousel-item">
+            <StudentCarousel />
+          </div>
         </div>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only"></span>
+        </a>
       </div>
+
+
+
 
     </template>
   </layout>
