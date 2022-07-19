@@ -41,7 +41,7 @@
         <div class="col-4 mx-5">
           <router-link to="/students">
             <div class="h-100 p-5 bg-light">
-              <div class="pb-5 display-4 fs-5">
+              <div class="py-5 display-4 fs-5">
                 <p class="mb-1">Filter interviews by</p>
                 <h2 class="display-4 fs-1">Student</h2>
               </div>
@@ -54,7 +54,7 @@
         <div class="col-4 mx-5">
           <router-link to="/collections" tag="div">
             <div class="h-100 p-5 bg-light">
-              <div class="pb-5">
+              <div class="py-5">
                 <p class="mb-1 display-4 fs-5">Read a</p>
                 <h2 class="display-4 fs-1">Collection</h2>
               </div>
