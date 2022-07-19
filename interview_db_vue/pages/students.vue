@@ -8,9 +8,9 @@
     </template>
 
     <template #content>
-      <div class="row mb-4">
-        <div class="col p-5 bg-info">
-          <div class="py-5">
+      <div class="row mb-5">
+        <div class="col p-5" style="background-color: #172643">
+          <div class="text-white py-5">
             <h2 class="display-3 text-center mb-4">Student Interviews</h2>
             <h5 class="text-center display-4 fs-4">
               Sort interviews by student<br>characteristics
@@ -24,19 +24,15 @@
           <StudentFilter />
         </div>
 
-        <div class="col-9 justify-content-end px-0">
+        <div class="col-9 justify-content-end">
           <div class="card-columns justify-content-end">
             <StudentListing :first-name="'Amanda'" class="justify-content-end" />
+            <StudentListing :first-name="'Caleb'" />
+            <StudentListing :first-name="'Anna'" />
           </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-3 justify-content-center"></div>
-        <div class="col-9 justify-content-end">
-          <StudentListing :first-name="'Caleb'" />
-          <StudentListing :first-name="'Anna'" />
-        </div>
+        <StudentListing :first-name="'Anna'" />
       </div>
     </template>
   </layout>

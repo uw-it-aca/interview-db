@@ -13,10 +13,10 @@
         </div>
         <div class="col-9">
             <div class="mb-3">
-              <h2 class="card-title display-3 fs-3 mb-1">{{ firstName }}</h2>
+              <h2 class="card-title display-3 fs-2 mb-1">{{ firstName }}</h2>
               <p class="card-subtitle text-uppercase display-6 fs-6 text-info">{{ major + "," + " " + year }}</p>
             </div>
-            <p class="card-text display-4 fs-5">"{{ quote }}"</p>
+            <p class="card-text display-4 fs-4">"{{ quote }}"</p>
             <p class="card-text mb-2"><router-link to="/">Read full interview ></router-link></p>
         </div>
       </div>
