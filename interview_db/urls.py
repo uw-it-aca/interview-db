@@ -25,21 +25,27 @@ if settings.DEBUG:
             TemplateView.as_view(template_name="404.html"),
             name="404_response",
         ),
+        re_path(
+            r"^403$",
+            TemplateView.as_view(template_name="403.html"),
+            name="403_response",
+        ),
     ]
 
 urlpatterns += [
+    re_path(r"^(students|collections|about)$", DefaultPageView.as_view()),
+    re_path(r"^collections/topic/$", DefaultPageView.as_view()),
+    re_path(r"^students/interview/$", DefaultPageView.as_view()),
     re_path(
-        r"interviews.html", views.InterviewsView.as_view(), name="interviews"
-    ),
-    re_path(r"people.html", views.PeopleView.as_view(), name="people"),
-    re_path(r"topics.html", views.TopicsView.as_view(), name="topics"),
-    re_path(
-        r"^interview/(?P<interview_id>\d+)/$",
+        r"^students/interview/(?P<interview_id>\d+)/$",
         views.interview,
         name="interview",
     ),
-    re_path(r"^topic/(?P<code_id>\d+)/$", views.code, name="code"),
-    re_path(r"^(students|collections|about)$", DefaultPageView.as_view()),
+    re_path(
+        r"^collections/topic/(?P<topic_id>\d+)/$",
+        views.interview,
+        name="interview",
+    ),
     re_path(
         r"^$", TemplateView.as_view(template_name="vue.html"), name="home"
     ),

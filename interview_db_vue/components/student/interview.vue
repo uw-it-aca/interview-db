@@ -1,4 +1,4 @@
-// student-interview.vue
+// interview.vue
 // full student interview page
 
 <template>
@@ -10,8 +10,9 @@
 
 <script>
 export default {
-  name: "StudentInterview",
-  firstName: {
+  name: "Interview",
+  props: {
+    firstName: {
       type: String,
       required: true,
       default: "Joe",
@@ -31,6 +32,7 @@ export default {
       required: true,
       default: "Some quote about really cool things wow I want to make games for other people so they can enjoy them too"
     },
+  },
   data() {
     return {};
   },
