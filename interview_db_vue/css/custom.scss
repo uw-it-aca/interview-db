@@ -1,17 +1,35 @@
 // import entire bootstrap library
 
+$light: #ECECEC;
+$info: #0AAAC9;
+$carousel-control-color: $light;
+$carousel-control-width: 25%;
+
 @use "sass:map";
 @import "node_modules/bootstrap/scss/bootstrap";
 
 // app custom colors
 $custom-colors: (
-  "foo": red,
-  "bar": lime,
+  "grey": #ECECEC,
 );
 
 li a {
   text-decoration: none;
 }
+
+a.active-link {
+  color: black;
+  text-decoration: none;
+}
+
+a.nav-link {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: auto 1em auto;
+  font-size: larger;
+}
+
 
 // bootstrap theme + utility merging
 $theme-colors: map-merge($theme-colors, $custom-colors);
@@ -56,9 +74,7 @@ $utilities: (
 
 // additional non-bootstrap styles
 
-.blah {
-  color: purple;
-}
+
 
 // MARK: import bootstrap and bootstrap-icons last
 @import "bootstrap/scss/bootstrap";

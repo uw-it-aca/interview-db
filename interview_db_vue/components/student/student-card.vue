@@ -1,18 +1,20 @@
 // student-card.vue
-// triplet of student interview cards to show on home page
+// triplet of student interview cards
 
 <template>
-  <div>
-    <img src="../../css/blossom.png" class="img-fluid mx-auto justify-content-center"
-      style="border-radius:50%; height:95px; width:95px; object-fit:cover; position:relative; z-index: -1;">
-    <div class="card border-0 rounded-0 bg-light" style="position:relative;bottom:50px;">
-      <div class="text-center pt-5">
-        <h2 class="fw-normal pt-5">{{ firstName }}</h2>
-        <h4 class="w-75 text-uppercase display-4 fs-6 text-info mx-auto">{{ year + "," + " " + major }}</h4>
+  <div class="row justify-content-center">
+      <img class="img-fluid p-0" 
+      src="../../css/blossom.png"
+      style="height: 110px; width: 110px; object-fit:cover; border-radius:50%">
+    <div class="card border-0 rounded-0 bg-light" style="position: relative; z-index: -1; bottom: 50px; width: 300px">
+      <div class="card-body text-center pt-5">
+        <h2 class="card-title fw-normal pt-3">{{ firstName }}</h2>
+        <h4 class="card-subtitle w-75 text-uppercase display-4 fs-6 text-info mx-auto mb-4">{{ year + "," + " " + major }}</h4>
 
-        <p class="mx-4">"{{ quote }}"</p>
-
-        <p><a class="btn btn-secondary" href="#">Read full story ></a></p>
+        <p class="card-text mb-4">"{{ quote }}"</p>
+        <p>
+          <router-link to="/about" class="active-link" style="color: #5F5F5F">Read full story ></router-link>
+        </p>
       </div>
     </div>
   </div>

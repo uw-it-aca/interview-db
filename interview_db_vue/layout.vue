@@ -1,6 +1,6 @@
 <template>
   <div class="container py-4">
-    <header class="pb-3 mb-4">
+    <header class="pb-3">
       <nav>
         <ul class="nav justify-content-end">
           <li class="nav-item">

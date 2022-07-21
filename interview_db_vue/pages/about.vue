@@ -8,15 +8,13 @@
     </template>
 
     <template #content>
-      <div class="row h-75">
-        <div class="col pb-0">
-          <img class="card-img rounded-0" src="../css/doorway.png" alt="Image of UW quad">
-          <div class="w-75 h-50 py-5 bg-light mx-auto px-5" style="position:relative;bottom:300px;">
-            <div class="text-center px-5">
-              <h2 class="display-6 my-5 py-3">Real Students, Real Stories</h2>
-              <h5 class="display-6 fs-3 px-5">We collect the true stories of UW students and<br/>share them with others on campus</h5>
-            </div>
-          </div>
+      <div class="row mb-0">
+        <img class="rounded-0" src="../css/doorway.png" alt="Image of UW quad">
+      </div>
+      <div class="w-75 h-75 py-5 bg-light mx-auto px-5 mb-0" style="position:relative;bottom:300px;">
+        <div class="text-center p-5">
+          <h2 class="display-6 my-5 py-3">Real Students, Real Stories</h2>
+          <h5 class="display-6 fs-3 px-5">We collect the true stories of UW students and<br/>share them with others on campus</h5>
         </div>
       </div>
       <div class="w-75 bg-light mx-auto px-5 mb-5" style="height:700px">
