@@ -26,7 +26,7 @@
             </div>
           </div>
           <h5 class="display-4 fs-4 text-center">
-            <router-link to="/about">Read more about our process ></router-link>
+            <router-link to="/about" class="active-link">Read more about our process ></router-link>
           </h5>
         </div>
       </div>

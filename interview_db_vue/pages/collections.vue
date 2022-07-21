@@ -24,15 +24,19 @@
         <div class="row g-0">
           <div class="col-7">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
+              src="../css/major.png"
               class="w-100 h-100 img-fluid"
               style="object-fit:cover">
           </div>
           <div class="col-5 p-5 justify-content-center text-white" style="background-color: #172643">
             <div class="text-center mx-auto">
-              <h5 class="card-title mb-4 pt-5 display-4 fs-1">Collection Topic</h5>
+              <h5 class="card-title mb-4 pt-5 display-6">Collection Topic</h5>
               <p class="card-text w-75 mb-4 mx-auto display-4 fs-4">Some question about the collection topic</p>
-              <p class="card-text display-4 fs-4"><router-link to="/collections/topic">Read Collection ></router-link></p>
+              <p class="card-text display-4 fs-4">
+                <router-link to="/collections/topic" class="active-link" style="color: inherit">
+                  Read Collection >
+                </router-link>
+              </p>
             </div>
           </div>
         </div>
@@ -43,9 +47,13 @@
         <div class="row g-0">
           <div class="col-5 p-5 justify-content-center text-white" style="background-color: #BC7326">
             <div class="text-center mx-auto">
-              <h5 class="card-title mb-4 pt-5 display-4 fs-1">Collection Topic</h5>
+              <h5 class="card-title mb-4 pt-5 display-6">Collection Topic</h5>
               <p class="card-text w-75 mb-4 mx-auto display-4 fs-4">Some question about the collection topic</p>
-              <p class="card-text display-4 fs-4"><router-link to="/">Read Collection ></router-link></p>
+              <p class="card-text display-4 fs-4">
+                <router-link to="/collections/topic" class="active-link" style="color: inherit">
+                  Read Collection >
+                </router-link>
+              </p>
             </div>
           </div>
           <div class="col-7">

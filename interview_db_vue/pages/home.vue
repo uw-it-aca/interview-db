@@ -21,14 +21,14 @@
         </div>
       </div>
 
-      <div class="row justify-content-center mb-5">
-        <div class="col-3">
+      <div class="row justify-content-center mx-auto">
+        <div class="col-3 mx-2">
           <StudentCard :first-name="'Amanda'" />
         </div>
-        <div class="col-3">
+        <div class="col-3 mx-2">
           <StudentCard :first-name="'Anna'" />
         </div>
-        <div class="col-3">
+        <div class="col-3 mx-2">
           <StudentCard :first-name="'Caleb'" />
         </div>
       </div>
@@ -39,7 +39,7 @@
 
       <div class="row justify-content-center mb-5 text-center">
         <div class="col-4 mx-5">
-          <router-link to="/students">
+          <router-link to="/students" class="active-link">
             <div class="h-100 p-5 bg-light">
               <div class="py-5 display-4 fs-5">
                 <p class="mb-1">Filter interviews by</p>
@@ -52,7 +52,7 @@
           </router-link>
         </div>
         <div class="col-4 mx-5">
-          <router-link to="/collections" tag="div">
+          <router-link to="/collections" tag="div" class="active-link">
             <div class="h-100 p-5 bg-light">
               <div class="py-5">
                 <p class="mb-1 display-4 fs-5">Read a</p>
@@ -66,30 +66,26 @@
         </div>
       </div>
 
-
-      
-
-      <!-- <div class="row mb-5 justify-content-center mx-auto text-center"> </div> -->
-      <div class="carousel slide justify-content-center mx-auto text-center" data-ride="carousel">
-        <div class="carousel-inner justify-content-center mx-auto">
-          <div class="carousel-item active">
-            <StudentCarousel :first-name="'Kevin'" />
+      <div class="row justify-content-center">
+        <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto" data-bs-ride="carousel">
+          <div class="carousel-inner justify-content-cente mx-auto">
+            <div class="carousel-item active justify-content-center">
+              <StudentCarousel :first-name="'Kevin'" class="d-block justify-content-center mx-auto" />
+            </div>
+            <div class="carousel-item">
+              <StudentCarousel :first-name="'Kevin'" />
+            </div>
+            <div class="carousel-item">
+              <StudentCarousel :first-name="'Kevin'" />
+            </div>
           </div>
-          <div class="carousel-item">
-            <StudentCarousel :first-name="'Amanda'" />
-          </div>
-          <div class="carousel-item">
-            <StudentCarousel />
-          </div>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only"></span>
-        </a>
       </div>
-
-
-
 
     </template>
   </layout>
