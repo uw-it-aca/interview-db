@@ -1,4 +1,4 @@
-// collection-page.vue
+// topic.vue
 // shows a few student stories for one collection topic
 
 <template>
@@ -9,11 +9,11 @@
     </template>
 
      <template #content>
-      <div class="row">
-        <div class="col p-5 mb-4 bg-info">
-          <div class="py-5">
-            <h2 class="display-5 fw-bold text-center text-uppercase">Collection Topic</h2>
-            <h5 class="text-center">
+      <div class="row mb-5">
+        <div class="col p-5" style="background-color: #172643; height:330px">
+          <div class="text-white py-5">
+            <h2 class="display-3 text-center mb-4">{{ collectionTitle }}</h2>
+            <h5 class="text-center display-4 fs-4">
               {{ collectionQuestion }}
             </h5>
           </div>
@@ -25,22 +25,24 @@
 
 <script>
 import Layout from "../layout.vue";
-import StudentStory from "../student-story.vue";
+
 
 export default {
-  name: "PagesCollectionPage",
+  name: "Topic",
   components: {
     layout: Layout,
-    "student-story": StudentStory,
+
   },
   props: {
     collectionTitle: {
       type: String,
       required: true,
+      default: "Choosing a Major",
     },
     collectionQuestion: {
       type: String,
       required: true,
+      default: "How did you find your major and why did you choose it?",
     }
   },
   data() {
