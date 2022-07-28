@@ -28,12 +28,6 @@ const routes = [
     pathToRegexpOptions: { strict: true },
   },
   {
-    path: "/collections/topic/:id",
-    name: "Topic",
-    component: Topic,
-    pathToRegexpOptions: { strict: true },
-  },
-  {
     path: "/about",
     name: "About",
     component: About,

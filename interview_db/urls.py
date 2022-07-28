@@ -34,18 +34,18 @@ if settings.DEBUG:
 
 urlpatterns += [
     re_path(r"^(students|collections|about)$", DefaultPageView.as_view()),
-    re_path(r"^collections/topic/$", DefaultPageView.as_view()),
-    re_path(r"^students/interview/$", DefaultPageView.as_view()),
-    re_path(
-        r"^students/interview/(?P<interview_id>\d+)/$",
-        views.interview,
-        name="interview",
-    ),
-    re_path(
-        r"^collections/topic/(?P<topic_id>\d+)/$",
-        views.interview,
-        name="interview",
-    ),
+    #re_path(r"^collections/topic/$", DefaultPageView.as_view()),
+    #re_path(r"^students/interview/$", DefaultPageView.as_view()),
+    #re_path(
+    #    r"^students/interview/(?P<interview_id>\d+)/$",
+    #    views.interview,
+    #    name="interview",
+    #),
+    #re_path(
+    #    r"^collections/topic/(?P<topic_id>\d+)/$",
+    #    views.interview,
+    #    name="interview",
+    #),
     re_path(
         r"^$", TemplateView.as_view(template_name="vue.html"), name="home"
     ),

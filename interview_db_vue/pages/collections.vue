@@ -89,7 +89,7 @@ export default {
     };
   },
   mounted() {
-    this.collections = JSON.parse(document.getElementById('code_list').textContent)
+    //this.collections = JSON.parse(document.getElementById('code_list').textContent)
   },
   methods: {},
 };
