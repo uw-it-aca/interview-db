@@ -56,13 +56,13 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
               <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Freshman
+                Computer Science
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
               <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Sophomore
+                Communications
               </label>
             </div>
             <div class="form-check">
