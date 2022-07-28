@@ -8,38 +8,33 @@
     </template>
 
     <template #content>
-      <div class="row mb-5">
-        <div class="col p-5" style="background-color: #172643; height: 330px">
-          <div class="text-white py-5">
-            <h2 class="display-3 text-center mb-4">Student Interviews</h2>
-            <h5 class="text-center display-4 fs-4">
-              Sort interviews by student<br />characteristics
-            </h5>
+      <div v-if="studentInterview">
+        <Interview />
+        <p>student interview #: {{ studentInterview }}</p>
+      </div>
+      
+      <div v-else>
+        <div class="row mb-5">
+          <div class="col p-5" style="background-color: #172643; height: 330px">
+            <div class="text-white py-5">
+              <h2 class="display-3 text-center mb-4">Student Interviews</h2>
+              <h5 class="text-center display-4 fs-4">
+                Sort interviews by student<br />characteristics
+              </h5>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="col-3 justify-content-center">
+            <StudentFilter />
+          </div>
 
-      <div v-if="studentInterview">
-        <p>student interview #: {{ studentInterview }}</p>
-        <p>
-          student interview page... Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. Ullam laboriosam harum illo provident omnis
-          praesentium tempore accusantium incidunt, aperiam, unde cum laborum
-          labore qui similique quisquam culpa animi maxime minima?
-        </p>
-        <p><router-link to="/students">go back to students</router-link></p>
-      </div>
-
-      <div v-else class="row">
-        <div class="col-3 justify-content-center">
-          <StudentFilter />
-        </div>
-
-        <div class="col-9 justify-content-end">
-          <div class="card-columns justify-content-end">
-            <StudentListing :first-name="'Amanda'" />
-            <StudentListing :first-name="'Caleb'" />
-            <StudentListing :first-name="'Anna'" />
+          <div class="col-9 justify-content-end">
+            <div class="card-columns justify-content-end">
+              <StudentListing :first-name="'Amanda'" />
+              <StudentListing :first-name="'Caleb'" />
+              <StudentListing :first-name="'Anna'" />
+            </div>
           </div>
         </div>
       </div>
@@ -52,14 +47,15 @@ import { Card } from "axdd-components";
 import Layout from "../layout.vue";
 import StudentListing from "../components/student/student-listing.vue";
 import StudentFilter from "../components/student-filter.vue";
+import Interview from "../components/student/interview.vue";
 
 export default {
   name: "PagesStudents",
   components: {
     layout: Layout,
-    "axdd-card": Card,
     StudentListing,
     StudentFilter,
+    Interview,
   },
   data() {
     return {

@@ -2,25 +2,16 @@
 // shows a few student stories for one collection topic
 
 <template>
-  <layout :page-title="pageTitle">
-    <!-- page content -->
-    <template #title>
-      <h1 class="visually-hidden">{{ collectionTitle }}</h1>
-    </template>
-
-     <template #content>
-      <div class="row mb-5">
-        <div class="col p-5" style="background-color: #172643; height:330px">
-          <div class="text-white py-5">
-            <h2 class="display-3 text-center mb-4">{{ collectionTitle }}</h2>
-            <h5 class="text-center display-4 fs-4">
-              {{ collectionQuestion }}
-            </h5>
-          </div>
+    <div class="row mb-5">
+      <div class="col p-5" style="background-color: #172643; height:330px">
+        <div class="text-white py-5">
+          <h2 class="display-3 text-center mb-4">{{ collectionTitle }}</h2>
+          <h5 class="text-center display-4 fs-4">
+            {{ collectionQuestion }}
+          </h5>
         </div>
       </div>
-    </template>
-  </layout>
+    </div>
 </template>
 
 <script>
