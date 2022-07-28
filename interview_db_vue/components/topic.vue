@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      pageTitle: collectionTitle,
+      pageTitle: "Topic",
     };
   },
   methods: {},

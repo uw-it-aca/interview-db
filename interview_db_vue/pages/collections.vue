@@ -33,7 +33,7 @@
               <h5 class="card-title mb-4 pt-5 display-6">Collection Topic</h5>
               <p class="card-text w-75 mb-4 mx-auto display-4 fs-4">Some question about the collection topic</p>
               <p class="card-text display-4 fs-4">
-                <router-link to="/collections/topic" class="active-link" style="color: inherit">
+                <router-link to="/collections/topic/$id" class="active-link" style="color: inherit">
                   Read Collection >
                 </router-link>
               </p>
@@ -70,21 +70,26 @@
 </template>
 
 <script>
-import { Card, CardHeading, CardAction } from "axdd-components";
 import Layout from "../layout.vue";
 
 export default {
   name: "PagesCollections",
   components: {
     layout: Layout,
-    "axdd-card": Card,
-    "axdd-card-heading": CardHeading,
-    "axdd-card-action": CardAction,
+  },
+  props: {
+    collections: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
       pageTitle: "Collections",
     };
+  },
+  mounted() {
+    this.collections = JSON.parse(document.getElementById('code_list').textContent)
   },
   methods: {},
 };

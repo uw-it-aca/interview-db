@@ -1,0 +1,9 @@
+{% extends 'vue.html' %}
+
+{% block content %}
+{{ code_list |json_script:"code_list" }}
+
+<div id="app">
+    <collections></collections>
+</div>  
+{% end block %}

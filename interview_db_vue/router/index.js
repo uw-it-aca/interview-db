@@ -20,27 +20,15 @@ const routes = [
     name: "Collections",
     component: Collections,
     pathToRegexpOptions: { strict: true },
-    children: [
-      {
-        path: "/topic",
-        component: Topic,
-      },
-    ],
   },
   {
     path: "/students",
     name: "Students",
     component: Students,
     pathToRegexpOptions: { strict: true },
-    // children: [
-    //   {
-    //     path: "/interview",
-    //     component: Interview,
-    //   },
-    // ],
   },
   {
-    path: "/collections/topic",
+    path: "/collections/topic/:id",
     name: "Topic",
     component: Topic,
     pathToRegexpOptions: { strict: true },

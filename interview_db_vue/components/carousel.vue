@@ -2,20 +2,22 @@
 // carousel cards for home page
 
 <template>
-  <div>
-    <div class="card w-75 overflow-hidden border-0 rounded-0 mx-auto">
-      <div class="row g-0">
-        <div class="col-4">
-          <img src="../css/quad.png"
-          class="img-fluid embed-responsive-item" style="height:100%; width:100%; object-fit:cover;">
-        </div>
-        <div class="col-5 bg-light p-5">
-          <div class="card-body text-center">
-            <div class="mb-4">
-              <h2 class="display-4 fs-3 mb-1">{{ firstName }}</h2>
-              <h5 class="text-uppercase display-4 fs-6 text-info mx-auto">{{ major + "," + " " + year }}</h5>
+  <div class="row justify-content-center">
+    <div class="col-9 mx-auto">
+      <div class="card overflow-hidden border-0 rounded-0 mx-auto">
+        <div class="row g-0">
+          <div class="col">
+            <img src="../css/quad.png" class="img-fluid embed-responsive-item"
+              style="height:100%; width:100%; object-fit:cover;">
+          </div>
+          <div class="col bg-light p-5">
+            <div class="card-body text-center">
+              <div class="mb-4">
+                <h2 class="display-4 fs-3 mb-1">{{ firstName }}</h2>
+                <h5 class="text-uppercase display-4 fs-6 text-info mx-auto">{{ major + "," + " " + year }}</h5>
+              </div>
+              <p><em>"{{ quote }}"</em></p>
             </div>
-            <p><em>"{{ quote }}"</em></p>
           </div>
         </div>
       </div>

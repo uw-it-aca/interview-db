@@ -23,7 +23,9 @@
       <slot name="description" />
       <slot name="content" />
     </main>
-    <footer class="pt-3 mt-4 text-muted border-top">&copy; 2022</footer>
+    <footer class="p-5 my-5 text-muted bg-light justify-content-end">
+      &copy; 2022
+    </footer>
   </div>
 </template>
 

@@ -13,7 +13,7 @@
 
         <p class="card-text mb-4">"{{ quote }}"</p>
         <p>
-          <router-link to="/about" class="active-link" style="color: #5F5F5F">Read full story ></router-link>
+          <router-link to="/students/interview/" class="active-link" style="color: #5F5F5F">Read full story ></router-link>
         </p>
       </div>
     </div>
@@ -42,7 +42,7 @@ export default {
     quote: {
       type: String,
       required: true,
-      default: "Some quote about really cool things wow I want to make games for other people so they can enjoy them too"
+      default: "Some quote about really cool things"
     },
   },
   data() {
