@@ -47,6 +47,6 @@ urlpatterns += [
     #    name="interview",
     #),
     re_path(
-        r"^$", TemplateView.as_view(template_name="vue.html"), name="home"
+        r"^.*$", TemplateView.as_view(template_name="vue.html"), name="home"
     ),
 ]
