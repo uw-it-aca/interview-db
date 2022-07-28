@@ -16,13 +16,13 @@ const routes = [
     component: Home,
   },
   {
-    path: "/collections",
+    path: "/collections/:topic?",
     name: "Collections",
     component: Collections,
     pathToRegexpOptions: { strict: true },
   },
   {
-    path: "/students",
+    path: "/students/:id?",
     name: "Students",
     component: Students,
     pathToRegexpOptions: { strict: true },
