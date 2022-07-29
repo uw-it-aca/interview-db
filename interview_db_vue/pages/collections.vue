@@ -9,9 +9,9 @@
 
     <template #content>
 
-      <div v-if="collectionsTopic">
+      <div v-if="collectionsId">
         <Topic />
-        {{ collectionsTopic }}
+        {{ collectionsId }}
       </div>
       
       <div v-else>
@@ -42,7 +42,7 @@
                   Some question about the collection topic
                 </p>
                 <p class="card-text display-4 fs-4">
-                  <router-link to="/collections/topic1" class="active-link" style="color: inherit">
+                  <router-link to="/collections/1" class="active-link" style="color: inherit">
                     Read Collection >
                   </router-link>
                 </p>
@@ -61,7 +61,7 @@
                   Some question about the collection topic
                 </p>
                 <p class="card-text display-4 fs-4">
-                  <router-link to="/collections/topic2" class="active-link" style="color: inherit">
+                  <router-link to="/collections/2" class="active-link" style="color: inherit">
                     Read Collection >
                   </router-link>
                 </p>
@@ -101,8 +101,8 @@ export default {
     };
   },
   computed: {
-    collectionsTopic() {
-      return this.$route.params.topic;
+    collectionsId() {
+      return this.$route.params.id;
     },
   },
   mounted() {
