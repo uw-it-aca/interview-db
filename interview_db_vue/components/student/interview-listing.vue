@@ -1,37 +1,31 @@
-// student-listing.vue // listings to be shown on Collection Page on one topic
-// and full student interviews page
+// interview-listing.vue 
+// listings to be shown on full student interviews page
 
 <template>
-  <div class="card w-50 mb-5 border-0 rounded-0">
+  <div class="card mb-5 border-0 rounded-0">
     <div class="card-body">
       <div class="row g-0">
         <div class="col-2">
-          <img
-            src="../../css/quad.png"
-            class="img-fluid"
-            style="
+          <img src="../../css/quad.png" class="img-fluid mx-auto d-block" style="
               border-radius: 50%;
-              height: 70px;
-              width: 70px;
+              height: 75px;
+              width: 75px;
               object-fit: cover;
-            "
-          />
+            " />
         </div>
 
-        <!-- add or remove border as needed -->
-        <div class="col-9 border-start border-dark border-4">
+        <div class="col-9 pe-5">
           <div class="mb-3 px-3">
-            <h2 class="card-title display-3 fs-2 mb-1">{{ firstName }}</h2>
-            <p class="card-subtitle text-uppercase display-6 fs-6 text-info">
+            <h2 class="card-title display-6 mb-2">{{ firstName }}</h2>
+            <p class="card-subtitle text-uppercase display-6 fs-5 text-info">
               {{ major + "," + " " + year }}
             </p>
           </div>
           <div class="mb-3 px-3">
-            <p class="card-text display-4 fs-4">"{{ quote }}"</p>
-            <p class="card-text mb-2">
-              <router-link to="/students/1234" class="active-link" style="color: #5f5f5f"
-                >Read full interview ></router-link
-              >
+            <p class="card-text display-6 fs-3">"{{ quote }}"</p>
+            <p class="card-text display-6 fs-5 mb-2">
+              <router-link to="/students/1234" class="active-link" style="color: #5f5f5f">Read full interview >
+              </router-link>
             </p>
           </div>
         </div>

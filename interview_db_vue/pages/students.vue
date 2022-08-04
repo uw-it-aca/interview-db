@@ -2,17 +2,29 @@
 
 <template>
   <layout :page-title="pageTitle">
-    <!-- page content -->
     <template #title>
       <h1 class="visually-hidden">{{ pageTitle }}</h1>
     </template>
 
     <template #content>
       <div v-if="studentInterview">
-        <Interview />
+        <div class="mt-4">
+          <Interview />
+        </div>
         <p>student interview #: {{ studentInterview }}</p>
+        <div class="row justify-content-center mx-auto">
+          <div class="col-3 mx-2">
+            <StudentCard :first-name="'Amanda'" />
+          </div>
+          <div class="col-3 mx-2">
+            <StudentCard :first-name="'Anna'" />
+          </div>
+          <div class="col-3 mx-2">
+            <StudentCard :first-name="'Caleb'" />
+          </div>
+        </div>
       </div>
-      
+
       <div v-else>
         <div class="row mb-5">
           <div class="col p-5" style="background-color: #172643; height: 330px">
@@ -43,9 +55,8 @@
 </template>
 
 <script>
-import { Card } from "axdd-components";
 import Layout from "../layout.vue";
-import StudentListing from "../components/student/student-listing.vue";
+import StudentListing from "../components/student/interview-listing.vue";
 import StudentFilter from "../components/student-filter.vue";
 import Interview from "../components/student/interview.vue";
 

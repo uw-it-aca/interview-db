@@ -17,7 +17,7 @@
           <h5 class="display-6 fs-3 px-5">We collect the true stories of UW students and<br/>share them with others on campus</h5>
         </div>
       </div>
-      <div class="w-75 bg-light mx-auto px-5 mb-5" style="height:700px">
+      <div class="w-75 bg-light mx-auto px-5 mb-5">
         <div class="text-center px-5 py-5">
           <h2 class="display-6 my-5 py-3">Our Team</h2>
           <h5 class="display-6 fs-3 px-5">Our team operates out of the Academic Experience Design and Delivery (AXDD) Department at UW-IT.</h5>

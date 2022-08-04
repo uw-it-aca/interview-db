@@ -10,6 +10,7 @@ INSTALLED_APPS += [
     'project.apps.InterviewAdminConfig',
     'interview_db.apps.InterviewConfig',
     'compressor',
+    'rest_framework',
 ]
 
 TEMPLATES = [
@@ -30,7 +31,7 @@ TEMPLATES = [
     }
 ]
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 COMPRESS_ROOT = '/static'
 
@@ -60,11 +61,11 @@ COMPRESS_JS_FILTERS = [
 ]
 
 ADMIN_REORDER = (
-    ('app1',('Student','Story')),
-    ('app2',('Interview')),
+    ('app1', ('Student', 'Story')),
+    ('app2', 'Interview'),
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
 MEDIA_URL = '/media/'
 
 if not DEBUG:
@@ -95,3 +96,11 @@ if os.getenv("ENV") == "localdev":
     )
 else:
     VITE_MANIFEST_PATH = os.path.join(os.sep, "static", "manifest.json")
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    # ]
+}

@@ -2,10 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from django.conf import settings
-from django.urls import re_path
+from django.contrib import admin
+from django.urls import re_path, path, include
 from django.views.generic import TemplateView
-from interview_db.views import DefaultPageView
+from interview_db.views import *
 from . import views
+# from rest_framework import routers, serializers, viewsets
 
 app_name = "interview_db"
 
@@ -32,21 +34,13 @@ if settings.DEBUG:
         ),
     ]
 
+
 urlpatterns += [
+    re_path(r'^admin', admin.site.urls), 
     re_path(r"^(students|collections|about)$", DefaultPageView.as_view()),
-    #re_path(r"^collections/topic/$", DefaultPageView.as_view()),
-    #re_path(r"^students/interview/$", DefaultPageView.as_view()),
-    #re_path(
-    #    r"^students/interview/(?P<interview_id>\d+)/$",
-    #    views.interview,
-    #    name="interview",
-    #),
-    #re_path(
-    #    r"^collections/topic/(?P<topic_id>\d+)/$",
-    #    views.interview,
-    #    name="interview",
-    #),
-    re_path(
-        r"^.*$", TemplateView.as_view(template_name="vue.html"), name="home"
-    ),
+    path('api/students/', InterviewListView.as_view(), name="student-list"),
+    path('api/students/<int:pk>/', InterviewDetailView.as_view(), name="student-detail"),
+    path('api/collections/', CollectionListView.as_view(), name="collection-list"),
+    path('api/collections/<int:pk>/', CollectionDetailView.as_view(), name="collection-detail"),
+    re_path(r"^.*$", TemplateView.as_view(template_name="vue.html"), name="home"),
 ]

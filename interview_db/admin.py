@@ -12,7 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from uw_saml.views import LoginView, LogoutView
 from uw_saml.utils import is_member_of_group
 
-from .models import StudentType, Major, Location, Student, Interview, Story, Coding, Code, SubCode, ResourceCategory, ResourceLink
+from .models import *
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 
