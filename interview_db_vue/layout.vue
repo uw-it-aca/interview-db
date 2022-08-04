@@ -24,7 +24,7 @@
       <slot name="content" />
     </main>
     <footer class="p-5 my-5 text-muted bg-light justify-content-end">
-      &copy; 2022
+      &copy; 2022 University of Washington
     </footer>
   </div>
 </template>

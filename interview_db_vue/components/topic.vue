@@ -12,17 +12,24 @@
         </div>
       </div>
     </div>
+
+    <div class="row mb-5 mx-auto">
+      <CollectionListing :first-name="'Amanda'" />
+      <CollectionListing :first-name="'Caleb'" />
+      <CollectionListing :first-name="'Anna'" />
+    </div>
 </template>
 
 <script>
 import Layout from "../layout.vue";
+import CollectionListing from "./student/collection-listing.vue";
 
 
 export default {
   name: "Topic",
   components: {
     layout: Layout,
-
+    CollectionListing,
   },
   props: {
     collectionTitle: {

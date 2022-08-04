@@ -30,9 +30,11 @@ setup(
         'django-prometheus',
         'django-storages[google]',
         'google-auth',
+        'djangorestframework~=3.13',
     ],
     license='Apache License, Version 2.0',
-    description=('App to collect and tag interview data, artifacts, and stories for publishing using the Django Admin app.'),
+    description=('App to collect and tag interview data, artifacts,'
+                 'and stories for publishing using the Django Admin app.'),
     long_description=README,
     url=url,
     classifiers=[

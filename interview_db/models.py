@@ -53,7 +53,6 @@ class Location(models.Model):
 
 
 class Student(models.Model):
-
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255, blank=True, null=True)
     uw_netid = models.CharField(max_length=10, blank=True, null=True)
@@ -119,11 +118,13 @@ class Interview(models.Model):
                                           null=True,
                                           help_text="Direct URL for transcribed interview, edited for publication.")
     image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True,
-                              help_text="Image should be 1875 x 2882 (any orientation), saved as an optimized High Quality (60) JPEG.")
+                              help_text="Image should be 1875 x 2882 (any orientation),"
+                                        "saved as an optimized High Quality (60) JPEG.")
     image_is_not_identifying = models.BooleanField(
         help_text="This image doesn't include the student's face.")
     image_alt_text = models.CharField(max_length=255, blank=True, null=True,
-                                      help_text="Describe the image in detail so that a non-sighted user might also get that personal connection.")
+                                      help_text="Describe the image in detail so that a non-sighted"
+                                                "user might also get that personal connection.")
     intended_major = models.BooleanField(blank=True)
     major = models.ManyToManyField(Major)
     standing = models.CharField(choices=STANDING,
@@ -149,14 +150,16 @@ class Interview(models.Model):
 
     def __str__(self):
         return str(self.student) + ": " + str(self.date)
+
     class Meta:
-        ordering = ['student','-date']
+        ordering = ['student', '-date']
         
     def declared_major(self):
-        return ','.join([ major.major_abbreviation for major in self.major.all() ])
+        return ','.join([major.major_abbreviation for major in self.major.all()])
 
     def get_absolute_url(self):
         return reverse('interview_db:interview', args=(), kwargs={'interview_id': str(self.id)})   
+
 
 class ResourceCategory(models.Model):
     resource_category = models.CharField(max_length=500)
@@ -166,32 +169,40 @@ class ResourceCategory(models.Model):
         return self.resource_category
     
     class Meta:
-        ordering = ['resource_category',]
+        ordering = ['resource_category']
+
 
 class ResourceLink(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255, 
-                                help_text="The text used as the link to the resource.")
+                             help_text="The text used as the link to the resource.")
     description = models.CharField(max_length=5000,
-                                        help_text="Provide a <strong>brief</strong> description. Something that could be the title attribute of the link.")
-    category = models.ForeignKey(ResourceCategory,on_delete=models.PROTECT, help_text="See our <a href='https://docs.google.com/document/d/1nDEYzdfqIDRQwOEKhRHZiiX8hHj4OxiTlNbYmF4dZUQ/edit?usp=sharing'>category guidelines</a> for resource links.")
-    
+                                   help_text="Provide a <strong>brief</strong> description."
+                                             "Something that could be the title attribute of the link.")
+    category = models.ForeignKey(
+        ResourceCategory,
+        on_delete=models.PROTECT,
+        help_text="See our <a href="
+                  'https://docs.google.com/document/d/1nDEYzdfqIDRQwOEKhRHZiiX8hHj4OxiTlNbYmF4dZUQ/edit?usp=sharing' >
+                  "category guidelines</a> for resource links.")
 
     def __str__(self):
         return self.title
     
     class Meta:
-        ordering = ['title',]
-    
+        ordering = ['title']
+
+
 class SubCode(models.Model):
     subcode = models.CharField(max_length=255)
     definition = models.CharField(max_length=5000)
-    
+
     class Meta:
-        ordering = ['subcode',] 
-        
+        ordering = ['subcode']
+
     def __str__(self):
         return self.subcode
+
 
 class Code(models.Model):
     topic = models.CharField(max_length=20)
@@ -199,21 +210,27 @@ class Code(models.Model):
     definition = models.TextField(max_length=5000)
     
     class Meta:
-        ordering = ['topic','code'] 
+        ordering = ['topic', 'code']
 
     def __str__(self):
         return str(self.topic) + " - " + str(self.code)
     
     def get_absolute_url(self):
-            return reverse('interview_db:code', args=(), kwargs={'code_id': str(self.id)}) 
-        
+        return reverse('interview_db:code', args=(), kwargs={'code_id': str(self.id)})
+
+
 class Story(models.Model):
-    interview = models.ForeignKey(Interview,on_delete=models.PROTECT)
+    interview = models.ForeignKey(Interview, on_delete=models.PROTECT)
     story = models.TextField(help_text="Stories should be understandable and interesting all on their own.")
-    related_resource_links = models.ManyToManyField(ResourceLink,blank=True,
-                                                        help_text="Select any resources that would be useful or relevant in this situation, whether mentioned in the story or not.<br/>"
-                                                        )
-    story_order_position = models.IntegerField(help_text="Logical position of story within context of other stories w/in interview. <strong>Must be unique</strong> to other stories of the same interview!")
+    related_resource_links = models.ManyToManyField(
+        ResourceLink,
+        blank=True,
+        help_text="Select any resources that would be useful or relevant in this situation,"
+                  "whether mentioned in the story or not.<br/>"
+    )
+    story_order_position = models.IntegerField(help_text="Logical position of story within context of other stories"
+                                                         "w/in interview. <strong>Must be unique</strong>"
+                                                         "to other stories of the same interview!")
     code = models.ManyToManyField(Code, through='Coding')
     subcode = models.ManyToManyField(SubCode, through='Coding')
 
@@ -226,14 +243,19 @@ class Story(models.Model):
         
     class Meta:
         verbose_name_plural = "Stories"
-        unique_together = ('interview','story_order_position')
+        unique_together = ('interview', 'story_order_position')
         ordering = ['story_order_position']
-        
+
+
 class Coding(models.Model):
-    code = models.ForeignKey(Code,on_delete=models.PROTECT, 
-                                    help_text="See our <a href='https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>code definitions</a>."
-                                    )
-    subcode = models.ForeignKey(SubCode,on_delete=models.PROTECT,)
+    code = models.ForeignKey(
+        Code,
+        on_delete=models.PROTECT,
+        help_text="See our <a href="
+                  "'https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>"
+                  "code definitions</a>."
+    )
+    subcode = models.ForeignKey(SubCode, on_delete=models.PROTECT)
 
     story = models.ForeignKey(Story, on_delete=models.PROTECT)
 
@@ -241,6 +263,4 @@ class Coding(models.Model):
         return str(self.code) + " > " + str(self.subcode)
     
     class Meta:
-        ordering = ['code',] 
-
-
+        ordering = ['code']
