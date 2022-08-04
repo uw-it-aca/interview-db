@@ -24,11 +24,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         StudentType.objects.all().delete()
         Major.objects.all().delete()
+        Coding.objects.all().delete()
         Code.objects.all().delete()
         Story.objects.all().delete()
         Interview.objects.all().delete()
         Student.objects.all().delete()
-        Coding.objects.all().delete()
 
         cse = Major.objects.create(
             full_title="Computer Science Engineering",
@@ -96,6 +96,7 @@ class Command(BaseCommand):
             code="Building Identity",
             definition="Building Identity",
         )
+
         subcode = SubCode.objects.create(
             subcode="Advice",
             definition="Advice",
@@ -119,22 +120,158 @@ class Command(BaseCommand):
             no_publishing_stories=False,
             other_publishing_restrictions=False,
         )
-
         i_joe.student_type.set([commuter])
         i_joe.major.set([cse])
 
         s_joe = Story.objects.create(
             interview=i_joe,
-            story="This is Joe's first story about Getting Help (learning)",
+            story="This is Joe's first story about Learning, Getting Help (learning), Advice",
             story_order_position=1,
         )
-        s_joe.code.add(1)
-        s_joe.subcode_id.add(2)
 
-        # c_joe = Coding.objects.create(
-        #     code=learning,
-        #     story=s_joe
-        # )
-        # s_joe.subcode.add([subcode])
+        s2_joe = Story.objects.create(
+            interview=i_joe,
+            story="This is Joe's second story about Identity, Building Identity, Advice...Lorem ipsum dolor sit "
+                  "amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                  " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
+                  "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat "
+                  "nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
+                  "mollit anim id est laborum.",
+            story_order_position=2,
+        )
+
+        c_joe = Coding(
+            code=learning,
+            story=s_joe,
+        )
+        c_joe.subcode = subcode
+        c_joe.save()
+
+        c2_joe = Coding(
+            code=identity,
+            story=s2_joe,
+        )
+        c2_joe.subcode = subcode
+        c2_joe.save()
+
+        s_joe.code.set([learning])
+        s_joe.subcode.set([subcode])
+        s_joe.save()
+
+        s2_joe.code.set([identity])
+        s2_joe.subcode.set([subcode])
+        s_joe.save()
+
+        i_nancy = Interview.objects.create(
+            student=nancy,
+            date="2022-08-04",
+            interview_quarter="su",
+            signed_release_form=True,
+            pull_quote="Nancy's quote about going to UW.",
+            interview_notes_url="notes.com",
+            image_is_not_identifying=True,
+            image_alt_text="profile",
+            intended_major=False,
+            standing="Senior",
+            years_until_graduation="2",
+            current_year="3",
+            no_identifying_photo=True,
+            no_real_name=False,
+            no_publishing_stories=False,
+            other_publishing_restrictions=False,
+        )
+        i_nancy.major.set([cse])
+
+        s_nancy = Story.objects.create(
+            interview=i_nancy,
+            story="This is Nancy's first story about Career, Choosing College, Advice",
+            story_order_position=1,
+        )
+
+        c_nancy = Coding(
+            code=career,
+            story=s_nancy,
+        )
+        c_nancy.subcode = subcode
+        c_nancy.save()
+
+        s_nancy.code.set([career])
+        s_nancy.subcode.set([subcode])
+        s_nancy.save()
+
+        i_billy = Interview.objects.create(
+            student=billy,
+            date="2022-06-04",
+            interview_quarter="sp",
+            signed_release_form=True,
+            pull_quote="Billy loves going to UW!",
+            interview_notes_url="notes.com",
+            image_is_not_identifying=True,
+            image_alt_text="profile",
+            intended_major=False,
+            standing="Junior",
+            years_until_graduation="3",
+            current_year="2",
+            no_identifying_photo=True,
+            no_real_name=False,
+            no_publishing_stories=False,
+            other_publishing_restrictions=False,
+        )
+        i_billy.major.set([hcde])
+
+        s_billy = Story.objects.create(
+            interview=i_billy,
+            story="This is Billy's first story about Identity, Building Identity, Advice",
+            story_order_position=1,
+        )
+
+        c_billy = Coding(
+            code=identity,
+            story=s_billy,
+        )
+        c_billy.subcode = subcode
+        c_billy.save()
+
+        s_billy.code.set([identity])
+        s_billy.subcode.set([subcode])
+        s_billy.save()
+
+        i_sam = Interview.objects.create(
+            student=sam,
+            date="2022-01-01",
+            interview_quarter="wi",
+            signed_release_form=True,
+            pull_quote="I can't wait to graduate!",
+            interview_notes_url="notes.com",
+            image_is_not_identifying=True,
+            image_alt_text="profile",
+            intended_major=False,
+            standing="Senior",
+            years_until_graduation="< 1",
+            current_year="4",
+            no_identifying_photo=True,
+            no_real_name=True,
+            no_publishing_stories=False,
+            other_publishing_restrictions=False,
+        )
+        i_sam.major.set([comm])
+
+        s_sam = Story.objects.create(
+            interview=i_sam,
+            story="This is Sam's first story about Career, Choosing College, Advice",
+            story_order_position=1,
+        )
+
+        c_sam = Coding(
+            code=identity,
+            story=s_sam,
+        )
+        c_sam.subcode = subcode
+        c_sam.save()
+
+        s_sam.code.set([identity])
+        s_sam.subcode.set([subcode])
+        s_sam.save()
+
 
 

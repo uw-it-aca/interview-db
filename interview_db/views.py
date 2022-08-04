@@ -29,7 +29,8 @@ class PageView(TemplateView):
         return context
 
     def render_to_response(self, context, **response_kwargs):
-        response = super(PageView, self).render_to_response(context, **response_kwargs)
+        response = super(PageView, self).render_to_response(
+            context, **response_kwargs)
         return response
 
 
@@ -50,12 +51,12 @@ class InterviewListView(APIView):
 
 class InterviewDetailView(APIView):
     """
-    API endpoint returning single interview
+    API endpoint returning single interview, made up of its matching stories
     """
 
     def get(self, request, interview_id):
-        queryset = get_object_or_404(Interview.objects.all(), pk=interview_id)
-        serializer = InterviewSerializer(queryset, many=False)
+        queryset = Story.objects.filter(interview=interview_id)
+        serializer = StorySerializer(queryset, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -75,55 +76,23 @@ class CollectionDetailView(APIView):
     API endpoint returning single collection
     """
 
-    def get(self, request, code):
-        queryset = Story.objects.filter(code=code).get()
+    def get(self, request, codes, subcodes):
+        # queryset = Story.objects.filter(code_in=codes)
+        # queryset += Story.objects.filter(subcode_in=subcodes)
+        queryset = Coding.objects.filter(code_in=codes).values_list(
+            'story', flat=True)
+        queryset += Coding.objects.filter(code_in=subcodes).values_list(
+            'story', flat=True)
         serializer = StorySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# @method_decorator(group_required(front_end_group), name='dispatch')
-# class IndexView(ListView):
-#     template_name = 'index.html'
-#     context_object_name = 'interview_list'
-#     def get_queryset(self):
-#         return Interview.objects.order_by('student')
-#
-#
-# @method_decorator(group_required(front_end_group), name='dispatch')
-# class InterviewsView(ListView):
-#     template_name = 'interviews.html'
-#     context_object_name = 'interview_list'
-#     def get_queryset(self):
-#         return Interview.objects.order_by('student')
-#
-#
-# @method_decorator(group_required(front_end_group), name='dispatch')
-# class PeopleView(ListView):
-#     template_name = 'people.html'
-#     context_object_name = 'interview_list'
-#     def get_queryset(self):
-#         return Interview.objects.order_by('student')
-#
-#
-# @method_decorator(group_required(front_end_group), name='dispatch')
-# class TopicsView(ListView):
-#     template_name = 'collections.html'
-#     context_object_name = 'code_list'
-#     def get_queryset(self):
-#         return Code.objects.order_by('topic', 'code')
-#
-#
-# @group_required(front_end_group)
-# def interview(request, interview_id):
-#     interview = get_object_or_404(Interview, pk=interview_id)
-#     return render(request, 'interview.html', {
-#         'interview': interview
-#         })
-#
-#
-# @group_required(front_end_group)
-# def code(request, code_id):
-#     code = get_object_or_404(Code, pk=code_id)
-#     return render(request, 'topic.html', {
-#         'code': code
-#         })
+class MajorListView(APIView):
+    """
+    API endpoint returning all added majors
+    """
+
+    def get(self, request):
+        queryset = Major.objects.all()
+        serializer = MajorSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
