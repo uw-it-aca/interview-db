@@ -20,13 +20,21 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = ['first_name', 'last_name', 'email', 'uw_netid']
 
 
+class CodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Code
+        fields = ['topic', 'code', 'definition']
+
+
 class InterviewSerializer(serializers.ModelSerializer):
     student = StudentSerializer(read_only=True)
     major = MajorSerializer(many=True, read_only=True)
 
     class Meta:
         model = Interview
-        fields = ['date',
+        fields = ['student',
+                  'major',
+                  'date',
                   'signed_release_form',
                   'pull_quote',
                   'image',
@@ -39,12 +47,6 @@ class InterviewSerializer(serializers.ModelSerializer):
                   'no_real_name',
                   'no_publishing_stories',
                   'other_publishing_restrictions']
-
-
-class CodeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Code
-        fields = ['topic', 'code', 'definition']
 
 
 class StorySerializer(serializers.ModelSerializer):

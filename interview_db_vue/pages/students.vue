@@ -43,6 +43,13 @@
 
           <div class="col-9 justify-content-end">
             <div class="card-columns justify-content-end">
+              <!-- <div v-for="student in this.students">
+                <StudentListing : first-name="'student.student.first_name'" 
+                                  year="'student.standing'"
+                                  major="'student.major'"
+                                  quote="'student.pull_quote'"
+                />
+              </div> -->
               <StudentListing :first-name="'Amanda'" />
               <StudentListing :first-name="'Caleb'" />
               <StudentListing :first-name="'Anna'" />
@@ -70,7 +77,8 @@ export default {
   },
   data() {
     return {
-      pageTitle: "Students",
+      // pageTitle: "Students",
+      // students: {},
     };
   },
   computed: {
@@ -78,6 +86,14 @@ export default {
       return this.$route.params.id;
     },
   },
-  methods: {},
+  // created() {
+  //   this.loadStudents();
+  // }
+  // methods: {
+  //   asyncloadStudents() {
+  //     const response = await get("api/students/");
+  //     this.students = response.data;
+  //   }
+  // },
 };
 </script>

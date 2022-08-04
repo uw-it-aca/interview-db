@@ -53,35 +53,13 @@
         </h2>
         <div class="collapse" id="major">
           <div class="card card-body border-0 mt-0">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Computer Science
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Communications
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Junior
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Senior
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Other
-              </label>
+            <div v-for="major in majors">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+                  {{ major.full_title }}
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -189,8 +167,18 @@ export default {
   name: "StudentFilter",
   props: {},
   data() {
-    return {};
+    return {
+      majors:[]
+    };
   },
-  methods: {},
+  methods: {
+    async loadMajors() {
+      const response = await get('api/majors/');
+      this.majors = response.data;
+    }
+  },
+  created() {
+    this.loadMajors();
+  }
 };
 </script>

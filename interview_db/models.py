@@ -92,7 +92,7 @@ class Interview(models.Model):
     )
     STANDING = (
         ('Fr', 'Freshman'),
-        ('So', 'Sophmore'),
+        ('So', 'Sophomore'),
         ('Jr', 'Junior'),
         ('Sr', 'Senior'),
         ('Al', 'Alumni - undergrad'),
@@ -118,12 +118,12 @@ class Interview(models.Model):
                                           null=True,
                                           help_text="Direct URL for transcribed interview, edited for publication.")
     image = models.ImageField(upload_to='interview_db_images', default="", blank=True, null=True,
-                              help_text="Image should be 1875 x 2882 (any orientation),"
+                              help_text="Image should be 1875 x 2882 (any orientation), "
                                         "saved as an optimized High Quality (60) JPEG.")
     image_is_not_identifying = models.BooleanField(
         help_text="This image doesn't include the student's face.")
     image_alt_text = models.CharField(max_length=255, blank=True, null=True,
-                                      help_text="Describe the image in detail so that a non-sighted"
+                                      help_text="Describe the image in detail so that a non-sighted "
                                                 "user might also get that personal connection.")
     intended_major = models.BooleanField(blank=True)
     major = models.ManyToManyField(Major)
@@ -177,7 +177,7 @@ class ResourceLink(models.Model):
     title = models.CharField(max_length=255, 
                              help_text="The text used as the link to the resource.")
     description = models.CharField(max_length=5000,
-                                   help_text="Provide a <strong>brief</strong> description."
+                                   help_text="Provide a <strong>brief</strong> description. "
                                              "Something that could be the title attribute of the link.")
     category = models.ForeignKey(
         ResourceCategory,
@@ -225,14 +225,14 @@ class Story(models.Model):
     related_resource_links = models.ManyToManyField(
         ResourceLink,
         blank=True,
-        help_text="Select any resources that would be useful or relevant in this situation,"
+        help_text="Select any resources that would be useful or relevant in this situation, "
                   "whether mentioned in the story or not.<br/>"
     )
-    story_order_position = models.IntegerField(help_text="Logical position of story within context of other stories"
-                                                         "w/in interview. <strong>Must be unique</strong>"
+    story_order_position = models.IntegerField(help_text="Logical position of story within context of other stories "
+                                                         "w/in interview. <strong>Must be unique</strong> "
                                                          "to other stories of the same interview!")
-    code = models.ManyToManyField(Code, through='Coding')
-    subcode = models.ManyToManyField(SubCode, through='Coding')
+    code = models.ManyToManyField(Code, through='Coding', through_fields=('story', 'code'))
+    subcode = models.ManyToManyField(SubCode, through='Coding', through_fields=('story', 'subcode'))
 
     def __str__(self):
         return str(self.interview) + ": " + str(self.story_order_position)
