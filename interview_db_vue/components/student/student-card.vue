@@ -13,7 +13,7 @@
 
         <p class="card-text mb-4 display-6 fs-6 px-4">"{{ quote }}"</p>
         <p class="card-text mb-2 display-6 fs-6">
-          <router-link to="/students/1234" class="active-link" style="color: #5f5f5f">Read full story >
+          <router-link to="/students/id" class="active-link" style="color: #5f5f5f">Read full story >
           </router-link>
         </p>
       </div>

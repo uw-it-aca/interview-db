@@ -264,3 +264,25 @@ class Coding(models.Model):
     
     class Meta:
         ordering = ['code']
+
+
+# class Collection(models.Model):
+#     TOPIC = (
+#         ('Getting Help', 'Getting Help'),
+#         ('Advice', 'Advice'),
+#         ('Working Towards Goals', 'Working Towards Goals'),
+#         ('Coming to College', 'Coming to College'),
+#         ('Majors', 'Majors'),
+#         ('Finding Community', 'Finding Community'),
+#         ('Self Reflection', 'Self Reflection'),
+#         ('Moving Forward', 'Moving Forward'),
+#     )
+
+#     topic = models.CharField(choices=TOPIC,
+#                         max_length=100,
+#                         blank=True,
+#                         null=True
+#                         )
+#     codes = models.ManyToManyField(Code)
+#     subcodes = models.ManyToManyField(SubCode)
+

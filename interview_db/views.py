@@ -54,9 +54,13 @@ class InterviewDetailView(APIView):
     API endpoint returning single interview, made up of its matching stories
     """
 
-    def get(self, request, interview_id):
-        queryset = Story.objects.filter(interview=interview_id)
-        serializer = StorySerializer(queryset, many=False)
+    def get(self, request, id):
+        queryset = Story.objects.filter(interview__id=id)
+        serializer = StorySerializer(queryset, many=True)
+
+        # for just interview, no stories
+        # queryset = get_object_or_404(Interview, pk=id)
+        # serializer = InterviewSerializer(queryset)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -73,7 +77,7 @@ class CollectionListView(APIView):
 
 class CollectionDetailView(APIView):
     """
-    API endpoint returning single collection
+    API endpoint returning single collection of stories
     """
 
     def get(self, request, codes, subcodes):
@@ -96,3 +100,24 @@ class MajorListView(APIView):
         queryset = Major.objects.all()
         serializer = MajorSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class StudentTypeListView(APIView):
+    """
+    API endpoint returning all added majors
+    """
+
+    def get(self, request):
+        queryset = StudentType.objects.all()
+        serializer = StudentTypeSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+# class CodedInterviewDetailView(APIView):
+#     """
+#     API endpoint returning all added majors
+#     """
+
+#     def get(self, request, interview_id):
+
+
