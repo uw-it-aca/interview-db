@@ -16,15 +16,19 @@
 
         <div class="col-9 pe-5">
           <div class="mb-3 px-3">
-            <h2 class="card-title display-6 mb-2">{{ firstName }}</h2>
+            <h2 class="card-title display-6 mb-2">{{ studentInfo.student.first_name }}</h2>
             <p class="card-subtitle text-uppercase display-6 fs-5 text-info">
-              {{ major + "," + " " + year }}
+              <span v-for="major in studentInfo.major" :key="major.id">
+                {{ major.full_title + ", " }}
+              </span>
+              {{ studentInfo.standing }}
             </p>
           </div>
           <div class="mb-3 px-3">
-            <p class="card-text display-6 fs-3">"{{ quote }}"</p>
+            <p class="card-text display-6 fs-3">"{{ studentInfo.pull_quote }}"</p>
             <p class="card-text display-6 fs-5 mb-2">
-              <router-link to="/students/1234" class="active-link" style="color: #5f5f5f">Read full interview >
+
+              <router-link :to="{name: 'Students', params: {id: studentInfo.id, singleStudent: JSON.stringify(studentInfo)}}" class="active-link" style="color: #5f5f5f">Read full interview >
               </router-link>
             </p>
           </div>
@@ -38,26 +42,9 @@
 export default {
   name: "StudentListing",
   props: {
-    firstName: {
-      type: String,
+    studentInfo: {
+      type: Object,
       required: true,
-      default: "Joe",
-    },
-    year: {
-      type: String,
-      required: true,
-      default: "Freshman",
-    },
-    major: {
-      type: Array,
-      required: true,
-      default: "Communications",
-    },
-    quote: {
-      type: String,
-      required: true,
-      default:
-        "Some quote about really cool things wow I want to make games for other people so they can enjoy them too",
     },
   },
   data() {

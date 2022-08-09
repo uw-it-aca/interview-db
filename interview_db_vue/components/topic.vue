@@ -2,28 +2,28 @@
 // shows a few student stories for one collection topic
 
 <template>
-    <div class="row mb-5">
-      <div class="col p-5" style="background-color: #172643; height:330px">
-        <div class="text-white py-5">
-          <h2 class="display-3 text-center mb-4">{{ collectionTitle }}</h2>
-          <h5 class="text-center display-4 fs-4">
-            {{ collectionQuestion }}
-          </h5>
-        </div>
+  <div class="row mb-5">
+    <div class="col p-5" style="background-color: #172643; height:330px">
+      <div class="text-white py-5">
+        <h2 class="display-3 text-center mb-4">{{ collectionTitle }}</h2>
+        <h5 class="text-center display-4 fs-4">
+          {{ collectionQuestion }}
+        </h5>
       </div>
     </div>
+  </div>
 
-    <div class="row mb-5 mx-auto">
-      <CollectionListing :first-name="'Amanda'" />
-      <CollectionListing :first-name="'Caleb'" />
-      <CollectionListing :first-name="'Anna'" />
-    </div>
+  <div class="row mb-5 mx-auto">
+    <CollectionListing :first-name="'Amanda'" />
+    <CollectionListing :first-name="'Caleb'" />
+    <CollectionListing :first-name="'Anna'" />
+  </div>
 </template>
 
 <script>
 import Layout from "../layout.vue";
 import CollectionListing from "./student/collection-listing.vue";
-
+import { get } from "axios";
 
 export default {
   name: "Topic",
@@ -46,8 +46,17 @@ export default {
   data() {
     return {
       pageTitle: "Topic",
+      stories: [],
     };
   },
-  methods: {},
+  methods: {
+    async loadData(props) {
+      const response = await get('api/collections/' + props.id + '/');
+      this.stories = response.data;
+    },
+  },
+  created() {
+    this.loadData();
+  },
 };
 </script>

@@ -7,21 +7,27 @@
     </template>
 
     <template #content>
-      <div v-if="studentInterview">
+      <div v-if="interviewId">
         <div class="mt-4">
-          <Interview />
-        </div>
-        <p>student interview #: {{ studentInterview }}</p>
-        <div class="row justify-content-center mx-auto">
-          <div class="col-3 mx-2">
-            <StudentCard :first-name="'Amanda'" />
+          <div class="row w-75 mx-auto mb-5">
+            <div class="col-3 justify-content-center">
+              <img src="../css/quad.png" class="img-fluid mx-auto d-block" style="
+              border-radius: 50%;
+              height: 150px;
+              width: 150px;
+              object-fit: cover;" />
+            </div>
+            <div class="col-9 justify-content-start py-3">
+              <h2 class="display-4">{{ singleStudentInfo.student.first_name }}</h2>
+              <h5 class="display-3 fs-3 text-info text-uppercase">
+                <div v-for="major in singleStudentInfo.major" :key="major.id">
+                  {{ major.full_title + ", " }}
+                </div>
+                {{ singleStudentInfo.standing }}
+              </h5>
+            </div>
           </div>
-          <div class="col-3 mx-2">
-            <StudentCard :first-name="'Anna'" />
-          </div>
-          <div class="col-3 mx-2">
-            <StudentCard :first-name="'Caleb'" />
-          </div>
+          <Interview :studentInfo="singleStudentInfo" />
         </div>
       </div>
 
@@ -43,16 +49,9 @@
 
           <div class="col-9 justify-content-end">
             <div class="card-columns justify-content-end">
-              <!-- <div v-for="student in this.students">
-                <StudentListing : first-name="'student.student.first_name'" 
-                                  year="'student.standing'"
-                                  major="'student.major'"
-                                  quote="'student.pull_quote'"
-                />
-              </div> -->
-              <StudentListing :first-name="'Amanda'" />
-              <StudentListing :first-name="'Caleb'" />
-              <StudentListing :first-name="'Anna'" />
+              <div v-for="student in students" :key="student.id">
+                <StudentListing :studentInfo="student" />
+              </div>
             </div>
           </div>
         </div>
@@ -66,6 +65,7 @@ import Layout from "../layout.vue";
 import StudentListing from "../components/student/interview-listing.vue";
 import StudentFilter from "../components/student-filter.vue";
 import Interview from "../components/student/interview.vue";
+import { get } from "axios";
 
 export default {
   name: "PagesStudents",
@@ -75,25 +75,34 @@ export default {
     StudentFilter,
     Interview,
   },
+  props: {
+    singleStudent: {
+      type: Object,
+      required: false,
+    }
+  },
   data() {
     return {
-      // pageTitle: "Students",
-      // students: {},
+      pageTitle: "Students",
+      students: [],
     };
   },
   computed: {
-    studentInterview() {
+    interviewId() {
       return this.$route.params.id;
     },
+    singleStudentInfo() {
+      return JSON.parse(this.$route.params.singleStudent);
+    }
   },
-  // created() {
-  //   this.loadStudents();
-  // }
-  // methods: {
-  //   asyncloadStudents() {
-  //     const response = await get("api/students/");
-  //     this.students = response.data;
-  //   }
-  // },
+  created() {
+    this.loadData();
+  },
+  methods: {
+    async loadData() {
+      const response = await get("/api/students/");
+      this.students = response.data;
+    }
+  },
 };
 </script>

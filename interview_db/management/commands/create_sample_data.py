@@ -120,7 +120,7 @@ class Command(BaseCommand):
             no_publishing_stories=False,
             other_publishing_restrictions=False,
         )
-        i_joe.student_type.set([commuter])
+        i_joe.student_type.set([commuter, first_gen])
         i_joe.major.set([cse])
 
         s_joe = Story.objects.create(
@@ -218,6 +218,7 @@ class Command(BaseCommand):
             other_publishing_restrictions=False,
         )
         i_billy.major.set([hcde])
+        i_joe.student_type.set([exchange])
 
         s_billy = Story.objects.create(
             interview=i_billy,
@@ -254,7 +255,8 @@ class Command(BaseCommand):
             no_publishing_stories=False,
             other_publishing_restrictions=False,
         )
-        i_sam.major.set([comm])
+        i_sam.major.set([comm, cse])
+        i_joe.student_type.set([commuter, international])
 
         s_sam = Story.objects.create(
             interview=i_sam,
