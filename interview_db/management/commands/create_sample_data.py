@@ -1,9 +1,5 @@
-# Copyright 2022 UW-IT, University of Washington
-# SPDX-License-Identifier: Apache-2.0
-
-# -*- coding: utf-8 -*-
-"""     This provides a management command to django's manage.py called
-    create_sample_spots that will generate a set of spots for testing.
+"""     Management command to django's manage.py called
+    create_sample_data that will generate interviews for testing.
 """
 from django.core.management.base import BaseCommand, CommandError
 from optparse import make_option
@@ -14,9 +10,6 @@ from django.utils import timezone
 from decimal import *
 
 # from datetime import datetime
-import os
-import glob
-
 
 class Command(BaseCommand):
     help = "Creates new data for testing"
