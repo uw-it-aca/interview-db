@@ -1,5 +1,5 @@
 // interview-listing.vue 
-// listings to be shown on full student interviews page
+// shown on students page
 
 <template>
   <div class="card mb-5 border-0 rounded-0">

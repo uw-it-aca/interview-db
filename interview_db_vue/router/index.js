@@ -4,9 +4,7 @@ import { trackRouter } from "vue-gtag-next";
 // page components
 import Home from "../pages/home.vue";
 import Collections from "../pages/collections.vue";
-import Topic from "../components/topic.vue";
 import Students from "../pages/students.vue";
-import Interview from "../components/student/interview.vue";
 import About from "../pages/about.vue";
 
 const routes = [
