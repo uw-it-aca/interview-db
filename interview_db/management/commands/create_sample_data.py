@@ -193,6 +193,7 @@ class Command(BaseCommand):
         s_nancy.save()
 
         i_billy = Interview.objects.create(
+            image = "../../interview_db_vue/css/blossom.png",
             student=billy,
             date="2022-06-04",
             interview_quarter="sp",

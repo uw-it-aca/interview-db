@@ -37,6 +37,7 @@ class InterviewSerializer(serializers.ModelSerializer):
     student = StudentSerializer(read_only=True)
     major = MajorSerializer(many=True, read_only=True)
     student_type = StudentTypeSerializer(many=True, read_only=True)
+    image_url = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
 
     class Meta:
         model = Interview
@@ -47,7 +48,7 @@ class InterviewSerializer(serializers.ModelSerializer):
                   'interview_quarter',
                   'signed_release_form',
                   'pull_quote',
-                  'image',
+                  'image_url',
                   'image_is_not_identifying',
                   'image_alt_text',
                   'intended_major',
@@ -59,6 +60,11 @@ class InterviewSerializer(serializers.ModelSerializer):
                   'no_real_name',
                   'no_publishing_stories',
                   'other_publishing_restrictions']
+    
+    # def get_photo_url(self, interview):
+    #   request = self.context.get('request')
+    #   url = interview.image.url
+    #   return request.build_absolute_uri(url)
 
 
 class StorySerializer(serializers.ModelSerializer):
