@@ -3,11 +3,10 @@
 
 from django.conf import settings
 from django.contrib import admin
-from django.urls import re_path, path, include
+from django.urls import re_path, path
 from django.views.generic import TemplateView
+from django.conf.urls.static import static
 from interview_db.views import *
-from . import views
-# from rest_framework import routers, serializers, viewsets
 
 app_name = "interview_db"
 
@@ -51,3 +50,6 @@ urlpatterns += [
         template_name="vue.html"),
         name="home"),
 ]
+
+urlpatterns += static(settings.MEDIA_URL,
+                      document_root=settings.MEDIA_ROOT)
