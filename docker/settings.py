@@ -12,8 +12,6 @@ INSTALLED_APPS += [
     'compressor',
 ]
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
-
 COMPRESS_ROOT = '/static'
 
 COMPRESS_PRECOMPILERS = (

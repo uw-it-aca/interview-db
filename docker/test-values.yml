@@ -39,9 +39,6 @@ gcsCredentials:
   secretName: interview-db.axdd.s.uw.edu-gcs-credentials
 repo: interview-db
 instance: test
-image:
-  repository: gcr.io/uwit-mci-axdd/interview-db
-  tag: IMAGE_TAG
 metrics:
   enabled: true
   serviceMonitor:
@@ -50,31 +47,31 @@ externalSecrets:
   enabled: true
   secrets:
     - name: interview-db.axdd.s.uw.edu-secrets
-      externalKey: axdd/kv/data/interview-db/test/secrets
+      externalKey: interview-db/test/secrets
       data:
         - name: django-secret
           property: django-secret
         - name: storage-bucket-name
           property: storage-bucket-name
     - name: interview-db.axdd.s.uw.edu-sql-secrets
-      externalKey: axdd/kv/data/interview-db/test/sql-secrets
+      externalKey: interview-db/test/sql-secrets
       data:
         - name: username
           property: username
         - name: password
           property: password
     - name: interview-db.axdd.s.uw.edu-gcs-credentials
-      externalKey: axdd/kv/data/interview-db/test/gcs-credentials
+      externalKey: interview-db/test/gcs-credentials
       data:
         - name: credentials.json
           property: credentials.json
     - name: interview-db.axdd.s.uw.edu-ic-certs
-      externalKey: axdd/kv/data/interview-db/test/ic-certs
+      externalKey: interview-db/test/ic-certs
       data:
         - name: interview-db.axdd.s.uw.edu-ic.cert
           property: interview-db.axdd.s.uw.edu-ic.cert
     - name: interview-db.axdd.s.uw.edu-uw-idp-cert
-      externalKey: axdd/kv/data/idp-cert
+      externalKey: idp-cert
       data:
         - name: uw-idp-cert
           property: cert
