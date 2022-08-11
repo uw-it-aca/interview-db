@@ -4,7 +4,7 @@ services:
   app:
     environment:
       ENV:  localdev
-      PORT: 8001
+      PORT: 8000
       AUTH: SAML_MOCK
     restart: always
     container_name: interview_db_app
@@ -16,7 +16,7 @@ services:
       - ./docker/settings.py:/app/project/settings.py
       - ./docker/urls.py:/app/project/urls.py
     ports:
-      - "${RUNSERVER_PORT:-8001}:8001"
+      - "${RUNSERVER_PORT:-8000}:8000"
     stdin_open: true
     tty: true
   node-bundler:

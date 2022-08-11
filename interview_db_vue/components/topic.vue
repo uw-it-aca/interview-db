@@ -14,9 +14,9 @@
   </div>
 
   <div class="row mb-5 mx-auto">
-    <CollectionListing :first-name="'Amanda'" />
-    <CollectionListing :first-name="'Caleb'" />
-    <CollectionListing :first-name="'Anna'" />
+    <div v-for="story in stories" :key="story.id">
+      <CollectionListing />
+    </div>
   </div>
 </template>
 
@@ -32,26 +32,20 @@ export default {
     CollectionListing,
   },
   props: {
-    collectionTitle: {
-      type: String,
+    topicInfo: {
+      type: Object,
       required: true,
-      default: "Choosing a Major",
     },
-    collectionQuestion: {
-      type: String,
-      required: true,
-      default: "How did you find your major and why did you choose it?",
-    }
   },
   data() {
     return {
-      pageTitle: "Topic",
+      // pageTitle: this.topicInfo.topic,
       stories: [],
     };
   },
   methods: {
     async loadData(props) {
-      const response = await get('api/collections/' + props.id + '/');
+      const response = await get("api/collections/" + this.topicInfo.id + "/");
       this.stories = response.data;
     },
   },

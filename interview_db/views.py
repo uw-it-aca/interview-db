@@ -4,15 +4,15 @@
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
-from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from uw_saml.decorators import group_required
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exemt
 from rest_framework.parsers import JSONParser
 from rest_framework import permissions, generics, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.db.models import Q
 
 from .serializers import *
 from .models import Code, Interview
@@ -42,10 +42,11 @@ class InterviewListView(APIView):
     """
     API endpoint returning list of interviews
     """
-    
+
     def get(self, request):
-        queryset = Interview.objects.all().order_by('date')
-        serializer = InterviewSerializer(queryset, many=True, context={"request":request})
+        queryset = Interview.objects.all().order_by('-date')
+        serializer = InterviewSerializer(queryset, many=True,
+                                         context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -57,10 +58,6 @@ class InterviewDetailView(APIView):
     def get(self, request, id):
         queryset = Story.objects.filter(interview__id=id)
         serializer = StorySerializer(queryset, many=True)
-
-        # for just interview, no stories
-        # queryset = get_object_or_404(Interview, pk=id)
-        # serializer = InterviewSerializer(queryset)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -70,8 +67,8 @@ class CollectionListView(APIView):
     """
 
     def get(self, request):
-        queryset = Code.objects.all()
-        serializer = CodeSerializer(queryset, many=True)
+        queryset = Collection.objects.all()
+        serializer = CollectionSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -79,14 +76,11 @@ class CollectionDetailView(APIView):
     """
     API endpoint returning single collection of stories
     """
-
-    def get(self, request, codes, subcodes):
-        # queryset = Story.objects.filter(code_in=codes)
-        # queryset += Story.objects.filter(subcode_in=subcodes)
-        queryset = Coding.objects.filter(code_in=codes).values_list(
-            'story', flat=True)
-        queryset += Coding.objects.filter(code_in=subcodes).values_list(
-            'story', flat=True)
+    def get(self, request, id):
+        collection = Collection.objects.get(id=id)
+        queryset = Story.objects.filter(
+            Q(code__in=collection.codes.all()) |
+            Q(subcode__in=collection.subcodes.all()))
         serializer = StorySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -113,11 +107,12 @@ class StudentTypeListView(APIView):
         return Response(serializer.data)
 
 
-# class CodedInterviewDetailView(APIView):
-#     """
-#     API endpoint returning all added majors
-#     """
+class StoryListView(APIView):
+    """
+    API endpoint returning all stories
+    """
 
-#     def get(self, request, interview_id):
-
-
+    def get(self, request):
+        queryset = Story.objects.all()
+        serializer = StorySerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

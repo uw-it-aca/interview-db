@@ -91,47 +91,13 @@
         </h2>
         <div class="collapse" id="collections">
           <div class="card card-body border-0 mt-0">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Choosing a Major
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Advice
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Coming to College
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Finding Community
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Getting Help
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Self Reflection
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Moving Forward
-              </label>
+            <div v-for="topic in topics" :key="topics.id">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+                  {{ topic.topic }}
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -149,6 +115,7 @@ export default {
     return {
       majors:[],
       traits:[],
+      topics:[],
     };
   },
   methods: {
@@ -157,6 +124,8 @@ export default {
       this.majors = response.data;
       const types = await get('api/types/');
       this.traits = types.data;
+      const collections = await get('api/collections/');
+      this.topics = collections.data;
     },
   },
   created() {
