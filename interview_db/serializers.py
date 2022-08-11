@@ -37,7 +37,8 @@ class InterviewSerializer(serializers.ModelSerializer):
     student = StudentSerializer(read_only=True)
     major = MajorSerializer(many=True, read_only=True)
     student_type = StudentTypeSerializer(many=True, read_only=True)
-    image_url = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
+    image_url = serializers.ImageField(max_length=None, use_url=True,
+                                       allow_null=True, required=False)
 
     class Meta:
         model = Interview
@@ -60,11 +61,6 @@ class InterviewSerializer(serializers.ModelSerializer):
                   'no_real_name',
                   'no_publishing_stories',
                   'other_publishing_restrictions']
-    
-    # def get_photo_url(self, interview):
-    #   request = self.context.get('request')
-    #   url = interview.image.url
-    #   return request.build_absolute_uri(url)
 
 
 class StorySerializer(serializers.ModelSerializer):
@@ -93,3 +89,16 @@ class CodingSerializer(serializers.ModelSerializer):
                   'code',
                   'subcode',
                   'story']
+
+
+class CollectionSerializer(serializers.ModelSerializer):
+    codes = CodeSerializer(read_only=True, many=True)
+    subcodes = SubCodeSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Collection
+        fields = ['id',
+                  'topic',
+                  'codes',
+                  'subcodes',
+                  'question']

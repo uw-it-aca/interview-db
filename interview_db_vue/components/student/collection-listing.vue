@@ -43,7 +43,7 @@
 export default {
   name: "CollectionListing",
   props: {
-    studentInfo: {
+    storyInfo: {
       type: Object,
       required: true,
     },

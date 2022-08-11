@@ -3,7 +3,6 @@
 
 <template>
   <div class="row w-75 mx-auto mb-2 justify-content-center">
-    <!-- {{ stories }} -->
     <div class="ps-4">
       <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">Choosing a
         Major</button>
