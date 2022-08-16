@@ -8,12 +8,10 @@
     </template>
 
     <template #content>
-
       <div v-if="collectionsId">
-        <Topic />
-        {{ collectionsId }}
+        <Topic :topicInfo="singleCollection"/>
       </div>
-      
+
       <div v-else>
         <div class="row">
           <div class="col p-5 bg-white">
@@ -29,50 +27,56 @@
           </div>
         </div>
 
-        <!-- image on left side -->
-        <div v-for="collection in collections" :key="collection.id">
-          <div class="card w-100 border-0 rounded-0 overflow-hidden" style="height: 380px">
-            <div class="row g-0">
-              <div class="col-7">
-                <img src="../css/major.png" class="w-100 h-100 img-fluid" style="object-fit: cover" />
-              </div>
-              <div class="col-5 p-5 justify-content-center text-white" style="background-color: #172643">
-                <div class="text-center mx-auto">
-                  <h5 class="card-title mb-4 pt-5 display-6">{{ collection.topic }}</h5>
-                  <p class="card-text w-75 mb-4 mx-auto display-4 fs-4">
-                    {{ collection.question }}
-                  </p>
-                  <p class="card-text display-4 fs-4">
-                    <router-link :to="{name: 'Collections', params: {id: collection.id, topicInfo: JSON.stringify(collection)}}" class="active-link" style="color: inherit">
-                      Read Collection >
-                    </router-link>
-                  </p>
+        <div v-for="collection, index in collections" :key="collection.id">
+          <div v-if="index % 2 == 0">
+            <div class="card w-100 border-0 rounded-0 overflow-hidden" style="height: 380px">
+              <div class="row g-0">
+                <div class="col-7">
+                  <img src="../css/major.png" class="w-100 h-100 img-fluid" style="object-fit: cover" />
+                </div>
+                <div class="col-5 p-5 justify-content-center text-white" style="background-color: #172643">
+                  <div class="text-center mx-auto">
+                    <h5 class="card-title mb-4 pt-5 display-6">{{ collection.topic }}</h5>
+                    <p class="card-text w-75 mb-4 mx-auto display-4 fs-4">
+                      {{ collection.question }}
+                    </p>
+                    <p class="card-text display-4 fs-4">
+                      <router-link
+                        :to="{ name: 'Collections', params: { id: collection.id, singleCollection: JSON.stringify(collection) } }"
+                        class="active-link" style="color: inherit">
+                        Read Collection >
+                      </router-link>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- image on right side -->
-        <div class="card w-100 border-0 rounded-0 overflow-hidden" style="height: 380px">
-          <div class="row g-0">
-            <div class="col-5 p-5 justify-content-center text-white" style="background-color: #bc7326">
-              <div class="text-center mx-auto">
-                <h5 class="card-title mb-4 pt-5 display-6">Collection Topic</h5>
-                <p class="card-text w-75 mb-4 mx-auto display-4 fs-4">
-                  Some question about the collection topic
-                </p>
-                <p class="card-text display-4 fs-4">
-                  <router-link to="/collections/2" class="active-link" style="color: inherit">
-                    Read Collection >
-                  </router-link>
-                </p>
+          
+          <div v-else>
+            <div class="card w-100 border-0 rounded-0 overflow-hidden" style="height: 380px">
+              <div class="row g-0">
+                <div class="col-5 p-5 justify-content-center text-white" style="background-color: #bc7326">
+                  <div class="text-center mx-auto">
+                    <h5 class="card-title mb-4 pt-5 display-6">{{ collection.topic }}</h5>
+                    <p class="card-text w-75 mb-4 mx-auto display-4 fs-4">
+                      {{ collection.question }}
+                    </p>
+                    <p class="card-text display-4 fs-4">
+                      <router-link
+                        :to="{ name: 'Collections', params: { id: collection.id, singleCollection: JSON.stringify(collection)}}"
+                        class="active-link" style="color: inherit">
+                        Read Collection >
+                      </router-link>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-7">
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
+                    class="w-100 h-100 img-fluid" style="object-fit: cover" />
+                </div>
               </div>
-            </div>
-            <div class="col-7">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
-                class="w-100 h-100 img-fluid" style="object-fit: cover" />
             </div>
           </div>
         </div>
@@ -96,7 +100,7 @@ export default {
     singleCollection: {
       type: Object,
       required: false,
-    },
+    }
   },
   data() {
     return {
@@ -108,6 +112,9 @@ export default {
     collectionsId() {
       return this.$route.params.id;
     },
+    singleCollection() {
+      return JSON.parse(this.$route.params.singleCollection);
+    }
   },
   created() {
     this.loadData();

@@ -6,7 +6,6 @@ from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from uw_saml.decorators import group_required
-from django.views.decorators.csrf import csrf_exemt
 from rest_framework.parsers import JSONParser
 from rest_framework import permissions, generics, viewsets
 from rest_framework.views import APIView

@@ -17,18 +17,18 @@
         <div class="col-9 border-start border-dark border-4">
           <div class="px-3">
             <div class="mb-4 px-3">
-              <h2 class="card-title display-6 mb-2">{{ studentInfo.student.first_name }}</h2>
+              <h2 class="card-title display-6 mb-2">{{ studentInfo.interview.student.first_name }}</h2>
               <p class="card-subtitle text-uppercase display-6 fs-5 text-info">
-              <div v-for="major in studentInfo.major" :key="major.id">
-                {{ major.full_title + ", "}}
-              </div>
-              {{ studentInfo.standing }}
+                <span v-for="major in studentInfo.interview.major" :key="major.id">
+                  {{ major.full_title + ", " }}
+                </span>
+                {{ studentInfo.interview.standing }}
               </p>
             </div>
             <div class="mb-3 px-3">
-              <p class="card-text lh-base display-6 fs-4">"{{ story }}"</p>
+              <p class="card-text lh-base display-6 fs-4">"{{ studentInfo.story }}"</p>
               <p class="card-text display-6 fs-5 mb-2">
-                <router-link to="/students/1234" class="active-link" style="color: #5f5f5f">Read full interview >
+                 <router-link :to="{name: 'Students', params: {id: studentInfo.interview.id, singleStudent: JSON.stringify(studentInfo.interview)}}" class="active-link" style="color: #5f5f5f">Read full interview >
                 </router-link>
               </p>
             </div>
@@ -43,7 +43,7 @@
 export default {
   name: "CollectionListing",
   props: {
-    storyInfo: {
+    studentInfo: {
       type: Object,
       required: true,
     },

@@ -66,7 +66,10 @@
             A: Most interviews are conducted by student staff at UW-IT.<br/><br/>
 
             <strong>Q: How are the interviews transcribed?</strong><br/>
-            A: We make edits for clarity and concision as well as re-organize the conversation to make student stories more readable. We are trained to take special care of conserving the original interviewee intent. 
+            A: We make edits for clarity and concision as well as re-organize the conversation to make student stories more readable. We are trained to take special care of conserving the original interviewee intent.<br/><br/>
+            
+            <strong>Q: How do you ensure data privacy for the students you interview?</strong><br/>
+            A: After each interview, we are obliged to give an additional form for the students to complete. This form clarifies whether they only want their information used for internal UW research or if they are willing to release their story to be shared.
           </p>
         </div>
       </div>
