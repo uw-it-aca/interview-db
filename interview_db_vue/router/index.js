@@ -17,6 +17,7 @@ const routes = [
     path: "/collections/:id?",
     name: "Collections",
     component: Collections,
+    props: true,
     pathToRegexpOptions: { strict: true },
   },
   {
