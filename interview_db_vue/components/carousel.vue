@@ -47,7 +47,7 @@ export default {
     quote: {
       type: String,
       required: true,
-      default: "Some quote about really cool things wow I want to make games for other people so they can enjoy them too"
+      default: "Some quote about really cool things. I want to make games for other people so they can enjoy them too"
     },
   },
   data() {

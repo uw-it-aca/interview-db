@@ -1,12 +1,8 @@
 """ Management command to django's manage.py called
     create_sample_data that will generate interviews for testing.
 """
-from django.core.management.base import BaseCommand, CommandError
-from optparse import make_option
+from django.core.management.base import BaseCommand
 from interview_db.models import *
-from django.contrib.auth.models import User
-from django.core.files import File
-from django.utils import timezone
 from decimal import *
 
 
@@ -72,7 +68,8 @@ class Command(BaseCommand):
         commuter = StudentType.objects.get_or_create(type="Commuter")[0]
         exchange = StudentType.objects.get_or_create(type="Exchange")[0]
         first_gen = StudentType.objects.get_or_create(type="First-Gen")[0]
-        international = StudentType.objects.get_or_create(type="International")[0]
+        international = StudentType.objects.get_or_create(
+            type="International")[0]
 
         learning = Code.objects.create(
             topic="Learning",
@@ -92,17 +89,20 @@ class Command(BaseCommand):
 
         help = Collection.objects.create(
             topic="Getting Help",
-            question="What resources have you used to help throughout your college career?"
+            question="What resources have you used to help "
+                     "throughout your college career?"
         )
         help.codes.set([learning])
         college = Collection.objects.create(
             topic="Coming to College",
-            question="What is the biggest challenge you've faced since coming to the UW?",
+            question="What is the biggest challenge you've "
+                     "faced since coming to the UW?",
         )
         college.codes.set([career])
         reflection = Collection.objects.create(
             topic="Self Reflection",
-            question="What is the biggest challenge you've faced since coming to the UW?",
+            question="What is the biggest challenge you've "
+                     "faced since coming to the UW?",
         )
         reflection.codes.set([identity])
 
@@ -133,16 +133,22 @@ class Command(BaseCommand):
         i_joe.major.set([cse])
         s_joe = Story.objects.create(
             interview=i_joe,
-            story="This is Joe's first story about Learning, Getting Help (learning), Advice",
+            story="This is Joe's first story about Learning, "
+                  "Getting Help (learning), Advice",
             story_order_position=1,
         )
         s2_joe = Story.objects.create(
             interview=i_joe,
-            story="This is Joe's second story about Identity, Building Identity, Advice...Lorem ipsum dolor sit "
-                  "amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                  " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
-                  "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat "
-                  "nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
+            story="This is Joe's second story about Identity, Building "
+                  "Identity, Advice...Lorem ipsum dolor sit "
+                  "amet, consectetur adipiscing elit, sed do eiusmod "
+                  "tempor incididunt ut labore et dolore magna aliqua."
+                  " Ut enim ad minim veniam, quis nostrud exercitation "
+                  "ullamco laboris nisi ut aliquip ex ea commodo "
+                  "consequat. Duis aute irure dolor in reprehenderit "
+                  "in voluptate velit esse cillum dolore eu fugiat "
+                  "nulla pariatur. Excepteur sint occaecat cupidatat "
+                  "non proident, sunt in culpa qui officia deserunt "
                   "mollit anim id est laborum.",
             story_order_position=2,
         )
@@ -168,12 +174,16 @@ class Command(BaseCommand):
             date="2022-08-04",
             interview_quarter="su",
             signed_release_form=True,
-            pull_quote="Nancy's really long pull quote about going to school at UW that is very lengthy. In fact, the quote reaches the maximum number of characters for this field, which is a total of two hundred characters.",
+            pull_quote="Nancy's really long pull quote about going to school "
+                       "at UW that is very lengthy. In fact, the "
+                       "quote reaches the maximum number of "
+                       "characters for this field, which is a "
+                       "total of two hundred characters.",
             interview_notes_url="notes.com",
             image_is_not_identifying=True,
             image_alt_text="profile",
             intended_major=False,
-            standing="Senior",
+            standing="Junior",
             years_until_graduation="2",
             current_year="3",
             no_identifying_photo=True,
@@ -184,7 +194,13 @@ class Command(BaseCommand):
         i_nancy.major.set([cse])
         s_nancy = Story.objects.create(
             interview=i_nancy,
-            story="This is Nancy's first story about Career, Choosing College, Advice",
+            story="This is Nancy's first story about Career, "
+                  "Choosing College, Advice "
+                  "Lorem ipsum dolor sit amet, consectetur "
+                  "adipiscing elit, sed do eiusmod tempor incididunt "
+                  "ut labore et dolore magna aliqua. Ut enim ad "
+                  "minim veniam, quis nostrud exercitation ullamco "
+                  "laboris nisi ut aliquip ex ea commodo consequat.",
             story_order_position=1,
         )
 
@@ -220,7 +236,13 @@ class Command(BaseCommand):
         i_joe.student_type.set([exchange])
         s_billy = Story.objects.create(
             interview=i_billy,
-            story="This is Billy's first story about Identity, Building Identity, Advice",
+            story="This is Billy's first story about Identity, "
+                  "Building Identity, Advice"
+                  "Duis aute irure dolor in reprehenderit in "
+                  "voluptate velit esse cillum dolore eu fugiat "
+                  "nulla pariatur. Excepteur sint occaecat cupidatat "
+                  "non proident, sunt in culpa qui officia deserunt "
+                  "mollit anim id est laborum.",
             story_order_position=1,
         )
         c_billy = Coding(
@@ -254,7 +276,8 @@ class Command(BaseCommand):
         i_joe.student_type.set([commuter, international])
         s_sam = Story.objects.create(
             interview=i_sam,
-            story="This is Sam's first story about Career, Choosing College, Advice",
+            story="This is Sam's first story about Career, "
+                  "Choosing College, Advice",
             story_order_position=1,
         )
         c_sam = Coding(

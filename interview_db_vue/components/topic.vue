@@ -5,7 +5,7 @@
   <div class="row mb-5">
     <div class="col p-5" style="background-color: #172643; height:330px">
       <div class="text-white py-5">
-        <h2 class="display-3 mb-4 mx-auto text-start">{{ topicInfo.topic }}</h2>
+        <h2 class="display-3 mb-4 mx-auto">{{ topicInfo.topic }}</h2>
         <div class="row w-50 mx-auto">
           <h5 class="text-start display-4 fs-4">
             {{ topicInfo.question }}
