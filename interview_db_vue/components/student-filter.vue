@@ -39,7 +39,19 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
               <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
-                Other
+                Alumni
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+                Masters
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+                PhD
               </label>
             </div>
           </div>
@@ -91,7 +103,7 @@
         </h2>
         <div class="collapse" id="collections">
           <div class="card card-body border-0 mt-0">
-            <div v-for="topic in topics" :key="topics.id">
+            <div v-for="topic in topics" :key="topic.id">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label display-6 fs-6" for="flexCheckDefault">

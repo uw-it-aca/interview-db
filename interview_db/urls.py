@@ -46,7 +46,6 @@ urlpatterns += [
          name="collection-detail"),
     path('api/majors/', MajorListView.as_view(), name="major-list"),
     path('api/types/', StudentTypeListView.as_view(), name="type-list"),
-    path('api/stories/', StoryListView.as_view(), name="story-list"),
     re_path(r"^.*$", TemplateView.as_view(
         template_name="vue.html"),
         name="home"),

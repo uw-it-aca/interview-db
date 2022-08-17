@@ -2,8 +2,6 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from django.db import models
-from django import forms
-from django.forms import ModelForm
 from django.template.defaultfilters import truncatechars
 from django.urls import reverse
 

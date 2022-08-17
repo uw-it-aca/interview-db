@@ -2,19 +2,14 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404
-from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
-from uw_saml.decorators import group_required
-from rest_framework.parsers import JSONParser
-from rest_framework import permissions, generics, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
 
 from .serializers import *
-from .models import Code, Interview
+from .models import *
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
@@ -104,14 +99,3 @@ class StudentTypeListView(APIView):
         queryset = StudentType.objects.all()
         serializer = StudentTypeSerializer(queryset, many=True)
         return Response(serializer.data)
-
-
-class StoryListView(APIView):
-    """
-    API endpoint returning all stories
-    """
-
-    def get(self, request):
-        queryset = Story.objects.all()
-        serializer = StorySerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)

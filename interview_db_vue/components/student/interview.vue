@@ -2,44 +2,73 @@
 // full student interview page
 
 <template>
-  <div class="row w-75 mx-auto mb-2 justify-content-center">
-    <div class="ps-4">
-      <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">Choosing a
-        Major</button>
-      <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">Coming to
-        College</button>
-      <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">Self
-        Reflection</button>
-      <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">Moving
-        Forward</button>
-    </div>
-  </div>
 
-  <div class="row w-75 mx-auto mb-5 pl-5 justify-content-center">
-    <div class="ps-4">
-      <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">Finding
-        Community</button>
-      <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">Advice</button>
+  <div class="mt-4">
+    <div class="row w-75 mx-auto mb-5">
+      <div class="col-3 justify-content-center">
+        <img src="../../css/quad.png" class="img-fluid mx-auto d-block" style="
+              border-radius: 50%;
+              height: 150px;
+              width: 150px;
+              object-fit: cover;" />
+      </div>
+      <div class="col-9 justify-content-start py-3">
+        <h2 class="display-4">{{ studentInfo.student.first_name }}</h2>
+        <h5 class="display-3 fs-3 text-info text-uppercase">
+          <span v-for="major in studentInfo.major" :key="major.id">
+            {{ major.full_title + ", " }}
+          </span>
+          {{ studentInfo.standing }}
+        </h5>
+      </div>
     </div>
-  </div>
 
-  <div class="row w-75 mx-auto mb-5 ps-3">
-    <div v-for="story in stories" :key="story.id">
-      <p class="display-6 fs-5 mb-5 ps-4 lh-base border-start border-dark border-4">
-        {{ story.story }}<b />
-      </p>
+  
+    <div class="row w-75 mx-auto mb-4">
+      <div class="col-2 justify-content-center py-2">
+        <p class="text-end"><strong>Filtering on:</strong></p>
+      </div>
+      <div class="justify-content-start col-10">
+        <div v-for="story in stories" :key="story.id">
+          <span v-for="collection in story.code" :key="collection.id">
+            <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
+              {{ collection.code }}
+            </button>
+          </span>
+          <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
+            Clear All
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="row justify-content-center mx-auto">
-    <div class="col-3 mx-2">
-      <StudentCard :first-name="'Amanda'" />
+    <div class="row w-75 mx-auto mb-5 ps-3">
+      <div v-for="story in stories" :key="story.id">
+        <div class="ps-4 mb-1 border-start border-dark border-4">
+          <p class="display-6 fs-5 lh-base">
+            {{ story.story }}
+          </p>
+        </div>
+        <div class="ps-4 mb-5 border-start border-white border-4">
+          <p class="text-secondary">Collection:
+            <span v-for="collection in story.code" :key="collection.id">
+              #{{ collection.code }}
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="col-3 mx-2">
-      <StudentCard :first-name="'Anna'" />
-    </div>
-    <div class="col-3 mx-2">
-      <StudentCard :first-name="'Caleb'" />
+
+    <div class="row justify-content-center mx-auto">
+      <div class="col-3 mx-2">
+        <StudentCard :first-name="'Amanda'" />
+      </div>
+      <div class="col-3 mx-2">
+        <StudentCard :first-name="'Anna'" />
+      </div>
+      <div class="col-3 mx-2">
+        <StudentCard :first-name="'Caleb'" />
+      </div>
     </div>
   </div>
 </template>
@@ -57,12 +86,21 @@ export default {
       type: Object,
       required: true,
     },
+    collections: {
+      type: Object,
+      required: false,
+    }
   },
   data() {
     return {
       stories: [],
     };
   },
+  // computed: {
+  //   collections() {
+
+  //   }
+  // }
   methods: {
     async loadData() {
       const response = await get("/api/students/" + this.studentInfo.id + "/");
