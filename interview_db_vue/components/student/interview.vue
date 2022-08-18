@@ -15,10 +15,13 @@
       <div class="col-9 justify-content-start py-3">
         <h2 class="display-4">{{ studentInfo.student.first_name }}</h2>
         <h5 class="display-3 fs-3 text-info text-uppercase">
+          {{ studentInfo.standing + ", "}}
           <span v-for="major in studentInfo.major" :key="major.id">
             {{ major.full_title + ", " }}
           </span>
-          {{ studentInfo.standing }}
+          <span v-for="trait in studentInfo.student_type" :key="trait.id">
+            {{ trait.type + ", "}}
+          </span>
         </h5>
       </div>
     </div>
@@ -29,16 +32,16 @@
         <p class="text-end"><strong>Filtering on:</strong></p>
       </div>
       <div class="justify-content-start col-10">
-        <div v-for="story in stories" :key="story.id">
+        <span v-for="story in stories" :key="story.id">
           <span v-for="collection in story.code" :key="collection.id">
             <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
               {{ collection.code }}
             </button>
           </span>
-          <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
+        </span>
+        <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
             Clear All
-          </button>
-        </div>
+        </button>
       </div>
     </div>
 
