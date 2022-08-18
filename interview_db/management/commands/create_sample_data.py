@@ -233,7 +233,7 @@ class Command(BaseCommand):
             other_publishing_restrictions=False,
         )
         i_billy.major.set([hcde])
-        i_joe.student_type.set([exchange])
+        i_billy.student_type.set([exchange])
         s_billy = Story.objects.create(
             interview=i_billy,
             story="This is Billy's first story about Identity, "
@@ -273,7 +273,7 @@ class Command(BaseCommand):
             other_publishing_restrictions=False,
         )
         i_sam.major.set([comm, cse])
-        i_joe.student_type.set([commuter, international])
+        i_sam.student_type.set([commuter, international])
         s_sam = Story.objects.create(
             interview=i_sam,
             story="This is Sam's first story about Career, "

@@ -86,9 +86,11 @@
           <div class="card card-body border-0 mt-0">
             <div v-for="trait in traits" :key="trait.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" :value="trait" id="trait" v-model="checkedFilters"
+                  @change="onClick($event)">
+                <label class="form-check-label display-6 fs-6" for="trait.id">
                   {{ trait.type }}
+                  {{ checkedFilters }}
                 </label>
               </div>
             </div>
@@ -125,9 +127,10 @@ export default {
   props: {},
   data() {
     return {
-      majors:[],
-      traits:[],
-      topics:[],
+      checkedFilters: [],
+      majors: [],
+      traits: [],
+      topics: [],
     };
   },
   methods: {
@@ -139,6 +142,9 @@ export default {
       const collections = await get('api/collections/');
       this.topics = collections.data;
     },
+    onClick(event) {
+      this.$emit('clicked', this.checkedFilters)
+    }
   },
   created() {
     this.loadData();

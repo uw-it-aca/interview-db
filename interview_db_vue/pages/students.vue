@@ -24,12 +24,14 @@
         </div>
         <div class="row">
           <div class="col-3 justify-content-center">
-            <StudentFilter />
+            <StudentFilter @clicked="updateFilters" />
+            {{ filters }}
+            {{ filteredStudents }}
           </div>
 
           <div class="col-9 justify-content-end">
             <div class="card-columns justify-content-end">
-              <div v-for="student in students" :key="student.id">
+              <div v-for="student in filteredStudents" :key="student.id">
                 <StudentListing :studentInfo="student" />
               </div>
             </div>
@@ -65,6 +67,7 @@ export default {
     return {
       pageTitle: "Students",
       students: [],
+      filters: [],
     };
   },
   computed: {
@@ -73,6 +76,11 @@ export default {
     },
     singleStudentInfo() {
       return JSON.parse(this.$route.params.singleStudent);
+    },
+    filteredStudents() {
+      if (!this.filters.length) return this.students
+      return this.students.filter(student =>
+        student.student_type.every(trait => trait.type.includes("Exchange"))
     }
   },
   created() {
@@ -82,6 +90,9 @@ export default {
     async loadData() {
       const response = await get("/api/students/");
       this.students = response.data;
+    },
+    updateFilters(value) {
+      this.filters = value;
     }
   },
 };
