@@ -70,6 +70,7 @@ class CollectionDetailView(APIView):
     """
     API endpoint returning single collection of stories
     """
+
     def get(self, request, id):
         collection = Collection.objects.get(id=id)
         queryset = Story.objects.filter(
@@ -92,10 +93,33 @@ class MajorListView(APIView):
 
 class StudentTypeListView(APIView):
     """
-    API endpoint returning all added majors
+    API endpoint returning all student types
     """
 
     def get(self, request):
         queryset = StudentType.objects.all()
         serializer = StudentTypeSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class RandomStudentsView(APIView):
+    """
+    API endpoint returning three random students
+    """
+
+    def get(self, request):
+        queryset = Interview.objects.order_by("?")[:3]
+        serializer = InterviewSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class RecentStudentsView(APIView):
+    """
+    API endpoint returning three random students
+    """
+
+    def get(self, request):
+        queryset = Interview.objects.all().order_by('-date')[:3]
+        serializer = InterviewSerializer(queryset, many=True,
+                                         context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)

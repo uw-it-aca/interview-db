@@ -22,14 +22,10 @@
       </div>
 
       <div class="row justify-content-center mx-auto">
-        <div class="col-3 mx-2">
-          <StudentCard :first-name="'Amanda'" />
-        </div>
-        <div class="col-3 mx-2">
-          <StudentCard :first-name="'Anna'" />
-        </div>
-        <div class="col-3 mx-2">
-          <StudentCard :first-name="'Caleb'" />
+        <div v-for="student in recentStudents" :key="student.id">
+          <div class="col-3 mx-2">
+            <StudentCard :studentInfo="student" />
+          </div>
         </div>
       </div>
 
@@ -69,14 +65,17 @@
       <div class="row justify-content-center">
         <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto" data-bs-ride="carousel">
           <div class="carousel-inner justify-content-cente mx-auto">
-            <div class="carousel-item active justify-content-center">
-              <StudentCarousel :first-name="'Kevin'" class="d-block justify-content-center mx-auto" />
-            </div>
-            <div class="carousel-item">
-              <StudentCarousel :first-name="'Kevin'" />
-            </div>
-            <div class="carousel-item">
-              <StudentCarousel :first-name="'Kevin'" />
+            <div v-for="student, index in randomStudents" :key="student.id">
+              <div v-if="index == 0">
+                <div class="carousel-item active justify-content-center">
+                  <StudentCarousel :studentInfo="student" class="d-block justify-content-center mx-auto" />
+                </div>
+              </div>
+              <div v-else>
+                <div class="carousel-item">
+                  <StudentCarousel :studentInfo="student"/>
+                </div>
+              </div>
             </div>
           </div>
           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
@@ -96,6 +95,7 @@ import Layout from "../layout.vue";
 import StudentCard from "../components/student/student-card.vue";
 import ProcessCard from "../components/process.vue";
 import StudentCarousel from "../components/carousel.vue";
+import { get } from "axios";
 
 export default {
   name: "PagesHome",
@@ -108,8 +108,20 @@ export default {
   data() {
     return {
       pageTitle: "Home",
+      randomStudents: [],
+      recentStudents: [],
     };
   },
-  methods: {},
+  created() {
+    this.loadData();
+  },
+  methods: {
+    async loadData() {
+      const random = await get("api/random/");
+      this.randomStudents = random.data;
+      const recent = await get("api/recent/");
+      this.recentStudents = recent.data;
+    }
+  },
 };
 </script>
