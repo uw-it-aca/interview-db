@@ -13,10 +13,15 @@
           <div class="col bg-light p-5">
             <div class="card-body text-center">
               <div class="mb-4">
-                <h2 class="display-4 fs-3 mb-1">{{ firstName }}</h2>
-                <h5 class="text-uppercase display-4 fs-6 text-info mx-auto">{{ major + "," + " " + year }}</h5>
+                <h2 class="display-4 fs-3 mb-1">{{ studentInfo.student.first_name }}</h2>
+                <h5 class="text-uppercase display-4 fs-6 text-info mx-auto">
+                  {{ studentInfo.standing }}
+                  <span v-for="major, index in studentInfo.major" :key="major.id">
+                    {{ ", " + major.full_title }}
+                  </span>
+                </h5>
               </div>
-              <p><em>"{{ quote }}"</em></p>
+              <p><em>"{{ studentInfo.pull_quote }}"</em></p>
             </div>
           </div>
         </div>
@@ -29,25 +34,9 @@
 export default {
   name: "StudentCarousel",
   props: {
-    firstName: {
-      type: String,
+    studentInfo: {
+      type: Object,
       required: true,
-      default: "Joe",
-    },
-    year: {
-      type: String,
-      required: true,
-      default: "Freshman",
-    },
-    major: {
-      type: Array,
-      required: true,
-      default: "Communications",
-    },
-    quote: {
-      type: String,
-      required: true,
-      default: "Some quote about really cool things. I want to make games for other people so they can enjoy them too"
     },
   },
   data() {

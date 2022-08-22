@@ -18,16 +18,18 @@
           <div class="mb-3 px-3">
             <h2 class="card-title display-6 mb-2">{{ studentInfo.student.first_name }}</h2>
             <p class="card-subtitle text-uppercase display-6 fs-5 text-info">
-              <span v-for="major in studentInfo.major" :key="major.id">
-                {{ major.full_title + ", " }}
-              </span>
               {{ studentInfo.standing }}
+              <span v-for="major, index in studentInfo.major" :key="major.id">
+                {{ ", " + major.full_title }}
+              </span>
             </p>
           </div>
           <div class="mb-3 px-3">
             <p class="card-text display-6 fs-3">"{{ studentInfo.pull_quote }}"</p>
             <p class="card-text display-6 fs-5 mb-2">
-              <router-link :to="{name: 'Students', params: {id: studentInfo.id, singleStudent: JSON.stringify(studentInfo)}}" class="active-link" style="color: #5f5f5f">Read full interview >
+              <router-link
+                :to="{ name: 'Students', params: { id: studentInfo.id, singleStudent: JSON.stringify(studentInfo) } }"
+                class="active-link" style="color: #5f5f5f">Read full interview >
               </router-link>
             </p>
           </div>
