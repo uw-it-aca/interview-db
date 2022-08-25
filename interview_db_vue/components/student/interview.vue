@@ -64,15 +64,11 @@
     </div>
 
     <div class="row justify-content-center mx-auto">
-      <div class="col-3 mx-2">
-        <StudentCard :first-name="'Amanda'" />
-      </div>
-      <div class="col-3 mx-2">
-        <StudentCard :first-name="'Anna'" />
-      </div>
-      <div class="col-3 mx-2">
-        <StudentCard :first-name="'Caleb'" />
-      </div>
+      <span v-for="student in recentStudents" :key="student.id">
+        <div class="col-3 mx-2">
+          <StudentCard :studentInfo="student" />
+        </div>
+      </span>
     </div>
   </div>
 </template>
@@ -98,17 +94,15 @@ export default {
   data() {
     return {
       stories: [],
+      recentStudents: [],
     };
   },
-  // computed: {
-  //   collections() {
-
-  //   }
-  // }
   methods: {
     async loadData() {
       const response = await get("/api/students/" + this.studentInfo.id + "/");
       this.stories = response.data;
+      const recent = await get("api/recent/");
+      this.recentStudents = recent.data;
     },
   },
   created() {

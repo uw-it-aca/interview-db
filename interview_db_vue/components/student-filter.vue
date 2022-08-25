@@ -90,7 +90,6 @@
                   @change="onClick($event)">
                 <label class="form-check-label display-6 fs-6" for="trait.id">
                   {{ trait.type }}
-                  {{ checkedFilters }}
                 </label>
               </div>
             </div>

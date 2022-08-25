@@ -21,12 +21,12 @@
         </div>
       </div>
 
-      <div class="row justify-content-center mx-auto">
-        <div v-for="student in recentStudents" :key="student.id">
+      <div class="row">
+        <span v-for="student in recentStudents" :key="student.id">
           <div class="col-3 mx-2">
             <StudentCard :studentInfo="student" />
           </div>
-        </div>
+        </span>
       </div>
 
       <div class="row mb-5">

@@ -25,8 +25,6 @@
         <div class="row">
           <div class="col-3 justify-content-center">
             <StudentFilter @clicked="updateFilters" />
-            {{ filters }}
-            {{ filteredStudents }}
           </div>
 
           <div class="col-9 justify-content-end">
@@ -79,30 +77,9 @@ export default {
     },
     filteredStudents() {
       if (!this.filters.length) return this.students
-      const out = this.students.filter(student =>
+      return this.students.filter(student =>
         student.student_type.filter (trait =>
         trait.id > 1))
-
-        return out
-
-      // const out
-      // for (let i = 0; i < this.filters.length; i++) {
-      //   out += this.filters[i]
-      // }
-
-      // const checkFilter = (stu = [], filters = []) =>  {
-      //   let res = [];
-      //   for (let i = 0; i < stu.length; i++) {
-      //     for (let j = 0; j < stu.student_type.length; j++) {
-      //       if (!this.filters.includes(stu.student_type[j])) {
-      //         break
-      //       }
-      //     }
-      //     res += stu[i]
-      //   }
-      //   return res
-      // }
-      // return checkFilter(this.students, this.filters)
     }
   },
   created() {

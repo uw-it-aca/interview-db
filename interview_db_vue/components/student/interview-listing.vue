@@ -6,7 +6,7 @@
     <div class="card-body">
       <div class="row g-0">
         <div class="col-2">
-          <img src="../../css/doorway.png" class="img-fluid mx-auto d-block" style="
+          <img src="../../css/about.png" class="img-fluid mx-auto d-block" style="
               border-radius: 50%;
               height: 75px;
               width: 75px;
