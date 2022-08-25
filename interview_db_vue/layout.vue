@@ -7,10 +7,12 @@
             <router-link class="nav-link" active-class="active" aria-current="page" to="/">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Students</router-link>
+            <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Students
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections</router-link>
+            <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections
+            </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About Us</router-link>
@@ -24,6 +26,24 @@
       <slot name="content" />
     </main>
     <footer class="p-5 my-5 text-muted bg-light justify-content-end">
+      <ul class="list-inline mb-2">
+        <li class="list-inline-item item-dot">
+          <a href="mailto:help@uw.edu?subject=Student Experience Interviews Project" title="Contact the DawgPath team"
+            class="text-muted text-decoration-none me-2">Contact</a>
+        </li>
+        <li class="list-inline-item item-dot">
+          <a href="https://itconnect.uw.edu/learn/success-analytics/apps/#dawg" title="DawgPath Docs on IT Connect"
+            class="text-muted text-decoration-none me-2">Documentation</a>
+        </li>
+        <li class="list-inline-item item-dot">
+          <a href="https://www.washington.edu/online/terms/" title="UW Terms of Use"
+            class="text-muted text-decoration-none me-2">Terms</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://www.washington.edu/online/privacy/" title="UW Privacy Policy"
+            class="router-link text-muted text-decoration-none me-2">Privacy</a>
+        </li>
+      </ul>
       &copy; 2022 University of Washington
     </footer>
   </div>
