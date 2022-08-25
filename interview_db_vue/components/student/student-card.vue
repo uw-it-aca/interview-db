@@ -10,7 +10,7 @@
         <h2 class="card-title fw-normal pt-4">{{ studentInfo.student.first_name }}</h2>
         <h4 class="card-subtitle w-75 text-uppercase display-4 fs-6 text-info mx-auto mb-4">
           {{ studentInfo.standing }}
-          <span v-for="major, index in studentInfo.major" :key="major.id">
+          <span v-for="major in studentInfo.major" :key="major.id">
             {{ ", " + major.full_title }}
           </span>
         </h4>
