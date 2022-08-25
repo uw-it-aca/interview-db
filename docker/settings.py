@@ -10,6 +10,25 @@ INSTALLED_APPS += [
     'project.apps.InterviewAdminConfig',
     'interview_db.apps.InterviewConfig',
     'compressor',
+    'rest_framework',
+]
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'debug':  True,
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'interview_db.context_processors.google_analytics',
+                'interview_db.context_processors.django_debug',
+            ],
+        }
+    }
 ]
 
 COMPRESS_ROOT = '/static'
@@ -40,11 +59,11 @@ COMPRESS_JS_FILTERS = [
 ]
 
 ADMIN_REORDER = (
-    ('app1',('Student','Story')),
-    ('app2',('Interview')),
+    ('app1', ('Student', 'Story')),
+    ('app2', 'Interview'),
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
 MEDIA_URL = '/media/'
 
 if not DEBUG:
@@ -65,3 +84,24 @@ if os.getenv('AUTH', 'NONE') == 'SAML_MOCK':
         INTERVIEW_DB_AUTHZ_GROUPS['admin'],
         INTERVIEW_DB_AUTHZ_GROUPS['front-end'],
     ]
+
+if os.getenv("ENV") == "localdev":
+    DEBUG = True
+
+if os.getenv("ENV") == "localdev":
+    VITE_MANIFEST_PATH = os.path.join(
+        BASE_DIR, "interview_db", "static", "manifest.json"
+    )
+else:
+    VITE_MANIFEST_PATH = os.path.join(os.sep, "static", "manifest.json")
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    # ]
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
+}
