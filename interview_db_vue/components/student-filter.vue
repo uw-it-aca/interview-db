@@ -90,7 +90,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" :value="trait" id="trait" v-model="checkedFilters"
                   @change="onClick($event)">
-                <label class="form-check-label display-6 fs-6" for="trait.id">
+                <label class="form-check-label display-6 fs-6" for="trait">
                   {{ trait.type }}
                 </label>
               </div>
@@ -108,8 +108,9 @@
           <div class="card card-body border-0 mt-0">
             <div v-for="topic in data.topics" :key="topic.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" :value="topic.topic" id="topic" v-model="checkedFilters"
+                 @change="onClick($event)">
+                <label class="form-check-label display-6 fs-6" for="topic">
                   {{ topic.topic }}
                 </label>
               </div>
