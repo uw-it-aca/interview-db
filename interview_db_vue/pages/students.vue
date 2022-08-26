@@ -18,18 +18,19 @@
               <h2 class="display-3 text-center mb-4">Student Interviews</h2>
               <h5 class="text-center display-4 fs-4">
                 Sort interviews by student<br />characteristics
+                <!-- Filters: {{ filters }} -->
               </h5>
             </div>
           </div>
         </div>
         <div class="row">
+          
           <div class="col-3 justify-content-center">
-            <StudentFilter @clicked="updateFilters" />
+            <StudentFilter :checkedFilters="filters" />
           </div>
-
           <div class="col-9 justify-content-end">
             <div class="card-columns justify-content-end">
-              <div v-for="student in filteredStudents" :key="student.id">
+              <div v-for="student in students" :key="student.id">
                 <StudentListing :studentInfo="student" />
               </div>
             </div>
@@ -65,7 +66,6 @@ export default {
     return {
       pageTitle: "Students",
       students: [],
-      filters: [],
     };
   },
   computed: {
@@ -80,7 +80,10 @@ export default {
       return this.students.filter(student =>
         student.student_type.filter (trait =>
         trait.id > 1))
-    }
+    },
+    // filters() {
+    //   return parseQuery(this.$route.query.filters);
+    // },
   },
   created() {
     this.loadData();
@@ -90,9 +93,9 @@ export default {
       const response = await get("/api/students/");
       this.students = response.data;
     },
-    updateFilters(value) {
-      this.filters = value;
-    }
+    // updateFilters(value) {
+    //   this.filters = value;
+    // }
   },
 };
 </script>

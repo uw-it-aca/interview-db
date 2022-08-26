@@ -32,10 +32,6 @@
             class="text-muted text-decoration-none me-2">Contact</a>
         </li>
         <li class="list-inline-item item-dot">
-          <a href="https://itconnect.uw.edu/learn/success-analytics/apps/#dawg" title="DawgPath Docs on IT Connect"
-            class="text-muted text-decoration-none me-2">Documentation</a>
-        </li>
-        <li class="list-inline-item item-dot">
           <a href="https://www.washington.edu/online/terms/" title="UW Terms of Use"
             class="text-muted text-decoration-none me-2">Terms</a>
         </li>

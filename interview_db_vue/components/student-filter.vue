@@ -5,6 +5,7 @@
   <div class="card" style="width: 18rem; border-radius:1.5rem">
     <h5 class="card-header border-0 border-top bg-white" style="border-radius:1.5rem">Filter by Student:</h5>
     <div class="card-body border-top">
+      {{checkedFilters}}
       <div class="mb-4">
         <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#year" aria-expanded="false"
           aria-controls="year">
@@ -13,8 +14,9 @@
         <div class="collapse mt-0" id="year">
           <div class="card card-body border-0">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="" id="freshman" v-model="checkedFilters"
+                @change="onClick($event)">
+              <label class="form-check-label display-6 fs-6" for="freshman">
                 Freshman
               </label>
             </div>
@@ -67,8 +69,9 @@
           <div class="card card-body border-0 mt-0">
             <div v-for="major in majors" :key="major.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" :value="major" id="major" v-model="checkedFilters"
+                  @change="onClick($event)">
+                <label class="form-check-label display-6 fs-6" for="major">
                   {{ major.full_title }}
                 </label>
               </div>
@@ -88,7 +91,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" :value="trait" id="trait" v-model="checkedFilters"
                   @change="onClick($event)">
-                <label class="form-check-label display-6 fs-6" for="trait.id">
+                <label class="form-check-label display-6 fs-6" for="trait">
                   {{ trait.type }}
                 </label>
               </div>
@@ -106,8 +109,9 @@
           <div class="card card-body border-0 mt-0">
             <div v-for="topic in topics" :key="topic.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" :value="topic.topic" id="topic" v-model="checkedFilters"
+                 @change="onClick($event)">
+                <label class="form-check-label display-6 fs-6" for="topic">
                   {{ topic.topic }}
                 </label>
               </div>
@@ -141,9 +145,13 @@ export default {
       const collections = await get('api/collections/');
       this.topics = collections.data;
     },
+    // onClick(event) {
+    //   this.$emit('clicked', this.checkedFilters)
+    // }
     onClick(event) {
-      this.$emit('clicked', this.checkedFilters)
-    }
+      this.$router.push({name: 'Students', query: {collections: this.checkedFilters}})
+      console.log(this.$route.query.collections)
+    },
   },
   created() {
     this.loadData();
