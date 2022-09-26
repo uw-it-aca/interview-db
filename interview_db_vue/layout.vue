@@ -67,6 +67,7 @@
 <script>
 export default {
   name: "LayoutComp",
+  inject: ["mq"],
   components: {},
   props: {
     pageTitle: {
