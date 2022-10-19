@@ -16,10 +16,10 @@
         <h2 class="display-4">{{ studentInfo.student.first_name }}</h2>
         <h5 class="display-3 fs-3 text-info text-uppercase">
           {{ studentInfo.standing }}
-          <span v-for="major, index in studentInfo.major" :key="major.id">
+          <span v-for="major in studentInfo.major" :key="major.id">
             {{ ", " + major.full_title }}
           </span>
-          <span v-for="trait, index in studentInfo.student_type" :key="trait.id">
+          <span v-for="trait in studentInfo.student_type" :key="trait.id">
             {{ ", " + trait.type }}
           </span>
 

@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
 
+from uw_saml.decorators import group_required
+
 from .serializers import *
 from .models import *
 

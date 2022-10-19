@@ -18,19 +18,23 @@
               <h2 class="display-3 text-center mb-4">Student Interviews</h2>
               <h5 class="text-center display-4 fs-4">
                 Sort interviews by student<br />characteristics
-                <!-- Filters: {{ filters }} -->
               </h5>
             </div>
           </div>
         </div>
         <div class="row">
-          
+
           <div class="col-3 justify-content-center">
-            <StudentFilter :checkedFilters="filters" />
+            <StudentFilter />
+            {{ filters }}
+            <!-- {{ filter.year}} -->
+            <!-- {{ filter.major }}
+            {{ filter.trait }}
+            {{ filter.topic }} -->
           </div>
           <div class="col-9 justify-content-end">
             <div class="card-columns justify-content-end">
-              <div v-for="student in students" :key="student.id">
+              <div v-for="student in filteredStudents" :key="student.id">
                 <StudentListing :studentInfo="student" />
               </div>
             </div>
@@ -66,6 +70,12 @@ export default {
     return {
       pageTitle: "Students",
       students: [],
+      filters: {
+        year: this.$route.query.year,
+        major: this.$route.query.major,
+        trait: this.$route.query.trait,
+        topic: this.$route.query.topic,
+      },
     };
   },
   computed: {
@@ -75,15 +85,29 @@ export default {
     singleStudentInfo() {
       return JSON.parse(this.$route.params.singleStudent);
     },
-    filteredStudents() {
-      if (!this.filters.length) return this.students
-      return this.students.filter(student =>
-        student.student_type.filter (trait =>
-        trait.id > 1))
+    updatedFilters() {
+      this.filters.year = this.$route.query.year;
+      this.filters.major = this.$route.query.major;
+      this.filters.trait = this.$route.query.trait;
+      this.filters.topic = this.$route.query.topic;
     },
-    // filters() {
-    //   return parseQuery(this.$route.query.filters);
-    // },
+    filteredStudents() {
+      if (this.filters) {
+        return this.students.filter(student => student.major == this.filters.major
+        );
+        return this.students.filter(student => {
+          return this.filters.major.every(m => student.major.includes(m))
+        });
+        return this.students.filter(student => {
+          return this.filters.major.every(m => student.major.includes(m))
+        });
+        return this.students.filter(student => {
+          return this.filters.major.every(m => student.major.includes(m))
+        });
+      } else {
+        return this.students;
+      }
+    },
   },
   created() {
     this.loadData();
@@ -93,9 +117,6 @@ export default {
       const response = await get("/api/students/");
       this.students = response.data;
     },
-    // updateFilters(value) {
-    //   this.filters = value;
-    // }
   },
 };
 </script>
