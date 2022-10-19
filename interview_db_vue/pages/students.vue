@@ -110,9 +110,6 @@ export default {
       const response = await get("/api/students/");
       this.students = response.data;
     },
-    // updateFilters(value) {
-    //   this.filters = value;
-    // }
   },
 };
 </script>
