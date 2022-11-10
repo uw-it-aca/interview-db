@@ -23,12 +23,15 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-3 justify-content-center">
-            <StudentFilter @clicked="updateFilters" />
-            {{ filters }}
-            {{ filteredStudents }}
-          </div>
 
+          <div class="col-3 justify-content-center">
+            <StudentFilter />
+            {{ filters }}
+            <!-- {{ filter.year}} -->
+            <!-- {{ filter.major }}
+            {{ filter.trait }}
+            {{ filter.topic }} -->
+          </div>
           <div class="col-9 justify-content-end">
             <div class="card-columns justify-content-end">
               <div v-for="student in filteredStudents" :key="student.id">
@@ -67,7 +70,12 @@ export default {
     return {
       pageTitle: "Students",
       students: [],
-      filters: [],
+      filters: {
+        year: this.$route.query.year,
+        major: this.$route.query.major,
+        trait: this.$route.query.trait,
+        topic: this.$route.query.topic,
+      },
     };
   },
   computed: {
@@ -77,33 +85,29 @@ export default {
     singleStudentInfo() {
       return JSON.parse(this.$route.params.singleStudent);
     },
+    updatedFilters() {
+      this.filters.year = this.$route.query.year;
+      this.filters.major = this.$route.query.major;
+      this.filters.trait = this.$route.query.trait;
+      this.filters.topic = this.$route.query.topic;
+    },
     filteredStudents() {
-      if (!this.filters.length) return this.students
-      const out = this.students.filter(student =>
-        student.student_type.filter (trait =>
-        trait.id > 1))
-
-        return out
-
-      // const out
-      // for (let i = 0; i < this.filters.length; i++) {
-      //   out += this.filters[i]
-      // }
-
-      // const checkFilter = (stu = [], filters = []) =>  {
-      //   let res = [];
-      //   for (let i = 0; i < stu.length; i++) {
-      //     for (let j = 0; j < stu.student_type.length; j++) {
-      //       if (!this.filters.includes(stu.student_type[j])) {
-      //         break
-      //       }
-      //     }
-      //     res += stu[i]
-      //   }
-      //   return res
-      // }
-      // return checkFilter(this.students, this.filters)
-    }
+      if (this.filters) {
+        return this.students.filter(student => student.major == this.filters.major
+        );
+        return this.students.filter(student => {
+          return this.filters.major.every(m => student.major.includes(m))
+        });
+        return this.students.filter(student => {
+          return this.filters.major.every(m => student.major.includes(m))
+        });
+        return this.students.filter(student => {
+          return this.filters.major.every(m => student.major.includes(m))
+        });
+      } else {
+        return this.students;
+      }
+    },
   },
   created() {
     this.loadData();
@@ -113,9 +117,6 @@ export default {
       const response = await get("/api/students/");
       this.students = response.data;
     },
-    updateFilters(value) {
-      this.filters = value;
-    }
   },
 };
 </script>
