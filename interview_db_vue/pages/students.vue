@@ -26,7 +26,6 @@
           <div class="col-3 justify-content-center">
             <StudentFilter @clicked="updateFilters" />
             {{ filters }}
-            {{ filteredStudents }}
           </div>
 
           <div class="col-9 justify-content-end">
