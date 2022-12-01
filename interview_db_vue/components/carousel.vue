@@ -13,15 +13,15 @@
           <div class="col bg-light p-5">
             <div class="card-body">
               <div class="mb-4">
-                <h2 class="display-4 fs-3 mb-1">{{ studentInfo.student.first_name }}</h2>
-                <h5 class="text-uppercase display-4 fs-6 text-info mx-auto">
+                <h1 class="display-5 mb-3 fw-bold">{{ studentInfo.student.first_name }}</h1>
+                <p class="display-4 fs-6 mx-auto pb-4 mb-5 border-bottom border-primary">
                   {{ studentInfo.standing + ", studying "}}
                   <span v-for="major, index in studentInfo.major" :key="major.id">
                     {{ major.full_title }}
                   </span>
-                </h5>
+                </p>
               </div>
-              <p><em>{{ studentInfo.pull_quote }}</em></p>
+              <p class="mt-2">{{ studentInfo.pull_quote }}</p>
             </div>
           </div>
         </div>

@@ -1,14 +1,21 @@
 // import entire bootstrap library
 
+// setting bootstrap color variables
 $light: #FAF8FC;              // card color
 $primary: #1E1E1E;            // text
 $secondary: #827252;          // default button
 $info: #B4A67F;               // active button
 $white: #F8F9fA;              // background color
+
 $min-contrast-ratio: 2.5;
+
 $carousel-control-color: $light;
 $carousel-control-width: 25%;
-$btn-border-radius: 20px;
+
+$btn-border-radius: 1px;
+$btn-border-width: 0px;
+$bs-btn-color: $white;
+$bs-btn-active-color: $info;
 $btn-transition: all 0.15s ease 0s;
 $btn-active-box-shadow: inset 0 3px 5px rgba($info, .125);
 $btn-link-color: $info;
@@ -24,23 +31,34 @@ $custom-colors: (
   "background": #F8F9fA,
 );
 
-li a {
-  text-decoration: none;
-}
+// // remove underline on button links
+// li a {
+//   text-decoration: none;
+//   color: $white;
+// }
 
-a.active-link {
-  color: black;
+a.active-link{
   text-decoration: none;
+  color: $white;
 }
 
 a.nav-link {
-  color: black;
-  text-decoration: none;
-  text-transform: uppercase;
   margin: auto 1em auto;
   font-size: larger;
 }
 
+// Open Sans for all body text
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+header, main {
+  font-family: 'Open Sans', sans-serif;
+  text-transform: none;
+  text-decoration:none;
+}
+
+// Times for all headers
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Times New Roman', Times, serif;
+}
 
 // bootstrap theme + utility merging
 $theme-colors: map-merge($theme-colors, $custom-colors);
