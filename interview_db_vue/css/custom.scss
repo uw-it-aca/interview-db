@@ -7,20 +7,24 @@ $secondary: #827252;          // default button
 $info: #B4A67F;               // active button
 $white: #F8F9fA;              // background color
 
+$border-radius: 1px;
 $min-contrast-ratio: 2.5;
 
 $carousel-control-color: $light;
 $carousel-control-width: 25%;
 
+// button styling
 $btn-border-radius: 1px;
 $btn-border-width: 0px;
 $bs-btn-color: $white;
 $bs-btn-active-color: $info;
 $btn-transition: all 0.15s ease 0s;
-$btn-active-box-shadow: inset 0 3px 5px rgba($info, .125);
-$btn-link-color: $info;
-$btn-link-hover-color: $info;
-$line-height-base: 1.75;
+$btn-box-shadow: 0 .5rem 1rem rgba($secondary, .5);
+$btn-padding-y: .9rem;
+$btn-padding-x: .95rem;
+// $btn-link-color: $info;
+// $btn-link-hover-color: $info;
+// $line-height-base: 1.75;
 $navbar-dark-toggler-border-color: $primary;
 
 @use "sass:map";
@@ -102,19 +106,16 @@ $utilities: (
 );
 
 // additional non-bootstrap styles
-.btn-info {
-  border: 1px solid rgba(0,0,0);
-  border-radius: 20px;
-  background: transparent;
-  transition: all 0.3s ease 0s;
-}
+// .btn-info {
+//   border-radius: 20px;
+//   background: transparent;
+//   transition: all 0.3s ease 0s;
+// }
 
-.btn-info:hover {
-  color: $info;
-  background: $info;
-  border: 1px solid $info;
-}
-
+// .btn-info:hover {
+//   color: $info;
+//   background: $info;
+// }
 
 
 // MARK: import bootstrap and bootstrap-icons last

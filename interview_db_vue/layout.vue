@@ -35,7 +35,7 @@
       <slot name="description" />
       <slot name="content" />
     </main>
-    <footer class="p-5 my-5 text-muted justify-content-end border-top border-primary">
+    <footer class="p-4 my-5 text-muted justify-content-end border-top border-primary">
       <ul class="list-inline mb-2">
         <li class="list-inline-item item-dot">
           <a href="mailto:help@uw.edu?subject=Student Experience Interviews Project" title="Contact the DawgPath team"
