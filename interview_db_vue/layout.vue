@@ -3,21 +3,28 @@
     <header class="pb-3">
       <nav class="fixed-top pt-4 bg-white">
         <div class="d-flex flex-column flex-md-row pb-3 border-bottom border-primary">
-          <span class="fs-4 d-flex fw-bold justify-content-center text-decoration-none col-5"> 
+          <h2 class="fs-4 d-flex justify-content-center text-decoration-none col-5 fw-bold">
             <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
-          </span>
-      
+          </h2>
+
           <ul class="nav d-inline-flex mt-2 mt-0 ms-5 col-7">
             <li class="nav-item">
-              <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Student Stories
-              </router-link>
+              <h6>
+                <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Student Stories
+                </router-link>
+              </h6>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections
-              </router-link>
+              <h6>
+                <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections
+                </router-link>
+              </h6>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About Us</router-link>
+              <h6>
+                <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About
+                  Us</router-link>
+              </h6>
             </li>
           </ul>
         </div>
