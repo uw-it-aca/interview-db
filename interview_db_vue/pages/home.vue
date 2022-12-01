@@ -11,8 +11,8 @@
         <div class="row g-0">
           <div class="col-7 pt-5 ps-5">
             <div class="card-body mt-5 pt-5 ps-5 mx-auto">
-              <h1 class="display-4 pt-5 mb-4 fw-bold">REAL STUDENTS</h1>
-              <h1 class="display-4 mb-4 fw-bold">REAL STORIES</h1>
+              <h1 class="display-4 pt-5 mb-3 fw-bold">REAL STUDENTS</h1>
+              <h1 class="display-4 mb-3 fw-bold">REAL STORIES</h1>
               <p class="fs-5 mb-4">
                 Telling the stories of UW students through a <br/>
                 series of authentic and personal interviews.
@@ -28,35 +28,6 @@
           </div>
         </div>
       </div>
-<!-- 
-      <div class="row justify-content-center mb-5 text-center">
-        <div class="col-4 mx-5">
-          <router-link to="/students" class="active-link">
-            <div class="h-100 p-5 bg-light">
-              <div class="py-5 display-4 fs-5">
-                <p class="mb-1">Filter interviews by</p>
-                <h2 class="display-4 fs-1">Student</h2>
-              </div>
-              <p class="w-75 mx-auto display-4 fs-5">
-                Filter student interviews by major, year, or characteristics
-              </p>
-            </div>
-          </router-link>
-        </div>
-        <div class="col-4 mx-5">
-          <router-link to="/collections" tag="div" class="active-link">
-            <div class="h-100 p-5 bg-light">
-              <div class="py-5">
-                <p class="mb-1 display-4 fs-5">Read a</p>
-                <h2 class="display-4 fs-1">Collection</h2>
-              </div>
-              <p class="w-75 mx-auto display-4 fs-5">
-                Stories from diverse students with similar themes
-              </p>
-            </div>
-          </router-link>
-        </div>
-      </div> -->
 
       <div class="row justify-content-center">
         <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto" data-bs-ride="carousel">

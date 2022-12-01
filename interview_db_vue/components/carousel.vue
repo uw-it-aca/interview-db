@@ -2,9 +2,9 @@
 // carousel cards for home page
 
 <template>
-  <div class="row justify-content-center">
-    <div class="col-9 mx-auto">
-      <div class="card overflow-hidden rounded-0 border-primary mx-auto h-100">
+  <div class="row justify-content-center d-flex">
+    <div class="col-9 mb-3 d-flex align-items-stretch mx-auto">
+      <div class="card overflow-hidden d-flex rounded-0 border-primary mx-auto h-100">
         <div class="row g-0">
           <div class="col">
             <img src="../css/quad.png" class="img-fluid embed-responsive-item"
@@ -17,11 +17,21 @@
                 <p class="display-4 fs-6 mx-auto pb-4 mb-5 border-bottom border-primary">
                   {{ studentInfo.standing + ", studying "}}
                   <span v-for="major, index in studentInfo.major" :key="major.id">
+                    <span v-if="index != 0">, </span>
                     {{ major.full_title }}
                   </span>
                 </p>
               </div>
-              <p class="mt-2">{{ studentInfo.pull_quote }}</p>
+              <div class="mb-4" v-if="studentInfo.pull_quote != 0">
+                <img src="../css/openquote.svg" />
+                <p class="my-1">{{ studentInfo.pull_quote }}</p>
+                <img src="../css/closequote.svg" />
+              </div>
+              <button type="button" class="btn btn-secondary">
+                <router-link :to="{ name: 'Students', params: { id: studentInfo.id, singleStudent: JSON.stringify(studentInfo) }}"
+                                    class="active-link">Read {{ studentInfo.student.first_name }}'s Story >
+                </router-link>
+              </button>
             </div>
           </div>
         </div>
