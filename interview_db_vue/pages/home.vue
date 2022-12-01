@@ -2,37 +2,33 @@
 
 <template>
   <layout :page-title="pageTitle">
-    <!-- page content -->
     <template #title>
       <h1 class="visually-hidden">{{ pageTitle }}</h1>
     </template>
 
     <template #content>
-      <div class="card overflow-hidden border-0 rounded-0 mb-5">
-        <img class="card-img rounded-0" src="../css/quad.png" alt="Image of UW quad">
-        <div class="card-img-overlay d-flex flex-column justify-content-center">
-          <div class="row justify-content-center text-center text-white">
-            <h2 class="display-5 fw-bold mb-4"><em>Husky Voices</em></h2>
-            <h6 class="display-4 fs-4">
-              Telling the stories of UW Students<br />through authentic,
-              personal,<br />spontaneous interviews
-            </h6>
+      <div class="card mb-5 mt-0 pt-0 rounded-0 border-primary w-100">
+        <div class="row g-0">
+          <div class="col-7 pt-5 ps-5">
+            <div class="card-body mt-5 pt-5 ps-5 mx-auto">
+              <h2 class="display-5 pt-5 fw-bold mb-4 ">REAL STUDENTS</h2>
+              <h2 class="display-5 fw-bold mb-4">REAL STORIES</h2>
+              <h6 class="display-4 fs-4 mb-4">
+                Telling the stories of UW students through a <br/>
+                series of authentic and personal interviews.
+              </h6>
+              <button type="button" class="btn btn-secondary">
+                <router-link to="/students" class="active-link">Read a Story ></router-link>
+              </button>
+            </div>
+          </div>
+          <div class="col-5">
+            <img src="../css/homeimage.png" class="img-fluid embed-responsive-item"
+              style="height:100%; width:100%; object-fit:cover;" alt="UW Quad on a Fall Day">
           </div>
         </div>
       </div>
-
-      <div class="row justify-content-center mx-auto">
-        <div v-for="student in recentStudents" :key="student.id">
-          <div class="col-3 mx-2">
-            <StudentCard :studentInfo="student" />
-          </div>
-        </div>
-      </div>
-
-      <div class="row mb-5">
-        <ProcessCard />
-      </div>
-
+<!-- 
       <div class="row justify-content-center mb-5 text-center">
         <div class="col-4 mx-5">
           <router-link to="/students" class="active-link">
@@ -60,7 +56,7 @@
             </div>
           </router-link>
         </div>
-      </div>
+      </div> -->
 
       <div class="row justify-content-center">
         <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto" data-bs-ride="carousel">

@@ -1,23 +1,26 @@
 <template>
-  <div class="container py-4">
+  <div class="container py-4 bg-white">
     <header class="pb-3">
-      <nav>
-        <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <router-link class="nav-link" active-class="active" aria-current="page" to="/">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Students
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About Us</router-link>
-          </li>
-        </ul>
+      <nav class="fixed-top pt-4 bg-white">
+        <div class="d-flex flex-column flex-md-row pb-3 border-bottom border-primary">
+          <span class="fs-4 d-flex fw-bold justify-content-center text-decoration-none col-5"> 
+            <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
+          </span>
+      
+          <ul class="nav d-inline-flex mt-2 mt-0 ms-5 col-7">
+            <li class="nav-item">
+              <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Student Stories
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About Us</router-link>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
     <main>
@@ -25,7 +28,7 @@
       <slot name="description" />
       <slot name="content" />
     </main>
-    <footer class="p-5 my-5 text-muted bg-light justify-content-end">
+    <footer class="p-5 my-5 text-muted justify-content-end border-top border-primary">
       <ul class="list-inline mb-2">
         <li class="list-inline-item item-dot">
           <a href="mailto:help@uw.edu?subject=Student Experience Interviews Project" title="Contact the DawgPath team"
