@@ -2,7 +2,7 @@
 // listings to be shown on topic page
 
 <template>
-  <div class="card mb-5 border-0 rounded-0">
+  <div class="card mb-5 border-0">
     <div class="card-body">
       <div class="row g-0 px-4 justify-content-center">
         <div class="col-2">
