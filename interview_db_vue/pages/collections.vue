@@ -14,26 +14,12 @@
 
       <div v-else>
 
-        <div class="mx-auto p-5 mb-4">
+        <div class="mx-auto p-5 mb-5">
           <div class="pt-5 ps-5 mx-auto">
             <h2 class="display-6 fw-bold mb-4">Collections</h2>
             <p class="fs-5 mb-4">Stories categorized by similar themes, collected from a diverse group of students.</p>
           </div>
         </div>
-
-        <!-- <div class="row">
-          <div class="col p-5 bg-white">
-            <div class="py-5 text-dark">
-              <h2 class="display-3 text-center text-uppercase mb-4">
-                Collections
-              </h2>
-              <h5 class="text-center display-4 fs-4">
-                Stories with similar themes collected from diverse<br />groups of
-                students
-              </h5>
-            </div>
-          </div>
-        </div> -->
 
         <div v-for="collection, index in collections" :key="collection.id">
           <div v-if="index % 2 == 0">

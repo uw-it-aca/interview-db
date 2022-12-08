@@ -1,62 +1,65 @@
 <template>
-  <div class="container py-4 bg-white">
-    <header class="pb-3">
-      <nav class="fixed-top pt-4 bg-white">
-        <div class="d-flex flex-column flex-md-row pb-3 border-bottom border-primary">
-          <h2 class="fs-4 d-flex justify-content-center text-decoration-none col-5 fw-bold">
-            <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
-          </h2>
 
-          <ul class="nav d-inline-flex mt-2 mt-0 ms-5 col-7">
-            <li class="nav-item">
-              <h6>
-                <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Student Stories
-                </router-link>
-              </h6>
-            </li>
-            <li class="nav-item">
-              <h6>
-                <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections
-                </router-link>
-              </h6>
-            </li>
-            <li class="nav-item">
-              <h6>
-                <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About
-                  Us</router-link>
-              </h6>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <main>
-      <slot name="title" />
-      <slot name="description" />
-      <slot name="content" />
-    </main>
-    <footer class="p-4 my-5 text-muted justify-content-end border-top border-primary">
-      <ul class="list-inline mb-2">
-        <li class="list-inline-item item-dot">
-          <a href="mailto:help@uw.edu?subject=Student Experience Interviews Project" title="Contact the DawgPath team"
-            class="text-muted text-decoration-none me-2">Contact</a>
-        </li>
-        <li class="list-inline-item item-dot">
-          <a href="https://itconnect.uw.edu/learn/success-analytics/apps/#dawg" title="DawgPath Docs on IT Connect"
-            class="text-muted text-decoration-none me-2">Documentation</a>
-        </li>
-        <li class="list-inline-item item-dot">
-          <a href="https://www.washington.edu/online/terms/" title="UW Terms of Use"
-            class="text-muted text-decoration-none me-2">Terms</a>
-        </li>
-        <li class="list-inline-item">
-          <a href="https://www.washington.edu/online/privacy/" title="UW Privacy Policy"
-            class="router-link text-muted text-decoration-none me-2">Privacy</a>
-        </li>
-      </ul>
-      &copy; 2022 University of Washington
-    </footer>
-  </div>
+  <header>
+    <nav class="fixed-top pt-4 bg-white">
+      <div class="d-flex flex-column flex-md-row pb-3 border-bottom border-primary">
+        <h2 class="fs-4 d-flex justify-content-center col-5 fw-bold">
+          <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
+        </h2>
+
+        <ul class="nav d-inline-flex mt-2 ms-5 col-7">
+          <li class="nav-item">
+            <h6>
+              <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Student Stories
+              </router-link>
+            </h6>
+          </li>
+          <li class="nav-item">
+            <h6>
+              <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections
+              </router-link>
+            </h6>
+          </li>
+          <li class="nav-item">
+            <h6>
+              <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About
+                Us</router-link>
+            </h6>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <slot name="title" />
+    <slot name="description" />
+    <slot name="content" />
+  </main>
+
+
+  <footer class="ps-5 footer p-4 border-top mx-auto">
+    <img src="./css/w.svg" class="me-5 float-end" style="position: relative; z-index: 1; bottom: 86px" />
+    <div class="row g-0 justify-content-end">
+      <div class="col-2 ps-5">
+        <h2 class="fs-4 d-flex fw-bold border-bottom">Husky Voices</h2>
+        <p>ux@uw.edu</p>
+      </div>
+      <div class="col-5"></div>
+      <div class="col-5 display-block">
+        <a href="mailto:help@uw.edu?subject=Husky Voices" title="Contact the DawgPath team"
+          class="text-decoration-none ms-4 justify-content-end">Contact</a>
+        <a href="https://itconnect.uw.edu/learn/success-analytics/apps/#dawg" title="DawgPath Docs on IT Connect"
+          class="text-decoration-none ms-4">Documentation</a>
+        <a href="https://www.washington.edu/online/terms/" title="UW Terms of Use"
+          class="text-decoration-none ms-4">Terms</a>
+        <a href="https://www.washington.edu/online/privacy/" title="UW Privacy Policy"
+          class="text-decoration-none router-link ms-4">Privacy</a>
+      </div>
+    </div>
+    <p class="ps-5 text-muted">&copy; 2022 University of Washington</p>
+
+  </footer>
 </template>
 
 <script>
