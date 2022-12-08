@@ -3,8 +3,8 @@
 
 <template>
   <div class="row justify-content-center d-flex">
-    <div class="col-9 mb-3 d-flex align-items-stretch mx-auto">
-      <div class="card overflow-hidden d-flexborder-primary mx-auto h-100">
+    <div class="col-9 mb-3 d-flex align-items-stretch">
+      <div class="card overflow-hidden d-flexborder-primary mx-5 h-100">
         <div class="row g-0">
           <div class="col">
             <img src="../css/quad.png" class="img-fluid embed-responsive-item"
