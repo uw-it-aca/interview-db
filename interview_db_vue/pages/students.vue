@@ -22,10 +22,10 @@
                 {{ filters }}
               </div>
 
-              <div class="col-9 justify-content-end">
+              <div class="col-8 ms-4 justify-content-end">
                 <div class="card-columns justify-content-end">
                   <div v-for="student in filteredStudents" :key="student.id">
-                    <StudentListing :studentInfo="student" />
+                    <StudentListing :studentInfo="student" class="mb-5" />
                   </div>
                 </div>
               </div>
