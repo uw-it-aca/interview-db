@@ -33,16 +33,16 @@
           <h2 class="display-6 fs-2 fw-bold mb-4">Frequently Asked Questions (FAQ)</h2>
 
           <div class="mx-auto pt-2 mb-5">
-            <div class="accordion" id="accordionExample">
+            <div class="accordion" id="faq">
               <div class="accordion-item">
-                <p class="fs-1" id="headingOne">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
+                <p class="accordion-header fs-5" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="false" aria-controls="collapseOne">
                     How do you choose the students you interview?
                   </button>
                 </p>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                  data-bs-parent="#accordionExample">
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                  data-bs-parent="#faq">
                   <div class="accordion-body">
                     <p class="fs-5">We walk around busy spaces like the HUB Cafeteria or By George and look for students
                       who look like they
@@ -58,7 +58,7 @@
                   </button>
                 </p>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                  data-bs-parent="#accordionExample">
+                  data-bs-parent="#faq">
                   <div class="accordion-body">
                     <p class="fs-5">Most interviews are conducted by student staff at UW-IT.</p>
                   </div>
@@ -72,7 +72,7 @@
                   </button>
                 </p>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                  data-bs-parent="#accordionExample">
+                  data-bs-parent="#faq">
                   <div class="accordion-body">
                     <p class="fs-5">We make edits for clarity and concision as well as re-organize the conversation to
                       make student stories
@@ -89,7 +89,7 @@
                   </button>
                 </p>
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                  data-bs-parent="#accordionExample">
+                  data-bs-parent="#faq">
                   <div class="accordion-body">
                     <p class="fs-5">After each interview, we are obliged to give an additional form for the students to
                       complete. This form clarifies whether they only want their information used for internal UW
