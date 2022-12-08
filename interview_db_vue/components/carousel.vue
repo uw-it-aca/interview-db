@@ -27,10 +27,11 @@
                 <p class="my-2">{{ studentInfo.pull_quote }}</p>
                 <img src="../css/closequote.svg" class="ms-5 ps-5 float-end"/>
               </div>
-              <button type="button" class="btn btn-secondary">
-                <router-link :to="{ name: 'Students', params: { id: studentInfo.id, singleStudent: JSON.stringify(studentInfo) }}"
+              <button type="button" class="btn btn-secondary" @click="$router.push({ name: 'Students', params: { id: studentInfo.id, singleStudent: JSON.stringify(studentInfo) }})" >
+                Read {{ studentInfo.student.first_name }}'s Story >
+                <!-- <router-link :to="{ name: 'Students', params: { id: studentInfo.id, singleStudent: JSON.stringify(studentInfo) }}"
                                     class="active-link">Read {{ studentInfo.student.first_name }}'s Story >
-                </router-link>
+                </router-link> -->
               </button>
             </div>
           </div>
