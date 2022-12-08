@@ -15,7 +15,12 @@
               <div class="mb-4">
                 <h2 class="display-5 mb-3 fw-bold">{{ studentInfo.student.first_name }}</h2>
                 <p class="display-4 fs-6 mx-auto pb-4 mb-3 border-bottom border-primary">
-                  {{ studentInfo.standing + ", studying "}}
+                  <span v-if="studentInfo.standing">
+                    {{ studentInfo.standing + ", studying" }}
+                  </span>
+                  <span v-else>
+                    Studying
+                  </span>
                   <span v-for="major, index in studentInfo.major" :key="major.id">
                     <span v-if="index != 0">, </span>
                     {{ major.full_title }}
@@ -25,13 +30,11 @@
               <div class="mb-5" v-if="studentInfo.pull_quote != 0">
                 <img src="../css/openquote.svg" />
                 <p class="my-2">{{ studentInfo.pull_quote }}</p>
-                <img src="../css/closequote.svg" class="ms-5 ps-5 float-end"/>
+                <img src="../css/closequote.svg" class="ms-5 ps-5 float-end" />
               </div>
-              <button type="button" class="btn btn-secondary" @click="$router.push({ name: 'Students', params: { id: studentInfo.id, singleStudent: JSON.stringify(studentInfo) }})" >
+              <button type="button" class="btn btn-secondary"
+                @click="$router.push({ name: 'Students', params: { id: studentInfo.id, singleStudent: JSON.stringify(studentInfo) } })">
                 Read {{ studentInfo.student.first_name }}'s Story >
-                <!-- <router-link :to="{ name: 'Students', params: { id: studentInfo.id, singleStudent: JSON.stringify(studentInfo) }}"
-                                    class="active-link">Read {{ studentInfo.student.first_name }}'s Story >
-                </router-link> -->
               </button>
             </div>
           </div>
