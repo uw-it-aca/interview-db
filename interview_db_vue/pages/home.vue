@@ -17,9 +17,7 @@
                 Telling the stories of UW students through a <br/>
                 series of authentic and personal interviews.
               </p>
-              <button type="button" class="btn btn-secondary">
-                <router-link to="/students" class="active-link">Read a Story ></router-link>
-              </button>
+              <button type="button" class="btn btn-secondary"  @click="$router.push('students')">Read a Story ></button>
             </div>
           </div>
           <div class="col-5">
