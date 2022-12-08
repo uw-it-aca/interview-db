@@ -12,26 +12,22 @@
       </div>
 
       <div v-else>
-        <div class="row mb-5">
-          <div class="col p-5" style="background-color: #172643; height: 330px">
-            <div class="text-white py-5">
-              <h2 class="display-3 text-center mb-4">Student Interviews</h2>
-              <h5 class="text-center display-4 fs-4">
-                Sort interviews by student<br />characteristics
-              </h5>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3 justify-content-center">
-            <StudentFilter @clicked="updateFilters" />
-            {{ filters }}
-          </div>
+        <div class="mx-auto p-5 mb-4">
+          <div class="pt-5 ps-5 mx-auto">
+            <h2 class="display-6 fw-bold mb-4">Student Stories</h2>
+            <p class="fs-5 mb-4">Sort interviews by student characteristics.</p>
+            <div class="row">
+              <div class="col-3 justify-content-center">
+                <StudentFilter @clicked="updateFilters" />
+                {{ filters }}
+              </div>
 
-          <div class="col-9 justify-content-end">
-            <div class="card-columns justify-content-end">
-              <div v-for="student in filteredStudents" :key="student.id">
-                <StudentListing :studentInfo="student" />
+              <div class="col-9 justify-content-end">
+                <div class="card-columns justify-content-end">
+                  <div v-for="student in filteredStudents" :key="student.id">
+                    <StudentListing :studentInfo="student" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -79,10 +75,10 @@ export default {
     filteredStudents() {
       if (!this.filters.length) return this.students
       const out = this.students.filter(student =>
-        student.student_type.filter (trait =>
-        trait.id > 1))
+        student.student_type.filter(trait =>
+          trait.id > 1))
 
-        return out
+      return out
 
       // const out
       // for (let i = 0; i < this.filters.length; i++) {

@@ -13,7 +13,15 @@
       </div>
 
       <div v-else>
-        <div class="row">
+
+        <div class="mx-auto p-5 mb-4">
+          <div class="pt-5 ps-5 mx-auto">
+            <h2 class="display-6 fw-bold mb-4">Collections</h2>
+            <p class="fs-5 mb-4">Stories categorized by similar themes, collected from a diverse group of students.</p>
+          </div>
+        </div>
+
+        <!-- <div class="row">
           <div class="col p-5 bg-white">
             <div class="py-5 text-dark">
               <h2 class="display-3 text-center text-uppercase mb-4">
@@ -25,11 +33,11 @@
               </h5>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div v-for="collection, index in collections" :key="collection.id">
           <div v-if="index % 2 == 0">
-            <div class="card w-100 border-0 rounded-0 overflow-hidden" style="height: 380px">
+            <div class="card w-100 border-0 overflow-hidden" style="height: 380px">
               <div class="row g-0">
                 <div class="col-7">
                   <img src="../css/major.png" class="w-100 h-100 img-fluid" style="object-fit: cover" />
@@ -54,7 +62,7 @@
           </div>
           
           <div v-else>
-            <div class="card w-100 border-0 rounded-0 overflow-hidden" style="height: 380px">
+            <div class="card w-100 border-0 overflow-hidden" style="height: 380px">
               <div class="row g-0">
                 <div class="col-5 p-5 justify-content-center text-white" style="background-color: #bc7326">
                   <div class="text-center mx-auto">

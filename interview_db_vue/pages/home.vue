@@ -7,17 +7,17 @@
     </template>
 
     <template #content>
-      <div class="card mb-5 mt-0 pt-0 rounded-0 border-primary w-100">
+      <div class="card mb-5 mt-0 pt-0 border-primary w-100">
         <div class="row g-0">
           <div class="col-7 pt-5 ps-5">
             <div class="card-body mt-5 pt-5 ps-5 mx-auto">
               <h1 class="display-4 pt-5 mb-3 fw-bold">REAL STUDENTS</h1>
               <h1 class="display-4 mb-3 fw-bold">REAL STORIES</h1>
               <p class="fs-5 mb-4">
-                Telling the stories of UW students through a <br/>
+                Telling the stories of UW students through a <br />
                 series of authentic and personal interviews.
               </p>
-              <button type="button" class="btn btn-secondary"  @click="$router.push('students')">Read a Story ></button>
+              <button type="button" class="btn btn-secondary" @click="$router.push('students')">Read a Story ></button>
             </div>
           </div>
           <div class="col-5">
@@ -38,7 +38,7 @@
               </div>
               <div v-else>
                 <div class="carousel-item">
-                  <StudentCarousel :studentInfo="student"/>
+                  <StudentCarousel :studentInfo="student" />
                 </div>
               </div>
             </div>
@@ -48,6 +48,20 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
+        </div>
+      </div>
+
+      <div class="mx-auto p-5 mb-4">
+        <div class="pt-5 ps-5 mx-auto">
+          <h2 class="display-6 fw-bold mb-4">Student Stories</h2>
+          <p class="fs-5 mb-4">Read individual interviews of students from a wide variety of backgrounds including <b>major, year</b> and other characteristics.</p>
+          <button type="button" class="btn btn-secondary" @click="$router.push('students')">Explore Stories ></button>
+        </div>
+
+        <div class="pt-5 ps-5 mx-auto">
+          <h2 class="display-6 fw-bold mb-4">Explore Collections</h2>
+          <p class="fs-5 mb-4">Navigate common themes among students on topics such as <b>transitioning to college</b> and <b>finding community</b>.</p>
+          <button type="button" class="btn btn-secondary" @click="$router.push('collections')">Explore Collections ></button>
         </div>
       </div>
 

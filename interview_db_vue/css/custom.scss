@@ -14,7 +14,7 @@ $carousel-control-color: $light;
 $carousel-control-width: 25%;
 
 // button styling
-$btn-border-radius: 1px;
+// $btn-border-radius: 0.05rem;
 $btn-border-width: 0px;
 $bs-btn-color: $white;
 $bs-btn-active-color: $info;
@@ -26,6 +26,13 @@ $btn-padding-x: 1rem;
 // $btn-link-hover-color: $info;
 // $line-height-base: 1.75;
 $navbar-dark-toggler-border-color: $primary;
+
+// card styling
+$border-radius: 0.1rem;
+$card-bg: $light;
+$card-border-color: $primary;
+$card-cap-bg: $light;
+$card-cap-color: $primary;
 
 @use "sass:map";
 @import "node_modules/bootstrap/scss/bootstrap";

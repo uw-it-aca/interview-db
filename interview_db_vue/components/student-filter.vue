@@ -2,13 +2,13 @@
 // to filter student interviews
 
 <template>
-  <div class="card" style="width: 18rem; border-radius:1.5rem">
-    <h5 class="card-header border-0 border-top bg-white" style="border-radius:1.5rem">Filter by Student:</h5>
-    <div class="card-body border-top">
+  <div class="card" style="width: 18rem">
+    <h5 class="card-header">Filter Stories</h5>
+    <div class="card-body">
       <div class="mb-4">
         <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#year" aria-expanded="false"
           aria-controls="year">
-          Year
+          Student Year
         </h2>
         <div class="collapse mt-0" id="year">
           <div class="card card-body border-0">
