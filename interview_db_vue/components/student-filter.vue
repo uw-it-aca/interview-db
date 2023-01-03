@@ -3,13 +3,13 @@
 
 <template>
   <div class="card" style="width: 18rem">
-    <h5 class="card-header">Filter Stories</h5>
+    <h2 class="card-header fw-bold fs-3">Filter Stories</h2>
     <div class="card-body">
       <div class="mb-4">
-        <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#year" aria-expanded="false"
+        <p class="display-4 fw-bold fs-5 mb-0" data-bs-toggle="collapse" href="#year" aria-expanded="false"
           aria-controls="year">
           Student Year
-        </h2>
+        </p>
         <div class="collapse mt-0" id="year">
           <div class="card card-body border-0">
             <div class="form-check">
@@ -59,10 +59,10 @@
       </div>
 
       <div class="mb-4">
-        <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#major" aria-expanded="false"
+        <p class="display-4 fs-5 fw-bold mb-0" data-bs-toggle="collapse" href="#major" aria-expanded="false"
           aria-controls="major">
           Major
-        </h2>
+        </p>
         <div class="collapse" id="major">
           <div class="card card-body border-0 mt-0">
             <div v-for="major in majors" :key="major.id">
@@ -77,11 +77,11 @@
         </div>
       </div>
 
-      <div class="mb-4">
-        <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#traits" aria-expanded="false"
+      <!-- <div class="mb-4">
+        <p class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#traits" aria-expanded="false"
           aria-controls="traits">
           Student Traits
-        </h2>
+        </p>
         <div class="collapse" id="traits">
           <div class="card card-body border-0 mt-0">
             <div v-for="trait in traits" :key="trait.id">
@@ -96,13 +96,13 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="mb-4">
-        <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#collections" aria-expanded="false"
+        <p class="display-4 fs-5 fw-bold mb-0" data-bs-toggle="collapse" href="#collections" aria-expanded="false"
           aria-controls="collections">
-          Collections
-        </h2>
+          Story Collection
+        </p>
         <div class="collapse" id="collections">
           <div class="card card-body border-0 mt-0">
             <div v-for="topic in topics" :key="topic.id">

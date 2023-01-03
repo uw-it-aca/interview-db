@@ -16,7 +16,7 @@
 
         <div class="mx-auto p-5 mb-5">
           <div class="pt-5 ps-5 mx-auto">
-            <h2 class="display-6 fw-bold mb-4">Collections</h2>
+            <h2 class="display-5 fw-bold mb-4">Collections</h2>
             <p class="fs-5 mb-4">Stories categorized by similar themes, collected from a diverse group of students.</p>
           </div>
         </div>
