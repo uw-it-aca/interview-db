@@ -11,10 +11,10 @@
         <div class="row g-0">
           <div class="col-7 pt-5 ps-5">
             <div class="card-body mt-5 pt-5 ps-5 mx-auto">
-              <h1 class="display-4 pt-5 mb-3 fw-bold">REAL STUDENTS</h1>
-              <h1 class="display-4 mb-3 fw-bold">REAL STORIES</h1>
+              <h2 class="display-4 pt-5 mb-3 fw-bold">REAL STUDENTS</h2>
+              <h2 class="display-4 mb-3 fw-bold">REAL STORIES</h2>
               <p class="fs-5 mb-4">
-                Telling the stories of UW students through a <br />
+                Sharing the stories of UW students through a <br />
                 series of authentic and personal interviews.
               </p>
               <button type="button" class="btn btn-secondary" @click="$router.push('students')">Read a Story ></button>

@@ -14,15 +14,15 @@
       <div v-else>
         <div class="mx-auto p-5 mb-4">
           <div class="pt-5 ps-5 mx-auto">
-            <h2 class="display-6 fw-bold mb-5">Student Stories</h2>
+            <h2 class="display-5 fw-bold mb-5">Student Stories</h2>
             <p class="fs-5 mb-4">Sort interviews by student characteristics.</p>
             <div class="row">
-              <div class="col-3 justify-content-center">
+              <div class="col-4 justify-content-center">
                 <StudentFilter @clicked="updateFilters" />
-                {{ filters }}
+                <!-- {{ filters }} -->
               </div>
 
-              <div class="col-8 ms-4 justify-content-end">
+              <div class="col-7 ms-4 justify-content-end">
                 <div class="card-columns justify-content-end">
                   <div v-for="student in filteredStudents" :key="student.id">
                     <StudentListing :studentInfo="student" class="mb-5" />

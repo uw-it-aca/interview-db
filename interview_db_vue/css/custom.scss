@@ -1,11 +1,11 @@
 // import entire bootstrap library
 
 // setting bootstrap color variables
-$light: #FAF8FC;              // card color
-$primary: #1E1E1E;            // text
-$secondary: #827252;          // default button
-$info: #B4A67F;               // active button
-$white: #F8F9fA;              // background color
+$light: #FAF8FC; // card color
+$primary: #1E1E1E; // text
+$secondary: #827252; // default button
+$info: #B4A67F; // active button
+$white: #F8F9fA; // background color
 
 $min-contrast-ratio: 2.5;
 
@@ -38,7 +38,7 @@ $custom-colors: (
   "background": #F8F9fA,
 );
 
-a.active-link{
+a.active-link {
   text-decoration: none;
   color: $white;
 }
@@ -57,60 +57,52 @@ button.btn-card {
   cursor: default;
   box-sizing: border-box;
   background-color: $light;
-  padding: 2rem 2rem;
-  // border-color: $primary;
-  // border-radius: 0.1rem;
+  padding: 1rem 1rem;
+  border-color: $primary;
+  border-radius: 0.1rem;
+  border-width: 1.5px;
 }
-
-
-  // --bs-btn-color: $light;
-  // --bs-btn-font-weight: 600;
-  // --bs-btn-bg: var(--bs-card-bg);
-  // --bs-btn-border-color: $primary;
-  // --bs-btn-border-radius: .1rem;
-  // --bs-btn-hover-color: #DBDBDB;
-  // --bs-btn-hover-bg: #{shade-color($light, 10%)};
-  // --bs-btn-hover-border-color: #{shade-color($light, 10%)};
-  // --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-  // --bs-btn-active-color: var(--bs-btn-hover-color);
-  // --bs-btn-active-bg: #{shade-color($light, 20%)};
-  // --bs-btn-active-border-color: #{shade-color($light, 20%)};
 
 .card-card-clickable {
   --bs-card-bg: none;
   --bs-card-border-width: 0px;
+}
 
-// $card-title-spacer-y:               $spacer * .5;
-// $card-border-width:                 $border-width;
-// $card-border-radius:                $border-radius;
-// $card-border-color:                 rgba($black, .125);
-// $card-inner-border-radius:          subtract($card-border-radius, $card-border-width);
-// $card-cap-padding-y:                $card-spacer-y * .5;
-// $card-cap-padding-x:                $card-spacer-x;
-// $card-cap-bg:                       rgba($black, .03);
-// $card-cap-color:                    null;
-// $card-height:                       null;
-// $card-color:                        null;
-// $card-bg:                           $white;
-// $card-img-overlay-padding:          $spacer;
-// $card-group-margin:                 $grid-gutter-width * .5;
+img.listing-img {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  z-index: 1;
+  bottom: 150px;
+  line-height: 0;
+  object-fit: cover;
+  border-radius: 1.5px;
+  filter: drop-shadow(0 .5rem 1rem rgba($secondary, .5));
 }
 
 // Open Sans for all body text
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-header, main {
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+header,
+main {
   font-family: 'Open Sans', sans-serif;
   text-transform: none;
-  text-decoration:none;
+  text-decoration: none;
 }
 
 // Times for all headers
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Times New Roman', Times, serif;
+  font-weight: 900;
 }
 
 $border-color: $primary;
-$border-width: 1.5px; 
+$border-width: 1.5px;
 $border-radius: 0.1rem;
 
 // bootstrap theme + utility merging
@@ -122,36 +114,24 @@ $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
 
 $utilities: (
   // MARK: bg-color-hover (changes bg-color on hover)
-  "background-color":
-    (
-      property: background-color,
-      class: bg,
-      state: hover focus,
-      values:
-        map-merge(
-          $theme-colors,
-          (
-            "body": $body-bg,
-            "white": $white,
-            "transparent": transparent,
-          )
-        ),
-    ),
+  "background-color": (property: background-color,
+    class: bg,
+    state: hover focus,
+    values: map-merge($theme-colors,
+      ("body": $body-bg,
+        "white": $white,
+        "transparent": transparent,
+      )),
+  ),
   // MARK: text-color-hover (changes text-color on hover)
-  "color":
-    (
-      property: color,
-      class: text,
-      state: hover focus,
-      values:
-        map-merge(
-          $theme-colors,
-          (
-            "white": $white,
-            "transparent": transparent,
-          )
-        ),
-    )
+  "color": (property: color,
+    class: text,
+    state: hover focus,
+    values: map-merge($theme-colors,
+      ("white": $white,
+        "transparent": transparent,
+      )),
+  )
 );
 
 // additional non-bootstrap styles
