@@ -3,18 +3,18 @@
 
 <template>
 
-  <div class="mt-4">
-    {{ studentInfo }}
+  <div class="mt-4 pt-4">
+    <!-- {{ studentInfo }} -->
 
     <div class="card border-0">
       <div class="row g-0">
         <div class="col-5">
-          <img src="../../css/quad.png" class="img-fluid mx-auto d-block" style="object-fit: cover;" />
+          <img src="../../css/quad.png" class="img-fluid mx-auto d-block"/>
         </div>
-        <div class="col-7 px-5">
+        <div class="col-7 p-5">
           <h2 class="card-title display-6 mb-2 fw-bold">{{ studentInfo.student.first_name }}</h2>
           <div class="border-bottom border-primary">
-            <p class="display-4 fs-6 mx-auto pb-4 mb-5">
+            <p class="display-4 fs-6 m-0">
               <span v-if="studentInfo.standing">
                 {{ studentInfo.standing + ", studying" }}
               </span>
@@ -64,6 +64,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
