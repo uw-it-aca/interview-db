@@ -4,11 +4,11 @@
 <template>
   <div class="row justify-content-center d-flex">
     <div class="col-9 mb-3 d-flex align-items-stretch">
-      <div class="card overflow-hidden d-flexborder-primary mx-5 h-100">
-        <div class="row g-0">
+      <div class="card overflow-hidden d-flexborder-primary mx-5">
+        <div class="row g-0" style="height:30rem;">
           <div class="col">
             <img src="../css/quad.png" class="img-fluid embed-responsive-item"
-              style="height:100%; width:100%; object-fit:cover;">
+              style="height:30rem; object-fit:cover;">
           </div>
           <div class="col bg-light p-5">
             <div class="card-body">

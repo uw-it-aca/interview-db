@@ -1,5 +1,5 @@
 // interview.vue
-// full student interview page
+// full individual student interview page
 
 <template>
 
@@ -7,14 +7,14 @@
     <!-- {{ studentInfo }} -->
 
     <div class="card border-0">
-      <div class="row g-0">
+      <div class="row g-0 mx-auto">
         <div class="col-5">
-          <img src="../../css/quad.png" class="img-fluid mx-auto d-block"/>
+          <img src="../../css/quad.png" class="img-fluid mx-auto d-block" />
         </div>
         <div class="col-7 p-5">
           <h2 class="card-title display-6 mb-2 fw-bold">{{ studentInfo.student.first_name }}</h2>
-          <div class="border-bottom border-primary">
-            <p class="display-4 fs-6 m-0">
+          <div class="row">
+            <div class="col">
               <span v-if="studentInfo.standing">
                 {{ studentInfo.standing + ", studying" }}
               </span>
@@ -25,13 +25,14 @@
                 <span v-if="index != 0">, </span>
                 {{ major.full_title }}
               </span>
-            </p>
-            <p class="fs-6 text-end">{{ interviewDate }}</p>
+            </div>
+            <div class="col">
+              <p class="fs-6 text-end">{{ interviewDate }}</p>
+            </div>
           </div>
 
-          <!-- collection buttons -->
-          <div class="border-bottom border-primary">
-            <h2 class="text-start fs-5">They talk about...</h2>
+          <div class="border-top border-primary py-4">
+            <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-10">
               <span v-for="story in stories" :key="story.id">
                 <span v-for="collection in story.code" :key="collection.id">
@@ -46,13 +47,11 @@
             </div>
 
             <div v-for="story in stories" :key="story.id">
-              <div class="border-bottom border-primary ">
+              <div class="border-top border-primary pt-4 pb-2">
                 <p class="display-6 fs-5">
                   {{ story.story }}
                 </p>
-              </div>
-              <div class="ps-4 mb-5 border-start border-white border-4">
-                <p class="text-secondary text-end">
+                <p class="fst-italic text-end">
                   <span v-for="collection in story.code" :key="collection.id">
                     #{{ collection.code }}
                   </span>
