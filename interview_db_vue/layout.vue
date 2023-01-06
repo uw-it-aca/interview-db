@@ -8,7 +8,7 @@
           <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
         </h2>
 
-        <ul class="nav d-inline-flex mt-2 ms-5 col-6">
+        <ul class="nav d-inline-flex mt-2 mx-auto col-6">
           <li class="nav-item">
             <h6>
               <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Student Stories
@@ -40,7 +40,7 @@
 
 
   <footer class="ps-5 footer p-4 border-top mx-auto">
-    <img src="./css/w.svg" class="me-5 float-end" style="position: relative; z-index: 1; bottom: 86px" />
+    <!-- <img src="./css/w.svg" class="me-5 float-end" style="position: relative; z-index: 1; bottom: 86px" /> -->
     <div class="row g-0 justify-content-end">
       <div class="col-2 ps-5">
         <h2 class="fs-4 d-flex fw-bold border-bottom">Husky Voices</h2>
@@ -48,7 +48,7 @@
       </div>
       <div class="col-5"></div>
       <div class="col-5 display-block">
-        <a href="mailto:help@uw.edu?subject=Husky Voices" title="Contact the DawgPath team"
+        <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Contact the AXDD UX Team"
           class="text-decoration-none ms-4 justify-content-end">Contact</a>
         <a href="https://itconnect.uw.edu/learn/success-analytics/apps/#dawg" title="DawgPath Docs on IT Connect"
           class="text-decoration-none ms-4">Documentation</a>

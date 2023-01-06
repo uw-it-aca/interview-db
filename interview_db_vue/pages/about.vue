@@ -26,7 +26,11 @@
         <div class="mx-auto pt-2 ps-5 mb-5">
           <h2 class="display-6 fs-2 fw-bold mb-4">Help Grow Our Collection</h2>
           <p class="fs-5 mb-4">Schedule a 15-30 minute appointment with us to talk about your UW experience.</p>
-          <button type="button" class="btn btn-secondary" @click="$router.push('students')">Share Your Story ></button>
+          <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Husky Voices">
+            <button type="button" class="btn btn-secondary">
+              Share Your Story >
+            </button>
+          </a>
         </div>
 
         <div class="mx-auto pt-2 ps-5 mb-5">
@@ -36,8 +40,8 @@
             <div class="accordion" id="faq">
               <div class="accordion-item">
                 <p class="accordion-header fs-5" id="headingOne">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                    aria-expanded="false" aria-controls="collapseOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                     How do you choose the students you interview?
                   </button>
                 </p>

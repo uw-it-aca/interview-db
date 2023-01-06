@@ -61,6 +61,7 @@ button.btn-card {
   border-color: $primary;
   border-radius: 0.1rem;
   border-width: 1.5px;
+  height: 21rem;
 }
 
 .card-card-clickable {
@@ -69,15 +70,15 @@ button.btn-card {
 }
 
 img.listing-img {
-  height: 200px;
-  width: 200px;
+  height: 12rem;
+  width: 12rem;
   position: relative;
   z-index: 1;
-  bottom: 150px;
+  bottom: 100px;
   line-height: 0;
   object-fit: cover;
   border-radius: 1.5px;
-  filter: drop-shadow(0 .5rem 1rem rgba($secondary, .5));
+  filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
 }
 
 // Open Sans for all body text
@@ -99,6 +100,10 @@ h5,
 h6 {
   font-family: 'Times New Roman', Times, serif;
   font-weight: 900;
+}
+
+html {
+  height:100vh;
 }
 
 $border-color: $primary;
