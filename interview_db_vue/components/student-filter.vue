@@ -13,12 +13,13 @@
         <div class="collapse mt-0" id="year">
           <div class="card card-body border-0">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="Fr" id="Freshman" v-model="filters.year"
+                @change="updateYear($event)">
+              <label class="form-check-label display-6 fs-6" for="freshman">
                 Freshman
               </label>
             </div>
-            <div class="form-check">
+            <!-- <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
               <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
                 Sophomore
@@ -53,7 +54,7 @@
               <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
                 PhD
               </label>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -65,10 +66,11 @@
         </p>
         <div class="collapse" id="major">
           <div class="card card-body border-0 mt-0">
-            <div v-for="major in majors" :key="major.id">
+            <div v-for="major in data.majors" :key="major.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" :value="major.id" id="major" v-model="filters.major"
+                  @change="updateQuery($event)">
+                <label class="form-check-label display-6 fs-6" for="major">
                   {{ major.full_title }}
                 </label>
               </div>
@@ -78,13 +80,13 @@
       </div>
 
       <!-- <div class="mb-4">
-        <p class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#traits" aria-expanded="false"
+        <p class="display-4 fs-5 fw-bold mb-0" data-bs-toggle="collapse" href="#traits" aria-expanded="false"
           aria-controls="traits">
           Student Traits
         </p>
         <div class="collapse" id="traits">
           <div class="card card-body border-0 mt-0">
-            <div v-for="trait in traits" :key="trait.id">
+            <div v-for="trait in data.traits" :key="trait.id">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" :value="trait" id="trait" v-model="checkedFilters"
                   @change="onClick($event)">
@@ -105,7 +107,7 @@
         </p>
         <div class="collapse" id="collections">
           <div class="card card-body border-0 mt-0">
-            <div v-for="topic in topics" :key="topic.id">
+            <div v-for="topic in data.topics" :key="topic.id">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
@@ -124,30 +126,65 @@
 import { get } from "axios";
 export default {
   name: "StudentFilter",
-  props: {},
+  props: {
+  },
   data() {
     return {
-      checkedFilters: [],
-      majors: [],
-      traits: [],
-      topics: [],
+      data: {
+        majors: [],
+        traits: [],
+        topics: [],
+      },
+      filters: {
+        year: [],
+        major: [],
+        trait: [],
+        topic: [],
+      },
     };
   },
   methods: {
     async loadData() {
-      const response = await get('api/majors/');
-      this.majors = response.data;
+      const majors = await get('api/majors/');
+      this.data.majors = majors.data;
       const types = await get('api/types/');
-      this.traits = types.data;
+      this.data.traits = types.data;
       const collections = await get('api/collections/');
-      this.topics = collections.data;
+      this.data.topics = collections.data;
     },
-    onClick(event) {
-      this.$emit('clicked', this.checkedFilters)
+    updateQuery(event) {
+      const query = {}
+      Object.entries(this.filters).forEach(([key, value]) => {
+        if (value) {
+          query[key] = value
+        }
+      })
+      this.$router.push({ query })
     }
-  },
-  created() {
-    this.loadData();
   }
+  // updateFilters(event) {
+  //   this.$router.push({
+  //     name: 'Students', query: {
+  //       major : JSON.stringify(this.filters.major),
+  //       trait: JSON.stringify(this.filters.trait),
+  //       topic: JSON.stringify(this.filters.topic),
+  //     }
+  //   });
+  // },
+  // updateYear(event) {
+  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { year: JSON.stringify(this.filters.year) }) });
+  // },
+  // updateMajor(event) {
+  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { major: JSON.stringify(this.filters.major) }) });
+  // },
+  // updateTrait(event) {
+  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { trait: JSON.stringify(this.filters.trait) }) });
+  // },
+  // updateTopic(event) {
+  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { topic: JSON.stringify(this.filters.topic) }) });
+  // },
+},
+created() {
+  this.loadData();
 };
 </script>

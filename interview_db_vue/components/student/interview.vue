@@ -5,13 +5,12 @@
 
   <div class="mt-4 pt-4">
     <!-- {{ studentInfo }} -->
-
     <div class="card border-0">
       <div class="row g-0 mx-auto">
-        <div class="col-5">
+        <div class="col-4">
           <img src="../../css/quad.png" class="img-fluid mx-auto d-block" />
         </div>
-        <div class="col-7 p-5">
+        <div class="col-8 p-5">
           <h2 class="card-title display-6 mb-2 fw-bold">{{ studentInfo.student.first_name }}</h2>
           <div class="row">
             <div class="col">
