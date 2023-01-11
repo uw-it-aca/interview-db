@@ -1,8 +1,8 @@
 <template>
 
   <header>
-    <nav class="fixed-top pt-4 bg-white border-bottom mb-2">
-      <img src="./css/w.svg" class="me-5 float-end" style="position: relative; z-index: 1; bottom: -19px" />
+    <nav class="fixed-top pt-4 bg-white mb-2" style="background-image:url(${staticUrl}./css/w.svg);">
+
       <div class="d-flex flex-column flex-md-row pb-3 border-bottom border-primary">
         <h2 class="fs-3 d-flex justify-content-center col-6 fw-bold">
           <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
@@ -27,7 +27,10 @@
                 Us</router-link>
             </h6>
           </li>
+          
+          <img src="./css/w.svg" class="float-end" />
         </ul>
+        <img src="./css/w.svg" class="me-5 float-end"/>
       </div>
     </nav>
   </header>
@@ -40,7 +43,6 @@
 
 
   <footer class="ps-5 footer p-4 border-top mx-auto">
-    <!-- <img src="./css/w.svg" class="me-5 float-end" style="position: relative; z-index: 1; bottom: 86px" /> -->
     <div class="row g-0 justify-content-end">
       <div class="col-2 ps-5">
         <h2 class="fs-4 d-flex fw-bold border-bottom">Husky Voices</h2>
