@@ -161,7 +161,7 @@ export default {
       })
       this.$router.push({ query })
     }
-  }
+  },
   // updateFilters(event) {
   //   this.$router.push({
   //     name: 'Students', query: {
@@ -183,8 +183,8 @@ export default {
   // updateTopic(event) {
   //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { topic: JSON.stringify(this.filters.topic) }) });
   // },
-},
-created() {
-  this.loadData();
+  created() {
+    this.loadData();
+  }
 };
 </script>

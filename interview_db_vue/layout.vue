@@ -30,7 +30,6 @@
           
           <img src="./css/w.svg" class="float-end" />
         </ul>
-        <img src="./css/w.svg" class="me-5 float-end"/>
       </div>
     </nav>
   </header>
