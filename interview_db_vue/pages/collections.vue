@@ -9,7 +9,7 @@
 
     <template #content>
       <div v-if="collectionsId">
-        <Topic :topicInfo="singleCollection"/>
+        <Topic :topicInfo="singleCollection" />
       </div>
 
       <div v-else>
@@ -19,9 +19,45 @@
             <h2 class="display-5 fw-bold mb-4">Collections</h2>
             <p class="fs-5 mb-5">Stories categorized by similar themes, collected from a diverse group of students.</p>
           </div>
-        </div>
 
-        <div v-for="collection, index in collections" :key="collection.id">
+          <div>
+            <button type="button" class="bg-light p-4 m-4" @click="$router.push({ name: 'Collections', params: { id: 1 } })">
+              <div class="text-start collection-button">
+                <h2 class="fw-bold display-6 mb-4">Choosing a Major</h2>
+                <p class="display-4 fs-6 mx-auto">
+                  How did you choose your major and why did you choose it?
+                  <i class="ms-4 bi bi-chevron-right"></i>
+                </p>
+              </div>
+            </button>
+          </div>
+
+          <div>
+            <button type="button" class="bg-light p-4 m-4" @click="$router.push({ name: 'Collections', params: { id: 1 } })">
+              <div class="text-start collection-button">
+                <h2 class="fw-bold display-6 mb-4">Choosing a Major</h2>
+                <p class="display-4 fs-6 mx-auto">
+                  How did you choose your major and why did you choose it?
+                  <i class="ms-4 bi bi-chevron-right"></i>
+                </p>
+              </div>
+            </button>
+          </div>
+
+          <div>
+            <button type="button" class="bg-light p-4 m-4" @click="$router.push({ name: 'Collections', params: { id: 1 } })">
+              <div class="text-start collection-button">
+                <h2 class="fw-bold display-6 mb-4">Choosing a Major</h2>
+                <p class="display-4 fs-6 mx-auto">
+                  How did you choose your major and why did you choose it?
+                  <i class="ms-4 bi bi-chevron-right"></i>
+                </p>
+              </div>
+            </button>
+          </div>
+
+
+          <!-- <div v-for="collection, index in collections" :key="collection.id">
           <div v-if="index % 2 == 0">
             <div class="card w-100 border-0 overflow-hidden" style="height: 380px">
               <div class="row g-0">
@@ -45,34 +81,7 @@
                 </div>
               </div>
             </div>
-          </div>
-          
-          <div v-else>
-            <div class="card w-100 border-0 overflow-hidden" style="height: 380px">
-              <div class="row g-0">
-                <div class="col-5 p-5 justify-content-center text-white" style="background-color: #bc7326">
-                  <div class="text-center mx-auto">
-                    <h5 class="card-title mb-4 pt-5 display-6">{{ collection.topic }}</h5>
-                    <p class="card-text w-75 mb-4 mx-auto display-4 fs-4">
-                      {{ collection.question }}
-                    </p>
-                    <p class="card-text display-4 fs-4">
-                      <router-link
-                        :to="{ name: 'Collections', params: { id: collection.id, singleCollection: JSON.stringify(collection)}}"
-                        class="active-link" style="color: inherit">
-                        Read Collection >
-                      </router-link>
-                    </p>
-                  </div>
-                </div>
-                <div class="col-7">
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
-                    class="w-100 h-100 img-fluid" style="object-fit: cover" />
-                </div>
-              </div>
-            </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </template>

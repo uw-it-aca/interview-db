@@ -12,19 +12,26 @@
         </div>
 
         <div class="col-8 ps-4 m-0">
-          <h2 class="card-title fw-bold display-5 mb-2">{{ studentInfo.student.first_name }}</h2>
-          <p class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary">
-            <span v-if="studentInfo.standing">
-              {{ studentInfo.standing + ", studying" }}
-            </span>
-            <span v-else>
-              Studying
-            </span>
-            <span v-for="major, index in studentInfo.major" :key="major.id">
-              <span v-if="index != 0">, </span>
-              {{ major.full_title }}
-            </span>
-          </p>
+          <h2 class="card-title fw-bold display-6 mb-2">{{ studentInfo.student.first_name }}</h2>
+          <div class="row">
+            <div class="col-11">
+              <p class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary">
+                <span v-if="studentInfo.standing">
+                  {{ studentInfo.standing + ", studying" }}
+                </span>
+                <span v-else>
+                  Studying
+                </span>
+                <span v-for="major, index in studentInfo.major" :key="major.id">
+                  <span v-if="index != 0">, </span>
+                  {{ major.full_title }}
+                </span>
+              </p>
+            </div>
+            <div class="col-1">
+              <i class="bi bi-chevron-right"></i>
+            </div>
+          </div>
         </div>
 
         <div class="card-text ps-4">

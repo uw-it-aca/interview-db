@@ -64,10 +64,15 @@ button.btn-card {
   height: 21rem;
 }
 
+button.collection-btn {
+  background-color: $light;
+}
+
 .card-card-clickable {
   --bs-card-bg: none;
   --bs-card-border-width: 0px;
 }
+
 
 img.listing-img {
   height: 12rem;
