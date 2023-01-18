@@ -4,9 +4,11 @@
 <template>
   <div class="row mb-5">
     <div class="col p-5" style="background-color: #172643; height:330px">
-      <div class="text-white py-5">
-        <h2 class="display-3 mb-4 mx-auto">{{ topicInfo.topic }}</h2>
+      <div class="text-white mx-auto py-5">
         <div class="row w-50 mx-auto">
+          <h2 class="text-start display-3 mb-4">{{ topicInfo.topic }}</h2>
+        </div>
+        <div class="row w-50 mx-auto ps-5">
           <h5 class="text-start display-4 fs-4">
             {{ topicInfo.question }}
           </h5>
