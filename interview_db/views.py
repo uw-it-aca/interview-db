@@ -61,7 +61,17 @@ class InterviewDetailView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@method_decorator(group_required(front_end_group), name='dispatch')
+class CodesListView(APIView):
+    """
+    API endpoint returning list of all codes
+    """
+
+    def get(self, request):
+        queryset = Code.objects.all()
+        serializer = CodeSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 class CollectionListView(APIView):
     """
     API endpoint returning list of collections

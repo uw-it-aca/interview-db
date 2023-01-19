@@ -231,3 +231,8 @@ class ResourceCategoryAdmin(SAMLModelAdmin):
 @admin.register(ResourceLink, site=saml_admin_site)
 class ResourceLinkAdmin(SAMLModelAdmin):
     has_access = False
+
+
+@admin.register(Collection, site=saml_admin_site)
+class CollectionAdmin (SAMLModelAdmin):
+    list_display = ('topic', 'question')
