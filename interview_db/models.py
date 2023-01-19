@@ -306,4 +306,4 @@ class Collection(models.Model):
                              )
     codes = models.ManyToManyField(Code, blank=True)
     subcodes = models.ManyToManyField(SubCode, blank=True)
-    question = models.TextField(max_length=100)
+    question = models.TextField(max_length=100, null=True)

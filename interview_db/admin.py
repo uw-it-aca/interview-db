@@ -218,11 +218,6 @@ class StoryAdmin (SAMLModelAdmin):
         }
 
 
-@admin.register(Collection, site=saml_admin_site)
-class CollectionAdmin (SAMLModelAdmin):
-    list_display = ('topic', 'question')
-
-
 @admin.register(ResourceCategory, site=saml_admin_site)
 class ResourceCategoryAdmin(SAMLModelAdmin):
     has_access = False
