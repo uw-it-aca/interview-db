@@ -48,6 +48,7 @@ urlpatterns += [
     path('api/types/', StudentTypeListView.as_view(), name="type-list"),
     path('api/random/', RandomStudentsView.as_view(), name="random-students"),
     path('api/recent/', RecentStudentsView.as_view(), name="recent-students"),
+    path('api/codes/', CodesListView.as_view()),
     re_path(r"^.*$", TemplateView.as_view(
         template_name="vue.html"),
         name="home"),
