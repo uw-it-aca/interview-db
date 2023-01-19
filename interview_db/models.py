@@ -134,7 +134,7 @@ class Interview(models.Model):
         max_length=255, blank=True, null=True,
         help_text="Describe the image in detail so that a non-sighted "
                   "user might also get that personal connection.")
-    intended_major = models.BooleanField()
+    intended_major = models.BooleanField(blank=True)
     major = models.ManyToManyField(Major)
     standing = models.CharField(choices=STANDING,
                                 max_length=2,
