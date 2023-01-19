@@ -12,27 +12,22 @@
       </div>
 
       <div v-else>
-        <div class="row mb-5">
-          <div class="col p-5" style="background-color: #172643; height: 330px">
-            <div class="text-white py-5">
-              <h2 class="display-3 text-center mb-4">Student Interviews</h2>
-              <h5 class="text-center display-4 fs-4">
-                Sort interviews by student<br />characteristics
-              </h5>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3 justify-content-center">
-            <StudentFilter @clicked="updateFilters" />
-            {{ filters }}
-            {{ filteredStudents }}
-          </div>
+        <div class="mx-auto p-5 mb-4">
+          <div class="pt-5 ps-5">
+            <h2 class="display-5 fw-bold mb-5">Student Stories</h2>
+            <p class="fs-5 mb-5">Sort interviews by student characteristics.</p>
+            <div class="row">
+              <div class="col-4">
+                <StudentFilter @clicked="updateFilters" />
+                {{ filters }}
+              </div>
 
-          <div class="col-9 justify-content-end">
-            <div class="card-columns justify-content-end">
-              <div v-for="student in filteredStudents" :key="student.id">
-                <StudentListing :studentInfo="student" />
+              <div class="col-7 mx-auto">
+                <div class="card-columns justify-content-end">
+                  <div v-for="student in filteredStudents" :key="student.id">
+                    <StudentListing :studentInfo="student" class="mb-5" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -67,7 +62,12 @@ export default {
     return {
       pageTitle: "Students",
       students: [],
-      filters: [],
+      filters: {
+        year: this.$route.query.year,
+        major: this.$route.query.major,
+        trait: this.$route.query.trait,
+        topic: this.$route.query.topic,
+      },
     };
   },
   computed: {
@@ -77,33 +77,30 @@ export default {
     singleStudentInfo() {
       return JSON.parse(this.$route.params.singleStudent);
     },
+    updatedFilters() {
+      this.filters.year = this.$route.query.year;
+      this.filters.major = this.$route.query.major;
+      this.filters.trait = this.$route.query.trait;
+      this.filters.topic = this.$route.query.topic;
+    },
     filteredStudents() {
-      if (!this.filters.length) return this.students
-      const out = this.students.filter(student =>
-        student.student_type.filter (trait =>
-        trait.id > 1))
-
-        return out
-
-      // const out
-      // for (let i = 0; i < this.filters.length; i++) {
-      //   out += this.filters[i]
+      return this.students;
+      // if (this.filters.length == 0) {
+      //   return this.students;
+      // } else {
+      //   return this.students.filter(student => student.major == this.filters.major
+      //   );
+      //   return this.students.filter(student => {
+      //     return this.filters.major.every(m => student.major.includes(m))
+      //   });
+      //   return this.students.filter(student => {
+      //     return this.filters.major.every(m => student.major.includes(m))
+      //   });
+      //   return this.students.filter(student => {
+      //     return this.filters.major.every(m => student.major.includes(m))
+      //   });
       // }
-
-      // const checkFilter = (stu = [], filters = []) =>  {
-      //   let res = [];
-      //   for (let i = 0; i < stu.length; i++) {
-      //     for (let j = 0; j < stu.student_type.length; j++) {
-      //       if (!this.filters.includes(stu.student_type[j])) {
-      //         break
-      //       }
-      //     }
-      //     res += stu[i]
-      //   }
-      //   return res
-      // }
-      // return checkFilter(this.students, this.filters)
-    }
+    },
   },
   created() {
     this.loadData();
@@ -113,9 +110,6 @@ export default {
       const response = await get("/api/students/");
       this.students = response.data;
     },
-    updateFilters(value) {
-      this.filters = value;
-    }
   },
 };
 </script>

@@ -1,43 +1,119 @@
 // import entire bootstrap library
 
-$light: #ECECEC;
-$info: #0AAAC9;
-$primary: #527EC4;
-$secondary: #848484;
-$carousel-control-color: $light;
+// setting bootstrap color variables
+$light: #FAF8FC;      // card color
+$primary: #1E1E1E;    // text
+$secondary: #827252;  // default button
+$info: #B4A67F;       // active button
+$white: #F8F9fA;      // background color
+
+$min-contrast-ratio: 2.5;
+
+$carousel-control-color: $primary;
 $carousel-control-width: 25%;
-$btn-border-radius: 20px;
+
+$navbar-dark-toggler-border-color: $primary;
+
+// button styling
+$btn-border-width: 0px;
+$bs-btn-color: $white;
+$bs-btn-active-color: $info;
 $btn-transition: all 0.15s ease 0s;
-$btn-active-box-shadow: inset 0 3px 5px rgba($info, .125);
-$btn-link-color: $info;
-$btn-link-hover-color: $info;
-$line-height-base: 1.75;
+$btn-box-shadow: 0 .5rem 1rem rgba($secondary, .5);
+$btn-padding-y: 1rem;
+$btn-padding-x: 1rem;
+
+// card styling
+$border-radius: 0.1rem;
+$card-bg: $light;
+$card-border-color: $primary;
+$card-cap-bg: $light;
+$card-cap-color: $primary;
 
 @use "sass:map";
 @import "node_modules/bootstrap/scss/bootstrap";
 
 // app custom colors
 $custom-colors: (
-  "grey": #5f5f5f,
+  "background": #F8F9fA,
 );
 
-li a {
-  text-decoration: none;
-}
-
 a.active-link {
-  color: black;
   text-decoration: none;
+  color: $white;
 }
 
 a.nav-link {
-  color: black;
-  text-decoration: none;
-  text-transform: uppercase;
   margin: auto 1em auto;
   font-size: larger;
 }
 
+// button-card styling
+button.btn-card {
+  color: $primary;
+  display: inline-block;
+  text-align: start;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  background-color: $light;
+  padding: 1rem 1rem;
+  border-color: $primary;
+  border-radius: 0.1rem;
+  border-width: 1.5px;
+  height: 21rem;
+}
+
+button.collection-btn {
+  background-color: $light;
+}
+
+.card-card-clickable {
+  --bs-card-bg: none;
+  --bs-card-border-width: 0px;
+}
+
+
+img.listing-img {
+  height: 12rem;
+  width: 12rem;
+  position: relative;
+  z-index: 1;
+  bottom: 100px;
+  line-height: 0;
+  object-fit: cover;
+  border-radius: 1.5px;
+  filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
+}
+
+// Open Sans for all body text
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+header,
+main {
+  font-family: 'Open Sans', sans-serif;
+  text-transform: none;
+  text-decoration: none;
+}
+
+// Times for all headers
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 900;
+}
+
+html {
+  height:100vh;
+}
+
+$border-color: $primary;
+$border-width: 1.5px;
+$border-radius: 0.1rem;
 
 // bootstrap theme + utility merging
 $theme-colors: map-merge($theme-colors, $custom-colors);
@@ -48,51 +124,37 @@ $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
 
 $utilities: (
   // MARK: bg-color-hover (changes bg-color on hover)
-  "background-color":
-    (
-      property: background-color,
-      class: bg,
-      state: hover focus,
-      values:
-        map-merge(
-          $theme-colors,
-          (
-            "body": $body-bg,
-            "white": $white,
-            "transparent": transparent,
-          )
-        ),
-    ),
+  "background-color": (property: background-color,
+    class: bg,
+    state: hover focus,
+    values: map-merge($theme-colors,
+      ("body": $body-bg,
+        "white": $white,
+        "transparent": transparent,
+      )),
+  ),
   // MARK: text-color-hover (changes text-color on hover)
-  "color":
-    (
-      property: color,
-      class: text,
-      state: hover focus,
-      values:
-        map-merge(
-          $theme-colors,
-          (
-            "white": $white,
-            "transparent": transparent,
-          )
-        ),
-    )
+  "color": (property: color,
+    class: text,
+    state: hover focus,
+    values: map-merge($theme-colors,
+      ("white": $white,
+        "transparent": transparent,
+      )),
+  )
 );
 
 // additional non-bootstrap styles
-.btn-info {
-  border: 1px solid rgba(0,0,0);
-  border-radius: 20px;
-  background: transparent;
-  transition: all 0.3s ease 0s;
-}
+// .btn-info {
+//   border-radius: 20px;
+//   background: transparent;
+//   transition: all 0.3s ease 0s;
+// }
 
-.btn-info:hover {
-  color: $info;
-  background: $info;
-  border: 1px solid $info;
-}
+// .btn-info:hover {
+//   color: $info;
+//   background: $info;
+// }
 
 
 // MARK: import bootstrap and bootstrap-icons last

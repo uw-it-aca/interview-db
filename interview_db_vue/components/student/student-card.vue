@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <img class="img-fluid p-0" src="../../css/blossom.png"
       style="height: 110px; width: 110px; object-fit:cover; border-radius:50%">
-    <div class="card border-0 rounded-0 bg-light" style="position: relative; z-index: -1; bottom: 70px; width: 300px">
+    <div class="card border-0 bg-light" style="position: relative; z-index: -1; bottom: 70px; width: 300px">
       <div class="card-body text-center pt-5">
         <h2 class="card-title fw-normal pt-4">{{ studentInfo.student.first_name }}</h2>
         <h4 class="card-subtitle w-75 text-uppercase display-4 fs-6 text-info mx-auto mb-4">

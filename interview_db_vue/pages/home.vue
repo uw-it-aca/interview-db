@@ -2,68 +2,33 @@
 
 <template>
   <layout :page-title="pageTitle">
-    <!-- page content -->
     <template #title>
       <h1 class="visually-hidden">{{ pageTitle }}</h1>
     </template>
 
     <template #content>
-      <div class="card overflow-hidden border-0 rounded-0 mb-5">
-        <img class="card-img rounded-0" src="../css/quad.png" alt="Image of UW quad">
-        <div class="card-img-overlay d-flex flex-column justify-content-center">
-          <div class="row justify-content-center text-center text-white">
-            <h2 class="display-5 fw-bold mb-4"><em>Husky Voices</em></h2>
-            <h6 class="display-4 fs-4">
-              Telling the stories of UW Students<br />through authentic,
-              personal,<br />spontaneous interviews
-            </h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="row justify-content-center mx-auto">
-        <div v-for="student in recentStudents" :key="student.id">
-          <div class="col-3 mx-2">
-            <StudentCard :studentInfo="student" />
-          </div>
-        </div>
-      </div>
-
-      <div class="row mb-5">
-        <ProcessCard />
-      </div>
-
-      <div class="row justify-content-center mb-5 text-center">
-        <div class="col-4 mx-5">
-          <router-link to="/students" class="active-link">
-            <div class="h-100 p-5 bg-light">
-              <div class="py-5 display-4 fs-5">
-                <p class="mb-1">Filter interviews by</p>
-                <h2 class="display-4 fs-1">Student</h2>
-              </div>
-              <p class="w-75 mx-auto display-4 fs-5">
-                Filter student interviews by major, year, or characteristics
+      <div class="card mb-5 mt-0 pt-0 border-primary w-100">
+        <div class="row g-0">
+          <div class="col-7 pt-5 ps-5">
+            <div class="card-body mt-5 pt-5 ps-5 mx-auto">
+              <h2 class="display-4 pt-5 mb-3 fw-bold">REAL STUDENTS</h2>
+              <h2 class="display-4 mb-3 fw-bold">REAL STORIES</h2>
+              <p class="fs-5 mb-4">
+                Sharing the stories of UW students through a <br />
+                series of authentic and personal interviews.
               </p>
+              <button type="button" class="btn btn-secondary" @click="$router.push('students')">Read a Story ></button>
             </div>
-          </router-link>
-        </div>
-        <div class="col-4 mx-5">
-          <router-link to="/collections" tag="div" class="active-link">
-            <div class="h-100 p-5 bg-light">
-              <div class="py-5">
-                <p class="mb-1 display-4 fs-5">Read a</p>
-                <h2 class="display-4 fs-1">Collection</h2>
-              </div>
-              <p class="w-75 mx-auto display-4 fs-5">
-                Stories from diverse students with similar themes
-              </p>
-            </div>
-          </router-link>
+          </div>
+          <div class="col-5">
+            <img src="../css/homeimage.png" class="img-fluid embed-responsive-item"
+              style="height:100%; width:100%; object-fit:cover;" alt="UW Quad on a Fall Day">
+          </div>
         </div>
       </div>
 
       <div class="row justify-content-center">
-        <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto" data-bs-ride="carousel">
+        <div id="studentCarousel" class="carousel slide justify-content-center mx-auto" data-bs-ride="carousel">
           <div class="carousel-inner justify-content-cente mx-auto">
             <div v-for="student, index in randomStudents" :key="student.id">
               <div v-if="index == 0">
@@ -73,16 +38,38 @@
               </div>
               <div v-else>
                 <div class="carousel-item">
-                  <StudentCarousel :studentInfo="student"/>
+                  <StudentCarousel :studentInfo="student" />
                 </div>
               </div>
             </div>
           </div>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+          <button class="carousel-control-prev" type="button" data-bs-target="#studentCarousel"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#studentCarousel"
             data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
+        </div>
+      </div>
+
+      <div class="mx-auto p-5 mb-5">
+        <div class="pt-5 ps-5 mx-auto">
+          <h2 class="display-6 fw-bold mb-4">Student Stories</h2>
+          <p class="fs-5 mb-4">Read individual interviews of students from a wide variety of backgrounds including
+            <b>major, year</b> and other characteristics.</p>
+          <button type="button" class="btn btn-secondary" @click="$router.push('students')">Explore Stories ></button>
+        </div>
+
+        <div class="pt-5 ps-5 mx-auto">
+          <h2 class="display-6 fw-bold mb-4">Explore Collections</h2>
+          <p class="fs-5 mb-4">Navigate common themes among students on topics such as <b>transitioning to college</b>
+            and <b>finding community</b>.</p>
+          <button type="button" class="btn btn-secondary" @click="$router.push('collections')">Explore Collections
+            ></button>
         </div>
       </div>
 

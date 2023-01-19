@@ -2,8 +2,8 @@
 // to be shown on home page
 
 <template>
-  <div class="card overflow-hidden border-0 rounded-0">
-    <img class="card-img rounded-0" src="../css/blossom.png" alt="Image of cherry blossoms">
+  <div class="card overflow-hidden border-0">
+    <img class="card-img" src="../css/blossom.png" alt="Image of cherry blossoms">
     <div class="card-img-overlay d-flex flex-column justify-content-center py-0">
       <div class="row justify-content-center">
         <div class="col-9 bg-white py-5 mx-auto">
