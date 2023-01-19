@@ -8,7 +8,7 @@
     </template>
 
     <template #content>
-      <div v-if="collectionsId">
+      <div v-if="collectionsTopic">
         <Topic :topicInfo="singleCollection" />
       </div>
 
@@ -20,40 +20,19 @@
             <p class="fs-5 mb-5">Stories categorized by similar themes, collected from a diverse group of students.</p>
           </div>
 
-          <div>
-            <button type="button" class="bg-light p-4 m-4" @click="$router.push({ name: 'Collections', params: { id: 1 } })">
-              <div class="text-start collection-button">
-                <h2 class="fw-bold display-6 mb-4">Choosing a Major</h2>
-                <p class="display-4 fs-6 mx-auto">
-                  How did you choose your major and why did you choose it?
-                  <i class="ms-4 bi bi-chevron-right"></i>
-                </p>
-              </div>
-            </button>
-          </div>
-
-          <div>
-            <button type="button" class="bg-light p-4 m-4" @click="$router.push({ name: 'Collections', params: { id: 1 } })">
-              <div class="text-start collection-button">
-                <h2 class="fw-bold display-6 mb-4">Choosing a Major</h2>
-                <p class="display-4 fs-6 mx-auto">
-                  How did you choose your major and why did you choose it?
-                  <i class="ms-4 bi bi-chevron-right"></i>
-                </p>
-              </div>
-            </button>
-          </div>
-
-          <div>
-            <button type="button" class="bg-light p-4 m-4" @click="$router.push({ name: 'Collections', params: { id: 1 } })">
-              <div class="text-start collection-button">
-                <h2 class="fw-bold display-6 mb-4">Choosing a Major</h2>
-                <p class="display-4 fs-6 mx-auto">
-                  How did you choose your major and why did you choose it?
-                  <i class="ms-4 bi bi-chevron-right"></i>
-                </p>
-              </div>
-            </button>
+          <div v-for="collection in collections" :key="collection.id">
+            <div>
+              <button type="button" class="bg-light p-4 m-4"
+                @click="$router.push({ name: 'Collections', params: { topic:  collection.topic, singleCollection: JSON.stringify(collection) } })">
+                <div class="text-start collection-button">
+                  <h2 class="fw-bold display-6 mb-4">{{ collection.topic }}</h2>
+                  <p class="display-4 fs-6 mx-auto">
+                    {{ collection.question }}
+                    <i class="ms-4 bi bi-chevron-right"></i>
+                  </p>
+                </div>
+              </button>
+            </div>
           </div>
 
 
@@ -112,8 +91,8 @@ export default {
     };
   },
   computed: {
-    collectionsId() {
-      return this.$route.params.id;
+    collectionsTopic() {
+      return this.$route.params.topic;
     },
     singleCollection() {
       return JSON.parse(this.$route.params.singleCollection);
