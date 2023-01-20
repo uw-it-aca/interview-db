@@ -1,42 +1,60 @@
-// interview-listing.vue 
-// shown on students page
+// interview-listing.vue // shown on full students page
 
 <template>
-  <div class="card mb-5 border-0 rounded-0">
-    <div class="card-body">
-      <div class="row g-0">
-        <div class="col-2">
-          <img src="../../css/about.png" class="img-fluid mx-auto d-block" style="
-              border-radius: 50%;
-              height: 75px;
-              width: 75px;
-              object-fit: cover;
-            " />
+  <button
+    type="button"
+    class="btn-card mt-5"
+    @click="
+      $router.push({
+        name: 'Students',
+        params: {
+          id: studentInfo.id,
+          singleStudent: JSON.stringify(studentInfo),
+        },
+      })
+    "
+  >
+    <p class="fs-6 text-end">{{ interviewDate }}</p>
+    <div class="card-clickable">
+      <div class="row p-0 m-0">
+        <div class="col-4 mx-auto ps-4">
+          <img src="../../css/blossom.png" class="listing-img" />
         </div>
 
-        <div class="col-9 pe-5">
-          <div class="mb-3 px-3">
-            <h2 class="card-title display-6 mb-2">{{ studentInfo.student.first_name }}</h2>
-            <p class="card-subtitle text-uppercase display-6 fs-5 text-info">
-              {{ studentInfo.standing }}
-              <span v-for="major in studentInfo.major" :key="major.id">
-                {{ ", " + major.full_title }}
-              </span>
-            </p>
+        <div class="col-8 ps-4 m-0">
+          <h2 class="card-title fw-bold display-6 mb-2">
+            {{ studentInfo.student.first_name }}
+          </h2>
+          <div class="row">
+            <div class="col-11">
+              <p
+                class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary"
+              >
+                <span v-if="studentInfo.standing">
+                  {{ studentInfo.standing + ", studying" }}
+                </span>
+                <span v-else> Studying </span>
+                <span
+                  v-for="(major, index) in studentInfo.major"
+                  :key="major.id"
+                >
+                  <span v-if="index != 0">, </span>
+                  {{ major.full_title }}
+                </span>
+              </p>
+            </div>
+            <div class="col-1">
+              <i class="bi bi-chevron-right"></i>
+            </div>
           </div>
-          <div class="mb-3 px-3">
-            <p class="card-text display-6 fs-3">"{{ studentInfo.pull_quote }}"</p>
-            <p class="card-text display-6 fs-5 mb-2">
-              <router-link
-                :to="{ name: 'Students', params: { id: studentInfo.id, singleStudent: JSON.stringify(studentInfo) } }"
-                class="active-link" style="color: #5f5f5f">Read full interview >
-              </router-link>
-            </p>
-          </div>
+        </div>
+
+        <div class="card-text ps-4">
+          <p class="display-6 fs-5">"{{ studentInfo.pull_quote }}"</p>
         </div>
       </div>
     </div>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -52,5 +70,10 @@ export default {
     return {};
   },
   methods: {},
+  computed: {
+    interviewDate() {
+      return new Date(this.studentInfo.date).toLocaleDateString("en-US");
+    },
+  },
 };
 </script>

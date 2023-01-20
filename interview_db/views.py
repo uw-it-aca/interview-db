@@ -7,9 +7,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
+from django.utils.decorators import method_decorator
 
 from uw_saml.decorators import group_required
-
 from .serializers import *
 from .models import *
 
@@ -17,6 +17,7 @@ admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class PageView(TemplateView):
     template_name = "vue.html"
 
@@ -30,10 +31,12 @@ class PageView(TemplateView):
         return response
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class DefaultPageView(PageView):
     template_name = "vue.html"
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewListView(APIView):
     """
     API endpoint returning list of interviews
@@ -46,6 +49,7 @@ class InterviewListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewDetailView(APIView):
     """
     API endpoint returning single interview, made up of its matching stories
@@ -57,6 +61,7 @@ class InterviewDetailView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class CollectionListView(APIView):
     """
     API endpoint returning list of collections
@@ -68,6 +73,7 @@ class CollectionListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class CollectionDetailView(APIView):
     """
     API endpoint returning single collection of stories
@@ -82,6 +88,7 @@ class CollectionDetailView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class MajorListView(APIView):
     """
     API endpoint returning all added majors
@@ -93,6 +100,7 @@ class MajorListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class StudentTypeListView(APIView):
     """
     API endpoint returning all student types
@@ -104,6 +112,7 @@ class StudentTypeListView(APIView):
         return Response(serializer.data)
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class RandomStudentsView(APIView):
     """
     API endpoint returning three random students
@@ -115,6 +124,7 @@ class RandomStudentsView(APIView):
         return Response(serializer.data)
 
 
+@method_decorator(group_required(front_end_group), name='dispatch')
 class RecentStudentsView(APIView):
     """
     API endpoint returning three random students

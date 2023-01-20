@@ -2,14 +2,14 @@
 // to filter student interviews
 
 <template>
-  <div class="card" style="width: 18rem; border-radius:1.5rem">
-    <h5 class="card-header border-0 border-top bg-white" style="border-radius:1.5rem">Filter by Student:</h5>
-    <div class="card-body border-top">
+  <div class="card" style="width: 25rem;">
+    <h2 class="card-header fw-bold fs-3">Filter Stories</h2>
+    <div class="card-body">
       <div class="mb-4">
-        <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#year" aria-expanded="false"
+        <p class="display-4 fw-bold fs-5 mb-0" data-bs-toggle="collapse" href="#year" aria-expanded="false"
           aria-controls="year">
-          Year
-        </h2>
+          Student Year
+        </p>
         <div class="collapse mt-0" id="year">
           <div class="card card-body border-0">
             <div class="form-check">
@@ -19,9 +19,8 @@
                 Freshman
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="So" id="flexCheckDefault" v-model="filters.year"
-                @change="updateYear($event)">
+            <!-- <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
               <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
                 Sophomore
               </label>
@@ -60,22 +59,22 @@
               <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
                 PhD
               </label>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
 
       <div class="mb-4">
-        <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#major" aria-expanded="false"
+        <p class="display-4 fs-5 fw-bold mb-0" data-bs-toggle="collapse" href="#major" aria-expanded="false"
           aria-controls="major">
           Major
-        </h2>
+        </p>
         <div class="collapse" id="major">
           <div class="card card-body border-0 mt-0">
-            <div v-for="major in data.major" :key="major.id">
+            <div v-for="major in data.majors" :key="major.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" :value="major.full_title" id="major"
-                  v-model="filters.major" @change="updateMajor($event)">
+                <input class="form-check-input" type="checkbox" :value="major.id" id="major" v-model="filters.major"
+                  @change="updateQuery($event)">
                 <label class="form-check-label display-6 fs-6" for="major">
                   {{ major.full_title }}
                 </label>
@@ -85,14 +84,14 @@
         </div>
       </div>
 
-      <div class="mb-4">
-        <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#traits" aria-expanded="false"
+      <!-- <div class="mb-4">
+        <p class="display-4 fs-5 fw-bold mb-0" data-bs-toggle="collapse" href="#traits" aria-expanded="false"
           aria-controls="traits">
           Student Traits
-        </h2>
+        </p>
         <div class="collapse" id="traits">
           <div class="card card-body border-0 mt-0">
-            <div v-for="trait in data.trait" :key="trait.id">
+            <div v-for="trait in data.traits" :key="trait.id">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" :value="trait.type" id="trait" v-model="filters.trait"
                   @change="updateTrait($event)">
@@ -103,16 +102,16 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="mb-4">
-        <h2 class="display-4 fs-5 mb-0" data-bs-toggle="collapse" href="#collections" aria-expanded="false"
+        <p class="display-4 fs-5 fw-bold mb-0" data-bs-toggle="collapse" href="#collections" aria-expanded="false"
           aria-controls="collections">
-          Collections
-        </h2>
+          Story Collection
+        </p>
         <div class="collapse" id="collections">
           <div class="card card-body border-0 mt-0">
-            <div v-for="topic in data.topic" :key="topic.id">
+            <div v-for="topic in data.topics" :key="topic.id">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" :value=topic.topic id="topic" v-model="filters.topic"
                   @change="updateTopic($event)">
@@ -137,49 +136,58 @@ export default {
   data() {
     return {
       data: {
-        major: [],
-        trait: [],
-        topic: [],
+        majors: [],
+        traits: [],
+        topics: [],
       },
       filters: {
         year: [],
         major: [],
         trait: [],
         topic: [],
-    },
+      },
     };
   },
   methods: {
     async loadData() {
-      const major = await get('api/majors/');
-      this.data.major = major.data;
+      const majors = await get('api/majors/');
+      this.data.majors = majors.data;
       const types = await get('api/types/');
-      this.data.trait = types.data;
+      this.data.traits = types.data;
       const collections = await get('api/collections/');
-      this.data.topic = collections.data;
+      this.data.topics = collections.data;
     },
-    // updateFilters(event) {
-    //   this.$router.push({
-    //     name: 'Students', query: {
-    //       major : JSON.stringify(this.filters.major),
-    //       trait: JSON.stringify(this.filters.trait),
-    //       topic: JSON.stringify(this.filters.topic),
-    //     }
-    //   });
-    // },
-    updateYear(event) {
-      this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { year: JSON.stringify(this.filters.year) }) });
-    },
-    updateMajor(event) {
-      this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { major: JSON.stringify(this.filters.major) }) });
-    },
-    updateTrait(event) {
-      this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { trait: JSON.stringify(this.filters.trait) }) });
-    },
-    updateTopic(event) {
-      this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { topic: JSON.stringify(this.filters.topic) }) });
-    },
+    updateQuery(event) {
+      const query = {}
+      Object.entries(this.filters).forEach(([key, value]) => {
+        if (value) {
+          query[key] = value
+        }
+      })
+      this.$router.push({ query })
+    }
   },
+  // updateFilters(event) {
+  //   this.$router.push({
+  //     name: 'Students', query: {
+  //       major : JSON.stringify(this.filters.major),
+  //       trait: JSON.stringify(this.filters.trait),
+  //       topic: JSON.stringify(this.filters.topic),
+  //     }
+  //   });
+  // },
+  // updateYear(event) {
+  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { year: JSON.stringify(this.filters.year) }) });
+  // },
+  // updateMajor(event) {
+  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { major: JSON.stringify(this.filters.major) }) });
+  // },
+  // updateTrait(event) {
+  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { trait: JSON.stringify(this.filters.trait) }) });
+  // },
+  // updateTopic(event) {
+  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { topic: JSON.stringify(this.filters.topic) }) });
+  // },
   created() {
     this.loadData();
   }

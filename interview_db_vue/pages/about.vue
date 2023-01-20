@@ -8,65 +8,175 @@
     </template>
 
     <template #content>
-      <div class="row mb-0">
-        <img class="d-block" src="../css/about.png" style="z-index: -1" alt="Image of UW quad">
-      </div>
-      <div class="w-75 h-75 p-5 bg-light mx-auto mb-0 d-block" style="position:relative; bottom:300px;">
-        <div class="text-center p-5">
-          <h2 class="display-6 py-5">Real Students, Real Stories</h2>
-          <h5 class="display-6 fs-3 px-5">We collect the true stories of UW students and<br/>share them with others on campus</h5>
-        </div>
-      </div>
-
-      <div class="w-75 bg-light mx-auto px-5 mb-5">
-        <div class="text-center p-5 mx-auto">
-          <h2 class="display-6 mb-5">Who We Are</h2>
-          <h5 class="display-6 px-5 fs-3 mb-5">Our team operates out of the Academic Experience Design and Delivery (AXDD) Department at UW-IT.</h5>
-          <img class="mb-5" src="../css/team.png" style="z-index: -1" alt="Image of UW quad">
-        </div>
-      </div>
-
-      <div class="w-75 bg-light mx-auto mb-5">
-        <div class="w-50 mx-auto text-center py-5">
-          <h2 class="display-6 fs-3 mb-5">Are you interested in adding<br/>to our collection?</h2>
-          <p class="display-4 fs-5">
-            Schedule a 15-30 minute appointment with an interviewer to talk about your UW experience and add to our collection.
+      <div class="mx-auto p-5 mb-4">
+        <div class="pt-5 ps-5 mx-auto mb-5">
+          <h2 class="display-5 fw-bold mb-4">Who We Are</h2>
+          <p class="fs-5 mb-4">
+            We collect the real stories of UW students and share them with
+            others on campus.
+          </p>
+          <p class="fs-5 mb-4">
+            Our team operates out of the
+            <b>Academic Experience Design and Delivery (AXDD)</b> department at
+            UW-IT.
           </p>
         </div>
-      </div>
 
-      <div class="w-75 bg-light mx-auto px-5 mb-5">
-        <div class="p-5">
-          <h2 class="text-center display-6 mb-5">FAQ</h2>
-          <p>
-            <strong>Q: How do you choose the students you interview?</strong><br/>
-            A: We walk around busy spaces like the HUB Cafeteria or By George and look for students who look like they might have a little extra time to talk.<br/><br/>
+        <div class="mx-auto pt-2 ps-5 mb-5">
+          <h2 class="display-6 fs-2 fw-bold mb-4">Our Interview Process</h2>
+          <p class="fs-5 mb-4">1. Meet a stranger</p>
+          <p class="fs-5 mb-4">2. Have a chat</p>
+          <p class="fs-5 mb-4">3. Transcribe and share</p>
+        </div>
 
-            <strong>Q: Who conducts these interviews?</strong><br/>
-            A: Most interviews are conducted by student staff at UW-IT.<br/><br/>
-
-            <strong>Q: How are the interviews transcribed?</strong><br/>
-            A: We make edits for clarity and concision as well as re-organize the conversation to make student stories more readable. We are trained to take special care of conserving the original interviewee intent.<br/><br/>
-            
-            <strong>Q: How do you ensure data privacy for the students you interview?</strong><br/>
-            A: After each interview, we are obliged to give an additional form for the students to complete. This form clarifies whether they only want their information used for internal UW research or if they are willing to release their story to be shared.
+        <div class="mx-auto pt-2 ps-5 mb-5">
+          <h2 class="display-6 fs-2 fw-bold mb-4">Help Grow Our Collection</h2>
+          <p class="fs-5 mb-4">
+            Schedule a 15-30 minute appointment with us to talk about your UW
+            experience.
           </p>
+          <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Husky Voices">
+            <button type="button" class="btn btn-secondary">
+              Share Your Story >
+            </button>
+          </a>
+        </div>
+
+        <div class="mx-auto pt-2 ps-5 mb-5">
+          <h2 class="display-6 fs-2 fw-bold mb-4">
+            Frequently Asked Questions (FAQ)
+          </h2>
+
+          <div class="mx-auto pt-2 mb-5">
+            <div class="accordion" id="faq">
+              <div class="accordion-item">
+                <p class="accordion-header fs-5" id="headingOne">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="false"
+                    aria-controls="collapseOne"
+                  >
+                    How do you choose the students you interview?
+                  </button>
+                </p>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingOne"
+                  data-bs-parent="#faq"
+                >
+                  <div class="accordion-body">
+                    <p class="fs-5">
+                      We walk around busy spaces like the HUB Cafeteria or By
+                      George and look for students who look like they might have
+                      a little extra time to talk.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <p class="accordion-header fs-5" id="headingTwo">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    Who conducts these interviews?
+                  </button>
+                </p>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#faq"
+                >
+                  <div class="accordion-body">
+                    <p class="fs-5">
+                      Most interviews are conducted by student staff at UW-IT.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <p class="accordion-header fs-5" id="headingThree">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                    How are the interviews transcribed?
+                  </button>
+                </p>
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingThree"
+                  data-bs-parent="#faq"
+                >
+                  <div class="accordion-body">
+                    <p class="fs-5">
+                      We make edits for clarity and concision as well as
+                      re-organize the conversation to make student stories more
+                      readable. We are trained to take special care of
+                      conserving the original interviewee intent.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <p class="accordion-header fs-5" id="headingFour">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour"
+                    aria-expanded="false"
+                    aria-controls="collapseFour"
+                  >
+                    How are the interviews transcribed?
+                  </button>
+                </p>
+                <div
+                  id="collapseFour"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingFour"
+                  data-bs-parent="#faq"
+                >
+                  <div class="accordion-body">
+                    <p class="fs-5">
+                      After each interview, we are obliged to give an additional
+                      form for the students to complete. This form clarifies
+                      whether they only want their information used for internal
+                      UW research or if they are willing to release their story
+                      to be shared.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
     </template>
   </layout>
 </template>
 
 <script>
-import { Card } from "axdd-components";
 import Layout from "../layout.vue";
 
 export default {
   name: "PagesAbout",
   components: {
     layout: Layout,
-    "axdd-card": Card,
   },
   data() {
     return {
