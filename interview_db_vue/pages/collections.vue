@@ -34,33 +34,6 @@
               </button>
             </div>
           </div>
-
-
-          <!-- <div v-for="collection, index in collections" :key="collection.id">
-          <div v-if="index % 2 == 0">
-            <div class="card w-100 border-0 overflow-hidden" style="height: 380px">
-              <div class="row g-0">
-                <div class="col-7">
-                  <img src="../css/major.png" class="w-100 h-100 img-fluid" style="object-fit: cover" />
-                </div>
-                <div class="col-5 p-5 justify-content-center text-white" style="background-color: #172643">
-                  <div class="text-center mx-auto">
-                    <h5 class="card-title mb-4 pt-5 display-6">{{ collection.topic }}</h5>
-                    <p class="card-text w-75 mb-4 mx-auto display-4 fs-4">
-                      {{ collection.question }}
-                    </p>
-                    <p class="card-text display-4 fs-4">
-                      <router-link
-                        :to="{ name: 'Collections', params: { id: collection.id, singleCollection: JSON.stringify(collection) } }"
-                        class="active-link" style="color: inherit">
-                        Read Collection >
-                      </router-link>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </template>
