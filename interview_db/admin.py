@@ -4,7 +4,6 @@
 from django.contrib import admin
 from django import forms
 from django.forms import ModelForm
-from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.contrib.admin.views.main import ChangeList
 from django.http import HttpResponse, HttpResponseRedirect
