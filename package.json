@@ -23,34 +23,32 @@
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "axios": "^0.27.2",
-    "bootstrap": "^5.2.0",
-    "bootstrap-icons": "^1.9.1",
-    "jquery": "^3.6.0",
+    "bootstrap": "^5.2.2",
+    "bootstrap-icons": "^1.10.1",
     "vue": "^3.2.33",
     "vue-gtag-next": "^1.14.0",
     "vue-router": "^4.0.14",
     "vue3-cookies": "^1.0.6",
-    "vue3-mq": "^3.1.0",
-    "vuex": "^4.0.2"
+    "vue3-mq": "^3.1.0"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.1.3",
-    "@vitejs/plugin-vue": "^2.3.1",
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "@vitest/coverage-c8": "^0.23.2",
     "@vue/eslint-config-prettier": "^7.0.0",
-    "@vue/test-utils": "^2.0.0-rc.20",
-    "c8": "^7.11.0",
-    "eslint": "^8.13.0",
-    "eslint-plugin-vue": "^8.2.0",
-    "jsdom": "^19.0.0",
+    "@vue/test-utils": "^2.0.2",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "jsdom": "^20.0.0",
     "postcss-html": "^1.4.1",
-    "prettier": "^2.3.2",
-    "sass": "^1.32.13",
+    "prettier": "^2.7.1",
+    "sass": "^1.56.1",
     "stylelint": "^14.7.1",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended-scss": "^6.0.0",
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard-scss": "^3.0.0",
-    "vite": "^2.9.7",
-    "vitest": "^0.10.2"
+    "vite": "^3.1.4",
+    "vitest": "^0.23.2"
   }
 }
