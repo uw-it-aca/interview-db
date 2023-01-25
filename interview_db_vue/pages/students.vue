@@ -25,7 +25,7 @@
               <div class="col-7 mx-auto">
                 <div class="card-columns justify-content-end">
                   <div v-for="student in filteredStudents" :key="student.id">
-                    <StudentListing :studentInfo="student" class="mb-5" />
+                    <InterviewListing :studentInfo="student" class="mb-5" />
                   </div>
                 </div>
               </div>
@@ -39,7 +39,7 @@
 
 <script>
 import Layout from "../layout.vue";
-import StudentListing from "../components/student/interview-listing.vue";
+import InterviewListing from "../components/student/interview-listing.vue";
 import StudentFilter from "../components/student-filter.vue";
 import Interview from "../components/student/interview.vue";
 import { get } from "axios";
@@ -48,7 +48,7 @@ export default {
   name: "PagesStudents",
   components: {
     layout: Layout,
-    StudentListing,
+    InterviewListing,
     StudentFilter,
     Interview,
   },
