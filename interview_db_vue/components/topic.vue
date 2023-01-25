@@ -19,19 +19,19 @@
 
   <div class="row mb-5 mx-auto">
     <div v-for="story in stories" :key="story.id">
-      <CollectionListing :studentInfo="story" />
+      <InterviewListing :studentInfo="story" />
     </div>
   </div>
 </template>
 
 <script>
-import CollectionListing from "./student/collection-listing.vue";
+import InterviewListing from "./student/interview-listing.vue";
 import { get } from "axios";
 
 export default {
   name: "Topic",
   components: {
-    CollectionListing,
+    InterviewListing,
   },
   props: {
     topicInfo: {
