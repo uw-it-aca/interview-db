@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await get("/api/collections/" + this.topicInfo.id + "/");
+      const response = await get("/api/collections/" + this.topicInfo.id + "/" + this.topicInfo.topic + "/");
       this.stories = response.data;
     },
   },
