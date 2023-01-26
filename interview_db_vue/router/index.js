@@ -14,7 +14,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/collections/:id/:topic",
+    path: "/collections/:topic?",
     name: "Collections",
     component: Collections,
     props: true,

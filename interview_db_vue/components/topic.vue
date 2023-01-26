@@ -10,8 +10,8 @@
         </div>
         <div class="row w-50 mx-auto ps-5">
           <h5 class="text-start display-4 fs-4">
-            {{ topicInfo }}
             {{ topicInfo.question }}
+            {{ stories }}
           </h5>
         </div>
       </div>
@@ -20,19 +20,19 @@
 
   <div class="row mb-5 mx-auto">
     <div v-for="story in stories" :key="story.id">
-      <InterviewListing :studentInfo="story" />
+      <StudentListing :studentInfo="story" />
     </div>
   </div>
 </template>
 
 <script>
-import InterviewListing from "./student/interview-listing.vue";
+import StudentListing from "./student/interview-listing.vue";
 import { get } from "axios";
 
 export default {
   name: "Topic",
   components: {
-    InterviewListing,
+    StudentListing,
   },
   props: {
     topicInfo: {
