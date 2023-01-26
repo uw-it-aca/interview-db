@@ -150,4 +150,6 @@ __diff_output__/
 # coverage
 coverage
 
+# dumped data
 interviewdb.json
+db_bak.json

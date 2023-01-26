@@ -1,5 +1,9 @@
+# Copyright 2023 UW-IT, University of Washington
+# SPDX-License-Identifier: Apache-2.0
+
+
 """ Management command to django's manage.py called
-    create_sample_data that will generate interviews for testing.
+    create_sample_interviews that will generate interviews for testing.
 """
 from django.core.management.base import BaseCommand, CommandError
 from interview_db.models import *
