@@ -42,7 +42,7 @@ urlpatterns += [
          name="student-detail"),
     path('api/collections/', CollectionListView.as_view(),
          name="collection-list"),
-    path('api/collections/<int:id>/<str:topic>/',
+    path('api/collections/<int:id>/',
          CollectionDetailView.as_view(),
          name="collection-detail",),
     path('api/majors/', MajorListView.as_view(), name="major-list"),

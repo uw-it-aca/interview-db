@@ -89,7 +89,7 @@ class CollectionDetailView(APIView):
     API endpoint returning single collection of stories
     """
 
-    def get(self, request, id, topic):
+    def get(self, request, id):
         collection = Collection.objects.get(id=id)
         queryset = Story.objects.filter(
             Q(code__in=collection.codes.all()) |

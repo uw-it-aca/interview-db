@@ -10,6 +10,7 @@
         </div>
         <div class="row w-50 mx-auto ps-5">
           <h5 class="text-start display-4 fs-4">
+            {{ topicInfo }}
             {{ topicInfo.question }}
           </h5>
         </div>
@@ -46,7 +47,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await get("/api/collections/" + this.topicInfo.id + "/" + this.topicInfo.topic + "/");
+      const response = await get("/api/collections/" + this.topicInfo.id + "/");
       this.stories = response.data;
     },
   },
