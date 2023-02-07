@@ -6,7 +6,7 @@ ingress:
       hosts:
         - test.huskyvoices.uw.edu
   hosts:
-    interview-db.axdd:
+    huskyvoices:
       host: test.huskyvoices.uw.edu
       paths:
         - "/"
@@ -47,26 +47,26 @@ externalSecrets:
   enabled: true
   secrets:
     - name: test.huskyvoices.uw.edu-secrets
-      externalKey: interview-db/test/secrets
+      externalKey: huskyvoices/test/secrets
       data:
         - name: django-secret
           property: django-secret
         - name: storage-bucket-name
           property: storage-bucket-name
     - name: test.huskyvoices.uw.edu-sql-secrets
-      externalKey: interview-db/test/sql-secrets
+      externalKey: huskyvoices/test/sql-secrets
       data:
         - name: username
           property: username
         - name: password
           property: password
     - name: test.huskyvoices.uw.edu-gcs-credentials
-      externalKey: interview-db/test/gcs-credentials
+      externalKey: huskyvoices/test/gcs-credentials
       data:
         - name: credentials.json
           property: credentials.json
     - name: test.huskyvoices.uw.edu-ic-certs
-      externalKey: interview-db/test/ic-certs
+      externalKey: huskyvoices/test/ic-certs
       data:
         - name: test.huskyvoices.uw.edu-ic.cert
           property: test.huskyvoices.uw.edu-ic.cert
