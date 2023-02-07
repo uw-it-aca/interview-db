@@ -24,9 +24,9 @@ readiness:
 securityPolicy:
   enabled: true
 database:
-  engine: mysql
-  name: interview_test
-  hostname: interview-db-db-service
+  engine: postgres
+  name: huskyvoices_test
+  hostname: huskyvoices-v1
   secretName: test.huskyvoices.uw.edu-sql-secrets
 externalService:
   enabled: true
