@@ -1,24 +1,21 @@
 // interview-listing.vue // shown on full students page
 
 <template>
-  <button
-    type="button"
-    class="btn-card mt-5"
-    @click="
-      $router.push({
-        name: 'Students',
-        params: {
-          id: studentInfo.interview.id,
-          singleStudent: JSON.stringify(studentInfo.interview),
-        },
-      })
-    "
-  >
+  <button type="button" class="btn-card mt-5" @click="
+    $router.push({
+      name: 'Students',
+      params: {
+        id: studentInfo.interview.id,
+        singleStudent: JSON.stringify(studentInfo.interview),
+      },
+    })
+  ">
     <p class="fs-6 text-end">{{ interviewDate }}</p>
-    <div class="collection-listing">
+    <div class="collection-card">
       <div class="row p-0 m-0">
         <div class="col-4 mx-auto ps-4">
           <img src="../../css/blossom.png" class="listing-img" />
+          <!-- <img src="../../css/blossom.png"/> -->
         </div>
 
         <div class="col-8 ps-4 m-0">
@@ -27,17 +24,12 @@
           </h2>
           <div class="row">
             <div class="col-11">
-              <p
-                class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary"
-              >
+              <p class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary">
                 <span v-if="studentInfo.interview.standing">
                   {{ studentInfo.interview.standing + ", studying" }}
                 </span>
                 <span v-else> Studying </span>
-                <span
-                  v-for="(major, index) in studentInfo.interview.major"
-                  :key="major.id"
-                >
+                <span v-for="(major, index) in studentInfo.interview.major" :key="major.id">
                   <span v-if="index != 0">, </span>
                   {{ major.full_title }}
                 </span>
@@ -59,7 +51,7 @@
 
 <script>
 export default {
-  name: "StudentListing",
+  name: "CollectionListing",
   props: {
     studentInfo: {
       type: Object,
@@ -79,8 +71,8 @@ export default {
 </script>
 
 <style>
-.collection-listing {
-  --bs-card-bg: none;
-  --bs-card-border-width: 0px;
+card.collection-card {
+
+  height: 100rem;
 }
 </style>

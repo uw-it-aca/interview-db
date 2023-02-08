@@ -10,23 +10,21 @@
     </div>
   </div>
 
-  <!-- {{ stories }} -->
-
   <div class="row w-75 mb-5 mx-auto">
     <div v-for="story in stories" :key="story.id">
-      <StudentListing :studentInfo="story" />
+      <CollectionListing :studentInfo="story" />
     </div>
   </div>
 </template>
 
 <script>
-import StudentListing from "./student/collection-listing.vue";
+import CollectionListing from "./student/collection-listing.vue";
 import { get } from "axios";
 
 export default {
   name: "Topic",
   components: {
-    StudentListing,
+    CollectionListing,
   },
   props: {
     topicInfo: {
