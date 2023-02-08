@@ -1,47 +1,65 @@
-// collection-listing.vue 
-// listings to be shown on topic page
+// interview-listing.vue // shown on full students page
 
 <template>
-  <div class="card mb-5 border-0">
-    <div class="card-body">
-      <div class="row g-0 px-4 justify-content-center">
-        <div class="col-2">
-          <img src="../../css/quad.png" class="img-fluid mx-auto d-block" style="
-              border-radius: 50%;
-              height: 80px;
-              width: 80px;
-              object-fit: cover;
-            " />
+  <button
+    type="button"
+    class="btn-card mt-5"
+    @click="
+      $router.push({
+        name: 'Students',
+        params: {
+          id: studentInfo.interview.id,
+          singleStudent: JSON.stringify(studentInfo.interview),
+        },
+      })
+    "
+  >
+    <p class="fs-6 text-end">{{ interviewDate }}</p>
+    <div class="collection-listing">
+      <div class="row p-0 m-0">
+        <div class="col-4 mx-auto ps-4">
+          <img src="../../css/blossom.png" class="listing-img" />
         </div>
 
-        <div class="col-9 border-start border-dark border-4">
-          <div class="px-3">
-            <div class="mb-4 px-3">
-              <h2 class="card-title display-6 mb-2">{{ studentInfo.interview.student.first_name }}</h2>
-              <p class="card-subtitle text-uppercase display-6 fs-5 text-info">
-                <span v-for="major in studentInfo.interview.major" :key="major.id">
-                  {{ major.full_title + ", " }}
+        <div class="col-8 ps-4 m-0">
+          <h2 class="card-title fw-bold display-6 mb-2">
+            {{ studentInfo.interview.student.first_name }}
+          </h2>
+          <div class="row">
+            <div class="col-11">
+              <p
+                class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary"
+              >
+                <span v-if="studentInfo.interview.standing">
+                  {{ studentInfo.interview.standing + ", studying" }}
                 </span>
-                {{ studentInfo.interview.standing }}
+                <span v-else> Studying </span>
+                <span
+                  v-for="(major, index) in studentInfo.interview.major"
+                  :key="major.id"
+                >
+                  <span v-if="index != 0">, </span>
+                  {{ major.full_title }}
+                </span>
               </p>
             </div>
-            <div class="mb-3 px-3">
-              <p class="card-text lh-base display-6 fs-4">"{{ studentInfo.story }}"</p>
-              <p class="card-text display-6 fs-5 mb-2">
-                 <router-link :to="{name: 'Students', params: {id: studentInfo.interview.id, singleStudent: JSON.stringify(studentInfo.interview)}}" class="active-link" style="color: #5f5f5f">Read full interview >
-                </router-link>
-              </p>
+            <div class="col-1">
+              <i class="bi bi-chevron-right"></i>
             </div>
           </div>
         </div>
+
+        <div class="card-text ps-4">
+          <p class="display-6 fs-5">"{{ studentInfo.story }}"</p>
+        </div>
       </div>
     </div>
-  </div>
+  </button>
 </template>
 
 <script>
 export default {
-  name: "CollectionListing",
+  name: "StudentListing",
   props: {
     studentInfo: {
       type: Object,
@@ -52,5 +70,17 @@ export default {
     return {};
   },
   methods: {},
+  computed: {
+    interviewDate() {
+      return new Date(this.studentInfo.interview.date).toLocaleDateString("en-US");
+    },
+  },
 };
 </script>
+
+<style>
+.collection-listing {
+  --bs-card-bg: none;
+  --bs-card-border-width: 0px;
+}
+</style>
