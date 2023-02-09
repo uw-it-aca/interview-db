@@ -4,6 +4,7 @@
   <button
     type="button"
     class="btn-card mt-5"
+    style="height=21rem"
     @click="
       $router.push({
         name: 'Students',

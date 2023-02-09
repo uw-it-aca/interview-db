@@ -1,7 +1,7 @@
 // interview-listing.vue // shown on full students page
 
 <template>
-  <button type="button" class="btn-card mt-5" @click="
+  <button type="button" class="btn-card mt-5" style="height=28rem" @click="
     $router.push({
       name: 'Students',
       params: {
@@ -15,7 +15,6 @@
       <div class="row p-0 m-0">
         <div class="col-4 mx-auto ps-4">
           <img src="../../css/blossom.png" class="listing-img" />
-          <!-- <img src="../../css/blossom.png"/> -->
         </div>
 
         <div class="col-8 ps-4 m-0">
@@ -41,7 +40,7 @@
           </div>
         </div>
 
-        <div class="card-text ps-4">
+        <div class="card-text ps-4 pb-4">
           <p class="display-6 fs-5">"{{ studentInfo.story }}"</p>
         </div>
       </div>
@@ -69,10 +68,3 @@ export default {
   },
 };
 </script>
-
-<style>
-card.collection-card {
-
-  height: 100rem;
-}
-</style>

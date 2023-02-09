@@ -61,7 +61,6 @@ button.btn-card {
   border-color: $primary;
   border-radius: 0.1rem;
   border-width: 1.5px;
-  height: 21rem;
 }
 
 .card-card-clickable {
@@ -74,7 +73,7 @@ img.listing-img {
   width: 12rem;
   position: relative;
   z-index: 1;
-  bottom: 100px;
+  top: -80px;
   line-height: 0;
   object-fit: cover;
   border-radius: 1.5px;
