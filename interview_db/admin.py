@@ -229,4 +229,5 @@ class ResourceLinkAdmin(SAMLModelAdmin):
 
 @admin.register(Collection, site=saml_admin_site)
 class CollectionAdmin (SAMLModelAdmin):
+    prepopulated_fields = {"slug": ("topic",)}
     list_display = ('topic', 'question')

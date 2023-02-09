@@ -4,7 +4,6 @@
 from django.db import models
 from django.template.defaultfilters import truncatechars
 from django.urls import reverse
-from django.core.exceptions import ValidationError
 
 
 class StudentType(models.Model):
@@ -304,6 +303,7 @@ class Collection(models.Model):
                              blank=True,
                              null=True
                              )
+    slug = models.SlugField(max_length=150, null=True)
     codes = models.ManyToManyField(Code, blank=True)
     subcodes = models.ManyToManyField(SubCode, blank=True)
     question = models.TextField(max_length=100, null=True)

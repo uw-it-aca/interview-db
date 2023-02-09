@@ -22,8 +22,12 @@
 
           <div v-for="collection in collections" :key="collection.id">
             <div>
-              <button type="button" class="bg-light p-4 m-4 collection-btn"
-                @click="$router.push({ name: 'Collections', params: { id: collection.id, topic:  collection.topic, singleCollection: JSON.stringify(collection) } })">
+              <button type="button" class="bg-light p-4 m-4 collection-btn" @click="$router.push({
+                name: 'Collections', params: {
+                  id: collection.id, topic: collection.topic,
+                  slug: collection.slug, singleCollection: JSON.stringify(collection)
+                }
+              })">
                 <div class="text-start collection-button">
                   <h2 class="fw-bold display-6 mb-4">{{ collection.topic }}</h2>
                   <p class="display-4 fs-6 mx-auto">
