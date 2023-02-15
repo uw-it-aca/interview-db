@@ -13,6 +13,7 @@ ADD --chown=acait:acait docker/ /app/project/
 
 RUN /app/bin/pip install -r requirements.txt
 
+
 RUN . /app/bin/activate && \
   python manage.py collectstatic --noinput && \
   python manage.py compress -f
