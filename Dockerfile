@@ -6,14 +6,12 @@ USER root
 
 RUN apt-get update && apt-get install libpq-dev -y
 
-
 USER acait
 
 ADD --chown=acait:acait . /app/
 ADD --chown=acait:acait docker/ /app/project/
 
 RUN /app/bin/pip install -r requirements.txt
-RUN /app/bin/pip install mysqlclient
 
 RUN . /app/bin/activate && \
   python manage.py collectstatic --noinput && \
