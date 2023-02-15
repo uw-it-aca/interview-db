@@ -14,7 +14,7 @@
           <div class="card card-body border-0">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Fr" id="Freshman" v-model="filters.year"
-                @change="updateYear($event)">
+                @change="updateQuery($event)">
               <label class="form-check-label display-6 fs-6" for="freshman">
                 Freshman
               </label>
@@ -114,7 +114,7 @@
             <div v-for="topic in data.topics" :key="topic.id">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" :value=topic.topic id="topic" v-model="filters.topic"
-                  @change="updateTopic($event)">
+                  @change="updateQuery($event)">
                 <label class="form-check-label display-6 fs-6" for="topic">
                   {{ topic.topic }}
                 </label>
