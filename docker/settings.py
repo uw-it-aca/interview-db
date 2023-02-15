@@ -12,24 +12,6 @@ INSTALLED_APPS += [
     'compressor',
 ]
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'debug':  True,
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'interview_db.context_processors.google_analytics',
-                'interview_db.context_processors.django_debug',
-            ],
-        }
-    }
-]
-
 COMPRESS_ROOT = '/static'
 
 COMPRESS_PRECOMPILERS = (
