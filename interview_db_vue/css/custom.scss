@@ -61,11 +61,6 @@ button.btn-card {
   border-color: $primary;
   border-radius: 0.1rem;
   border-width: 1.5px;
-  height: 21rem;
-}
-
-button.collection-btn {
-  background-color: $light;
 }
 
 .card-card-clickable {
@@ -73,13 +68,12 @@ button.collection-btn {
   --bs-card-border-width: 0px;
 }
 
-
 img.listing-img {
   height: 12rem;
   width: 12rem;
   position: relative;
   z-index: 1;
-  bottom: 100px;
+  top: -80px;
   line-height: 0;
   object-fit: cover;
   border-radius: 1.5px;

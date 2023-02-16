@@ -102,6 +102,7 @@ class CollectionSerializer(serializers.ModelSerializer):
         model = Collection
         fields = ['id',
                   'topic',
+                  'slug',
                   'codes',
                   'subcodes',
                   'question']

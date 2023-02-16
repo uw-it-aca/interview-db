@@ -2,22 +2,15 @@
 // shows all student stories for one collection topic
 
 <template>
-  <div class="row mb-5">
-    <div class="col p-5" style="background-color: #172643; height:330px">
-      <div class="text-white mx-auto py-5">
-        <div class="row w-50 mx-auto">
-          <h2 class="text-start display-3 mb-4">{{ topicInfo.topic }}</h2>
-        </div>
-        <div class="row w-50 mx-auto ps-5">
-          <h5 class="text-start display-4 fs-4">
-            {{ topicInfo.question }}
-          </h5>
-        </div>
-      </div>
+
+  <div class="mx-auto p-5 mb-4">
+    <div class="pt-5 ps-5">
+      <h2 class="display-5 fw-bold mb-5">{{ topicInfo.topic }}</h2>
+      <p class="fs-5 mb-5">{{ topicInfo.question }}</p>
     </div>
   </div>
 
-  <div class="row mb-5 mx-auto">
+  <div class="row w-75 mb-5 mx-auto">
     <div v-for="story in stories" :key="story.id">
       <CollectionListing :studentInfo="story" />
     </div>

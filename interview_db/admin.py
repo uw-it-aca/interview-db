@@ -4,7 +4,6 @@
 from django.contrib import admin
 from django import forms
 from django.forms import ModelForm
-from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.contrib.admin.views.main import ChangeList
 from django.http import HttpResponse, HttpResponseRedirect
@@ -218,11 +217,6 @@ class StoryAdmin (SAMLModelAdmin):
         }
 
 
-@admin.register(Collection, site=saml_admin_site)
-class CollectionAdmin (SAMLModelAdmin):
-    list_display = ('topic', 'question')
-
-
 @admin.register(ResourceCategory, site=saml_admin_site)
 class ResourceCategoryAdmin(SAMLModelAdmin):
     has_access = False
@@ -231,3 +225,9 @@ class ResourceCategoryAdmin(SAMLModelAdmin):
 @admin.register(ResourceLink, site=saml_admin_site)
 class ResourceLinkAdmin(SAMLModelAdmin):
     has_access = False
+
+
+@admin.register(Collection, site=saml_admin_site)
+class CollectionAdmin (SAMLModelAdmin):
+    prepopulated_fields = {"slug": ("topic",)}
+    list_display = ('topic', 'question')

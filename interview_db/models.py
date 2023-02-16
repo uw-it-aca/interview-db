@@ -303,6 +303,10 @@ class Collection(models.Model):
                              blank=True,
                              null=True
                              )
-    codes = models.ManyToManyField(Code)
-    subcodes = models.ManyToManyField(SubCode)
-    question = models.TextField(max_length=100, blank=True, null=True)
+    slug = models.SlugField(max_length=150, null=True)
+    codes = models.ManyToManyField(Code, blank=True)
+    subcodes = models.ManyToManyField(SubCode, blank=True)
+    question = models.TextField(max_length=100, null=True)
+
+    def __str__(self):
+        return str(self.topic)
