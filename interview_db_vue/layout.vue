@@ -1,34 +1,31 @@
 <template>
-
   <header>
-    <nav class="fixed-top pt-4 bg-white mb-2" style="background-image:url(${staticUrl}./css/w.svg);">
-
-      <div class="d-flex flex-column flex-md-row pb-3 border-bottom border-primary">
-        <h2 class="fs-3 d-flex justify-content-center col-6 fw-bold">
+    <nav class="pt-4 bg-white border-0 mb-2">
+      <img src="./css/w.svg" class="display-block" />
+      <div class="d-flex flex-column flex-md-row pb-3 text-purple">
+        <h2 class="fs-3 d-flex justify-content-center col-6 fw-bold ">
           <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
         </h2>
 
         <ul class="nav d-inline-flex mt-2 mx-auto col-6">
           <li class="nav-item">
             <h6>
-              <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Student Stories
+              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/students">Student Stories
               </router-link>
             </h6>
           </li>
           <li class="nav-item">
             <h6>
-              <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections
+              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/collections">Collections
               </router-link>
             </h6>
           </li>
           <li class="nav-item">
             <h6>
-              <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About
+              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/about">About
                 Us</router-link>
             </h6>
           </li>
-          
-          <img src="./css/w.svg" class="float-end" />
         </ul>
       </div>
     </nav>
@@ -41,8 +38,8 @@
   </main>
 
 
-  <footer class="ps-5 footer p-4 border-top mx-auto">
-    <div class="row g-0 justify-content-end">
+  <footer class="ps-5 footer p-4 bg-purple text-white">
+    <!-- <div class="row g-0 justify-content-end">
       <div class="col-2 ps-5">
         <h2 class="fs-4 d-flex fw-bold border-bottom">Husky Voices</h2>
         <p>ux@uw.edu</p>
@@ -58,10 +55,10 @@
         <a href="https://www.washington.edu/online/privacy/" title="UW Privacy Policy"
           class="text-decoration-none router-link ms-4">Privacy</a>
       </div>
-    </div>
-    <p class="ps-5 text-muted">&copy; 2022 University of Washington</p>
+    </div> -->
+    <p class="ps-5 text-right justify-content-end">Copyright &copy; 2022 University of Washington</p>
 
-  </footer>
+</footer>
 </template>
 
 <script>
