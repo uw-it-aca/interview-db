@@ -5,6 +5,7 @@ FROM gcr.io/uwit-mci-axdd/django-container:${DJANGO_CONTAINER_VERSION} as app-co
 USER root
 
 RUN apt-get update && apt-get install libpq-dev -y
+RUN /app/bin/pip install psycopg2
 
 USER acait
 
