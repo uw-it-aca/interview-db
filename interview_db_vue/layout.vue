@@ -1,13 +1,13 @@
 <template>
   <header>
-    <nav class="pt-4 bg-white border-0 mb-2">
-      <img src="./css/w.svg" class="display-block" />
-      <div class="d-flex flex-column flex-md-row pb-3 text-purple">
-        <h2 class="fs-3 d-flex justify-content-center col-6 fw-bold ">
+    <nav class="bg-white border-0 p-2">
+      <div class="d-flex flex-column flex-md-row text-purple">
+        <img src="./css/w.svg" class="display-block" />
+        <h2 class="fs-3 d-flex justify-content-center col-3 fw-bold">
           <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
         </h2>
 
-        <ul class="nav d-inline-flex mt-2 mx-auto col-6">
+        <ul class="nav d-inline-flex mt-2 mx-auto p-2 col-9 justify-content-end">
           <li class="nav-item">
             <h6>
               <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/students">Student Stories
@@ -31,14 +31,14 @@
     </nav>
   </header>
 
-  <main class="pt-5">
+  <main class="">
     <slot name="title" />
     <slot name="description" />
     <slot name="content" />
   </main>
 
 
-  <footer class="ps-5 footer p-4 bg-purple text-white">
+  <footer class="p-4 footer bg-purple text-white">
     <!-- <div class="row g-0 justify-content-end">
       <div class="col-2 ps-5">
         <h2 class="fs-4 d-flex fw-bold border-bottom">Husky Voices</h2>
@@ -56,7 +56,13 @@
           class="text-decoration-none router-link ms-4">Privacy</a>
       </div>
     </div> -->
-    <p class="ps-5 text-right justify-content-end">Copyright &copy; 2022 University of Washington</p>
+    <div class="col-6">
+      
+    </div>
+    <div class="col-6">
+      <p class="ps-5 text-right justify-content-end">Copyright &copy; 2023 University of Washington</p>
+    </div>
+    
 
 </footer>
 </template>
