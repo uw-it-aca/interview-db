@@ -12,12 +12,12 @@
         <div style="position: relative">
           <img class="card-img" src="../images/aboutUsImage.png"/>
           <div class="card" style="position: absolute; top: 40%">
-            <h1 class="display-3 text-gold fw-bold my-4 mx-4">About Us</h1>
+            <h1 class="my-4 mx-4">About Us</h1>
           </div>
         </div>
         <div class="mx-auto p-5">
           <div class="pt-5 ps-5 mx-auto mb-5">
-            <h2 class= "fs-1 text-gold fw-bold mb-4">Who We Are</h2>
+            <h2 class= "mb-4">Who We Are</h2>
             <p class="mb-4">
               We collect the real stories of UW students and share them with
               others on campus.
