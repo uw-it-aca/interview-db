@@ -23,7 +23,7 @@
       </div>
 
       <div class="card border-0 mb-5">
-        <img class="card-img" src="../images/homequad.png" alt="The quad during cherry blossom season">
+        <img class="card-img" src="../images/homeimage.png" alt="The quad during cherry blossom season">
         <div class="card-img-overlay text-center justify-content-center">
           <div class="pt-5 row justify-content-center">
             <span class="col-2">

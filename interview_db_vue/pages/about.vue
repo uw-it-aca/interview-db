@@ -8,42 +8,50 @@
     </template>
 
     <template #content>
-      <div class="mx-auto p-5 mb-4">
-        <div class="pt-5 ps-5 mx-auto mb-5">
-          <h2 class="display-5 fw-bold mb-4">Who We Are</h2>
-          <p class="fs-5 mb-4">
-            We collect the real stories of UW students and share them with
-            others on campus.
-          </p>
-          <p class="fs-5 mb-4">
-            Our team operates out of the
-            <b>Academic Experience Design and Delivery (AXDD)</b> department at
-            UW-IT.
-          </p>
+      <div>
+        <div style="position: relative">
+          <img class="card-img" src="../images/aboutUsImage.png"/>
+          <div class="card" style="position: absolute; top: 40%">
+            <h1 class="display-3 text-gold fw-bold my-4 mx-4">About Us</h1>
+          </div>
+        </div>
+        <div class="mx-auto p-5">
+          <div class="pt-5 ps-5 mx-auto mb-5">
+            <h2 class= "fs-1 text-gold fw-bold mb-4">Who We Are</h2>
+            <p class="mb-4">
+              We collect the real stories of UW students and share them with
+              others on campus.
+            </p>
+            <p class="mb-4">
+              Our team operates out of the
+              <b>Academic Experience Design and Delivery (AXDD)</b> department at
+              UW-IT.
+            </p>
+          </div>
+
+
+        <div class="mx-auto pt-2 ps-5 mb-5">
+          <h2 class="fs-1 text-gold fw-bold mb-4">Our Interview Process</h2>
+          <p class="mb-4">1. Meet a stranger</p>
+          <p class="mb-4">2. Have a chat</p>
+          <p class="mb-4">3. Transcribe and share</p>
         </div>
 
         <div class="mx-auto pt-2 ps-5 mb-5">
-          <h2 class="display-6 fs-2 fw-bold mb-4">Our Interview Process</h2>
-          <p class="fs-5 mb-4">1. Meet a stranger</p>
-          <p class="fs-5 mb-4">2. Have a chat</p>
-          <p class="fs-5 mb-4">3. Transcribe and share</p>
-        </div>
-
-        <div class="mx-auto pt-2 ps-5 mb-5">
-          <h2 class="display-6 fs-2 fw-bold mb-4">Help Grow Our Collection</h2>
-          <p class="fs-5 mb-4">
+          <h2 class="fs-1 text-gold fw-bold mb-4">Help Grow Our Collection</h2>
+          <p class="mb-4">
             Schedule a 15-30 minute appointment with us to talk about your UW
             experience.
           </p>
           <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Husky Voices">
-            <button type="button" class="btn btn-secondary">
+            <button type="button" class="btn btn-purple">
               Share Your Story >
             </button>
           </a>
         </div>
 
         <div class="mx-auto pt-2 ps-5 mb-5">
-          <h2 class="display-6 fs-2 fw-bold mb-4">
+          <h2 class="fs-1 text-gold fw-bold mb-4">
             Frequently Asked Questions (FAQ)
           </h2>
 
@@ -69,7 +77,7 @@
                   data-bs-parent="#faq"
                 >
                   <div class="accordion-body">
-                    <p class="fs-5">
+                    <p>
                       We walk around busy spaces like the HUB Cafeteria or By
                       George and look for students who look like they might have
                       a little extra time to talk.
@@ -97,7 +105,7 @@
                   data-bs-parent="#faq"
                 >
                   <div class="accordion-body">
-                    <p class="fs-5">
+                    <p>
                       Most interviews are conducted by student staff at UW-IT.
                     </p>
                   </div>
@@ -123,7 +131,7 @@
                   data-bs-parent="#faq"
                 >
                   <div class="accordion-body">
-                    <p class="fs-5">
+                    <p>
                       We make edits for clarity and concision as well as
                       re-organize the conversation to make student stories more
                       readable. We are trained to take special care of
@@ -152,7 +160,7 @@
                   data-bs-parent="#faq"
                 >
                   <div class="accordion-body">
-                    <p class="fs-5">
+                    <p>
                       After each interview, we are obliged to give an additional
                       form for the students to complete. This form clarifies
                       whether they only want their information used for internal
@@ -165,6 +173,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </template>
   </layout>
