@@ -1,13 +1,36 @@
 <template>
   <header>
-    <nav class="bg-white border-0 p-2">
+    <nav class="bg-white p-2">
       <div class="d-flex flex-column flex-md-row text-purple">
-        <img src="./css/w.svg" class="display-block" />
-        <h2 class="fs-3 d-flex justify-content-center col-3 fw-bold">
-          <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
+        <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
+          <img src="./images/purplew.png" class="img-fluid justify-content-start"
+            style="object-fit:contain; width:100%; height:50px" alt="Husky W Logo">
+        </router-link>
+        <h2 class="fs-3 d-flex justify-content-start fw-bold">
+          <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
+            Husky Voices
+          </router-link>
         </h2>
+<!-- 
+        <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
+          <div><img src="./images/purplew.png" class="justify-content-start"
+              style="object-fit:contain; width:100%; height:50px; position:absolute" alt="Husky W Logo"></div>
+          <div>
+            <h2 class="fs-3 fw-bold">
+              Husky Voices
+            </h2>
+          </div>
+        </router-link> -->
 
-        <ul class="nav d-inline-flex mt-2 mx-auto p-2 col-9 justify-content-end">
+        <!-- <button @click="$router.push({ name: 'Home' })" class="border-0 bg-white">
+            <img src="./images/purplew.png" style="object-fit:contain; width:100%; height:50px"
+              alt="Husky W Logo">
+            <h2 class="fs-3 fw-bold text-purple">Husky Voices
+            </h2>
+          </button> -->
+        <!-- </div> -->
+
+        <ul class="nav d-inline-flex mt-2 mx-auto p-2 col-6 justify-content-end">
           <li class="nav-item">
             <h6>
               <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/students">Student
@@ -33,7 +56,7 @@
     </nav>
   </header>
 
-  <main class="">
+  <main class="p-2">
     <slot name="title" />
     <slot name="description" />
     <slot name="content" />

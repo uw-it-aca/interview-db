@@ -39,7 +39,7 @@
       </div>
 
       <div class="row g-0 justify-content-center mb-5">
-        <span class="col mx-4">
+        <span class="col-4 mx-5">
           <div class="pt-5 ps-5 mx-auto text-center">
             <h2 class="display-4 fw-bold mb-5 text-gold">About Us</h2>
             <p class="mb-4">
@@ -50,7 +50,7 @@
             </button>
           </div>
         </span>
-        <span class="col mx-4">
+        <span class="col-4 mx-4">
           <div class="pt-5 ps-5 mx-auto text-center">
             <h2 class="display-4 fw-bold mb-5 text-gold">Collections</h2>
             <p class="mb-4">
@@ -97,8 +97,8 @@ export default {
     async loadData() {
       const random = await get("api/random/");
       this.randomStudents = random.data;
-      const recent = await get("api/recent/");
-      this.recentStudents = recent.data;
+      // const recent = await get("api/recent/");
+      // this.recentStudents = recent.data;
     },
   },
 };

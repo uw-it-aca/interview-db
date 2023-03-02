@@ -6,12 +6,7 @@ $primary: #1E1E1E;    // text
 $secondary: #827252;  // default button
 $info: #B4A67F;       // active button
 $white: #F8F9fA;      // background color
-
 $min-contrast-ratio: 2.5;
-
-// $carousel-control-color: $primary;
-// $carousel-control-width: 25%;
-// $navbar-dark-toggler-border-color: $primary;
 
 // button styling
 $btn-border-width: 0px;
@@ -45,7 +40,7 @@ a.active-link {
 }
 
 a.nav-link {
-  margin: auto 1em auto;
+  margin: auto 0.25em auto;
   font-size: larger;
 }
 
