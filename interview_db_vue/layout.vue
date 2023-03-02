@@ -66,7 +66,7 @@
   <footer class="py-4 px-5 footer bg-purple text-white">
     <div class="row">
        <div class="col-6">
-        <img src="../images/washingtonlogo.svg" />
+        <!--<img src="../images/washingtonlogo.svg" /> -->
       </div>
       <div class="col-6">
         <p class="text-end justify-content-end">Copyright &copy; 2023 University of Washington</p>

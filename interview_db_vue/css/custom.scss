@@ -89,33 +89,30 @@ main {
 }
 
 // Times for all headers
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 900;
-}
-
 h1{
-  font-size: 64px;
-  font-weight: 900;
-  color: $secondary;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: ;
+  font-weight: bolder;
+  color: $purple;
 }
 
 h2{
+  font-family: 'Times New Roman', Times, serif;
   font-size: 48px;
+  font-weight: bold;
+  color: $secondary;
 }
 
 h3{
+  font-family: 'Times New Roman', Times, serif;
   font-size: 40px;
   color: $secondary;
 }
 
-p{
-  font-size: 16px;
+h4,
+h5,
+h6 {
+  font-family: 'Times New Roman', Times, serif;
 }
 
 html {
