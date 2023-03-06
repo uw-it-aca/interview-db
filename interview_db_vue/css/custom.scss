@@ -6,7 +6,6 @@ $primary: #1E1E1E;    // text
 $secondary: #827252;  // default button
 $info: #B4A67F;       // active button
 $white: #F8F9fA;      // background color
-$purple: #4B2E83;
 
 $min-contrast-ratio: 2.5;
 
@@ -91,7 +90,7 @@ main {
 // Times for all headers
 h1{
   font-family: 'Times New Roman', Times, serif;
-  font-size: ;
+  font-size: 60px;
   font-weight: bolder;
   color: $purple;
 }
