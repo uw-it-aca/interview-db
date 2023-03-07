@@ -10,7 +10,7 @@ $white: #F8F9fA;      // background color
 $min-contrast-ratio: 2.5;
 
 // button styling
-$btn-border-width: 0px;
+$btn-border-width: 0;
 $bs-btn-color: $white;
 $bs-btn-active-color: $info;
 $btn-transition: all 0.15s ease 0s;
@@ -41,7 +41,7 @@ a.active-link {
 }
 
 a.nav-link {
-  margin: auto 0.25em auto;
+  margin: auto 0.25em;
   font-size: larger;
 }
 
@@ -54,15 +54,29 @@ button.btn-card {
   cursor: default;
   box-sizing: border-box;
   background-color: $light;
-  padding: 1rem 1rem;
+  padding: 1rem;
   border-color: $primary;
   border-radius: 0.1rem;
   border-width: 1.5px;
 }
 
+// title card styling
+.title-div{
+  position: absolute;
+  top: 40%;
+  background-color: $light;
+  border-style: solid;
+  border-color: $primary;
+  border-width: 1px;
+  padding-left: 3rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .card-card-clickable {
   --bs-card-bg: none;
-  --bs-card-border-width: 0px;
+  --bs-card-border-width: 0;
 }
 
 img.listing-img {
@@ -91,8 +105,8 @@ main {
 h1{
   font-family: 'Times New Roman', Times, serif;
   font-size: 60px;
-  font-weight: bolder;
-  color: $purple;
+  font-weight: bold;
+  color: $secondary;
 }
 
 h2{
@@ -105,6 +119,7 @@ h2{
 h3{
   font-family: 'Times New Roman', Times, serif;
   font-size: 40px;
+  font-weight: bold;
   color: $secondary;
 }
 
@@ -128,7 +143,6 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 $utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
 $utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text");
 $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
-
 $utilities: (
   // MARK: bg-color-hover (changes bg-color on hover)
   "background-color": (property: background-color,
