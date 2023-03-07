@@ -24,16 +24,16 @@ readiness:
 securityPolicy:
   enabled: true
 database:
-  engine: postgres
-  name: huskyvoices_test
-  hostname: huskyvoices-db-service
-  secretName: test.huskyvoices.uw.edu-sql-secrets
+  engine: mysql
+  name: interview_test
+  hostname: interview-db-db-service
+  secretName: interview-db.axdd.s.uw.edu-sql-secrets
 externalService:
   enabled: true
-  name: huskyvoices-db-service
+  name: interview-db-db-service
   type: ClusterIP
-  serviceAddress: 172.18.1.106
-  servicePort: 5432
+  serviceAddress: 172.18.0.14
+  servicePort: 3306
 gcsCredentials:
   mounted: true
   secretName: test.huskyvoices.uw.edu-gcs-credentials
