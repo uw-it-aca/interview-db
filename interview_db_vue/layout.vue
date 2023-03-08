@@ -2,16 +2,16 @@
   <header>
     <nav class="bg-white p-2">
       <div class="d-flex flex-column flex-md-row text-purple">
-        <div class="d-flex flex-row">
-          <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
-            <img src="./images/purplew.png" class="img-fluid justify-content-start"
-              style="object-fit:contain; width:100%; height:50px" alt="Husky W Logo">
-          </router-link>
-          <h2 class="fs-3 d-flex justify-content-start fw-bold">
+        <div class="d-flex flex-row husky-header">
             <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
-              Husky Voices
+              <img src="./images/purplew.png" class="img-fluid justify-content-start"
+                style="object-fit:contain; width:100%; height:50px" alt="Husky W Logo">
             </router-link>
-          </h2>
+            <h2 class="fs-3 d-flex justify-content-start fw-bold">
+              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
+                Husky Voices
+              </router-link>
+            </h2>
           <i class="bi bi-list hamburger-menu"></i>
         </div>
 <!-- 
