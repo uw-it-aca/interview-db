@@ -110,3 +110,6 @@ project/
 
 # VS Code
 .vscode
+
+# dumped data
+dump.json
