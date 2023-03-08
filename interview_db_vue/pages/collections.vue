@@ -13,13 +13,13 @@
       </div>
 
       <div v-else>
-
-        <div class="mx-auto p-5 mb-5">
-          <div class="pt-5 ps-5 mx-auto">
-            <h2 class="display-5 fw-bold mb-4">Collections</h2>
-            <p class="fs-5 mb-5">Stories categorized by similar themes, collected from a diverse group of students.</p>
+        <div style="position: relative">
+          <img class="card-img" src="../images/collectionsImage.png"/>
+          <div class="title-div">
+            <h1>Collections</h1>
           </div>
-
+        </div>
+        <div class="mx-auto p-5 mb-5">
           <div v-for="collection in collections" :key="collection.id">
             <div>
               <button type="button" class="bg-light p-4 m-4 collection-btn" @click="$router.push({
