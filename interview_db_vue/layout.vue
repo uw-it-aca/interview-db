@@ -2,15 +2,18 @@
   <header>
     <nav class="bg-white p-2">
       <div class="d-flex flex-column flex-md-row text-purple">
-        <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
-          <img src="./images/purplew.png" class="img-fluid justify-content-start"
-            style="object-fit:contain; width:100%; height:50px" alt="Husky W Logo">
-        </router-link>
-        <h2 class="fs-3 d-flex justify-content-start fw-bold">
+        <div class="d-flex flex-row">
           <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
-            Husky Voices
+            <img src="./images/purplew.png" class="img-fluid justify-content-start"
+              style="object-fit:contain; width:100%; height:50px" alt="Husky W Logo">
           </router-link>
-        </h2>
+          <h2 class="fs-3 d-flex justify-content-start fw-bold">
+            <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
+              Husky Voices
+            </router-link>
+          </h2>
+          <i class="bi bi-list hamburger-menu"></i>
+        </div>
 <!-- 
         <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
           <div><img src="./images/purplew.png" class="justify-content-start"
@@ -29,8 +32,7 @@
             </h2>
           </button> -->
         <!-- </div> -->
-
-        <ul class="nav d-inline-flex mt-2 mx-auto p-2 col-6 justify-content-end">
+        <ul class="nav mt-2 mx-auto p-2 col-6 justify-content-end nav-list">
           <li class="nav-item">
             <h6>
               <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/students">Student
