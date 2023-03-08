@@ -24,16 +24,16 @@ readiness:
 securityPolicy:
   enabled: true
 database:
-  engine: mysql
-  name: interview_test
-  hostname: interview-db-db-service
-  secretName: interview-db.axdd.s.uw.edu-sql-secrets
+  engine: postgres
+  name: huskyvoices_test
+  hostname: huskyvoices-db-service
+  secretName: test.huskyvoices.uw.edu-sql-secrets
 externalService:
   enabled: true
-  name: interview-db-db-service
+  name: huskyvoices-db-service
   type: ClusterIP
-  serviceAddress: 172.18.0.14
-  servicePort: 3306
+  serviceAddress: 172.18.1.106
+  servicePort: 5432
 gcsCredentials:
   mounted: true
   secretName: test.huskyvoices.uw.edu-gcs-credentials
@@ -53,8 +53,8 @@ externalSecrets:
           property: django-secret
         - name: storage-bucket-name
           property: storage-bucket-name
-    - name: interview-db.axdd.s.uw.edu-sql-secrets
-      externalKey: interview-db/test/sql-secrets
+    - name: test.huskyvoices.uw.edu-sql-secrets
+      externalKey: huskyvoices/test/sql-secrets
       data:
         - name: username
           property: username
