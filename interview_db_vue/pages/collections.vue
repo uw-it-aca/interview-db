@@ -14,7 +14,7 @@
 
       <div v-else>
         <div style="position: relative">
-          <img class="card-img" src="../images/collectionsImage.png"/>
+          <img class="banner-image" src="../images/collectionsImage.png"/>
           <div class="title-div">
             <h1>Collections</h1>
           </div>

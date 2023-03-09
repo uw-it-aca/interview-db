@@ -60,20 +60,6 @@ button.btn-card {
   border-width: 1.5px;
 }
 
-// title card styling
-.title-div{
-  position: absolute;
-  top: 40%;
-  background-color: $light;
-  border-style: solid;
-  border-color: $primary;
-  border-width: 1px;
-  padding-left: 3rem;
-  padding-right: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .card-card-clickable {
   --bs-card-bg: none;
   --bs-card-border-width: 0;
@@ -102,53 +88,75 @@ main {
 }
 
 // Times for all headers
-h1{
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 60px;
-  font-weight: bold;
-  color: $secondary;
-}
-
-h2{
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 48px;
-  font-weight: bold;
-  color: $secondary;
-}
-
-h3{
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 40px;
-  font-weight: bold;
-  color: $secondary;
-}
-
+h1,
+h2,
+h3,
 h4,
 h5,
 h6 {
   font-family: 'Times New Roman', Times, serif;
 }
 
-@media (max-width: 550px)
-{
-  .nav-list{
-    display: none !important;
-  }
-
-  .hamburger-menu{
-    display: inline;
-    font-size: 50px;
-  }
-
-  .title-logo{
-    justify-content: space-between;
-  }
+.nav-list{
+  display: none !important;
 }
 
-@media(min-width: 550px)
+.hamburger-menu{
+  display: inline;
+  font-size: 50px;
+}
+
+//styling for W + Husky Voices title in nav
+.title-logo{
+  width: 100%;
+  justify-content: space-between;
+}
+
+.banner-image{
+  width: 100%;
+  height: auto;
+}
+
+// title banner styling for over banner-image
+.title-div{
+  position: absolute;
+  top: 25%;
+  background-color: $light;
+  border-style: solid;
+  border-color: $primary;
+  border-width: 1px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@include media-breakpoint-up(sm)
 {
   .hamburger-menu{
     display: none;
+  }
+
+  .nav-list{
+    display: flex !important;
+  }
+
+  .title-logo{
+    justify-content: left;
+  }
+
+    // title card styling
+  .title-div{
+    position: absolute;
+    top: 40%;
+    background-color: $light;
+    border-style: solid;
+    border-color: $primary;
+    border-width: 1px;
+    padding-left: 3rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 }
 

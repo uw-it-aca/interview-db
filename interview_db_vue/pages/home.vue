@@ -16,7 +16,7 @@
               series of authentic and personal interviews.
             </p>
             <button type="button" class="btn btn-purple" @click="$router.push('students')">
-              Explore Student Stories >
+              Explore Student Stories <i class="bi bi-chevron-right"></i>
             </button>
           </div>
         </div>

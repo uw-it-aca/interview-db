@@ -10,14 +10,14 @@
     <template #content>
       <div>
         <div style="position: relative">
-          <img class="card-img" src="../images/aboutUsImage.png"/>
+          <img class="banner-image" src="../images/aboutUsImage.png"/>
           <div class="title-div">
-            <h1>About Us</h1>
+            <h1 class="text-gold fw-bold">About Us</h1>
           </div>
         </div>
         <div class="mx-auto p-5">
           <div class="pt-5 ps-5 mx-auto mb-5">
-            <h2 class="mb-4">Who We Are</h2>
+            <h2 class="text-gold fw-bold mb-4">Who We Are</h2>
             <p class="mb-4">
               We collect the real stories of UW students and share them with
               others on campus.
