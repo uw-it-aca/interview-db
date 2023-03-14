@@ -69,7 +69,7 @@
                   data-bs-parent="#faq"
                 >
                   <div class="accordion-body">
-                    <p class="fs-5">
+                    <p>
                       We walk around busy spaces like the HUB Cafeteria or By
                       George and look for students who look like they might have
                       a little extra time to talk.
@@ -97,7 +97,7 @@
                   data-bs-parent="#faq"
                 >
                   <div class="accordion-body">
-                    <p class="fs-5">
+                    <p>
                       Most interviews are conducted by student staff at UW-IT.
                     </p>
                   </div>
@@ -123,7 +123,7 @@
                   data-bs-parent="#faq"
                 >
                   <div class="accordion-body">
-                    <p class="fs-5">
+                    <p>
                       We make edits for clarity and concision as well as
                       re-organize the conversation to make student stories more
                       readable. We are trained to take special care of
@@ -152,7 +152,7 @@
                   data-bs-parent="#faq"
                 >
                   <div class="accordion-body">
-                    <p class="fs-5">
+                    <p>
                       After each interview, we are obliged to give an additional
                       form for the students to complete. This form clarifies
                       whether they only want their information used for internal
