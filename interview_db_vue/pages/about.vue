@@ -8,44 +8,51 @@
     </template>
 
     <template #content>
-      <div class="mx-auto p-5 mb-4">
-        <div class="pt-5 ps-5 mx-auto mb-5">
-          <h2 class="display-5 fw-bold mb-4">Who We Are</h2>
-          <p class="fs-5 mb-4">
-            We collect the real stories of UW students and share them with
-            others on campus.
-          </p>
-          <p class="fs-5 mb-4">
-            Our team operates out of the
-            <b>Academic Experience Design and Delivery (AXDD)</b> department at
-            UW-IT.
-          </p>
+      <div>
+        <div style="position: relative">
+          <img class="banner-image" src="../images/aboutUsImage.png"/>
+          <div class="title-div">
+            <h1 class="text-gold fw-bold">About Us</h1>
+          </div>
         </div>
+        <div class="mx-auto p-5">
+          <div class="pt-5 ps-5 mx-auto mb-5">
+            <h2 class="text-gold fw-bold mb-4">Who We Are</h2>
+            <p class="mb-4">
+              We collect the real stories of UW students and share them with
+              others on campus.
+            </p>
+            <p class="mb-4">
+              Our team operates out of the
+              <b>Academic Experience Design and Delivery (AXDD)</b> department at
+              UW-IT.
+            </p>
+          </div>
 
-        <div class="mx-auto pt-2 ps-5 mb-5">
-          <h2 class="display-6 fs-2 fw-bold mb-4">Our Interview Process</h2>
-          <p class="fs-5 mb-4">1. Meet a stranger</p>
-          <p class="fs-5 mb-4">2. Have a chat</p>
-          <p class="fs-5 mb-4">3. Transcribe and share</p>
-        </div>
+          <div class="mx-auto pt-2 ps-5 mb-5">
+            <h2 class="fs-1 text-gold fw-bold mb-4">Our Interview Process</h2>
+            <p class="mb-4">1. Meet a stranger</p>
+            <p class="mb-4">2. Have a chat</p>
+            <p class="mb-4">3. Transcribe and share</p>
+          </div>
 
-        <div class="mx-auto pt-2 ps-5 mb-5">
-          <h2 class="display-6 fs-2 fw-bold mb-4">Help Grow Our Collection</h2>
-          <p class="fs-5 mb-4">
-            Schedule a 15-30 minute appointment with us to talk about your UW
-            experience.
-          </p>
-          <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Husky Voices">
-            <button type="button" class="btn btn-secondary">
-              Share Your Story >
-            </button>
-          </a>
-        </div>
+          <div class="mx-auto pt-2 ps-5 mb-5">
+            <h2 class="fs-1 text-gold fw-bold mb-4">Help Grow Our Collection</h2>
+            <p class="mb-4">
+              Schedule a 15-30 minute appointment with us to talk about your UW
+              experience.
+            </p>
+            <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Husky Voices">
+              <button type="button" class="btn btn-purple">
+                Share Your Story <i class="bi bi-chevron-right"></i>
+              </button>
+            </a>
+          </div>
 
-        <div class="mx-auto pt-2 ps-5 mb-5">
-          <h2 class="display-6 fs-2 fw-bold mb-4">
-            Frequently Asked Questions (FAQ)
-          </h2>
+          <div class="mx-auto pt-2 ps-5 mb-5">
+            <h2 class="fs-1 text-gold fw-bold mb-4">
+              Frequently Asked Questions (FAQ)
+            </h2>
 
           <div class="mx-auto pt-2 mb-5">
             <div class="accordion" id="faq">
@@ -165,6 +172,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </template>
   </layout>
