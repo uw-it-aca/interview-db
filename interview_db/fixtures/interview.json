@@ -214,7 +214,11 @@
         "pk": 1,
         "fields": {
             "topic": "Getting Help",
-            "codes": [4, 12, 19],
+            "codes": [
+                4,
+                12,
+                19
+            ],
             "subcodes": [],
             "question": "What resources helped you get through college?"
         }
@@ -225,7 +229,9 @@
         "fields": {
             "topic": "Advice",
             "codes": [],
-            "subcodes": [6],
+            "subcodes": [
+                6
+            ],
             "question": "What advice would you give your past self?"
         }
     },
@@ -235,7 +241,12 @@
         "fields": {
             "topic": "Working Towards Goals",
             "codes": [],
-            "subcodes": [2, 3, 4, 5],
+            "subcodes": [
+                2,
+                3,
+                4,
+                5
+            ],
             "question": "What is helping you work towards your goals?"
         }
     },
@@ -244,7 +255,12 @@
         "pk": 4,
         "fields": {
             "topic": "Coming to College",
-            "codes": [6, 5, 13, 18],
+            "codes": [
+                6,
+                5,
+                13,
+                18
+            ],
             "subcodes": [],
             "question": "What resources helped you get through college?"
         }
@@ -254,7 +270,10 @@
         "pk": 5,
         "fields": {
             "topic": "Choosing a Major",
-            "codes": [7, 8],
+            "codes": [
+                7,
+                8
+            ],
             "subcodes": [],
             "question": "How did you find your major and why did you choose it?"
         }
@@ -264,7 +283,9 @@
         "pk": 6,
         "fields": {
             "topic": "Finding Community",
-            "codes": [15],
+            "codes": [
+                15
+            ],
             "subcodes": [],
             "question": "How have you built your community?"
         }
@@ -274,7 +295,13 @@
         "pk": 7,
         "fields": {
             "topic": "Self Reflection",
-            "codes": [16, 17, 14, 2, 3],
+            "codes": [
+                16,
+                17,
+                14,
+                2,
+                3
+            ],
             "subcodes": [],
             "question": "How do you feel about your time so far about the UW?"
         }
@@ -284,7 +311,11 @@
         "pk": 8,
         "fields": {
             "topic": "Moving Forward",
-            "codes": [9, 10, 11],
+            "codes": [
+                9,
+                10,
+                11
+            ],
             "subcodes": [],
             "question": "What are your plans for the future?"
         }
