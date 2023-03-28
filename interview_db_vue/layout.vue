@@ -1,66 +1,79 @@
 <template>
-
   <header>
-    <nav class="fixed-top pt-4 bg-white mb-2" style="background-image:url(${staticUrl}./css/w.svg);">
+    <nav class="bg-white p-2">
+      <div class="d-flex flex-md-row text-purple justify-content-between">
+        <div class="d-flex flex-row title-logo">
+            <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
+              <img src="./images/purplew.png" class="img-fluid justify-content-start"
+                style="object-fit:contain; width:100%; height:50px" alt="Husky W Logo">
+            </router-link>
+            <h2 class="fs-3 d-flex justify-content-start fw-bold">
+              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
+                Husky Voices
+              </router-link>
+            </h2>
+          <i class="bi bi-list hamburger-menu"></i>
+        </div>
+<!-- 
+        <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
+          <div><img src="./images/purplew.png" class="justify-content-start"
+              style="object-fit:contain; width:100%; height:50px; position:absolute" alt="Husky W Logo"></div>
+          <div>
+            <h2 class="fs-3 fw-bold">
+              Husky Voices
+            </h2>
+          </div>
+        </router-link> -->
 
-      <div class="d-flex flex-column flex-md-row pb-3 border-bottom border-primary">
-        <h2 class="fs-3 d-flex justify-content-center col-6 fw-bold">
-          <router-link class="nav-link" active-class="active" aria-current="page" to="/">Husky Voices</router-link>
-        </h2>
-
-        <ul class="nav d-inline-flex mt-2 mx-auto col-6">
+        <!-- <button @click="$router.push({ name: 'Home' })" class="border-0 bg-white">
+            <img src="./images/purplew.png" style="object-fit:contain; width:100%; height:50px"
+              alt="Husky W Logo">
+            <h2 class="fs-3 fw-bold text-purple">Husky Voices
+            </h2>
+          </button> -->
+        <!-- </div> -->
+        <ul class="nav mt-2 p-2 col-6 justify-content-end nav-list">
           <li class="nav-item">
             <h6>
-              <router-link class="nav-link" active-class="active" aria-current="page" to="/students">Student Stories
+              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/students">Student
+                Stories
               </router-link>
             </h6>
           </li>
           <li class="nav-item">
             <h6>
-              <router-link class="nav-link" active-class="active" aria-current="page" to="/collections">Collections
+              <router-link class="nav-link text-purple" active-class="active" aria-current="page"
+                to="/collections">Collections
               </router-link>
             </h6>
           </li>
           <li class="nav-item">
             <h6>
-              <router-link class="nav-link" active-class="active" aria-current="page" to="/about">About
+              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/about">About
                 Us</router-link>
             </h6>
           </li>
-          
-          <img src="./css/w.svg" class="float-end" />
         </ul>
       </div>
     </nav>
   </header>
 
-  <main class="pt-5">
+  <main class="p-2">
     <slot name="title" />
     <slot name="description" />
     <slot name="content" />
   </main>
 
 
-  <footer class="ps-5 footer p-4 border-top mx-auto">
-    <div class="row g-0 justify-content-end">
-      <div class="col-2 ps-5">
-        <h2 class="fs-4 d-flex fw-bold border-bottom">Husky Voices</h2>
-        <p>ux@uw.edu</p>
+  <footer class="py-4 px-5 footer bg-purple text-white">
+    <div class="row">
+       <div class="col-6">
+        <!--<img src="../images/washingtonlogo.svg" /> -->
       </div>
-      <div class="col-5"></div>
-      <div class="col-5 display-block">
-        <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Contact the AXDD UX Team"
-          class="text-decoration-none ms-4 justify-content-end">Contact</a>
-        <a href="https://itconnect.uw.edu/learn/success-analytics/apps/#dawg" title="DawgPath Docs on IT Connect"
-          class="text-decoration-none ms-4">Documentation</a>
-        <a href="https://www.washington.edu/online/terms/" title="UW Terms of Use"
-          class="text-decoration-none ms-4">Terms</a>
-        <a href="https://www.washington.edu/online/privacy/" title="UW Privacy Policy"
-          class="text-decoration-none router-link ms-4">Privacy</a>
+      <div class="col-6">
+        <p class="text-end justify-content-end">Copyright &copy; 2023 University of Washington</p>
       </div>
     </div>
-    <p class="ps-5 text-muted">&copy; 2022 University of Washington</p>
-
   </footer>
 </template>
 
