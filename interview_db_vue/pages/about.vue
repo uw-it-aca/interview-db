@@ -30,14 +30,14 @@
           </div>
 
           <div class="mx-auto pt-2 ps-5 mb-5">
-            <h2 class="fs-1 text-gold fw-bold mb-4">Our Interview Process</h2>
+            <h2 class="text-gold fw-bold mb-4">Our Interview Process</h2>
             <p class="mb-4">1. Meet a stranger</p>
             <p class="mb-4">2. Have a chat</p>
             <p class="mb-4">3. Transcribe and share</p>
           </div>
 
           <div class="mx-auto pt-2 ps-5 mb-5">
-            <h2 class="fs-1 text-gold fw-bold mb-4">Help Grow Our Collection</h2>
+            <h2 class="text-gold fw-bold mb-4">Help Grow Our Collection</h2>
             <p class="mb-4">
               Schedule a 15-30 minute appointment with us to talk about your UW
               experience.
@@ -50,7 +50,7 @@
           </div>
 
           <div class="mx-auto pt-2 ps-5 mb-5">
-            <h2 class="fs-1 text-gold fw-bold mb-4">
+            <h2 class="text-gold fw-bold mb-4">
               Frequently Asked Questions (FAQ)
             </h2>
 
