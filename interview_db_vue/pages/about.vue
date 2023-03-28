@@ -54,124 +54,124 @@
               Frequently Asked Questions (FAQ)
             </h2>
 
-          <div class="mx-auto pt-2 mb-5">
-            <div class="accordion" id="faq">
-              <div class="accordion-item">
-                <p class="accordion-header fs-5" id="headingOne">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                    aria-expanded="false"
-                    aria-controls="collapseOne"
+            <div class="mx-auto pt-2 mb-5">
+              <div class="accordion" id="faq">
+                <div class="accordion-item">
+                  <p class="accordion-header fs-5" id="headingOne">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="false"
+                      aria-controls="collapseOne"
+                    >
+                      How do you choose the students you interview?
+                    </button>
+                  </p>
+                  <div
+                    id="collapseOne"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingOne"
+                    data-bs-parent="#faq"
                   >
-                    How do you choose the students you interview?
-                  </button>
-                </p>
-                <div
-                  id="collapseOne"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="headingOne"
-                  data-bs-parent="#faq"
-                >
-                  <div class="accordion-body">
-                    <p>
-                      We walk around busy spaces like the HUB Cafeteria or By
-                      George and look for students who look like they might have
-                      a little extra time to talk.
-                    </p>
+                    <div class="accordion-body">
+                      <p>
+                        We walk around busy spaces like the HUB Cafeteria or By
+                        George and look for students who look like they might have
+                        a little extra time to talk.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="accordion-item">
-                <p class="accordion-header fs-5" id="headingTwo">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
+                <div class="accordion-item">
+                  <p class="accordion-header fs-5" id="headingTwo">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="collapseTwo"
+                    >
+                      Who conducts these interviews?
+                    </button>
+                  </p>
+                  <div
+                    id="collapseTwo"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingTwo"
+                    data-bs-parent="#faq"
                   >
-                    Who conducts these interviews?
-                  </button>
-                </p>
-                <div
-                  id="collapseTwo"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="headingTwo"
-                  data-bs-parent="#faq"
-                >
-                  <div class="accordion-body">
-                    <p>
-                      Most interviews are conducted by student staff at UW-IT.
-                    </p>
+                    <div class="accordion-body">
+                      <p>
+                        Most interviews are conducted by student staff at UW-IT.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="accordion-item">
-                <p class="accordion-header fs-5" id="headingThree">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree"
+                <div class="accordion-item">
+                  <p class="accordion-header fs-5" id="headingThree">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree"
+                      aria-expanded="false"
+                      aria-controls="collapseThree"
+                    >
+                      How are the interviews transcribed?
+                    </button>
+                  </p>
+                  <div
+                    id="collapseThree"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingThree"
+                    data-bs-parent="#faq"
                   >
-                    How are the interviews transcribed?
-                  </button>
-                </p>
-                <div
-                  id="collapseThree"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="headingThree"
-                  data-bs-parent="#faq"
-                >
-                  <div class="accordion-body">
-                    <p>
-                      We make edits for clarity and concision as well as
-                      re-organize the conversation to make student stories more
-                      readable. We are trained to take special care of
-                      conserving the original interviewee intent.
-                    </p>
+                    <div class="accordion-body">
+                      <p>
+                        We make edits for clarity and concision as well as
+                        re-organize the conversation to make student stories more
+                        readable. We are trained to take special care of
+                        conserving the original interviewee intent.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="accordion-item">
-                <p class="accordion-header fs-5" id="headingFour">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFour"
-                    aria-expanded="false"
-                    aria-controls="collapseFour"
+                <div class="accordion-item">
+                  <p class="accordion-header fs-5" id="headingFour">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseFour"
+                      aria-expanded="false"
+                      aria-controls="collapseFour"
+                    >
+                      How are the interviews transcribed?
+                    </button>
+                  </p>
+                  <div
+                    id="collapseFour"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingFour"
+                    data-bs-parent="#faq"
                   >
-                    How are the interviews transcribed?
-                  </button>
-                </p>
-                <div
-                  id="collapseFour"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="headingFour"
-                  data-bs-parent="#faq"
-                >
-                  <div class="accordion-body">
-                    <p>
-                      After each interview, we are obliged to give an additional
-                      form for the students to complete. This form clarifies
-                      whether they only want their information used for internal
-                      UW research or if they are willing to release their story
-                      to be shared.
-                    </p>
+                    <div class="accordion-body">
+                      <p>
+                        After each interview, we are obliged to give an additional
+                        form for the students to complete. This form clarifies
+                        whether they only want their information used for internal
+                        UW research or if they are willing to release their story
+                        to be shared.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
       </div>
       </div>
     </template>
