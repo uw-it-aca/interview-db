@@ -81,7 +81,6 @@ class Command(BaseCommand):
 
             # commuter = StudentType.objects.get_or_create(type="Commuter")[0]
             # exchange = StudentType.objects.get_or_create(type="Exchange")[0]
-            # first_gen = StudentType.objects.get_or_create(type="First-Gen")[0]
             # international = StudentType.objects.get_or_create(
             #     type="International")[0]
 
@@ -139,7 +138,8 @@ class Command(BaseCommand):
                 code=Code.objects.get_or_create(code="Building Identity")[0],
                 story=s2_joe,
             )
-            c2_joe.subcode = SubCode.objects.get_or_create(subcode="Context")[0]
+            c2_joe.subcode = SubCode.objects.get_or_create(
+                subcode="Context")[0]
             c2_joe.save()
 
             i_jane = Interview.objects.create(
@@ -182,7 +182,8 @@ class Command(BaseCommand):
                 code=Code.objects.get_or_create(code="Choosing College")[0],
                 story=s_jane,
             )
-            c_jane.subcode = SubCode.objects.get_or_create(subcode="Context")[0]
+            c_jane.subcode = SubCode.objects.get_or_create(
+                subcode="Context")[0]
             c_jane.save()
 
             i_billy = Interview.objects.create(
@@ -219,10 +220,12 @@ class Command(BaseCommand):
                 story_order_position=1,
             )
             c_billy = Coding(
-                code=Code.objects.get_or_create(code="Prove Myself")[0],
+                code=Code.objects.get_or_create
+                (code="Prove Myself")[0],
                 story=s_billy,
             )
-            c_billy.subcode = SubCode.objects.get_or_create(subcode="Context")[0]
+            c_billy.subcode = SubCode.objects.get_or_create(
+                subcode="Context")[0]
             c_billy.save()
 
             i_sam = Interview.objects.create(
