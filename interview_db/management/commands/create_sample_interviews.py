@@ -29,11 +29,9 @@ class Command(BaseCommand):
             StudentType.objects.all().delete()
             Major.objects.all().delete()
             Coding.objects.all().delete()
-            Code.objects.all().delete()
             Story.objects.all().delete()
             Interview.objects.all().delete()
             Student.objects.all().delete()
-            Collection.objects.all().delete()
 
             cse = Major.objects.create(
                 full_title="Computer Science Engineering",
@@ -81,51 +79,10 @@ class Command(BaseCommand):
                 follow_up_consent=False,
             )
 
-            commuter = StudentType.objects.get_or_create(type="Commuter")[0]
-            exchange = StudentType.objects.get_or_create(type="Exchange")[0]
-            first_gen = StudentType.objects.get_or_create(type="First-Gen")[0]
-            international = StudentType.objects.get_or_create(
-                type="International")[0]
-
-            learning = Code.objects.create(
-                topic="Learning",
-                code="Getting Help (learning)",
-                definition="Getting Help (learning)",
-            )
-            career = Code.objects.create(
-                topic="Career",
-                code="Choosing College",
-                definition="Choosing College"
-            )
-            identity = Code.objects.create(
-                topic="Identity",
-                code="Building Identity",
-                definition="Building Identity",
-            )
-
-            help = Collection.objects.create(
-                topic="Getting Help",
-                question="What resources have you used to help "
-                         "throughout your college career?"
-            )
-            help.codes.set([learning])
-            college = Collection.objects.create(
-                topic="Coming to College",
-                question="What is the biggest challenge you've "
-                         "faced since coming to the UW?",
-            )
-            college.codes.set([career])
-            reflection = Collection.objects.create(
-                topic="Self Reflection",
-                question="What is the biggest challenge you've "
-                         "faced since coming to the UW?",
-            )
-            reflection.codes.set([identity])
-
-            subcode = SubCode.objects.create(
-                subcode="Advice",
-                definition="Advice",
-            )
+            # commuter = StudentType.objects.get_or_create(type="Commuter")[0]
+            # exchange = StudentType.objects.get_or_create(type="Exchange")[0]
+            # international = StudentType.objects.get_or_create(
+            #     type="International")[0]
 
             i_joe = Interview.objects.create(
                 student=joe,
@@ -137,7 +94,7 @@ class Command(BaseCommand):
                 image_is_not_identifying=True,
                 image_alt_text="Joe's picture",
                 intended_major=True,
-                standing="Freshman",
+                standing="Fr",
                 years_until_graduation="4",
                 current_year="1",
                 no_identifying_photo=True,
@@ -145,18 +102,19 @@ class Command(BaseCommand):
                 no_publishing_stories=False,
                 other_publishing_restrictions=False,
             )
-            i_joe.student_type.set([commuter, first_gen])
+
+            # i_joe.student_type.set([commuter, first_gen])
             i_joe.major.set([cse])
+
             s_joe = Story.objects.create(
                 interview=i_joe,
-                story="This is Joe's first story about Learning, "
-                      "Getting Help (learning), Advice",
+                story="This is Joe's first story about Learning!",
                 story_order_position=1,
             )
             s2_joe = Story.objects.create(
                 interview=i_joe,
-                story="This is Joe's second story about Identity, Building "
-                      "Identity, Advice...Lorem ipsum dolor sit "
+                story="This is Joe's second story about "
+                      "Building Identity ... Lorem ipsum dolor sit "
                       "amet, consectetur adipiscing elit, sed do eiusmod "
                       "tempor incididunt ut labore et dolore magna aliqua."
                       " Ut enim ad minim veniam, quis nostrud exercitation "
@@ -168,22 +126,21 @@ class Command(BaseCommand):
                       "mollit anim id est laborum.",
                 story_order_position=2,
             )
+
             c_joe = Coding(
-                code=learning,
+                code=Code.objects.get_or_create(code="Lifelong Learning")[0],
                 story=s_joe,
             )
-            c_joe.subcode = subcode
+            c_joe.subcode = SubCode.objects.get_or_create(subcode="Context")[0]
             c_joe.save()
+
             c2_joe = Coding(
-                code=identity,
+                code=Code.objects.get_or_create(code="Building Identity")[0],
                 story=s2_joe,
             )
-            c2_joe.subcode = subcode
+            c2_joe.subcode = SubCode.objects.get_or_create(
+                subcode="Context")[0]
             c2_joe.save()
-            s_joe.code.set([learning])
-            s_joe.subcode.set([subcode])
-            s2_joe.code.set([identity])
-            s2_joe.subcode.set([subcode])
 
             i_jane = Interview.objects.create(
                 student=jane,
@@ -199,7 +156,7 @@ class Command(BaseCommand):
                 image_is_not_identifying=True,
                 image_alt_text="profile",
                 intended_major=False,
-                standing="Junior",
+                standing="Jr",
                 years_until_graduation="2",
                 current_year="3",
                 no_identifying_photo=True,
@@ -208,10 +165,11 @@ class Command(BaseCommand):
                 other_publishing_restrictions=False,
             )
             i_jane.major.set([cse])
+
             s_jane = Story.objects.create(
                 interview=i_jane,
-                story="This is Jane's first story about Career, "
-                      "Choosing College, Advice "
+                story="This is Jane's first story about "
+                      "Coming to College: Choosing College. "
                       "Lorem ipsum dolor sit amet, consectetur "
                       "adipiscing elit, sed do eiusmod tempor incididunt "
                       "ut labore et dolore magna aliqua. Ut enim ad "
@@ -221,13 +179,12 @@ class Command(BaseCommand):
             )
 
             c_jane = Coding(
-                code=career,
+                code=Code.objects.get_or_create(code="Choosing College")[0],
                 story=s_jane,
             )
-            c_jane.subcode = subcode
+            c_jane.subcode = SubCode.objects.get_or_create(
+                subcode="Context")[0]
             c_jane.save()
-            s_jane.code.set([career])
-            s_jane.subcode.set([subcode])
 
             i_billy = Interview.objects.create(
                 image="../../interview_db_vue/css/blossom.png",
@@ -240,7 +197,7 @@ class Command(BaseCommand):
                 image_is_not_identifying=True,
                 image_alt_text="profile",
                 intended_major=False,
-                standing="Junior",
+                standing="Jr",
                 years_until_graduation="3",
                 current_year="2",
                 no_identifying_photo=True,
@@ -248,12 +205,13 @@ class Command(BaseCommand):
                 no_publishing_stories=False,
                 other_publishing_restrictions=False,
             )
-            i_billy.major.set([hcde])
-            i_billy.student_type.set([exchange])
+            i_billy.major.set([hcde, comm])
+            # i_billy.student_type.set([exchange])
+
             s_billy = Story.objects.create(
                 interview=i_billy,
-                story="This is Billy's first story about Identity, "
-                      "Building Identity, Advice"
+                story="This is Billy's first story about Moving "
+                      "Forward: Prove Myself. "
                       "Duis aute irure dolor in reprehenderit in "
                       "voluptate velit esse cillum dolore eu fugiat "
                       "nulla pariatur. Excepteur sint occaecat cupidatat "
@@ -262,13 +220,13 @@ class Command(BaseCommand):
                 story_order_position=1,
             )
             c_billy = Coding(
-                code=identity,
+                code=Code.objects.get_or_create
+                (code="Prove Myself")[0],
                 story=s_billy,
             )
-            c_billy.subcode = subcode
+            c_billy.subcode = SubCode.objects.get_or_create(
+                subcode="Context")[0]
             c_billy.save()
-            s_billy.code.set([identity])
-            s_billy.subcode.set([subcode])
 
             i_sam = Interview.objects.create(
                 student=sam,
@@ -280,7 +238,7 @@ class Command(BaseCommand):
                 image_is_not_identifying=True,
                 image_alt_text="profile",
                 intended_major=False,
-                standing="Senior",
+                standing="Sr",
                 years_until_graduation="< 1",
                 current_year="4",
                 no_identifying_photo=True,
@@ -289,18 +247,15 @@ class Command(BaseCommand):
                 other_publishing_restrictions=False,
             )
             i_sam.major.set([comm, cse])
-            i_sam.student_type.set([commuter, international])
+            # i_sam.student_type.set([commuter, international])
             s_sam = Story.objects.create(
                 interview=i_sam,
-                story="This is Sam's first story about Career, "
-                      "Choosing College, Advice",
+                story="This is Sam's first story about Finding Community",
                 story_order_position=1,
             )
             c_sam = Coding(
-                code=identity,
+                code=Code.objects.get_or_create(code="Finding Community")[0],
                 story=s_sam,
             )
-            c_sam.subcode = subcode
+            c_sam.subcode = SubCode.objects.get_or_create(subcode="Context")[0]
             c_sam.save()
-            s_sam.code.set([identity])
-            s_sam.subcode.set([subcode])

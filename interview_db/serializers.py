@@ -42,6 +42,7 @@ class InterviewSerializer(serializers.ModelSerializer):
     student_type = StudentTypeSerializer(many=True, read_only=True)
     image_url = serializers.ImageField(max_length=None, use_url=True,
                                        allow_null=True, required=False)
+    standing = serializers.CharField(source='get_standing_display')
 
     class Meta:
         model = Interview
