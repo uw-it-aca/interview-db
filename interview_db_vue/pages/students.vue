@@ -14,12 +14,12 @@
       <div v-else>
         <div class="mx-auto p-5 mb-4">
           <div class="pt-5 ps-5">
-            <h2 class="display-5 fw-bold mb-5">Student Stories</h2>
+            <h2 class="display-5 fw-bold mb-5 text-gold">Student Stories</h2>
             <p class="fs-5 mb-5">Sort interviews by student characteristics.</p>
             <div class="row">
               <div class="col-4">
                 <StudentFilter @clicked="updateFilters" />
-                {{ filters }}
+                <!-- {{ filters }} -->
               </div>
 
               <div class="col-7 mx-auto">

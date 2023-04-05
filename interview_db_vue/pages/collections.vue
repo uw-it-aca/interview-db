@@ -16,7 +16,7 @@
         <div style="position: relative">
           <img class="banner-image" src="../images/collectionsImage.png"/>
           <div class="title-div">
-            <h1>Collections</h1>
+            <h1 class="text-gold fw-bold">Collections</h1>
           </div>
         </div>
         <div class="mx-auto p-5 mb-5">

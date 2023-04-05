@@ -23,7 +23,7 @@
         </div>
 
         <div class="col-8 ps-4 m-0">
-          <h2 class="card-title fw-bold display-6 mb-2">
+          <h2 class="card-title fw-bold text-purple display-6 mb-2">
             {{ studentInfo.student.first_name }}
           </h2>
           <div class="row">
@@ -44,14 +44,15 @@
                 </span>
               </p>
             </div>
-            <div class="col-1">
-              <i class="bi bi-chevron-right"></i>
-            </div>
           </div>
         </div>
 
         <div class="card-text ps-4">
           <p class="display-6 fs-5">"{{ studentInfo.pull_quote }}"</p>
+        </div>
+        <div>
+            <u class="text-purple" style="display:inline;">Read More</u>
+            <i class="bi bi-chevron-right"></i>
         </div>
       </div>
     </div>
