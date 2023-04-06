@@ -114,7 +114,8 @@ h6 {
 
 .banner-image{
   width: 100%;
-  height: auto;
+  height: 270px;
+  object-fit: cover;
 }
 
 // title banner styling for over banner-image
@@ -157,6 +158,10 @@ h6 {
     padding-right: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .banner-image{
+    height: auto;
   }
 }
 
