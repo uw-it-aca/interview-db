@@ -13,53 +13,54 @@
         <div class="collapse mt-0" id="year">
           <div class="card card-body border-0">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Fr" id="Freshman" v-model="filters.year"
+              <input class="form-check-input" type="checkbox" value="Freshman" id="Freshman" v-model="filters.year"
                 @change="updateQuery($event)">
               <label class="form-check-label display-6 fs-6" for="freshman">
                 Freshman
               </label>
             </div>
-            <!-- <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Sophomore" id="Sophomore" v-model="filters.year"
+                @change="updateQuery($event)">
+              <label class="form-check-label display-6 fs-6" for="sophomore">
                 Sophomore
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Jr" id="flexCheckDefault" v-model="filters.year"
-                @change="updateYear($event)">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="Junior" id="Junior" v-model="filters.year"
+                @change="updateQuery($event)">
+              <label class="form-check-label display-6 fs-6" for="Junior">
                 Junior
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Sr" id="flexCheckDefault" v-model="filters.year"
-                @change="updateYear($event)">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="Senior" id="Senior" v-model="filters.year"
+                @change="updateQuery($event)">
+              <label class="form-check-label display-6 fs-6" for="Senior">
                 Senior
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Al" id="flexCheckDefault" v-model="filters.year"
-                @change="updateYear($event)">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="Alumni - undergrad" id="Alumni" v-model="filters.year"
+                @change="updateQuery($event)">
+              <label class="form-check-label display-6 fs-6" for="Alumni">
                 Alumni
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Ma" id="flexCheckDefault" v-model="filters.year"
-                @change="updateYear($event)">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="Masters" id="Masters" v-model="filters.year"
+                @change="updateQuery($event)">
+              <label class="form-check-label display-6 fs-6" for="Masters">
                 Masters
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Ph" id="flexCheckDefault" v-model="filters.year"
-                @change="updateYear($event)">
-              <label class="form-check-label display-6 fs-6" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="PhD" id="PhD" v-model="filters.year"
+                @change="updateQuery($event)">
+              <label class="form-check-label display-6 fs-6" for="PhD">
                 PhD
               </label>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
