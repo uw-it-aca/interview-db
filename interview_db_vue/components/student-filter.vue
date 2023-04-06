@@ -73,7 +73,7 @@
           <div class="card card-body border-0 mt-0">
             <div v-for="major in data.majors" :key="major.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" :value="major.id" id="major" v-model="filters.major"
+                <input class="form-check-input" type="checkbox" :value="major" id="major" v-model="filters.major"
                   @change="updateQuery($event)">
                 <label class="form-check-label display-6 fs-6" for="major">
                   {{ major.full_title }}
@@ -113,7 +113,7 @@
           <div class="card card-body border-0 mt-0">
             <div v-for="topic in data.topics" :key="topic.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" :value=topic.topic id="topic" v-model="filters.topic"
+                <input class="form-check-input" type="checkbox" :value=topic.slug id="topic" v-model="filters.topic"
                   @change="updateQuery($event)">
                 <label class="form-check-label display-6 fs-6" for="topic">
                   {{ topic.topic }}
@@ -137,13 +137,11 @@ export default {
     return {
       data: {
         majors: [],
-        traits: [],
         topics: [],
       },
       filters: {
         year: [],
         major: [],
-        trait: [],
         topic: [],
       },
     };

@@ -4,7 +4,7 @@
 <template>
 
   <div class="mt-4 pt-4">
-    <!-- {{ studentInfo }} -->
+    {{ studentInfo.standing }}
     <div class="card border-0">
       <div class="row g-0 mx-auto">
         <div class="col-4">
@@ -79,7 +79,8 @@ export default {
     },
     interviewDate() {
       return new Date(this.studentInfo.date).toLocaleDateString('en-US');
-    }
+    },
+
   },
   props: {
     studentInfo: {
@@ -101,6 +102,7 @@ export default {
     async loadData() {
       const response = await get("/api/students/" + this.interviewId + "/");
       this.stories = response.data;
+      this.studentInfo = JSON.parse(this.studentInfo);
     }
   },
   created() {

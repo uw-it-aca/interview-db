@@ -71,35 +71,21 @@ export default {
     };
   },
   computed: {
+    console: () => console,
     interviewId() {
       return this.$route.params.id;
     },
     singleStudentInfo() {
       return JSON.parse(this.$route.params.singleStudent);
     },
-    updatedFilters() {
+    updateFilters() {
       this.filters.year = this.$route.query.year;
       this.filters.major = this.$route.query.major;
       this.filters.trait = this.$route.query.trait;
       this.filters.topic = this.$route.query.topic;
     },
     filteredStudents() {
-      return this.students;
-      // if (this.filters.length == 0) {
-      //   return this.students;
-      // } else {
-      //   return this.students.filter(student => student.major == this.filters.major
-      //   );
-      //   return this.students.filter(student => {
-      //     return this.filters.major.every(m => student.major.includes(m))
-      //   });
-      //   return this.students.filter(student => {
-      //     return this.filters.major.every(m => student.major.includes(m))
-      //   });
-      //   return this.students.filter(student => {
-      //     return this.filters.major.every(m => student.major.includes(m))
-      //   });
-      // }
+      return this.students.filter(student => this.filters.year.includes(student.standing));
     },
   },
   created() {
