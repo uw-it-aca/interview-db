@@ -4,7 +4,8 @@ FROM gcr.io/uwit-mci-axdd/django-container:${DJANGO_CONTAINER_VERSION} as app-pr
 
 USER root
 
-RUN apt-get update && apt-get install mysql-client libmysqlclient-dev -y
+RUN apt-get update && apt-get install libpq-dev -y
+RUN /app/bin/pip install psycopg2
 
 USER acait
 
@@ -12,7 +13,7 @@ ADD --chown=acait:acait . /app/
 ADD --chown=acait:acait docker/ /app/project/
 
 RUN /app/bin/pip install -r requirements.txt
-RUN /app/bin/pip install mysqlclient
+
 
 FROM node:14.18.1-stretch AS node-bundler
 
