@@ -6,4 +6,4 @@ from django.apps import AppConfig
 
 
 class InterviewConfig(AppConfig):
-    name = 'interview_db'
+    name = "interview_db"
