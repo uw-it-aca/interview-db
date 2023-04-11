@@ -39,7 +39,6 @@ class CodeSerializer(serializers.ModelSerializer):
 class InterviewSerializer(serializers.ModelSerializer):
     student = StudentSerializer(read_only=True)
     major = MajorSerializer(many=True, read_only=True)
-    # major = major_display
     student_type = StudentTypeSerializer(many=True, read_only=True)
     image_url = serializers.ImageField(max_length=None, use_url=True,
                                        allow_null=True, required=False)

@@ -4,11 +4,6 @@
 <template>
 
   <div class="mt-4 pt-4">
-    {{ studentInfo }}
-    HELLO
-    {{  studentInfo.get_absolute_url }}
-    <!-- {{  studentInfo.image }} -->
-    <!-- {{ studentInfo.image.url }} -->
     <div class="card border-0">
       <div class="row g-0 mx-auto">
         <div class="col-4">
