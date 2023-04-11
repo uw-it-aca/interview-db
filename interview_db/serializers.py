@@ -53,6 +53,8 @@ class InterviewSerializer(serializers.ModelSerializer):
                   'interview_quarter',
                   'signed_release_form',
                   'pull_quote',
+                  'declared_major',
+                  'image',
                   'image_url',
                   'image_is_not_identifying',
                   'image_alt_text',
