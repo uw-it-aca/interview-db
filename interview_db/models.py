@@ -164,8 +164,8 @@ class Interview(models.Model):
         ordering = ['student', '-date']
 
     def declared_major(self):
-        return ','.join(
-            [major.major_abbreviation for major in self.major.all()]
+        return ', '.join(
+            [major.full_title for major in self.major.all()]
         )
 
     def get_absolute_url(self):

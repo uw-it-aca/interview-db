@@ -4,7 +4,11 @@
 <template>
 
   <div class="mt-4 pt-4">
-    <!-- {{ studentInfo }} -->
+    {{ studentInfo }}
+    HELLO
+    {{  studentInfo.get_absolute_url }}
+    <!-- {{  studentInfo.image }} -->
+    <!-- {{ studentInfo.image.url }} -->
     <div class="card border-0">
       <div class="row g-0 mx-auto">
         <div class="col-4">
@@ -20,10 +24,7 @@
               <span v-else>
                 Studying
               </span>
-              <span v-for="major, index in studentInfo.major" :key="major.id">
-                <span v-if="index != 0">, </span>
-                {{ major.full_title }}
-              </span>
+              {{ studentInfo.declared_major }}
             </div>
             <div class="col">
               <p class="fs-6 text-end">{{ interviewDate }}</p>

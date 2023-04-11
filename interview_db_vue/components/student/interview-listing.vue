@@ -35,13 +35,7 @@
                   {{ studentInfo.standing + ", studying" }}
                 </span>
                 <span v-else> Studying </span>
-                <span
-                  v-for="(major, index) in studentInfo.major"
-                  :key="major.id"
-                >
-                  <span v-if="index != 0">, </span>
-                  {{ major.full_title }}
-                </span>
+                {{ studentInfo.declared_major }}
               </p>
             </div>
             <div class="col-1">

@@ -39,6 +39,7 @@ class CodeSerializer(serializers.ModelSerializer):
 class InterviewSerializer(serializers.ModelSerializer):
     student = StudentSerializer(read_only=True)
     major = MajorSerializer(many=True, read_only=True)
+    # major = major_display
     student_type = StudentTypeSerializer(many=True, read_only=True)
     image_url = serializers.ImageField(max_length=None, use_url=True,
                                        allow_null=True, required=False)
@@ -53,6 +54,8 @@ class InterviewSerializer(serializers.ModelSerializer):
                   'interview_quarter',
                   'signed_release_form',
                   'pull_quote',
+                  'declared_major',
+                  'image',
                   'image_url',
                   'image_is_not_identifying',
                   'image_alt_text',
