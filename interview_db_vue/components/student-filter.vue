@@ -74,7 +74,7 @@
           <div class="card card-body border-0 mt-0">
             <div v-for="major in data.majors" :key="major.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" :value="major" id="major" v-model="filters.major"
+                <input class="form-check-input" type="checkbox" :value="major.full_title" id="major" v-model="filters.major"
                   @change="updateQuery($event)">
                 <label class="form-check-label display-6 fs-6" for="major">
                   {{ major.full_title }}
@@ -84,26 +84,6 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="mb-4">
-        <p class="display-4 fs-5 fw-bold mb-0" data-bs-toggle="collapse" href="#traits" aria-expanded="false"
-          aria-controls="traits">
-          Student Traits
-        </p>
-        <div class="collapse" id="traits">
-          <div class="card card-body border-0 mt-0">
-            <div v-for="trait in data.traits" :key="trait.id">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" :value="trait.type" id="trait" v-model="filters.trait"
-                  @change="updateTrait($event)">
-                <label class="form-check-label display-6 fs-6" for="trait">
-                  {{ trait.type }}
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
       <div class="mb-4">
         <p class="display-4 fs-5 fw-bold mb-0" data-bs-toggle="collapse" href="#collections" aria-expanded="false"
@@ -160,33 +140,13 @@ export default {
       const query = {}
       Object.entries(this.filters).forEach(([key, value]) => {
         if (value) {
-          query[key] = value
+          query[key] = (value)
         }
       })
       this.$router.push({ query })
     }
   },
-  // updateFilters(event) {
-  //   this.$router.push({
-  //     name: 'Students', query: {
-  //       major : JSON.stringify(this.filters.major),
-  //       trait: JSON.stringify(this.filters.trait),
-  //       topic: JSON.stringify(this.filters.topic),
-  //     }
-  //   });
-  // },
-  // updateYear(event) {
-  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { year: JSON.stringify(this.filters.year) }) });
-  // },
-  // updateMajor(event) {
-  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { major: JSON.stringify(this.filters.major) }) });
-  // },
-  // updateTrait(event) {
-  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { trait: JSON.stringify(this.filters.trait) }) });
-  // },
-  // updateTopic(event) {
-  //   this.$router.replace({ name: 'Students', query: Object.assign({}, this.$route.query, { topic: JSON.stringify(this.filters.topic) }) });
-  // },
+
   created() {
     this.loadData();
   }

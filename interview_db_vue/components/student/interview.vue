@@ -4,6 +4,8 @@
 <template>
 
   <div class="mt-4 pt-4">
+    <!-- {{ studentInfo }} -->
+    {{ studentInfo.major.full_title }}
     <div class="card border-0">
       <div class="row g-0 mx-auto">
         <div class="col-4">
@@ -98,7 +100,7 @@ export default {
     async loadData() {
       const response = await get("/api/students/" + this.interviewId + "/");
       this.stories = response.data;
-      this.studentInfo = JSON.parse(this.studentInfo);
+      // this.studentInfo = JSON.parse(this.studentInfo);
     }
   },
   created() {

@@ -14,7 +14,7 @@ class StudentTypeSerializer(serializers.ModelSerializer):
 class MajorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Major
-        fields = ['id', 'full_title', 'major_abbreviation']
+        fields = ['full_title']
 
 
 class StudentSerializer(serializers.ModelSerializer):

@@ -20,6 +20,7 @@
               <div class="col-4">
                 <StudentFilter @clicked="updateFilters" />
                 {{ filters }}
+                <!-- {{ test }} -->
               </div>
 
               <div class="col-7 mx-auto">
@@ -84,8 +85,26 @@ export default {
       this.filters.trait = this.$route.query.trait;
       this.filters.topic = this.$route.query.topic;
     },
+    test() {
+      for (var key in this.filters) {
+        return this.filters.key;
+      }
+    },
     filteredStudents() {
-      return this.students.filter(student => this.filters.year.includes(student.standing));
+      // students = this.students.filter(student => {
+      //   for (var key in this.filters) {
+      //     if (this.filters.key.includes(student.key)) {
+      //       return true;
+      //     }
+      //     return false;
+      //   }
+      // });
+      
+      // return this.students.filter(student => this.filters.year.includes(student.standing));
+      if (this.students.filter.major != undefined) {
+        return this.students.filter(student => this.filters.major.includes(student.major.full_title));
+      }
+      return this.students;
     },
   },
   created() {
