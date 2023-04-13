@@ -89,6 +89,25 @@ class CollectionDetailView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
+class InterviewTopicsView(APIView):
+    """
+    API endpoint returning all the collections of a single interview
+    """
+
+    def get(self, request, id):
+        interview = Story.objects.filter(interview__id=id)
+        queryset = Collection.objects.all()
+
+        for s in interview: 
+            queryset.filter(
+                Q(codes__in=s.code.all()) |
+                Q(subcodes__in=s.subcode.all()))
+
+        serializer = CollectionSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
 class MajorListView(APIView):
     """
     API endpoint returning all added majors
@@ -127,7 +146,7 @@ class RandomStudentsView(APIView):
 @method_decorator(group_required(front_end_group), name='dispatch')
 class RecentStudentsView(APIView):
     """
-    API endpoint returning three random students
+    API endpoint returning three most recent students
     """
 
     def get(self, request):

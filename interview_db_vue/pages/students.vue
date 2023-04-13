@@ -101,10 +101,10 @@ export default {
       // });
       
       // return this.students.filter(student => this.filters.year.includes(student.standing));
-      if (this.students.filter.major != undefined) {
-        return this.students.filter(student => this.filters.major.includes(student.major.full_title));
+      if (this.students.filter.major === undefined) {
+        return this.students;
       }
-      return this.students;
+      return this.students.filter(student => this.filters.major.includes(student.major.full_title));
     },
   },
   created() {

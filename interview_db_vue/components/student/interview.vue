@@ -4,7 +4,7 @@
 <template>
 
   <div class="mt-4 pt-4">
-    <!-- {{ studentInfo }} -->
+    {{ studentInfo }}
     {{ studentInfo.major.full_title }}
     <div class="card border-0">
       <div class="row g-0 mx-auto">
