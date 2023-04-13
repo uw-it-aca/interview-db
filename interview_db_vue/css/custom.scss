@@ -48,11 +48,12 @@ a.nav-link {
 // button-card styling
 button.btn-card {
   color: $primary;
-  display: inline-block;
+  display: flex;
   text-align: start;
   align-items: flex-start;
   cursor: default;
   box-sizing: border-box;
+  flex-basis: content;
   background-color: $light;
   padding: 1rem;
   border-color: $primary;
@@ -68,14 +69,26 @@ button.btn-card {
 img.listing-img {
   height: 12rem;
   width: 12rem;
-  position: relative;
+  //position: relative;
   z-index: 1;
-  top: -80px;
+  //top: -80px;
   line-height: 0;
   object-fit: cover;
   border-radius: 1.5px;
   filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
 }
+
+.card-img-row{
+  position: relative;
+  top:-80px;
+}
+
+.card-date-row{
+  position: relative;
+  top: 80px;
+}
+
+
 
 // Open Sans for all body text
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');

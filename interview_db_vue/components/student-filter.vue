@@ -76,7 +76,6 @@
               <div v-for="major in data.majors" :key="major.id">
                   <option>{{ major.full_title }}</option>
               </div>
-              </select>
             </div>
             <div v-for="major in data.majors" :key="major.id">
               <div class="form-check">
