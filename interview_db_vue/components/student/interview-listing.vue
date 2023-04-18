@@ -46,8 +46,8 @@
                   {{ major.full_title }}
                 </span>
               </p>
-        <!--</div>
-          <div class="row">
+        </div>
+          <!--<div class="row">
             <div class="col-11">
               <p
                 class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary"
