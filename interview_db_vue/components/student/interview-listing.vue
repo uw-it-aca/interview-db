@@ -25,9 +25,6 @@
         </div>
 
         <div class="col-8 ps-4 m-0 align-items-baseline">
-          <div class="row card-date-row">
-            <p class="fs-6 text-end">{{ interviewDate }}</p>
-          </div>
           <h2 class="card-title fw-bold text-purple display-6 mb-2">
             {{ studentInfo.student.first_name }}
           </h2>
