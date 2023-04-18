@@ -50,7 +50,7 @@ View your application using your specified port number in the .env file
 
         Demo: http://localhost:8000/
 
-To load collections fixture, you can call:
+To load collections models, you can call:
 
         $ ./manage.py loaddata /app/interview_db/fixtures/interview.json
 
