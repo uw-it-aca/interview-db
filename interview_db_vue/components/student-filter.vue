@@ -74,7 +74,7 @@
           <div class="card card-body border-0 mt-0">
             <div v-for="major in data.majors" :key="major.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" :value=JSON.stringify(major) id="major" v-model="filters.major"
+                <input class="form-check-input" type="checkbox" :value=major.full_title id="major" v-model="filters.major"
                   @change="updateQuery($event)">
                 <label class="form-check-label display-6 fs-6" for="major">
                   {{ major.full_title }}

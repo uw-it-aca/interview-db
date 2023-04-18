@@ -86,8 +86,8 @@ export default {
       this.filters.topic = this.$route.query.topic;
     },
     test() {
-      for (var key in this.filters) {
-        return this.filters.key;
+      if (this.filters.major !== undefined) {
+        return JSON.parse(this.filters.major);
       }
     },
     filteredStudents() {
@@ -101,10 +101,11 @@ export default {
       // });
       
       // return this.students.filter(student => this.filters.year.includes(student.standing));
-      if (this.students.filter.major === undefined) {
-        return this.students;
+      if (this.filters.year !== undefined || this.filters.major !== undefined || this.filters.topic !== undefined) {
+        return this.students.filter(student => this.filters.major.includes(student.major.full_title));
       }
-      return this.students.filter(student => this.filters.major.includes(student.major.full_title));
+      return this.students;
+      
     },
   },
   created() {
