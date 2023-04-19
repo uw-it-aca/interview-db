@@ -83,11 +83,6 @@ export default {
       required: true,
     },
   },
-  //   collections: {
-  //     type: Object,
-  //     required: false,
-  //   }
-  // },
   data() {
     return {
       stories: [],
