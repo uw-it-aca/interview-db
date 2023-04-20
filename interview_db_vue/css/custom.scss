@@ -45,22 +45,6 @@ a.nav-link {
   font-size: larger;
 }
 
-// button-card styling
-button.btn-card {
-  color: $primary;
-  display: flex;
-  text-align: start;
-  align-items: flex-start;
-  cursor: default;
-  box-sizing: border-box;
-  flex-basis: content;
-  background-color: $light;
-  padding: 1rem;
-  border-color: $primary;
-  border-radius: 0.1rem;
-  border-width: 1.5px;
-}
-
 .card-card-clickable {
   --bs-card-bg: none;
   --bs-card-border-width: 0;
@@ -130,6 +114,21 @@ h6 {
   height: auto;
 }
 
+button.btn-card {
+  color: $primary;
+  display: flex;
+  text-align: start;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  flex-basis: content;
+  background-color: $light;
+  padding: 1rem;
+  border-color: $primary;
+  border-radius: 0.1rem;
+  border-width: 1.5px;
+}
+
 // title banner styling for over banner-image
 .title-div{
   position: absolute;
@@ -170,6 +169,20 @@ h6 {
     padding-right: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+}
+
+@include media-breakpoint-down(lg)
+{
+  .student-col{
+    display: flex;
+    flex: 1;
+    flex-shrink: 0;
+  }
+
+  .button.btn-card{
+    flex: 1;
+    flex-shrink: 0;
   }
 }
 

@@ -17,16 +17,20 @@
             <h2 class="display-5 fw-bold mb-5 text-gold">Student Stories</h2>
             <p class="fs-5 mb-5">Sort interviews by student characteristics.</p>
             <div class="row">
-              <div class="col-4">
+              <div class="col-4 d-none d-lg-block">
                 <StudentFilter @clicked="updateFilters" />
                 <!-- {{ filters }} -->
               </div>
 
-              <div class="col-7 mx-auto">
-                <div class="card-columns justify-content-end">
-                  <div v-for="student in filteredStudents" :key="student.id">
+              <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
+                <div class="d-flex d-lg-none justify-content-end">
+                  <u class="text-purple fs-5" style="display: inline;">Filters</u>
+                  <i class="bi bi-filter" style="font-size: 22px"></i>
+                </div>
+                <div class="card-columns justify-content-end student-col"
+                v-for="student in filteredStudents"
+                :key="student.id">
                     <InterviewListing :studentInfo="student" class="mb-5" />
-                  </div>
                 </div>
               </div>
             </div>
