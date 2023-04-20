@@ -23,10 +23,12 @@
               </div>
 
               <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
-                <div class="d-flex d-lg-none justify-content-end">
-                  <u class="text-purple fs-5" style="display: inline;">Filters</u>
-                  <i class="bi bi-filter" style="font-size: 22px"></i>
-                </div>
+                <router-link active-class="active" aria-current="page" to="/filters">
+                  <div class="d-flex d-lg-none justify-content-end">
+                    <u class="text-purple fs-5" style="display: inline;">Filters</u>
+                    <i class="bi bi-filter" style="font-size: 22px"></i>
+                  </div>
+                </router-link>
                 <div class="card-columns justify-content-end"
                 v-for="student in filteredStudents"
                 :key="student.id">

@@ -33,6 +33,10 @@ const routes = [
     component: About,
     pathToRegexpOptions: { strict: true },
   },
+  {
+    path: "/filters",
+    name: "Filters",
+  },
 ];
 
 const router = createRouter({
