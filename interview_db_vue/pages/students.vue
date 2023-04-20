@@ -107,7 +107,6 @@ export default {
   },
   created() {
     this.loadData();
-    console.log(this.$attrs);
   },
   methods: {
     async loadData() {
