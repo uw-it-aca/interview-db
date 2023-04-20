@@ -27,7 +27,7 @@
                   <u class="text-purple fs-5" style="display: inline;">Filters</u>
                   <i class="bi bi-filter" style="font-size: 22px"></i>
                 </div>
-                <div class="card-columns justify-content-end student-col"
+                <div class="card-columns justify-content-end"
                 v-for="student in filteredStudents"
                 :key="student.id">
                     <InterviewListing :studentInfo="student" class="mb-5" />

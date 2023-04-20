@@ -52,10 +52,8 @@ a.nav-link {
 
 img.listing-img {
   height: 12rem;
-  width: 12rem;
-  //position: relative;
+  max-width: 100%;
   z-index: 1;
-  //top: -80px;
   line-height: 0;
   object-fit: cover;
   border-radius: 1.5px;
@@ -172,19 +170,6 @@ button.btn-card {
   }
 }
 
-@include media-breakpoint-down(lg)
-{
-  .student-col{
-    display: flex;
-    flex: 1;
-    flex-shrink: 0;
-  }
-
-  .button.btn-card{
-    flex: 1;
-    flex-shrink: 0;
-  }
-}
 
 html {
   height:100vh;

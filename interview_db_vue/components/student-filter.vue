@@ -2,7 +2,7 @@
 // to filter student interviews
 
 <template>
-  <div class="card" style="width: 25rem;">
+  <div class="card">
     <h2 class="m-3 fw-bold fs-3">Filter Stories</h2>
     <div class="card-body">
       <div class="mb-4">
