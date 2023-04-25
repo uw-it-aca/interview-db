@@ -6,6 +6,7 @@ import Home from "../pages/home.vue";
 import Collections from "../pages/collections.vue";
 import Students from "../pages/students.vue";
 import About from "../pages/about.vue";
+import StudentFilter from "../components/student-filter.vue";
 
 const routes = [
   {
@@ -36,6 +37,8 @@ const routes = [
   {
     path: "/filters",
     name: "Filters",
+    component: StudentFilter,
+    pathToRegexpOptions: { strict: true },
   },
 ];
 
