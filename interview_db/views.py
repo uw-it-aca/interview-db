@@ -148,4 +148,5 @@ class ImageView(APIView):
         interview = Interview.objects.get(id=id).image
         img = interview.image
         response = HttpResponse(FileWrapper(img))
+        response["Content-Type"] = "image"
         return response
