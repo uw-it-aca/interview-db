@@ -50,16 +50,6 @@ a.nav-link {
   --bs-card-border-width: 0;
 }
 
-img.listing-img {
-  height: 12rem;
-  max-width: 100%;
-  z-index: 1;
-  line-height: 0;
-  object-fit: cover;
-  border-radius: 1.5px;
-  filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
-}
-
 .card-img-row{
   position: relative;
   top:-80px;
@@ -68,6 +58,21 @@ img.listing-img {
 .card-date-row{
   position: relative;
   top: 80px;
+}
+
+.img-div{
+    display: flex;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+
+img.listing-img {
+  width: 100%;
+  height: 80%;
+  z-index: 1;
+  line-height: 0;
+  border-radius: 1.5px;
+  filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
 }
 
 

@@ -20,7 +20,7 @@
         <div class="row card-date-row">
           <p class="fs-6 text-end">{{ interviewDate }}</p>
         </div>
-        <div class="col-lg-4 col-sm-6 mx-auto ps-4">
+        <div class="col-lg-4 col-sm-6 mx-auto ps-4 img-div">
           <img src="../../css/blossom.png" class="listing-img" />
         </div>
 
