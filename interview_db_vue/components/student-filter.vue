@@ -129,6 +129,9 @@
           </div>
         </div>
       </div>
+      <button type="button" class="d-lg-none btn btn-purple" @click="$router.push('students')">
+        Submit
+      </button>
     </div>
   </div>
 </template>
