@@ -14,7 +14,6 @@ ADD --chown=acait:acait docker/ /app/project/
 
 RUN /app/bin/pip install -r requirements.txt
 
-
 FROM node:14.18.1-stretch AS node-bundler
 
 ADD ./package.json /app/
@@ -40,4 +39,4 @@ COPY --from=app-container /app/ /app/
 COPY --from=app-container /static/ /static/
 
 ENV NODE_ENV=development
-RUN npm install
+# RUN npm install
