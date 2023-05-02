@@ -20,19 +20,22 @@
             </button>
           </div>
         </div>
+        <div class="col-6">
+          <StudentCarousel :studentInfo="singleStudentInfo" />
+        </div>
       </div>
 
       <div class="card border-0 mb-5">
         <img class="card-img" src="../images/homequad.png" alt="The quad during cherry blossom season">
         <div class="card-img-overlay text-center justify-content-center">
-          <div class="pt-5 row justify-content-center">
+          <div class="pt-3 row justify-content-center">
             <span class="col-2">
-              <h2 class="display-4 fw-bold">66</h2>
-              <p>Students Interviewed</p>
+              <h2 class="text-gold display-4 fw-bold">66</h2>
+              <p class="text-gold font-weight-bold">Students Interviewed</p>
             </span>
             <span class="col-2">
-              <h2 class="display-4 fw-bold">874</h2>
-              <p>Stories Shared</p>
+              <h2 class="text-gold display-4 fw-bold">874</h2>
+              <p class="text-gold font-weight-bold">Stories Shared</p>
             </span>
           </div>
         </div>
@@ -83,12 +86,23 @@ export default {
     ProcessCard,
     StudentCarousel,
   },
+  props: {
+    singleStudent: {
+      type: String,
+      required: false,
+    },
+  },
   data() {
     return {
       pageTitle: "Home",
       randomStudents: [],
       recentStudents: [],
     };
+  },
+  computed: {
+    singleStudentInfo() {
+      return JSON.parse(this.$route.params.singleStudent);
+    },
   },
   created() {
     this.loadData();
