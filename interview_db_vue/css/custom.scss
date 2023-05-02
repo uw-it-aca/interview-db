@@ -50,18 +50,9 @@ a.nav-link {
   --bs-card-border-width: 0;
 }
 
-.card-img-row{
-  position: relative;
-  top:-80px;
-}
-
-.card-date-row{
-  position: relative;
-  top: 80px;
-}
-
 .img-div{
     display: flex;
+    flex-shrink: 1 !important;
     aspect-ratio: 1/1;
     overflow: hidden;
 }
@@ -172,6 +163,11 @@ button.btn-card {
     padding-right: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .shift-up{
+    position: relative;
+    top: -40px;
   }
 }
 
