@@ -7,9 +7,9 @@
     </template>
 
     <template #content>
-      <div class="row g-0 mb-4">
+      <div class="row g-0 mb-4" style="background: linear-gradient(#FBFBFB, #FFFFFF);">
         <div class="col-6">
-          <div class="card bg-light p-4 mx-auto border-1 border-light">
+          <div class="card bg-light p-4 mx-auto my-4 border-1 border-light shadow">
             <h2 class="display-4 mb-4 fw-bold text-gold">REAL STUDENTS<br>REAL STORIES</h2>
             <p class="mb-4">
               Sharing the stories of UW students through a <br />
@@ -23,16 +23,16 @@
       </div>
 
       <div class="card border-0 mb-5">
-        <img class="card-img" src="../images/homeimage.png" alt="The quad during cherry blossom season">
+        <img class="card-img" src="../images/homequad.png" alt="The quad during cherry blossom season">
         <div class="card-img-overlay text-center justify-content-center">
           <div class="pt-5 row justify-content-center">
             <span class="col-2">
-              <h2 class="display-4 fw-bold">874</h2>
-              <p>Stories Shared</p>
-            </span>
-            <span class="col-2">
               <h2 class="display-4 fw-bold">66</h2>
               <p>Students Interviewed</p>
+            </span>
+            <span class="col-2">
+              <h2 class="display-4 fw-bold">874</h2>
+              <p>Stories Shared</p>
             </span>
           </div>
         </div>
@@ -46,7 +46,7 @@
               Find out more about who we are, our interview process, and get involved by telling your story!
             </p>
             <button type="button" class="btn btn-purple" @click="$router.push('about')">
-              Learn more >
+              Learn more <i class="bi bi-chevron-right"></i>
             </button>
           </div>
         </span>
@@ -58,7 +58,7 @@
               transitioning to college and finding community, and moving forward after graduation.
             </p>
             <button type="button" class="btn btn-purple" @click="$router.push('collections')">
-              Browse Collections >
+              Browse Collections <i class="bi bi-chevron-right"></i>
             </button>
           </div>
         </span>
