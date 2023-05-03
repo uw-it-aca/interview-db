@@ -9,7 +9,10 @@
         <div class="col-4">
           <img src="../../css/quad.png" class="img-fluid mx-auto d-block" />
         </div>
-        <div class="col-8 p-5">
+        {{ interviewId }}
+        {{ studentInfo }}
+
+        <!-- <div class="col-8 p-5">
           <h2 class="card-title display-6 mb-2 fw-bold">{{ studentInfo.student.first_name }}</h2>
           <div class="row">
             <div class="col">
@@ -24,7 +27,7 @@
             <div class="col">
               <p class="fs-6 text-end">{{ interviewDate }}</p>
             </div>
-          </div>
+          </div> -->
 
           <div class="border-top border-primary py-4">
             <p class="text-start">They talk about...</p>
@@ -58,7 +61,7 @@
         </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -78,20 +81,22 @@ export default {
     }
   },
   props: {
-    studentInfo: {
-      type: Object,
-      required: true,
-    },
+    // studentInfo: {
+    //   type: Object,
+    //   required: true,
+    // },
   },
   data() {
     return {
       stories: [],
+      studentInfo: []
     }
   },
   methods: {
     async loadData() {
       const response = await get("/api/students/" + this.interviewId + "/");
       this.stories = response.data;
+      this.studentInfo = this.stories[0].interview;
     }
   },
   created() {
