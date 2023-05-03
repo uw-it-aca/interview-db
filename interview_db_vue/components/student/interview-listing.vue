@@ -10,7 +10,6 @@
         name: 'Students',
         params: {
           id: studentInfo.id,
-          // singleStudent: JSON.stringify(studentInfo),
         },
       })
     "
