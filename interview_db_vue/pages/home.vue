@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="col-6">
-          <StudentCarousel :studentInfo="singleStudentInfo" />
+          <!--<StudentCarousel :studentInfo="singleStudentInfo" /> -->
         </div>
       </div>
 
@@ -99,19 +99,19 @@ export default {
       recentStudents: [],
     };
   },
-  computed: {
-    singleStudentInfo() {
-      return JSON.parse(this.$route.params.singleStudent);
-    },
-  },
-  created() {
-    this.loadData();
-  },
-  methods: {
-    async loadData() {
-      const random = await get("api/random/");
-      this.randomStudents = random.data;
-    },
-  },
+  // computed: {
+  //  singleStudentInfo() {
+  //    return JSON.parse(this.$route.params.singleStudent);
+  //  },
+  //},
+  //created() {
+  //  this.loadData();
+  //},
+  //methods: {
+   // async loadData() {
+  //    const random = await get("api/random/");
+  //    this.randomStudents = random.data;
+   // },
+  //},
 };
 </script>

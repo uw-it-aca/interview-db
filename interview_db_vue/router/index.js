@@ -6,6 +6,7 @@ import Home from "../pages/home.vue";
 import Collections from "../pages/collections.vue";
 import Students from "../pages/students.vue";
 import About from "../pages/about.vue";
+import LayoutMobile from "../mobilelayout.vue";
 
 const routes = [
   {
@@ -34,6 +35,13 @@ const routes = [
     component: About,
     pathToRegexpOptions: { strict: true },
   },
+  {
+    path: "/menu",
+    name: "Menu",
+    component: LayoutMobile,
+    pathToRegexpOptions: { strict: true },
+  },
+
 ];
 
 const router = createRouter({

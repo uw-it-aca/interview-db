@@ -12,7 +12,9 @@
                 Husky Voices
               </router-link>
             </h2>
-          <i class="bi bi-list hamburger-menu"></i>
+          <router-link active-class="active" aria-current="page" to="/menu">
+            <i class="bi bi-list hamburger-menu"></i>
+          </router-link>
         </div>
 <!-- 
         <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
