@@ -21,7 +21,30 @@
           </div>
         </div>
         <div class="col-6">
-          <!--<StudentCarousel :studentInfo="singleStudentInfo" /> -->
+          <div class="row justify-content-center">
+            <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto"
+              data-bs-ride="carousel">
+              <div class="carousel-inner justify-content-cente mx-auto">
+                <div v-for="student, index in randomStudents" :key="student.id">
+                  <div v-if="index == 0">
+                    <div class="carousel-item active justify-content-center">
+                      <StudentCarousel :studentInfo="student" class="d-block justify-content-center mx-auto" />
+                    </div>
+                  </div>
+                  <div v-else>
+                    <div class="carousel-item justify-content-center">
+                      <StudentCarousel :studentInfo="student" class="d-block justify-content-center mx-auto"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -92,7 +115,6 @@ export default {
     return {
       pageTitle: "Home",
       randomStudents: [],
-      recentStudents: [],
     };
   },
   // computed: {
@@ -100,14 +122,14 @@ export default {
   //    return JSON.parse(this.$route.params.singleStudent);
   //  },
   //},
-  //created() {
-  //  this.loadData();
-  //},
-  //methods: {
-   // async loadData() {
-  //    const random = await get("api/random/");
-  //    this.randomStudents = random.data;
-   // },
-  //},
+  created() {
+    this.loadData();
+  },
+  methods: {
+    async loadData() {
+      const random = await get("api/random/");
+      this.randomStudents = random.data;
+    },
+  },
 };
 </script>

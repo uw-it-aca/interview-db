@@ -77,6 +77,17 @@ img.listing-img {
   filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
 }
 
+img.listing-img {
+  height: 8rem;
+  width: 8rem;
+  position: relative;
+  z-index: 1;
+  top: -80px;
+  line-height: 0;
+  object-fit: cover;
+  border-radius: 1.5px;
+}
+
 // Open Sans for all body text
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
