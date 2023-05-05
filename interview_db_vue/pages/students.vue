@@ -9,7 +9,7 @@
     <template #content>
       <div v-bind="$attrs">
         <div v-if="interviewId">
-          <Interview :studentInfo="singleStudentInfo" />
+          <Interview />
         </div>
 
         <div v-else>
@@ -88,21 +88,6 @@ export default {
     },
     filteredStudents() {
       return this.students;
-      // if (this.filters.length == 0) {
-      //   return this.students;
-      // } else {
-      //   return this.students.filter(student => student.major == this.filters.major
-      //   );
-      //   return this.students.filter(student => {
-      //     return this.filters.major.every(m => student.major.includes(m))
-      //   });
-      //   return this.students.filter(student => {
-      //     return this.filters.major.every(m => student.major.includes(m))
-      //   });
-      //   return this.students.filter(student => {
-      //     return this.filters.major.every(m => student.major.includes(m))
-      //   });
-      // }
     },
   },
   created() {
