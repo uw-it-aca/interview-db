@@ -58,12 +58,12 @@ a.nav-link {
 }
 
 img.listing-img {
-  width: 100%;
-  height: 80%;
-  z-index: 1;
-  line-height: 0;
   border-radius: 1.5px;
   filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
+  line-height: 0;
+  max-width: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
 
@@ -166,8 +166,7 @@ button.btn-card {
   }
 
   .shift-up{
-    position: relative;
-    top: -40px;
+    margin-top: -40px !important;
   }
 }
 
