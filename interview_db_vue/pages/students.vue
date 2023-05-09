@@ -107,10 +107,6 @@ export default {
         return this.students.filter(student => this.filters.major.includes(student.major.full_title));
       }
       return this.students;
-<<<<<<< HEAD
-      
-=======
->>>>>>> develop
     },
   },
   created() {
