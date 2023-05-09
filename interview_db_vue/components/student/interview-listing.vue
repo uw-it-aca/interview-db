@@ -16,12 +16,12 @@
     "
   >
     <div class="d-flex card-clickable">
-      <div class="row p-0 m-0 shift-up align-items-end">
-        <div class="col-md-5 col-sm-6 row-xs mx-auto ps-4 img-div">
-          <img src="../../css/blossom.png" class="listing-img" />
+      <div class="row p-0 m-x-0">
+        <div class="col-md-5 col-sm-6 row-xs mx-auto ps-4 img-div shift-up">
+          <img src="../../css/quad.png" class="listing-img" />
         </div>
 
-        <div class="col-md-7 col-sm-6 ps-4 m-0 align-items-end shift-up">
+        <div class="col-md-7 col-sm-6 ps-4 m-0">
           <div class="row">
             <p class="fs-6 text-end">{{ interviewDate }}</p>
             <h2 class="card-title fw-bold text-purple display-6 mb-2">
@@ -40,10 +40,10 @@
           </div>
         </div>
 
-        <div class="card-text p-4 shift-up">
+        <div class="card-text px-4">
           <p class="display-6 fs-5">"{{ studentInfo.pull_quote }}"</p>
         </div>
-        <div class="d-flex justify-content-end shift-up">
+        <div class="d-flex justify-content-end">
             <u class="text-purple" style="display:inline;">Read More</u>
             <i class="bi bi-chevron-right"></i>
         </div>

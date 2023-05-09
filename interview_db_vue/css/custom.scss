@@ -166,8 +166,11 @@ button.btn-card {
   }
 
   .shift-up{
-    position: relative;
-    top: -40px;
+    margin-top: -40px !important;
+  }
+
+  .shift-down{
+    margin-top:40px !important;
   }
 }
 
