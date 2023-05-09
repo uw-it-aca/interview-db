@@ -75,15 +75,7 @@ export default {
   computed: {
     interviewId() {
       return this.$route.params.id;
-<<<<<<< HEAD
-    },
-    interviewDate() {
-      return new Date(this.studentInfo.date).toLocaleDateString('en-US');
-    },
-
-=======
     }
->>>>>>> develop
   },
   data() {
     return {
