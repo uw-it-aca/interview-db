@@ -15,14 +15,13 @@
       })
     "
   >
-    <div class="d-flex card-clickable">
-      <div class="row p-0 m-x-0 shift-up align-items-end">
-        <div class="col-md-5 col-sm-6 row-xs mx-auto ps-4 img-div">
-          <img src="../../css/blossom.png" class="listing-img" />
-        </div>
-
-        <div class="col-md-7 col-sm-6 ps-4 m-0 align-items-end">
-          <div class="row">
+    <div class="col-md-3 col-sm-5 shift-up row-xs mx-auto img-div">
+      <img src="../../css/homeimage.png" class="listing-img" />
+    </div>  
+    <div class="d-flex col-md-9">
+      <div class="row p-0 m-x-0 align-items-end">
+        <div class="ps-4 m-0 align-items-end">
+          <div>
             <p class="fs-6 text-end">{{ interviewDate }}</p>
             <h2 class="card-title fw-bold text-purple display-6 mb-2">
               {{ studentInfo.student.first_name }}
