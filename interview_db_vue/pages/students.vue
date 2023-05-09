@@ -7,32 +7,34 @@
     </template>
 
     <template #content>
-      <div v-if="interviewId">
-        <Interview :studentInfo="singleStudentInfo" />
-      </div>
+      <div v-bind="$attrs">
+        <div v-if="interviewId">
+          <Interview />
+        </div>
 
-      <div v-else>
-        <div class="mx-auto p-5 mb-4">
-          <div class="pt-5 ps-5">
-            <h2 class="display-5 fw-bold mb-5">Student Stories</h2>
-            <p class="fs-5 mb-5">Sort interviews by student characteristics.</p>
-            <div class="row">
-              <div class="col-4">
-                <StudentFilter @clicked="updateFilters" />
-                {{ filters }}
-                <!-- {{ test }} -->
-              </div>
+        <div v-else>
+          <div class="mx-auto p-5 mb-4">
+            <div class="pt-5 ps-5">
+              <h2 class="display-5 fw-bold mb-5">Student Stories</h2>
+              <p class="fs-5 mb-5">Sort interviews by student characteristics.</p>
+              <div class="row">
+                <div class="col-4">
+                  <StudentFilter @clicked="updateFilters" />
+                </div>
 
-              <div class="col-7 mx-auto">
-                <div class="card-columns justify-content-end">
-                  <div v-for="student in filteredStudents" :key="student.id">
-                    <InterviewListing :studentInfo="student" class="mb-5" />
+                <div class="col-7 mx-auto">
+                  <div class="card-columns justify-content-end">
+                    <div v-for="student in filteredStudents" :key="student.id">
+                      <InterviewListing :studentInfo="student" class="mb-5" />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+
       </div>
     </template>
   </layout>
@@ -55,7 +57,7 @@ export default {
   },
   props: {
     singleStudent: {
-      type: Object,
+      type: String,
       required: false,
     }
   },
@@ -105,7 +107,10 @@ export default {
         return this.students.filter(student => this.filters.major.includes(student.major.full_title));
       }
       return this.students;
+<<<<<<< HEAD
       
+=======
+>>>>>>> develop
     },
   },
   created() {
