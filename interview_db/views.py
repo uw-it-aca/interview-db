@@ -10,6 +10,7 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 from wsgiref.util import FileWrapper
 from django.http import HttpResponse
+from django.core.files.images import ImageFile
 from uw_saml.decorators import group_required
 from .serializers import *
 from .models import *
@@ -150,3 +151,9 @@ class ImageView(APIView):
         response = HttpResponse(FileWrapper(img))
         response["Content-Type"] = "image"
         return response
+
+    # require admin auth
+    def delete(self, request, id):
+        interview = Interview.objects.get(id=id)
+        interview.update(image=None)
+        return HttpResponse(status=200)

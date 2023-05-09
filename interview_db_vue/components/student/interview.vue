@@ -7,7 +7,13 @@
     <div class="card border-0">
       <div class="row g-0 mx-auto">
         <div class="col-4">
-          <img src="../../css/quad.png" class="img-fluid mx-auto d-block" />
+          <span v-if="image">
+            {{ image }}
+            <!-- <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="{{ interviewInfo.image_alt_text }}"/> -->
+          </span>
+          <span v-else>
+            <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="a placeholder image"/>
+          </span>
         </div>
 
         <div class="col-8 p-5">
@@ -65,6 +71,7 @@
 <script>
 import StudentCard from "./student-card.vue";
 import { get } from "axios";
+
 export default {
   name: "Interview",
   components: {
@@ -81,6 +88,7 @@ export default {
       interviewInfo: [],
       studentInfo: [],
       interviewDate: null,
+      image: null,
     }
   },
   methods: {
@@ -90,6 +98,15 @@ export default {
       this.interviewInfo = this.stories[0].interview;
       this.studentInfo = this.interviewInfo.student;
       this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
+
+      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
+        return;
+      }
+
+      if (this.interviewInfo.image) {
+        const image = await get("api/students/" + this.interviewId + "/image/");
+        this.image = image;
+      }
     }
   },
   created() {
