@@ -3,7 +3,7 @@
 
 <template>
   <div class="card">
-    <h2 class="m-3 fw-bold fs-3">Filter Stories</h2>
+    <h2 class="m-3 fw-bold display-6">Filter Stories</h2>
     <div class="card-body">
       <div class="mb-4">
         <p class="display-4 fw-bold fs-5 mb-0" href="#year" aria-expanded="false"
