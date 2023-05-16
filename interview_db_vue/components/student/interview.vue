@@ -9,7 +9,7 @@
         <div class="col-4">
           <span v-if="image">
             {{ image }}
-            <!-- <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="{{ interviewInfo.image_alt_text }}"/> -->
+            <img :src="image" class="img-fluid mx-auto d-block"/>
           </span>
           <span v-else>
             <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="a placeholder image"/>
