@@ -7,9 +7,10 @@
     <div class="card border-0">
       <div class="row g-0 mx-auto">
         <div class="col-4">
+          {{ image }}
           <span v-if="image">
-            {{ image }}
             <img :src="image" class="img-fluid mx-auto d-block"/>
+            <!-- <img :src="'data:image/png;base64,' + image" /. -->
           </span>
           <span v-else>
             <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="a placeholder image"/>
@@ -89,28 +90,38 @@ export default {
       studentInfo: [],
       interviewDate: null,
       image: null,
+      test: null,
     }
   },
   methods: {
-    async loadData() {
-      const response = await get("/api/students/" + this.interviewId + "/");
-      this.stories = response.data;
-      this.interviewInfo = this.stories[0].interview;
-      this.studentInfo = this.interviewInfo.student;
-      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
-
+    async loadImage() {
       if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
         return;
       }
 
       if (this.interviewInfo.image) {
         const image = await get("api/students/" + this.interviewId + "/image/");
-        this.image = image;
+        this.image = image.data;
+        console.log(image);
       }
+    },
+    // async loadRandom() {
+    //   const random = await get("api/random/");
+    //   this.randomStudents = random.data;
+    //   console.log(random);
+    //   console.log(random.data);
+    // },
+    async loadData() {
+      const response = await get("/api/students/" + this.interviewId + "/");
+      this.stories = response.data;
+      this.interviewInfo = this.stories[0].interview;
+      this.studentInfo = this.interviewInfo.student;
+      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');  
     }
   },
   created() {
     this.loadData();
+    this.loadImage();
   }
 };
 </script>

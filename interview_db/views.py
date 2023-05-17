@@ -14,6 +14,7 @@ from django.core.files.images import ImageFile
 from uw_saml.decorators import group_required
 from .serializers import *
 from .models import *
+import base64
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
@@ -148,8 +149,11 @@ class ImageView(APIView):
     def get(self, request, id):
         interview = Interview.objects.get(id=id)
         img = interview.image
-        response = HttpResponse(FileWrapper(img))
-        response["Content-Type"] = "image"
+        # response = HttpResponse(FileWrapper(img))
+        # response["Content-Type"] = "image/*"
+        string = base64.b64encode(img.file.read())
+        response = HttpResponse(string)
+        # response["content-length"] = 1
         return response
 
     # require admin auth

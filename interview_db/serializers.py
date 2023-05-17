@@ -40,8 +40,8 @@ class InterviewSerializer(serializers.ModelSerializer):
     student = StudentSerializer(read_only=True)
     major = MajorSerializer(many=True, read_only=True)
     student_type = StudentTypeSerializer(many=True, read_only=True)
-    image_url = serializers.ImageField(max_length=None, use_url=True,
-                                       allow_null=True, required=False)
+    image = serializers.ImageField(max_length=None, use_url=True,
+                                   allow_empty_file=True, required=False)
     standing = serializers.CharField(source='get_standing_display')
 
     class Meta:
@@ -55,7 +55,6 @@ class InterviewSerializer(serializers.ModelSerializer):
                   'pull_quote',
                   'declared_major',
                   'image',
-                  'image_url',
                   'image_is_not_identifying',
                   'image_alt_text',
                   'intended_major',
