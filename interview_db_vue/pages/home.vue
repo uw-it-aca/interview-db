@@ -7,20 +7,21 @@
     </template>
 
     <template #content>
-      <div class="row g-0 mb-4" style="background: linear-gradient(#FBFBFB, #FFFFFF);">
-        <div class="col-md-6 col-12">
+      <div class="row g-0 mb-4" style="background: linear-gradient(#FBFBFB, #f8f9fa)">
+        <div class="col-md-6 col-lg-5 col-12">
           <div class="card bg-light p-4 mx-auto my-4 border-1 border-light shadow">
-            <h2 class="display-4 mb-4 fw-bold text-gold">REAL STUDENTS<br>REAL STORIES</h2>
+            <div class="card-body">
+            <h2 class="display-5 mb-4 fw-bold text-gold">REAL STUDENTS<br>REAL STORIES</h2>
             <p class="mb-4">
-              Sharing the stories of UW students through a <br />
-              series of authentic and personal interviews.
+              Sharing the stories of UW students through a series of authentic and personal interviews.
             </p>
             <button type="button" class="btn btn-purple" @click="$router.push('students')">
               Explore Student Stories <i class="bi bi-chevron-right"></i>
             </button>
           </div>
+          </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-lg-7 col-md-6">
           <div class="row justify-content-center">
             <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto"
               data-bs-ride="carousel">
