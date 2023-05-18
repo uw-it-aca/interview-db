@@ -5,7 +5,7 @@
   <button
     type="button"
     class="btn-card mt-5"
-    style="height:20rem; width:25rem"
+    style="height:20rem; width:30rem"
     @click="
       $router.push({
         name: 'Students',
@@ -48,12 +48,12 @@
 
     <div class="d-flex card-clickable">
       <div class="row p-0 m-x-0">
-        <div class="row p-0 m-0 border-bottom border-primary">
-          <div class="col-md-5 col-sm-6 row-xs ps-4 img-div shift-up">
+        <div class="row p-0 m-0">
+          <div class="col-md-5 col-sm-6 col-4 row-xs ps-4 img-div shift-up">
             <img src="../css/quad.png" class="listing-img" />
           </div>
 
-          <div class="col-md-7 col-sm-6 ps-4 m-0">
+          <div class="col-md-7 col-sm-6  col-8 ps-4 m-0">
             <div class="row">
               <p class="fs-6 text-end">{{ interviewDate }}</p>
               <h2 class="card-title fw-bold text-purple display-6 mb-2">
@@ -73,7 +73,7 @@
           </div>
         </div>
 
-        <div class="card-text pt-2 px-4">
+        <div class="card-text pt-2 px-4 border-top border-primary">
           <p class="display-6 fs-6">"{{ studentInfo.pull_quote }}"</p>
         </div>
         <div class="d-flex justify-content-end">
