@@ -149,10 +149,10 @@ class ImageView(APIView):
     def get(self, request, id):
         interview = Interview.objects.get(id=id)
         img = interview.image
-        # response = HttpResponse(FileWrapper(img))
-        # response["Content-Type"] = "image/*"
-        string = base64.b64encode(img.file.read())
-        response = HttpResponse(string)
+        response = HttpResponse(FileWrapper(img))
+        # response["Content-Type"] = "image/png"
+        # string = base64.b64encode(img.file.read())
+        # response = HttpResponse(string)
         # response["content-length"] = 1
         return response
 

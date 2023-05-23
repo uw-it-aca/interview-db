@@ -9,7 +9,8 @@
         <div class="col-4">
           {{ image }}
           <span v-if="image">
-            <img :src="image" class="img-fluid mx-auto d-block"/>
+            <img :src="image" class="img-fluid mx-auto d-block" alt={{altText}}/>
+            should show image here
             <!-- <img :src="'data:image/png;base64,' + image" /. -->
           </span>
           <span v-else>
@@ -90,7 +91,7 @@ export default {
       studentInfo: [],
       interviewDate: null,
       image: null,
-      test: null,
+      altText: null,
     }
   },
   methods: {
@@ -98,30 +99,26 @@ export default {
       if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
         return;
       }
-
-      if (this.interviewInfo.image) {
-        const image = await get("api/students/" + this.interviewId + "/image/");
-        this.image = image.data;
-        console.log(image);
-      }
+      const image = await get("/api/students/"+ this.interviewId + "/image/");
+      this.image = image.data;
+      this.altText = this.interviewInfo.image_alt_text;
+      console.log("image: ", image);
     },
-    // async loadRandom() {
-    //   const random = await get("api/random/");
-    //   this.randomStudents = random.data;
-    //   console.log(random);
-    //   console.log(random.data);
-    // },
+
     async loadData() {
       const response = await get("/api/students/" + this.interviewId + "/");
       this.stories = response.data;
       this.interviewInfo = this.stories[0].interview;
       this.studentInfo = this.interviewInfo.student;
       this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');  
+
+      if (this.interviewInfo.image) {
+        this.loadImage();
+      }
     }
   },
   created() {
     this.loadData();
-    this.loadImage();
   }
 };
 </script>
