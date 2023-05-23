@@ -7,11 +7,8 @@
     <div class="card border-0">
       <div class="row g-0 mx-auto">
         <div class="col-4">
-          {{ image }}
           <span v-if="image">
             <img :src="image" class="img-fluid mx-auto d-block" alt={{altText}}/>
-            should show image here
-            <!-- <img :src="'data:image/png;base64,' + image" /. -->
           </span>
           <span v-else>
             <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="a placeholder image"/>
@@ -93,16 +90,6 @@ export default {
     }
   },
   methods: {
-    async loadImage() {
-      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
-        return;
-      }
-      const image = await get("/api/students/"+ this.interviewId + "/image/");
-      this.image = image.data;
-      this.altText = this.interviewInfo.image_alt_text;
-      console.log("image: ", image);
-    },
-
     async loadData() {
       const response = await get("/api/students/" + this.interviewId + "/");
       this.stories = response.data;
@@ -113,7 +100,18 @@ export default {
       if (this.interviewInfo.image) {
         this.loadImage();
       }
-    }
+    },
+    async loadImage() {
+      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
+        return;
+      }
+      this.altText = this.interviewInfo.image_alt_text;
+
+      // create blob for image
+      const blob = await get("/api/students/"+ this.interviewId + "/image/", {responseType: 'blob'});
+      this.image = blob.data;
+      this.image = URL.createObjectURL(this.image);
+    },
   },
   created() {
     this.loadData();
