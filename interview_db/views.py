@@ -14,6 +14,7 @@ from django.core.files.images import ImageFile
 from uw_saml.decorators import group_required
 from .serializers import *
 from .models import *
+import base64
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
@@ -149,11 +150,11 @@ class ImageView(APIView):
         interview = Interview.objects.get(id=id)
         img = interview.image
         response = HttpResponse(FileWrapper(img))
-        response["Content-Type"] = "image"
         return response
 
     # require admin auth
     def delete(self, request, id):
         interview = Interview.objects.get(id=id)
-        interview.update(image=None)
+        img = interview.img
+        img.delete()
         return HttpResponse(status=200)
