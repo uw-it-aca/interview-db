@@ -68,6 +68,12 @@ button.btn-card {
   margin: 8px !important;
 }
 
+.scroll-area{
+  height: inherit;
+  overflow-y: scroll !important;
+  overflow: hidden;
+}
+
 .img-div{
   display: flex;
   flex-shrink: 1 !important;

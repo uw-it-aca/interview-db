@@ -5,12 +5,12 @@
 
   <div>
     <div class="card border-0">
-      <div class="row g-0 mx-auto">
-        <div class="col-6" style="height:100vh;">
+      <div class="row g-0 mx-auto" style="height: 72vh">
+        <div class="col-6" style="height: inherit;">
           <img src="../../images/placeholder.png" class="img-fluid mx-auto position-sticky" style="height: 100%; object-fit: cover;" />
         </div>
 
-        <div class="col-6 p-5">
+        <div class="col-6 p-5 scroll-area">
           <h2 class="card-title display-4 mb-2 text-gold fw-bold">{{ studentInfo.first_name }}</h2>
           <div class="row">
             <div class="col">
