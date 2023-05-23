@@ -71,13 +71,11 @@
 </template>
 
 <script>
-import StudentCard from "./student-card.vue";
 import { get } from "axios";
 
 export default {
   name: "Interview",
   components: {
-    StudentCard,
   },
   computed: {
     interviewId() {
