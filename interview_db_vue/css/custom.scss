@@ -110,6 +110,15 @@ h6 {
   font-size: 50px;
 }
 
+.footer-img{
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.footer-copyright{
+  justify-content: center;
+}
+
 //styling for W + Husky Voices title in nav
 .title-logo{
   width: 100%;
@@ -175,6 +184,17 @@ img.home-img{
 
   .banner-image{
     height: auto;
+  }
+}
+
+@include media-breakpoint-up(md){
+  .footer-copyright{
+    justify-content: end;
+  }
+
+  .footer-img{
+    justify-content: start;
+    padding-bottom: 0px;
   }
 }
 

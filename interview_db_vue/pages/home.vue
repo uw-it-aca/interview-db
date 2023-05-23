@@ -53,11 +53,11 @@
         <img class="home-img" src="../images/homequad.png" alt="The quad during cherry blossom season">
         <div class="card-img-overlay text-center justify-content-center">
           <div class="pt-3 row justify-content-center">
-            <span class="col-md-2 col-12">
+            <span class="col-md-2 col-6">
               <h2 class="text-gold display-4 fw-bold">66</h2>
               <p class="text-gold font-weight-bold">Students Interviewed</p>
             </span>
-            <span class="col-md-2 col-12">
+            <span class="col-md-2 col-6">
               <h2 class="text-gold display-4 fw-bold">874</h2>
               <p class="text-gold font-weight-bold">Stories Shared</p>
             </span>
@@ -66,7 +66,7 @@
       </div>
 
       <div class="row g-0 justify-content-center mb-5">
-        <div class="col-md-4 col-12 mx-5 pt-5 ps-5 text-center">
+        <div class="col-md-4 col-12 mx-5 pt-5 text-center">
           <h2 class="display-4 fw-bold mb-5 text-gold">About Us</h2>
           <p class="mb-4">
             Find out more about who we are, our interview process, and get involved by telling your story!
@@ -75,7 +75,7 @@
             Learn more <i class="bi bi-chevron-right"></i>
           </button>
         </div>
-        <div class="col-md-4 col-12 pt-5 ps-5 mx-4 text-center">
+        <div class="col-md-4 col-12 pt-5 mx-5 text-center">
           <h2 class="display-4 fw-bold mb-5 text-gold">Collections</h2>
           <p class="mb-4">
             Navigate common themes among students on topics such as
