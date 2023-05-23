@@ -63,6 +63,9 @@ ADMIN_REORDER = (
     ('app2', 'Interview'),
 )
 
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
+# MEDIA_URL = '/media/'
+
 if not DEBUG:
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')
