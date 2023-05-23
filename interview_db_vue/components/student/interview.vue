@@ -3,15 +3,15 @@
 
 <template>
 
-  <div class="mt-4 pt-4">
+  <div>
     <div class="card border-0">
       <div class="row g-0 mx-auto">
-        <div class="col-4">
-          <img src="../../css/quad.png" class="img-fluid mx-auto d-block" />
+        <div class="col-6" style="height:100vh;">
+          <img src="../../images/placeholder.png" class="img-fluid mx-auto position-sticky" style="height: 100%; object-fit: cover;" />
         </div>
 
-        <div class="col-8 p-5">
-          <h2 class="card-title display-6 mb-2 fw-bold">{{ studentInfo.first_name }}</h2>
+        <div class="col-6 p-5">
+          <h2 class="card-title display-4 mb-2 text-gold fw-bold">{{ studentInfo.first_name }}</h2>
           <div class="row">
             <div class="col">
               <span v-if="interviewInfo.standing">
@@ -29,15 +29,15 @@
 
           <div class="border-top border-primary py-4">
             <p class="text-start">They talk about...</p>
-            <div class="justify-content-start col-10">
+            <div class="justify-content-start col-12">
               <span v-for="story in stories" :key="story.id">
                 <span v-for="collection in story.code" :key="collection.id">
-                  <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
+                  <button type="button" class="btn btn-outline-info interview-filter" data-bs-toggle="button" autocomplete="off">
                     {{ collection.code }}
                   </button>
                 </span>
               </span>
-              <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
+              <button type="button" class="btn btn-outline-info interview-filter" data-bs-toggle="button" autocomplete="off">
                 Clear All
               </button>
             </div>

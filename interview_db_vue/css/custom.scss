@@ -59,10 +59,13 @@ button.btn-card {
   border-radius: 0.1rem;
   border-width: 1.5px;
 }
-
-.card-card-clickable {
-  --bs-card-bg: none;
-  --bs-card-border-width: 0;
+.interview-filter{
+  background: white !important;
+  border-style: solid !important;
+  border-color: $primary !important;
+  border-width: 1px !important;
+  padding: 4px !important;
+  margin: 8px !important;
 }
 
 .img-div{
