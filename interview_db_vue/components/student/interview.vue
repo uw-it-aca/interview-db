@@ -5,7 +5,7 @@
 
   <div>
     <div class="card border-0">
-      <div class="row g-0 mx-auto" style="height: 72vh">
+      <div class="row g-0 mx-auto" style="height: 73vh">
         <div class="col-6" style="height: inherit;">
           <img src="../../images/placeholder.png" class="img-fluid mx-auto position-sticky" style="height: 100%; object-fit: cover;" />
         </div>
