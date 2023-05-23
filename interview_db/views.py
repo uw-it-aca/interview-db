@@ -45,7 +45,10 @@ class InterviewListView(APIView):
     """
 
     def get(self, request):
-        queryset = Interview.objects.all().order_by('-date')
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').order_by('-date')
         serializer = InterviewSerializer(queryset, many=True,
                                          context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
