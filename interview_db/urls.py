@@ -42,6 +42,8 @@ urlpatterns += [
          name="student-detail"),
     path('api/students/<int:id>/image/', ImageView.as_view(),
          name="student-image"),
+    path('api/students/<int:id>/topics/', InterviewTopicsView.as_view(),
+         name="interview-topics"),
     path('api/collections/', CollectionListView.as_view(),
          name="collection-list"),
     path('api/collections/<int:id>/',
