@@ -10,7 +10,6 @@
         name: 'Students',
         params: {
           id: studentInfo.id,
-          singleStudent: JSON.stringify(studentInfo),
         },
       })
     "
@@ -29,13 +28,10 @@
             </h2>
             <p class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary">
               <span v-if="studentInfo.standing">
-                {{ studentInfo.standing + ", studying" }}
-              </span>
-              <span v-else> Studying </span>
-              <span v-for="(major, index) in studentInfo.major" :key="major.id">
-                <span v-if="index != 0">, </span>
-                {{ major.full_title }}
-              </span>
+                  {{ studentInfo.standing + ", studying" }}
+                </span>
+                <span v-else> Studying </span>
+                {{ studentInfo.declared_major }}
             </p>
           </div>
         </div>

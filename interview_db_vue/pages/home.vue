@@ -45,7 +45,7 @@
             <p class="mb-4">
               Find out more about who we are, our interview process, and get involved by telling your story!
             </p>
-            <button type="button" class="btn btn-purple" @click="$router.push('students')">
+            <button type="button" class="btn btn-purple" @click="$router.push('about')">
               Learn more >
             </button>
           </div>
@@ -97,8 +97,6 @@ export default {
     async loadData() {
       const random = await get("api/random/");
       this.randomStudents = random.data;
-      // const recent = await get("api/recent/");
-      // this.recentStudents = recent.data;
     },
   },
 };

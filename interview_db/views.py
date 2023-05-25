@@ -8,10 +8,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
 from django.utils.decorators import method_decorator
-
+from wsgiref.util import FileWrapper
+from django.http import HttpResponse
+from django.core.files.images import ImageFile
 from uw_saml.decorators import group_required
 from .serializers import *
 from .models import *
+import base64
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
@@ -135,3 +138,23 @@ class RecentStudentsView(APIView):
         serializer = InterviewSerializer(queryset, many=True,
                                          context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
+class ImageView(APIView):
+    """
+    API endpoint returning images
+    """
+
+    def get(self, request, id):
+        interview = Interview.objects.get(id=id)
+        img = interview.image
+        response = HttpResponse(FileWrapper(img))
+        return response
+
+    # require admin auth
+    def delete(self, request, id):
+        interview = Interview.objects.get(id=id)
+        img = interview.img
+        img.delete()
+        return HttpResponse(status=200)

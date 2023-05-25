@@ -4,26 +4,28 @@
 <template>
 
   <div class="mt-4 pt-4">
-    <!-- {{ studentInfo }} -->
     <div class="card border-0">
       <div class="row g-0 mx-auto">
         <div class="col-4">
-          <img src="../../css/quad.png" class="img-fluid mx-auto d-block" />
+          <span v-if="image">
+            <img :src="image" class="img-fluid mx-auto d-block" alt={{altText}}/>
+          </span>
+          <span v-else>
+            <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="a placeholder image"/>
+          </span>
         </div>
+
         <div class="col-8 p-5">
-          <h2 class="card-title display-6 mb-2 fw-bold">{{ studentInfo.student.first_name }}</h2>
+          <h2 class="card-title display-6 mb-2 fw-bold">{{ studentInfo.first_name }}</h2>
           <div class="row">
             <div class="col">
-              <span v-if="studentInfo.standing">
-                {{ studentInfo.standing + ", studying" }}
+              <span v-if="interviewInfo.standing">
+                {{ interviewInfo.standing + ", studying" }}
               </span>
               <span v-else>
                 Studying
               </span>
-              <span v-for="major, index in studentInfo.major" :key="major.id">
-                <span v-if="index != 0">, </span>
-                {{ major.full_title }}
-              </span>
+              {{ interviewInfo.declared_major }}
             </div>
             <div class="col">
               <p class="fs-6 text-end">{{ interviewDate }}</p>
@@ -66,42 +68,50 @@
 </template>
 
 <script>
-import StudentCard from "./student-card.vue";
 import { get } from "axios";
+
 export default {
   name: "Interview",
   components: {
-    StudentCard,
   },
   computed: {
     interviewId() {
       return this.$route.params.id;
-    },
-    interviewDate() {
-      return new Date(this.studentInfo.date).toLocaleDateString('en-US');
     }
   },
-  props: {
-    studentInfo: {
-      type: Object,
-      required: true,
-    },
-  },
-  //   collections: {
-  //     type: Object,
-  //     required: false,
-  //   }
-  // },
   data() {
     return {
       stories: [],
+      interviewInfo: [],
+      studentInfo: [],
+      interviewDate: null,
+      image: null,
+      altText: null,
     }
   },
   methods: {
     async loadData() {
       const response = await get("/api/students/" + this.interviewId + "/");
       this.stories = response.data;
-    }
+      this.interviewInfo = this.stories[0].interview;
+      this.studentInfo = this.interviewInfo.student;
+      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');  
+
+      if (this.interviewInfo.image) {
+        this.loadImage();
+      }
+    },
+    async loadImage() {
+      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
+        return;
+      }
+      this.altText = this.interviewInfo.image_alt_text;
+
+      // create blob for image
+      const blob = await get("/api/students/"+ this.interviewId + "/image/", {responseType: 'blob'});
+      this.image = blob.data;
+      this.image = URL.createObjectURL(this.image);
+    },
   },
   created() {
     this.loadData();

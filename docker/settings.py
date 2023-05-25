@@ -40,7 +40,7 @@ COMPRESS_PRECOMPILERS = (
 )
 
 COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
 COMPRESS_OUTPUT_DIR = '/static'
 
 STATICFILES_FINDERS = (
@@ -63,8 +63,8 @@ ADMIN_REORDER = (
     ('app2', 'Interview'),
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
+# MEDIA_URL = '/media/'
 
 if not DEBUG:
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'

@@ -153,3 +153,8 @@ coverage
 # dumped data
 interviewdb.json
 db_bak.json
+# VS Code
+.vscode
+
+# dumped data
+dump.json

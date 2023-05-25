@@ -7,31 +7,31 @@
     </template>
 
     <template #content>
-      <div v-if="interviewId">
-        <Interview :studentInfo="singleStudentInfo" />
-      </div>
+      <div v-bind="$attrs">
+        <div v-if="interviewId">
+          <Interview />
+        </div>
 
-      <div v-else>
-        <div class="mx-auto p-5 mb-4">
-          <div class="p-auto">
-            <h2 class="display-5 fw-bold mb-5 text-gold">Student Stories</h2>
-            <div class="row">
-              <div class="col-4 d-none d-lg-block">
-                <StudentFilter @clicked="updateFilters" />
-                <!-- {{ filters }} -->
-              </div>
+        <div v-else>
+          <div class="mx-auto p-5 mb-4">
+            <div class="p-auto">
+              <h2 class="display-5 fw-bold mb-5 text-gold">Student Stories</h2>
+              <div class="row">
+                <div class="col-4 d-none d-lg-block">
+                  <StudentFilter @clicked="updateFilters" />
+                  <!-- {{ filters }} -->
+                </div>
 
-              <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
-                <router-link active-class="active" aria-current="page" to="/filters">
-                  <div class="d-flex d-lg-none justify-content-end">
-                    <u class="text-purple fs-5" style="display: inline;">Filters</u>
-                    <i class="bi bi-filter" style="font-size: 22px"></i>
-                  </div>
-                </router-link>
-                <div class="card-columns justify-content-end"
-                v-for="student in filteredStudents"
-                :key="student.id">
+                <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
+                  <router-link active-class="active" aria-current="page" to="/filters">
+                    <div class="d-flex d-lg-none justify-content-end">
+                      <u class="text-purple fs-5" style="display: inline;">Filters</u>
+                      <i class="bi bi-filter" style="font-size: 22px"></i>
+                    </div>
+                  </router-link>
+                  <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
                     <InterviewListing :studentInfo="student" class="mb-5" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@ export default {
   },
   props: {
     singleStudent: {
-      type: Object,
+      type: String,
       required: false,
     }
   },
@@ -90,21 +90,6 @@ export default {
     },
     filteredStudents() {
       return this.students;
-      // if (this.filters.length == 0) {
-      //   return this.students;
-      // } else {
-      //   return this.students.filter(student => student.major == this.filters.major
-      //   );
-      //   return this.students.filter(student => {
-      //     return this.filters.major.every(m => student.major.includes(m))
-      //   });
-      //   return this.students.filter(student => {
-      //     return this.filters.major.every(m => student.major.includes(m))
-      //   });
-      //   return this.students.filter(student => {
-      //     return this.filters.major.every(m => student.major.includes(m))
-      //   });
-      // }
     },
   },
   created() {
