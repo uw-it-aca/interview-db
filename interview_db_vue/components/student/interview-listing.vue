@@ -74,7 +74,6 @@ export default {
       }
 
       this.altText = this.interviewInfo.image_alt_text;
-      console.log("student: ", this.interviewInfo.id);
       // create blob for image
       const blob = await get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
       this.image = blob.data;

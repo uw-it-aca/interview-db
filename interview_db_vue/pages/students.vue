@@ -99,7 +99,6 @@ export default {
     async loadData() {
       const response = await get("/api/students/");
       this.students = response.data;
-      console.log(this.students);
     },
   },
 };

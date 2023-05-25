@@ -111,7 +111,6 @@ export default {
       const blob = await get("/api/students/"+ this.interviewId + "/image/", {responseType: 'blob'});
       this.image = blob.data;
       this.image = URL.createObjectURL(this.image);
-      console.log(this.altText);
     },
   },
   created() {
