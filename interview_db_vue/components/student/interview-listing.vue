@@ -65,10 +65,10 @@ export default {
     };
   },
   created() {
-    this.loadData();
+    this.loadImage();
   },
   methods: {
-    async loadData() {
+    async loadImage() {
       if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
         return;
       }
