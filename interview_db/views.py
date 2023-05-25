@@ -46,7 +46,10 @@ class InterviewListView(APIView):
     """
 
     def get(self, request):
-        queryset = Interview.objects.all().order_by('-date')
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').order_by('-date')
         serializer = InterviewSerializer(queryset, many=True,
                                          context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -158,3 +161,27 @@ class ImageView(APIView):
         img = interview.img
         img.delete()
         return HttpResponse(status=200)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
+class InterviewCountView(APIView):
+    """
+    API endpoint returning total number of interviews (displayed)
+    """
+    def get(self, request):
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').count()
+        return Response(queryset, status=status.HTTP_200_OK)
+
+
+# exclude stories from the excluded interviews?
+@method_decorator(group_required(front_end_group), name='dispatch')
+class StoryCountView(APIView):
+    """
+    API endpoint returning total number of stories
+    """
+    def get(self, request):
+        queryset = Story.objects.all().count()
+        return Response(queryset, status=status.HTTP_200_OK)
