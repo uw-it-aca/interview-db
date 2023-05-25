@@ -151,10 +151,3 @@ class ImageView(APIView):
         img = interview.image
         response = HttpResponse(FileWrapper(img))
         return response
-
-    # require admin auth
-    def delete(self, request, id):
-        interview = Interview.objects.get(id=id)
-        img = interview.img
-        img.delete()
-        return HttpResponse(status=200)
