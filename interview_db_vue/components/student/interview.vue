@@ -9,7 +9,12 @@
     <div class="card border-0">
       <div class="row g-0 mx-auto">
         <div class="col-4">
-          <img src="../../css/quad.png" class="img-fluid mx-auto d-block" />
+          <span v-if="image">
+            <img :src="image" class="img-fluid mx-auto d-block" alt={{altText}}/>
+          </span>
+          <span v-else>
+            <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="a placeholder image"/>
+          </span>
         </div>
 
         <div class="col-8 p-5">
@@ -65,12 +70,11 @@
 </template>
 
 <script>
-import StudentCard from "./student-card.vue";
 import { get } from "axios";
+
 export default {
   name: "Interview",
   components: {
-    StudentCard,
   },
   computed: {
     interviewId() {
@@ -83,6 +87,8 @@ export default {
       interviewInfo: [],
       studentInfo: [],
       interviewDate: null,
+      image: null,
+      altText: null,
     }
   },
   methods: {
@@ -91,8 +97,23 @@ export default {
       this.stories = response.data;
       this.interviewInfo = this.stories[0].interview;
       this.studentInfo = this.interviewInfo.student;
-      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
-    }
+      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');  
+
+      if (this.interviewInfo.image) {
+        this.loadImage();
+      }
+    },
+    async loadImage() {
+      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
+        return;
+      }
+      this.altText = this.interviewInfo.image_alt_text;
+
+      // create blob for image
+      const blob = await get("/api/students/"+ this.interviewId + "/image/", {responseType: 'blob'});
+      this.image = blob.data;
+      this.image = URL.createObjectURL(this.image);
+    },
   },
   created() {
     this.loadData();

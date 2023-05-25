@@ -10,9 +10,11 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 from wsgiref.util import FileWrapper
 from django.http import HttpResponse
+from django.core.files.images import ImageFile
 from uw_saml.decorators import group_required
 from .serializers import *
 from .models import *
+import base64
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
@@ -44,7 +46,10 @@ class InterviewListView(APIView):
     """
 
     def get(self, request):
-        queryset = Interview.objects.all().order_by('-date')
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').order_by('-date')
         serializer = InterviewSerializer(queryset, many=True,
                                          context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -172,5 +177,35 @@ class ImageView(APIView):
         interview = Interview.objects.get(id=id)
         img = interview.image
         response = HttpResponse(FileWrapper(img))
-        response["Content-Type"] = "image"
         return response
+
+    # require admin auth
+    def delete(self, request, id):
+        interview = Interview.objects.get(id=id)
+        img = interview.img
+        img.delete()
+        return HttpResponse(status=200)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
+class InterviewCountView(APIView):
+    """
+    API endpoint returning total number of interviews (displayed)
+    """
+    def get(self, request):
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').count()
+        return Response(queryset, status=status.HTTP_200_OK)
+
+
+# exclude stories from the excluded interviews?
+@method_decorator(group_required(front_end_group), name='dispatch')
+class StoryCountView(APIView):
+    """
+    API endpoint returning total number of stories
+    """
+    def get(self, request):
+        queryset = Story.objects.all().count()
+        return Response(queryset, status=status.HTTP_200_OK)

@@ -2,15 +2,15 @@
 // to filter student interviews
 
 <template>
-  <div class="card" style="width: 25rem;">
-    <h2 class="card-header fw-bold fs-3">Filter Stories</h2>
+  <div class="card">
+    <h2 class="m-3 fw-bold display-6">Filter Stories</h2>
     <div class="card-body">
       <div class="mb-4">
-        <p class="display-4 fw-bold fs-5 mb-0" data-bs-toggle="collapse" href="#year" aria-expanded="false"
+        <p class="display-4 fw-bold fs-5 mb-0" href="#year" aria-expanded="false"
           aria-controls="year">
           Student Year
         </p>
-        <div class="collapse mt-0" id="year">
+        <div class="mt-0" id="year">
           <div class="card card-body border-0">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Freshman" id="Freshman" v-model="filters.year"
@@ -66,12 +66,18 @@
       </div>
 
       <div class="mb-4">
-        <p class="display-4 fs-5 fw-bold mb-0" data-bs-toggle="collapse" href="#major" aria-expanded="false"
+        <p class="display-4 fs-5 fw-bold mb-0" href="#major" aria-expanded="false"
           aria-controls="major">
           Major
         </p>
-        <div class="collapse" id="major">
+        <div id="major">
           <div class="card card-body border-0 mt-0">
+            <div class="form-group">
+              <select multiple class="form-control" id="major" data-live-search="true"></select>
+              <div v-for="major in data.majors" :key="major.id">
+                  <option>{{ major.full_title }}</option>
+              </div>
+            </div>
             <div v-for="major in data.majors" :key="major.id">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" :value=major.full_title id="major" v-model="filters.major"
@@ -104,6 +110,9 @@
           </div>
         </div>
       </div>
+      <button type="button" class="d-lg-none btn btn-purple" @click="$router.push('students')">
+        Submit
+      </button>
     </div>
   </div>
 </template>
