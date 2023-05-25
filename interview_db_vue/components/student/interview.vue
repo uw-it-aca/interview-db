@@ -35,9 +35,9 @@
           <div class="border-top border-primary py-4">
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-10">
-              <span v-for="topic in topics" :key="topic.id">
+              <span v-for="topic in topics" :key="topic.topic">
                 <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
-                  {{ topic }}
+                  {{ topic.topic }}
                 </button>
               </span>
               <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
@@ -95,7 +95,9 @@ export default {
       this.interviewInfo = this.stories[0].interview;
       this.studentInfo = this.interviewInfo.student;
       this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
-      this.topics = await get("api/students/" + this.interviewId + "/topics/");  
+
+      const topics = await get("/api/students/" + this.interviewId + "/topics/");  
+      this.topics = topics.data;
 
       if (this.interviewInfo.image) {
         this.loadImage();
