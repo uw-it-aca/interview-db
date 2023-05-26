@@ -21,7 +21,7 @@
           </div>
           </div>
         </div>
-        <div class="col-12 col-lg-7 col-md-6">
+        <div class="col-12 col-lg-7 col-md-6 mx-auto">
           <div class="row justify-content-center">
             <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto"
               data-bs-ride="carousel">
@@ -69,7 +69,7 @@
         <div class="col-md-4 col-12 mx-5 pt-5 text-center">
           <h2 class="display-4 fw-bold mb-5 text-gold">About Us</h2>
           <p class="mb-4">
-            Find out more about who we are, our interview process, and get involved by telling your story!
+            Find out more about who we are, our <br> interview process, and get involved by telling <br> your story!
           </p>
           <button type="button" class="btn btn-purple justify-content-end" @click="$router.push('about')">
             Learn more <i class="bi bi-chevron-right"></i>
