@@ -31,7 +31,7 @@
               <p>Stories Shared</p>
             </span>
             <span class="col-2">
-              <h2 class="display-4 fw-bold">66</h2>
+              <h2 class="display-4 fw-bold">{{ studentCount }}</h2>
               <p>Students Interviewed</p>
             </span>
           </div>
@@ -87,7 +87,8 @@ export default {
     return {
       pageTitle: "Home",
       randomStudents: [],
-      recentStudents: [],
+      storyCount: 0,
+      studentCount: 0,
     };
   },
   created() {
@@ -95,8 +96,12 @@ export default {
   },
   methods: {
     async loadData() {
-      const random = await get("api/random/");
+      const random = await get("/api/random/");
       this.randomStudents = random.data;
+      const students = await get("/api/students/count/");
+      this.studentCount = students.data;
+      const stories = await get("/api/stories/count/");
+      this.storyCount = stories.data;
     },
   },
 };
