@@ -8,7 +8,7 @@
       <div class="row g-0 mx-auto">
         <div class="col-4">
           <span v-if="image">
-            <img :src="image" class="img-fluid mx-auto d-block" alt={{altText}}/>
+            <img :src="image" class="img-fluid mx-auto d-block" :alt="altText"/>
           </span>
           <span v-else>
             <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="a placeholder image"/>

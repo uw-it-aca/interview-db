@@ -30,7 +30,7 @@
                     </div>
                   </router-link>
                   <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
-                    <InterviewListing :studentInfo="student" class="mb-5" />
+                    <InterviewListing :interviewInfo="student" class="mb-5" />
                   </div>
                 </div>
               </div>
