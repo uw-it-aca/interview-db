@@ -95,6 +95,30 @@ class CollectionDetailView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
+class InterviewTopicsView(APIView):
+    """
+    API endpoint returning all the collections of a single interview
+    """
+
+    def get(self, request, id):
+        interview = Story.objects.filter(interview__id=id)
+        queryset = []
+        list = []
+        for s in interview:
+            list.append(s.code.all())
+            list.append(s.subcode.all())
+
+        for code in list:
+            for c in Collection.objects.all():
+                if code[0] in c.codes.all() or code[0] in c.subcodes.all():
+                    queryset.append(c)
+
+        queryset = [*set(queryset)]
+        serializer = CollectionSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
 class MajorListView(APIView):
     """
     API endpoint returning all added majors

@@ -35,12 +35,10 @@
           <div class="border-top border-primary py-4">
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-10">
-              <span v-for="story in stories" :key="story.id">
-                <span v-for="collection in story.code" :key="collection.id">
-                  <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
-                    {{ collection.code }}
-                  </button>
-                </span>
+              <span v-for="topic in topics" :key="topic.topic">
+                <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
+                  {{ topic.topic }}
+                </button>
               </span>
               <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
                 Clear All
@@ -83,6 +81,7 @@ export default {
     return {
       stories: [],
       interviewInfo: [],
+      topics: [],
       studentInfo: [],
       interviewDate: null,
       image: null,
@@ -95,7 +94,10 @@ export default {
       this.stories = response.data;
       this.interviewInfo = this.stories[0].interview;
       this.studentInfo = this.interviewInfo.student;
-      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');  
+      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
+
+      const topics = await get("/api/students/" + this.interviewId + "/topics/");  
+      this.topics = topics.data;
 
       if (this.interviewInfo.image) {
         this.loadImage();
