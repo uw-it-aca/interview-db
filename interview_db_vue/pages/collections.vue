@@ -16,23 +16,23 @@
         <div style="position: relative">
           <img class="banner-image" src="../images/collectionsImage.png"/>
           <div class="title-div">
-            <h1>Collections</h1>
+            <h1 class="text-gold fw-bold display-5">Collections</h1>
           </div>
         </div>
-        <div class="mx-auto p-5 mb-5">
-          <div v-for="collection in collections" :key="collection.id">
+        <div class="mb-5 row">
+          <div v-for="collection in collections" :key="collection.id" class = "col-4">
             <div>
-              <button type="button" class="bg-light p-4 m-4 collection-btn" @click="$router.push({
+              <button type="button" class="bg-light p-4 mx-2 my-3 collection-btn" @click="$router.push({
                 name: 'Collections', params: {
                   id: collection.id, topic: collection.topic,
                   slug: collection.slug, singleCollection: JSON.stringify(collection)
                 }
               })">
                 <div class="text-start collection-button">
-                  <h2 class="fw-bold display-6 mb-4">{{ collection.topic }}</h2>
+                  <h2 class="fw-bold display-6 mb-4 text-purple">{{ collection.topic }}</h2>
+                  <i class="bi bi-chevron-right justify-self-end"></i>
                   <p class="display-4 fs-6 mx-auto">
                     {{ collection.question }}
-                    <i class="ms-4 bi bi-chevron-right"></i>
                   </p>
                 </div>
               </button>
