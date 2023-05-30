@@ -21,8 +21,8 @@
           </div>
           </div>
         </div>
-        <div class="col-12 col-lg-7 col-md-6 mx-auto">
-          <div class="row justify-content-center">
+        <div class="col-12 col-lg-7 col-md-6">
+          <div class="row justify-content-center mx-5 my-auto">
             <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto"
               data-bs-ride="carousel">
               <div class="carousel-inner justify-content-cente mx-auto">
