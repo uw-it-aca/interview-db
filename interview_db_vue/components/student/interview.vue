@@ -32,9 +32,10 @@
             <div class="justify-content-start col-12">
               <span v-for="story in stories" :key="story.id">
                 <span v-for="collection in story.code" :key="collection.id">
-                  <button type="button" class="btn btn-outline-info interview-filter text-black" data-bs-toggle="button" autocomplete="off">
+                  <input type="checkbox" class="btn-check" :id=collection.id autocomplete="off">
+                  <label class="btn btn-outline-success m-1" :for=collection.id>
                     {{ collection.code }}
-                  </button>
+                  </label>
                 </span>
               </span>
               <button type="button" class="btn btn-outline-info interview-filter" data-bs-toggle="button" autocomplete="off">
