@@ -69,12 +69,6 @@ button.btn-card {
   margin: 8px !important;
 }
 
-.scroll-area{
-  height: inherit;
-  overflow-y: scroll !important;
-  overflow: hidden;
-}
-
 .img-div{
   display: flex;
   flex-shrink: 1 !important;
@@ -164,6 +158,10 @@ img.home-img{
   padding-bottom: 1rem;
 }
 
+.interview-height{
+  height: 100%;
+}
+
 @include media-breakpoint-up(sm)
 {
   .hamburger-menu{
@@ -205,6 +203,17 @@ img.home-img{
   .footer-img{
     justify-content: start;
     padding-bottom: 0px;
+  }
+}
+
+@include media-breakpoint-up(lg){
+  .scroll-area{
+    height: inherit;
+    overflow-y: scroll !important;
+    overflow: hidden;
+  }
+  .interview-height{
+    height: 76vh;
   }
 }
 
