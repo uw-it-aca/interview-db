@@ -144,6 +144,13 @@ img.home-img{
   object-fit: cover;
 }
 
+.button-outline {
+  background-color: transparent;
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-color: #4B2E83 !important;
+}
+
 // title banner styling for over banner-image
 .title-div{
   position: absolute;

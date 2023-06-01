@@ -32,15 +32,16 @@
             <div class="justify-content-start col-12">
               <span v-for="story in stories" :key="story.id">
                 <span v-for="collection in story.code" :key="collection.id">
-                  <input type="checkbox" class="btn-check" :id=collection.id autocomplete="off">
-                  <label class="btn btn-outline-success m-1" :for=collection.id>
+                  <input type="checkbox" class="btn-check btn-outline-success" :id=collection.id autocomplete="off">
+                  <label class="btn btn-outline-success button-outline m-1" :for=collection.id>
                     {{ collection.code }}
                   </label>
                 </span>
               </span>
-              <button type="button" class="btn btn-outline-info interview-filter" data-bs-toggle="button" autocomplete="off">
+              <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
+              <label class="btn btn-outline-success m-1" for="clear-all">
                 Clear All
-              </button>
+              </label>
             </div>
 
             <div v-for="story in stories" :key="story.id">
