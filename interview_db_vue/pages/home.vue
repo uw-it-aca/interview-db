@@ -25,16 +25,16 @@
           <div class="row justify-content-center mx-5 my-auto">
             <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto"
               data-bs-ride="carousel">
-              <div class="carousel-inner justify-content-cente mx-auto">
+              <div class="carousel-inner justify-content-center mx-auto">
                 <div v-for="student, index in randomStudents" :key="student.id">
                   <div v-if="index == 0">
                     <div class="carousel-item active justify-content-center">
-                      <StudentCarousel :studentInfo="student" class="d-block justify-content-center mx-auto" />
+                      <StudentCarousel :studentInfo="student" class="justify-content-center mx-auto" />
                     </div>
                   </div>
                   <div v-else>
                     <div class="carousel-item justify-content-center">
-                      <StudentCarousel :studentInfo="student" class="d-block justify-content-center mx-auto"/>
+                      <StudentCarousel :studentInfo="student" class="justify-content-center mx-auto"/>
                     </div>
                   </div>
                 </div>

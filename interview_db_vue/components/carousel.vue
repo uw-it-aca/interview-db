@@ -16,7 +16,6 @@
     "
   >
     <div class="d-flex card-clickable">
-      <div class="row p-0 m-x-0">
         <div class="row p-0 m-0">
           <div class="col-md-5 col-sm-6 col-4 row-xs ps-4 img-div shift-up">
             <img src="../css/quad.png" class="listing-img" />
@@ -38,16 +37,25 @@
                   {{ major.full_title }}
                 </span>
               </p>
+              <div class="d-none d-xl-block">
+                <div class="card-text pt-2 border-top border-primary">
+                  <p class="display-6 fs-6">"{{ studentInfo.pull_quote }}"</p>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <u class="text-purple" style="display:inline;">Read More</u>
+                  <i class="bi bi-chevron-right"></i>
+              </div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="card-text pt-2 px-4 border-top border-primary">
-          <p class="display-6 fs-6">"{{ studentInfo.pull_quote }}"</p>
-        </div>
-        <div class="d-flex justify-content-end">
-            <u class="text-purple" style="display:inline;">Read More</u>
-            <i class="bi bi-chevron-right"></i>
+        <div class="d-xl-none">  
+          <div class="card-text pt-2 px-4 border-top border-primary">
+            <p class="display-6 fs-6">"{{ studentInfo.pull_quote }}"</p>
+          </div>
+          <div class="d-flex justify-content-end">
+              <u class="text-purple" style="display:inline;">Read More</u>
+              <i class="bi bi-chevron-right"></i>
+          </div>
         </div>
       </div>
     </div>
