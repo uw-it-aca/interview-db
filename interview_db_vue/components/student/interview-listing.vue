@@ -12,10 +12,10 @@
       <div class="row p-0 m-x-0">
         <div class="col-md-5 col-sm-6 row-xs mx-auto ps-4 img-div shift-up">
           <span v-if="image">
-            <img :src="image" class="listing-img" :alt="altText" />
+            <img :src="image" style="object-fit:cover" class="listing-img img-fluid" :alt="altText" />
           </span>
           <span v-else>
-            <img src="../../css/quad.png" class="listing-img" alt="a placeholder image" />
+            <img src="../../images/placeholder.png" style="object-fit:cover" class="listing-img img-fluid" alt="a placeholder image" />
           </span>
         </div>
 
