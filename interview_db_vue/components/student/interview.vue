@@ -2,12 +2,18 @@
 // full individual student interview page
 
 <template>
-
   <div>
     <div class="card border-0">
       <div class="row g-0 mx-auto interview-height">
         <div class="col-lg-6 col-12" style="height: inherit;">
-          <img src="../../images/placeholder.png" class="img-fluid mx-auto position-sticky" style="height: 100%; object-fit: cover;" />
+          <span v-if="image">
+            <img :src="image" class="img-fluid mx-auto position-sticky" style="height: 100%; object-fit: cover;"
+              :alt="altText" />
+          </span>
+          <span v-else>
+            <img src="../../images/placeholder.png" class="img-fluid mx-auto position-sticky"
+              style="height: 100%; object-fit: cover;" />
+          </span>
         </div>
 
         <div class="col-lg-6 col-12 p-5 scroll-area">
@@ -30,13 +36,11 @@
           <div class="border-top border-primary py-4">
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-12">
-              <span v-for="story in stories" :key="story.id">
-                <span v-for="collection in story.code" :key="collection.id">
-                  <input type="checkbox" class="btn-check btn-outline-success" :id=collection.id autocomplete="off">
-                  <label class="btn btn-outline-success button-outline m-1" :for=collection.id>
-                    {{ collection.code }}
-                  </label>
-                </span>
+              <span v-for="topic in topics" :key="topic.topic">
+                <input type="checkbox" class="btn-check btn-outline-success" :id=topic.id autocomplete="off">
+                <label class="btn btn-outline-success button-outline m-1" :for=topic.id>
+                  {{ topic.topic }}
+                </label>
               </span>
               <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
               <label class="btn btn-outline-success m-1" for="clear-all">
@@ -65,12 +69,11 @@
 </template>
 
 <script>
-import StudentCard from "./student-card.vue";
 import { get } from "axios";
+
 export default {
   name: "Interview",
   components: {
-    StudentCard,
   },
   computed: {
     interviewId() {
@@ -81,8 +84,11 @@ export default {
     return {
       stories: [],
       interviewInfo: [],
+      topics: [],
       studentInfo: [],
       interviewDate: null,
+      image: null,
+      altText: null,
     }
   },
   methods: {
@@ -92,7 +98,25 @@ export default {
       this.interviewInfo = this.stories[0].interview;
       this.studentInfo = this.interviewInfo.student;
       this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
-    }
+
+      const topics = await get("/api/students/" + this.interviewId + "/topics/");
+      this.topics = topics.data;
+
+      if (this.interviewInfo.image) {
+        this.loadImage();
+      }
+    },
+    async loadImage() {
+      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
+        return;
+      }
+      this.altText = this.interviewInfo.image_alt_text;
+
+      // create blob for image
+      const blob = await get("/api/students/" + this.interviewId + "/image/", { responseType: 'blob' });
+      this.image = blob.data;
+      this.image = URL.createObjectURL(this.image);
+    },
   },
   created() {
     this.loadData();
