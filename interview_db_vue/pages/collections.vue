@@ -19,21 +19,25 @@
             <h1 class="text-gold fw-bold display-5">Collections</h1>
           </div>
         </div>
-        <div class="mb-5 row">
-          <div v-for="collection in collections" :key="collection.id" class = "col-4">
-            <div>
-              <button type="button" class="bg-light p-4 mx-2 my-3 collection-btn" @click="$router.push({
+        <div class="mb-5 row d-flex">
+          <div v-for="collection in collections" :key="collection.id" class = "col-4 d-flex align-items-stretch">
+            <div class="d-flex align-items-stretch flex-fill">
+              <button type="button" class="bg-light p-4 mx-2 my-3 flex-fill" @click="$router.push({
                 name: 'Collections', params: {
                   id: collection.id, topic: collection.topic,
                   slug: collection.slug, singleCollection: JSON.stringify(collection)
                 }
               })">
-                <div class="text-start collection-button">
-                  <h2 class="fw-bold display-6 mb-4 text-purple">{{ collection.topic }}</h2>
-                  <i class="bi bi-chevron-right justify-self-end"></i>
-                  <p class="display-4 fs-6 mx-auto">
-                    {{ collection.question }}
-                  </p>
+                <div class="text-start collection-button d-flex justify-content-end row">
+                  <div class="col-11">
+                    <h2 class="fw-bold fs-3 mb-4 text-purple col-12">{{ collection.topic }}</h2>
+                    <p class="display-4 fs-6 mx-auto col-12">
+                      {{ collection.question }}
+                    </p>
+                  </div>
+                  <div class="d-flex align-items-center col-1">
+                    <i class="bi bi-chevron-right"></i>
+                  </div>
                 </div>
               </button>
             </div>
