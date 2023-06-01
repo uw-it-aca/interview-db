@@ -12,7 +12,9 @@
                 Husky Voices
               </router-link>
             </h2>
-          <i class="bi bi-list hamburger-menu"></i>
+          <router-link active-class="active" aria-current="page" to="/menu">
+            <i class="bi bi-list hamburger-menu"></i>
+          </router-link>
         </div>
 <!-- 
         <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
@@ -58,7 +60,7 @@
     </nav>
   </header>
 
-  <main class="p-2">
+  <main>
     <slot name="title" />
     <slot name="description" />
     <slot name="content" />
@@ -67,11 +69,11 @@
 
   <footer class="py-4 px-5 footer bg-purple text-white">
     <div class="row">
-       <div class="col-6">
-        <!--<img src="../images/washingtonlogo.svg" /> -->
+       <div class="col-md-6 col-12 footer-img d-flex">
+        <img src="./images/washingtonlogo.svg" />
       </div>
-      <div class="col-6">
-        <p class="text-end justify-content-end">Copyright &copy; 2023 University of Washington</p>
+      <div class="col-md-6 col-12 align-items-center footer-copyright d-flex">
+        <p class="">Copyright &copy; 2023 University of Washington</p>
       </div>
     </div>
   </footer>

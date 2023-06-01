@@ -61,7 +61,7 @@ export default {
     singleStudent: {
       type: String,
       required: false,
-    }
+    },
   },
   data() {
     return {
