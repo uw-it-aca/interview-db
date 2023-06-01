@@ -17,13 +17,12 @@
   >
     <div class="d-flex card-clickable">
         <div class="row p-0 m-0">
-          <div class="col-md-5 col-sm-6 col-4 row-xs ps-4 img-div shift-up">
+          <div class="col-md-5 col-sm-6 col-12 row-xs ps-4 img-div shift-up">
             <img src="../css/quad.png" class="listing-img" />
           </div>
 
-          <div class="col-md-7 col-sm-6  col-8 ps-4 m-0">
+          <div class="col-md-7 col-sm-6 col-12 ps-4 m-0">
             <div class="row">
-              <p class="fs-6 text-end">{{ interviewDate }}</p>
               <h2 class="card-title fw-bold text-purple display-6 mb-2">
                 {{ studentInfo.student.first_name }}
               </h2>

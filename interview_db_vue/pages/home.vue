@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="col-12 col-lg-7 col-md-6">
-          <div class="row justify-content-center mx-5 my-auto">
+          <div class="row justify-content-center mx-auto my-auto">
             <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto"
               data-bs-ride="carousel">
               <div class="carousel-inner justify-content-center mx-auto">
