@@ -149,7 +149,10 @@ class RandomStudentsView(APIView):
     """
 
     def get(self, request):
-        queryset = Interview.objects.order_by("?")[:3]
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').count()
         serializer = InterviewSerializer(queryset, many=True)
         return Response(serializer.data)
 
