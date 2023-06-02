@@ -8,7 +8,7 @@
 
     <template #content>
       <div class="row g-0 mb-4" style="background: linear-gradient(#FBFBFB, #f8f9fa)">
-        <div class="col-md-6 col-lg-5 col-12 col-xl-5">
+        <div class="col-md-6 col-lg-5 col-12 col-xl-5 d-flex align-items-center">
           <div class="card bg-light p-4 mx-auto my-4 border-1 border-light shadow">
             <div class="card-body">
             <h2 class="display-5 mb-4 fw-bold text-gold">REAL STUDENTS<br>REAL STORIES</h2>
