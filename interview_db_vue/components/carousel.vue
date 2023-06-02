@@ -5,7 +5,7 @@
   <button
     type="button"
     class="btn-card mt-5"
-    style="height: 21rem"
+    style="height: fit-content;"
     @click="
       $router.push({
         name: 'Students',
@@ -21,41 +21,32 @@
             <img src="../css/quad.png" class="listing-img" />
           </div>
 
-          <div class="col-md-7 col-sm-6 col-12 ps-4 m-0">
+          <div class="col-md-7 col-sm-6 col-12 ps-4 d-flex align-items-center">
             <div class="row">
-              <h2 class="card-title fw-bold text-purple display-6 mb-2">
+              <h2 class="card-title fw-bold text-purple display-6">
                 {{ studentInfo.student.first_name }}
               </h2>
-              <p class="display-4 fs-6 mx-auto pb-4">
-                <span v-if="studentInfo.standing">
-                  {{ studentInfo.standing + ", studying" }}
-                </span>
-                <span v-else> Studying </span>
-                <span v-for="(major, index) in studentInfo.major" :key="major.id">
-                  <span v-if="index != 0">, </span>
-                  {{ major.full_title }}
-                </span>
-              </p>
-              <div class="d-none d-xl-block">
-                <div class="card-text pt-2 border-top border-primary">
-                  <p class="display-6 fs-6">"{{ studentInfo.pull_quote }}"</p>
-                </div>
-                <div class="d-flex justify-content-end">
-                  <u class="text-purple" style="display:inline;">Read More</u>
-                  <i class="bi bi-chevron-right"></i>
-              </div>
+              <div class="border-bottom border-primary">
+                <p class="display-4 fs-6 mx-auto">
+                  <span v-if="studentInfo.standing">
+                    {{ studentInfo.standing + ", studying" }}
+                  </span>
+                  <span v-else> Studying </span>
+                  <span v-for="(major, index) in studentInfo.major" :key="major.id">
+                    <span v-if="index != 0">, </span>
+                    {{ major.full_title }}
+                  </span>
+                </p>
               </div>
             </div>
-          </div>
-        <div class="d-xl-none">  
-          <div class="card-text pt-2 px-4 border-top border-primary">
+          </div> 
+          <div class="card-text pt-2 px-4">
             <p class="display-6 fs-6">"{{ studentInfo.pull_quote }}"</p>
           </div>
           <div class="d-flex justify-content-end">
               <u class="text-purple" style="display:inline;">Read More</u>
               <i class="bi bi-chevron-right"></i>
           </div>
-        </div>
       </div>
     </div>
     
