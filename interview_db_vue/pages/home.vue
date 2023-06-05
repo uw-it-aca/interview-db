@@ -8,7 +8,7 @@
 
     <template #content>
       <div class="row g-0 mb-4" style="background: linear-gradient(#FBFBFB, #f8f9fa)">
-        <div class="col-md-6 col-lg-5 col-12 col-xl-5 d-flex align-items-center">
+        <div class="col-md-6 col-lg-5 col-12 col-xl-5 d-flex align-items-center justify-content-start">
           <div class="card bg-light p-4 mx-auto my-4 border-1 border-light shadow">
             <div class="card-body">
             <h2 class="display-5 mb-4 fw-bold text-gold">REAL STUDENTS<br>REAL STORIES</h2>
@@ -23,7 +23,7 @@
         </div>
         <div class="col-12 col-lg-7 col-md-6 col-xl-7 pr-2 justify-content-center">
           <div class="row justify-content-center mx-auto my-auto">
-            <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto col-12 col-lg-10"
+            <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto col-12 col-lg-8"
               data-bs-ride="carousel">
               <div class="carousel-inner justify-content-center mx-auto">
                 <div v-for="student, index in randomStudents" :key="student.id">
