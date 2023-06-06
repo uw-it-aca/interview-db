@@ -6,13 +6,13 @@
     <div class="card border-0">
       <div class="row g-0 mx-auto interview-height">
         <div class="col-lg-6 col-12" style="height: inherit;">
-          <span v-if="image">
+          <span v-if="image" style="width: 100%">
             <img :src="image" class="img-fluid mx-auto position-sticky" style="height: 100%; object-fit: cover;"
               :alt="altText" />
           </span>
-          <span v-else>
-            <img src="../../images/placeholder.png" class="img-fluid mx-auto position-sticky"
-              style="height: 100%; object-fit: cover;" />
+          <span v-else style="width: 100%">
+            <img src="../../images/test.jpg" class="img-fluid mx-auto position-sticky"
+              style="height: 100%; object-fit: cover; width: 100%" />
           </span>
         </div>
 
