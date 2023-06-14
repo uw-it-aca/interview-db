@@ -16,13 +16,16 @@
             <img :src="image" style="object-fit:cover" class="listing-img img-fluid" :alt="altText" />
           </span>
           <span v-else style="width: 100%;">
-            <img src="../../images/placeholder.png" style="object-fit:cover;" class="listing-img img-fluid" alt="a placeholder image" />
+            <img src="../../images/placeholder.png" style="object-fit:cover;" class="listing-img img-fluid"
+              alt="a placeholder image" />
           </span>
         </div>
 
         <div class="col-md-7 col-sm-6 ps-4 m-0">
           <div class="row">
-            <p class="fs-6 text-end">{{ interviewDate }}</p>
+            <span v-if="!carousel">
+              <p class="fs-6 text-end">{{ interviewDate }}</p>
+            </span>
             <h2 class="card-title fw-bold text-purple display-6 mb-2">
               {{ interviewInfo.student.first_name }}
             </h2>
@@ -37,13 +40,19 @@
         </div>
 
         <div class="card-text px-4">
-          <p class="display-6 fs-5">
-            <span v-if=story>"{{ story }}"
-            </span>
-            <span v-else>"{{ interviewInfo.pull_quote }}"
-            </span>
-          </p>
+          <span v-if="carousel">
+            <p class="display-6 fs-6">"{{ interviewInfo.pull_quote }}"</p>
+          </span>
+          <span v-else>
+            <p class="display-6 fs-5">
+              <span v-if=story>"{{ story }}"
+              </span>
+              <span v-else>"{{ interviewInfo.pull_quote }}"
+              </span>
+            </p>
+          </span>
         </div>
+
         <div class="d-flex justify-content-end">
           <u class="text-purple" style="display:inline;">Read More</u>
           <i class="bi bi-chevron-right"></i>
@@ -65,6 +74,10 @@ export default {
     },
     story: {
       type: String,
+      required: false,
+    },
+    carousel: {
+      type: Boolean,
       required: false,
     }
   },
