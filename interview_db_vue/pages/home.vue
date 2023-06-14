@@ -8,7 +8,7 @@
 
     <template #content>
       <div class="row g-0 mb-4" style="background: linear-gradient(#FBFBFB, #f8f9fa)">
-        <div class="col-md-6 col-lg-5 col-12">
+        <div class="col-md-6 col-lg-5 col-12 col-xl-5 d-flex align-items-center justify-content-start">
           <div class="card bg-light p-4 mx-auto my-4 border-1 border-light shadow">
             <div class="card-body">
             <h2 class="display-5 mb-4 fw-bold text-gold">REAL STUDENTS<br>REAL STORIES</h2>
@@ -21,20 +21,20 @@
           </div>
           </div>
         </div>
-        <div class="col-12 col-lg-7 col-md-6">
-          <div class="row justify-content-center">
-            <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto"
+        <div class="col-12 col-lg-7 col-md-6 col-xl-7 pr-2 justify-content-center">
+          <div class="row justify-content-center mx-auto my-auto">
+            <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto col-12 col-lg-8"
               data-bs-ride="carousel">
-              <div class="carousel-inner justify-content-cente mx-auto">
+              <div class="carousel-inner justify-content-center mx-auto">
                 <div v-for="student, index in randomStudents" :key="student.id">
                   <div v-if="index == 0">
                     <div class="carousel-item active justify-content-center">
-                      <StudentCarousel :studentInfo="student" class="d-block justify-content-center mx-auto" />
+                      <StudentCarousel :studentInfo="student" class="justify-content-center mx-auto" />
                     </div>
                   </div>
                   <div v-else>
                     <div class="carousel-item justify-content-center">
-                      <StudentCarousel :studentInfo="student" class="d-block justify-content-center mx-auto"/>
+                      <StudentCarousel :studentInfo="student" class="justify-content-center mx-auto"/>
                     </div>
                   </div>
                 </div>
@@ -69,7 +69,7 @@
         <div class="col-md-4 col-12 mx-5 pt-5 text-center">
           <h2 class="display-4 fw-bold mb-5 text-gold">About Us</h2>
           <p class="mb-4">
-            Find out more about who we are, our interview process, and get involved by telling your story!
+            Find out more about who we are, our <br> interview process, and get involved by telling <br> your story!
           </p>
           <button type="button" class="btn btn-purple justify-content-end" @click="$router.push('about')">
             Learn more <i class="bi bi-chevron-right"></i>

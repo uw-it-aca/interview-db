@@ -11,11 +11,11 @@
     <div class="d-flex card-clickable">
       <div class="row p-0 m-x-0">
         <div class="col-md-5 col-sm-6 row-xs mx-auto ps-4 img-div shift-up">
-          <span v-if="image">
+          <span v-if="image" style="width: 100%;">
             <img :src="image" style="object-fit:cover" class="listing-img img-fluid" :alt="altText" />
           </span>
-          <span v-else>
-            <img src="../../images/placeholder.png" style="object-fit:cover" class="listing-img img-fluid" alt="a placeholder image" />
+          <span v-else style="width: 100%;">
+            <img src="../../images/placeholder.png" style="object-fit:cover;" class="listing-img img-fluid" alt="a placeholder image" />
           </span>
         </div>
 
