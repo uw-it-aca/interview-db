@@ -1,13 +1,13 @@
 ingress:
   enabled: true
   tls:
-    notify:
-      secretName: interview-db.axdd.s.uw.edu-ingress-cert
+    huskyvoices:
+      secretName: test.huskyvoices.uw.edu-ingress-cert
       hosts:
-        - interview-db.axdd.s.uw.edu
+        - test.huskyvoices.uw.edu
   hosts:
-    interview-db.axdd:
-      host: interview-db.axdd.s.uw.edu
+    huskyvoices:
+      host: test.huskyvoices.uw.edu
       paths:
         - "/"
   annotations:
@@ -24,19 +24,19 @@ readiness:
 securityPolicy:
   enabled: true
 database:
-  engine: mysql
-  name: interview_test
-  hostname: interview-db-db-service
-  secretName: interview-db.axdd.s.uw.edu-sql-secrets
+  engine: postgres
+  name: huskyvoices_test
+  hostname: huskyvoices-db-service
+  secretName: test.huskyvoices.uw.edu-sql-secrets
 externalService:
   enabled: true
-  name: interview-db-db-service
+  name: huskyvoices-db-service
   type: ClusterIP
-  serviceAddress: 172.18.0.14
-  servicePort: 3306
+  serviceAddress: 172.18.1.106
+  servicePort: 5432
 gcsCredentials:
   mounted: true
-  secretName: interview-db.axdd.s.uw.edu-gcs-credentials
+  secretName: test.huskyvoices.uw.edu-gcs-credentials
 repo: interview-db
 instance: test
 metrics:
@@ -46,31 +46,31 @@ metrics:
 externalSecrets:
   enabled: true
   secrets:
-    - name: interview-db.axdd.s.uw.edu-secrets
-      externalKey: interview-db/test/secrets
+    - name: test.huskyvoices.uw.edu-secrets
+      externalKey: huskyvoices/test/secrets
       data:
         - name: django-secret
           property: django-secret
         - name: storage-bucket-name
           property: storage-bucket-name
-    - name: interview-db.axdd.s.uw.edu-sql-secrets
-      externalKey: interview-db/test/sql-secrets
+    - name: test.huskyvoices.uw.edu-sql-secrets
+      externalKey: huskyvoices/test/sql-secrets
       data:
         - name: username
           property: username
         - name: password
           property: password
-    - name: interview-db.axdd.s.uw.edu-gcs-credentials
-      externalKey: interview-db/test/gcs-credentials
+    - name: test.huskyvoices.uw.edu-gcs-credentials
+      externalKey: huskyvoices/test/gcs-credentials
       data:
         - name: credentials.json
           property: credentials.json
-    - name: interview-db.axdd.s.uw.edu-ic-certs
-      externalKey: interview-db/test/ic-certs
+    - name: test.huskyvoices.uw.edu-ic-certs
+      externalKey: huskyvoices/test/ic-certs
       data:
-        - name: interview-db.axdd.s.uw.edu-ic.cert
-          property: interview-db.axdd.s.uw.edu-ic.cert
-    - name: interview-db.axdd.s.uw.edu-uw-idp-cert
+        - name: test.huskyvoices.uw.edu-ic.cert
+          property: test.huskyvoices.uw.edu-ic.cert
+    - name: test.huskyvoices.uw.edu-uw-idp-cert
       externalKey: idp-cert
       data:
         - name: uw-idp-cert
@@ -85,25 +85,25 @@ environmentVariables:
   - name: ID_FRONT_END_GROUP
     value: u_jcivjan_sip-frontend
   - name: SAML_ENTITY_ID
-    value: https://interview-db.axdd.s.uw.edu/saml2
+    value: https://test.huskyvoices.uw.edu/saml2
   - name: CLUSTER_CNAME
-    value: interview-db.axdd.s.uw.edu
+    value: test.huskyvoices.uw.edu
   - name: SAML_USER_ATTRIBUTE
     value: uwnetid
 environmentVariablesSecrets:
   djangoSecret:
     name: DJANGO_SECRET
-    secretName: interview-db.axdd.s.uw.edu-secrets
+    secretName: test.huskyvoices.uw.edu-secrets
     secretKey: django-secret
   samlSpCertSecret:
     name: SP_CERT
-    secretName: interview-db.axdd.s.uw.edu-ic-certs
-    secretKey: interview-db.axdd.s.uw.edu-ic.cert
+    secretName: test.huskyvoices.uw.edu-ic-certs
+    secretKey: test.huskyvoices.uw.edu-ic.cert
   samlIdpCertSecret:
     name: IDP_CERT
-    secretName: interview-db.axdd.s.uw.edu-uw-idp-cert
+    secretName: test.huskyvoices.uw.edu-uw-idp-cert
     secretKey: uw-idp-cert
   gcsBucketName:
     name: GCS_BUCKET_NAME
-    secretName: interview-db.axdd.s.uw.edu-secrets
+    secretName: test.huskyvoices.uw.edu-secrets
     secretKey: storage-bucket-name
