@@ -72,6 +72,8 @@ export default {
       if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
         return;
       }
+      
+      if (this.interviewInfo.image == null) return;
 
       this.altText = this.interviewInfo.image_alt_text;
       // create blob for image

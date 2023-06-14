@@ -111,9 +111,8 @@ export default {
         return;
       }
       
-      if (this.interviewInfo.image == null) {
-        return;
-      }
+      if (this.interviewInfo.image == null) return;
+
       
       this.altText = this.interviewInfo.image_alt_text;
 
