@@ -46,7 +46,10 @@ class InterviewListView(APIView):
     """
 
     def get(self, request):
-        queryset = Interview.objects.all().order_by('-date')
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').order_by('-date')
         serializer = InterviewSerializer(queryset, many=True,
                                          context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -88,6 +91,30 @@ class CollectionDetailView(APIView):
             Q(code__in=collection.codes.all()) |
             Q(subcode__in=collection.subcodes.all()))
         serializer = StorySerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
+class InterviewTopicsView(APIView):
+    """
+    API endpoint returning all the collections of a single interview
+    """
+
+    def get(self, request, id):
+        interview = Story.objects.filter(interview__id=id)
+        queryset = []
+        list = []
+        for s in interview:
+            list.append(s.code.all())
+            list.append(s.subcode.all())
+
+        for code in list:
+            for c in Collection.objects.all():
+                if code[0] in c.codes.all() or code[0] in c.subcodes.all():
+                    queryset.append(c)
+
+        queryset = [*set(queryset)]
+        serializer = CollectionSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -152,9 +179,26 @@ class ImageView(APIView):
         response = HttpResponse(FileWrapper(img))
         return response
 
-    # require admin auth
-    def delete(self, request, id):
-        interview = Interview.objects.get(id=id)
-        img = interview.img
-        img.delete()
-        return HttpResponse(status=200)
+
+@method_decorator(group_required(front_end_group), name='dispatch')
+class InterviewCountView(APIView):
+    """
+    API endpoint returning total number of interviews (displayed)
+    """
+    def get(self, request):
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').count()
+        return Response(queryset, status=status.HTTP_200_OK)
+
+
+# exclude stories from the excluded interviews?
+@method_decorator(group_required(front_end_group), name='dispatch')
+class StoryCountView(APIView):
+    """
+    API endpoint returning total number of stories
+    """
+    def get(self, request):
+        queryset = Story.objects.all().count()
+        return Response(queryset, status=status.HTTP_200_OK)

@@ -60,7 +60,7 @@
     </nav>
   </header>
 
-  <main class="p-2">
+  <main>
     <slot name="title" />
     <slot name="description" />
     <slot name="content" />

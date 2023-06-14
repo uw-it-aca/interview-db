@@ -1,73 +1,92 @@
 // interview-listing.vue // shown on full students page
 
 <template>
-  <button
-    type="button"
-    class="btn-card mt-5"
-    style="height:21rem"
-    @click="
-      $router.push({
-        name: 'Students',
-        params: {
-          id: studentInfo.id,
-        },
-      })
-    "
-  >
-    <p class="fs-6 text-end">{{ interviewDate }}</p>
-    <div class="card-clickable">
-      <div class="row p-0 m-0">
-        <div class="col-4 mx-auto ps-4">
-          <img src="../../css/blossom.png" class="listing-img" />
+  <button type="button" class="btn-card mt-5" style="height:fit-content;" @click="$router.push({
+    name: 'Students',
+    params: {
+      id: interviewInfo.id,
+    },
+  })
+    ">
+    <div class="d-flex card-clickable">
+      <div class="row p-0 m-x-0">
+        <div class="col-md-5 col-sm-6 row-xs mx-auto ps-4 img-div shift-up">
+          <span v-if="image">
+            <img :src="image" style="object-fit:cover" class="listing-img img-fluid" :alt="altText" />
+          </span>
+          <span v-else>
+            <img src="../../images/placeholder.png" style="object-fit:cover" class="listing-img img-fluid" alt="a placeholder image" />
+          </span>
         </div>
 
-        <div class="col-8 ps-4 m-0">
-          <h2 class="card-title fw-bold display-6 mb-2">
-            {{ studentInfo.student.first_name }}
-          </h2>
+        <div class="col-md-7 col-sm-6 ps-4 m-0">
           <div class="row">
-            <div class="col-11">
-              <p
-                class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary"
-              >
-                <span v-if="studentInfo.standing">
-                  {{ studentInfo.standing + ", studying" }}
-                </span>
-                <span v-else> Studying </span>
-                {{ studentInfo.declared_major }}
-              </p>
-            </div>
-            <div class="col-1">
-              <i class="bi bi-chevron-right"></i>
-            </div>
+            <p class="fs-6 text-end">{{ interviewDate }}</p>
+            <h2 class="card-title fw-bold text-purple display-6 mb-2">
+              {{ interviewInfo.student.first_name }}
+            </h2>
+            <p class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary">
+              <span v-if="interviewInfo.standing">
+                {{ interviewInfo.standing + ", studying" }}
+              </span>
+              <span v-else> Studying </span>
+              {{ interviewInfo.declared_major }}
+            </p>
           </div>
         </div>
 
-        <div class="card-text ps-4">
-          <p class="display-6 fs-5">"{{ studentInfo.pull_quote }}"</p>
+        <div class="card-text px-4">
+          <p class="display-6 fs-5">"{{ interviewInfo.pull_quote }}"</p>
+        </div>
+        <div class="d-flex justify-content-end">
+          <u class="text-purple" style="display:inline;">Read More</u>
+          <i class="bi bi-chevron-right"></i>
         </div>
       </div>
     </div>
+
   </button>
 </template>
 
 <script>
+import { get } from "axios";
 export default {
   name: "StudentListing",
   props: {
-    studentInfo: {
+    interviewInfo: {
       type: Object,
       required: true,
     },
   },
   data() {
-    return {};
+    return {
+      image: null,
+      altText: null,
+    };
   },
-  methods: {},
+  created() {
+    this.loadImage();
+  },
+  methods: {
+    async loadImage() {
+      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
+        return;
+      }
+
+      this.altText = this.interviewInfo.image_alt_text;
+      // create blob for image
+      const blob = await get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
+      this.image = blob.data;
+      this.image = URL.createObjectURL(this.image);
+    },
+  },
   computed: {
     interviewDate() {
-      return new Date(this.studentInfo.date).toLocaleDateString("en-US");
+      return new Date(this.interviewInfo.date).toLocaleDateString("en-US");
     },
+    interviewId() {
+      return this.interviewInfo.id;
+    }
   },
 };
 </script>

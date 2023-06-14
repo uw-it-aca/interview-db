@@ -54,11 +54,11 @@
         <div class="card-img-overlay text-center justify-content-center">
           <div class="pt-3 row justify-content-center">
             <span class="col-md-2 col-6">
-              <h2 class="text-gold display-4 fw-bold">66</h2>
+              <h2 class="text-gold display-4 fw-bold">{{ studentCount }}</h2>
               <p class="text-gold font-weight-bold">Students Interviewed</p>
             </span>
             <span class="col-md-2 col-6">
-              <h2 class="text-gold display-4 fw-bold">874</h2>
+              <h2 class="text-gold display-4 fw-bold">{{ storyCount }}</h2>
               <p class="text-gold font-weight-bold">Stories Shared</p>
             </span>
           </div>
@@ -116,6 +116,8 @@ export default {
     return {
       pageTitle: "Home",
       randomStudents: [],
+      storyCount: 0,
+      studentCount: 0,
     };
   },
   // computed: {
@@ -128,8 +130,12 @@ export default {
   },
   methods: {
     async loadData() {
-      const random = await get("api/random/");
+      const random = await get("/api/random/");
       this.randomStudents = random.data;
+      const students = await get("/api/students/count/");
+      this.studentCount = students.data;
+      const stories = await get("/api/stories/count/");
+      this.storyCount = stories.data;
     },
   },
 };

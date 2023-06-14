@@ -1,11 +1,12 @@
 // import entire bootstrap library
 
 // setting bootstrap color variables
-$light: #FAF8FC;      // card color
-$primary: #1E1E1E;    // text
-$secondary: #827252;  // default button
-$info: #B4A67F;       // active button
-$white: #F8F9fA;      // background color
+$light: #FAF8FC; // card color
+$primary: #1E1E1E; // text
+$secondary: #827252; // default button
+$success: #4B2E83;
+$info: #B4A67F; // active button
+$white: #F8F9fA; // background color
 
 $min-contrast-ratio: 2.5;
 
@@ -60,26 +61,38 @@ button.btn-card {
   border-width: 1.5px;
 }
 
-.card-card-clickable {
-  --bs-card-bg: none;
-  --bs-card-border-width: 0;
+.interview-filter {
+  background: white !important;
+  border-style: solid !important;
+  border-color: $primary !important;
+  border-width: 1px !important;
+  padding: 4px !important;
+  margin: 8px !important;
 }
 
-.img-div{
+.img-div {
   display: flex;
   flex-shrink: 1 !important;
   aspect-ratio: 1/1;
   overflow: hidden;
 }
 
-img.listing-img {
-width: 100%;
-height: 80%;
-z-index: 1;
-line-height: 0;
-border-radius: 1.5px;
-filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
+.card-card-clickable {
+  --bs-card-bg: none;
+  --bs-card-border-width: 0;
 }
+
+
+img.listing-img {
+  width: 100%;
+  height: 80%;
+  z-index: 1;
+  line-height: 0;
+  border-radius: 1.5px;
+  filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
+}
+
+
 
 // Open Sans for all body text
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
@@ -101,47 +114,54 @@ h6 {
   font-family: 'Times New Roman', Times, serif;
 }
 
-.nav-list{
+.nav-list {
   display: none !important;
 }
 
-.hamburger-menu{
+.hamburger-menu {
   display: inline;
   font-size: 50px;
 }
 
-.footer-img{
+.footer-img {
   justify-content: center;
   padding-bottom: 20px;
 }
 
-.footer-copyright{
+.footer-copyright {
   justify-content: center;
 }
 
 //styling for W + Husky Voices title in nav
-.title-logo{
+.title-logo {
   width: 100%;
   justify-content: space-between;
 }
 
-.shift-up{
+.shift-up {
   margin-top: -40px !important;
 }
 
-.banner-image{
+.banner-image {
   width: 100%;
   height: 270px;
   object-fit: cover;
 }
 
-img.home-img{
+img.home-img {
   height: 400px;
   object-fit: cover;
 }
 
+.button-outline {
+  background-color: transparent;
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-color: #4B2E83 !important;
+}
+
 // title banner styling for over banner-image
-.title-div{
+.title-div {
   position: absolute;
   top: 25%;
   background-color: $light;
@@ -154,22 +174,25 @@ img.home-img{
   padding-bottom: 1rem;
 }
 
-@include media-breakpoint-up(sm)
-{
-  .hamburger-menu{
+.interview-height {
+  height: 100%;
+}
+
+@include media-breakpoint-up(sm) {
+  .hamburger-menu {
     display: none;
   }
 
-  .nav-list{
+  .nav-list {
     display: flex !important;
   }
 
-  .title-logo{
+  .title-logo {
     justify-content: left;
   }
 
-    // title card styling
-  .title-div{
+  // title card styling
+  .title-div {
     position: absolute;
     top: 40%;
     background-color: $light;
@@ -182,24 +205,36 @@ img.home-img{
     padding-bottom: 1rem;
   }
 
-  .banner-image{
-    height: auto;
+  .shift-up {
+    margin-top: -40px !important;
   }
 }
 
-@include media-breakpoint-up(md){
-  .footer-copyright{
+@include media-breakpoint-up(md) {
+  .footer-copyright {
     justify-content: end;
   }
 
-  .footer-img{
+  .footer-img {
     justify-content: start;
     padding-bottom: 0px;
   }
 }
 
+@include media-breakpoint-up(lg) {
+  .scroll-area {
+    height: inherit;
+    overflow-y: scroll !important;
+    overflow: hidden;
+  }
+
+  .interview-height {
+    height: 76vh;
+  }
+}
+
 html {
-  height:100vh;
+  height: 100vh;
 }
 
 $border-color: $primary;

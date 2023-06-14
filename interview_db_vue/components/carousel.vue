@@ -18,7 +18,13 @@
     <div class="d-flex card-clickable">
         <div class="row p-0 m-0">
           <div class="col-md-5 col-sm-6 col-12 row-xs ps-4 img-div shift-up">
-            <img src="../css/quad.png" class="listing-img" />
+            <span v-if="image">
+              <img :src="image" style="object-fit:cover" class="listing-img img-fluid" :alt="altText" />
+            </span>
+            <span v-else>
+              <img src="../images/placeholder.png" style="object-fit:cover" class="listing-img img-fluid"
+                alt="a placeholder image" />
+            </span>
           </div>
 
           <div class="col-md-7 col-sm-6 col-12 ps-4 d-flex align-items-center">
@@ -49,7 +55,7 @@
           </div>
       </div>
     </div>
-    
+
   </button>
 </template>
 
@@ -65,6 +71,21 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  created() {
+    this.loadImage();
+  },
+  methods: {
+    async loadImage() {
+      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
+        return;
+      }
+
+      this.altText = this.interviewInfo.image_alt_text;
+      // create blob for image
+      const blob = await get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
+      this.image = blob.data;
+      this.image = URL.createObjectURL(this.image);
+    },
+  },
 };
 </script>
