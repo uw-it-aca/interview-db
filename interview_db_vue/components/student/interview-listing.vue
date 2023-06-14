@@ -1,4 +1,5 @@
-// interview-listing.vue // shown on full students page
+// interview-listing.vue 
+// shown on full students page or individual topic page
 
 <template>
   <button type="button" class="btn-card mt-5" style="height:fit-content;" @click="$router.push({
@@ -36,7 +37,12 @@
         </div>
 
         <div class="card-text px-4">
-          <p class="display-6 fs-5">"{{ interviewInfo.pull_quote }}"</p>
+          <p class="display-6 fs-5">
+            <span v-if=story>"{{ story }}"
+            </span>
+            <span v-else>"{{ interviewInfo.pull_quote }}"
+            </span>
+          </p>
         </div>
         <div class="d-flex justify-content-end">
           <u class="text-purple" style="display:inline;">Read More</u>
@@ -57,6 +63,10 @@ export default {
       type: Object,
       required: true,
     },
+    story: {
+      type: String,
+      required: false,
+    }
   },
   data() {
     return {
