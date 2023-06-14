@@ -59,7 +59,7 @@
 
         <div class="card-text px-4">
           <p v-if="carousel" class="display-6 fs-6">"{{ interviewInfo.pull_quote }}"</p>
-          <p v-if=story class="display-6 fs-5">"{{ story }}"</p>
+          <p v-else-if=story class="display-6 fs-5">"{{ story }}"</p>
           <p v-else class="display-6 fs-5">"{{ interviewInfo.pull_quote }}"</p>
         </div>
 
