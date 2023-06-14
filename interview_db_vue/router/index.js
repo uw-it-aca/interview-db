@@ -17,7 +17,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/collections/:slug?",
+    path: "/collections/:id?",
     name: "Collections",
     component: Collections,
     props: true,
