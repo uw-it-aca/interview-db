@@ -1,5 +1,5 @@
 // interview-listing.vue 
-// shown on full students page or individual topic page
+// shown on full students page, individual topic page, or home page as random carousel cards
 
 <template>
   <button type="button" class="btn-card mt-5" style="height:fit-content;" @click="$router.push({
@@ -12,30 +12,22 @@
     <div class="d-flex card-clickable">
       <div class="row p-0 m-x-0">
         <div v-if="story" class="col-md-3 col-sm-3 row-xs mx-auto ps-4 img-div shift-up">
-          <span v-if="image" style="width: 100%;">
-            <img :src="image" style="object-fit:cover" class="listing-img img-fluid" :alt="altText" />
-          </span>
-          <span v-else style="width: 100%;">
-            <img src="../../images/placeholder.png" style="object-fit:cover;" class="listing-img img-fluid"
-              alt="a placeholder image" />
-          </span>
+          <img v-if="image" :src="image" style="width:100%; object-fit:cover" class="listing-img img-fluid"
+            :alt="altText" />
+          <img v-else src="../../images/placeholder.png" style="width: 100%; object-fit:cover;"
+            class="listing-img img-fluid" alt="a placeholder image" />
         </div>
 
         <div v-else class="col-md-5 col-sm-6 row-xs mx-auto ps-4 img-div shift-up">
-          <span v-if="image" style="width: 100%;">
-            <img :src="image" style="object-fit:cover" class="listing-img img-fluid" :alt="altText" />
-          </span>
-          <span v-else style="width: 100%;">
-            <img src="../../images/placeholder.png" style="object-fit:cover;" class="listing-img img-fluid"
-              alt="a placeholder image" />
-          </span>
+          <img v-if="image" :src="image" style="width:100%; object-fit:cover" class="listing-img img-fluid"
+            :alt="altText" />
+          <img v-else src="../../images/placeholder.png" style="width: 100%; object-fit:cover;"
+            class="listing-img img-fluid" alt="a placeholder image" />
         </div>
-        
+
         <div v-if="story" class="col-md-9 col-sm-9 ps-4 m-0">
           <div class="row">
-            <span v-if="!carousel">
-              <p class="fs-6 text-end">{{ interviewDate }}</p>
-            </span>
+            <p v-if="!carousel" class="fs-6 text-end">{{ interviewDate }}</p>
             <h2 class="card-title fw-bold text-purple display-6 mb-2">
               {{ interviewInfo.student.first_name }}
             </h2>
@@ -51,9 +43,7 @@
 
         <div v-else class="col-md-7 col-sm-6 ps-4 m-0">
           <div class="row">
-            <span v-if="!carousel">
-              <p class="fs-6 text-end">{{ interviewDate }}</p>
-            </span>
+            <p v-if="!carousel" class="fs-6 text-end">{{ interviewDate }}</p>
             <h2 class="card-title fw-bold text-purple display-6 mb-2">
               {{ interviewInfo.student.first_name }}
             </h2>
@@ -68,17 +58,9 @@
         </div>
 
         <div class="card-text px-4">
-          <span v-if="carousel">
-            <p class="display-6 fs-6">"{{ interviewInfo.pull_quote }}"</p>
-          </span>
-          <span v-else>
-            <p class="display-6 fs-5">
-              <span v-if=story>"{{ story }}"
-              </span>
-              <span v-else>"{{ interviewInfo.pull_quote }}"
-              </span>
-            </p>
-          </span>
+          <p v-if="carousel" class="display-6 fs-6">"{{ interviewInfo.pull_quote }}"</p>
+          <p v-if=story class="display-6 fs-5">"{{ story }}"</p>
+          <p v-else class="display-6 fs-5">"{{ interviewInfo.pull_quote }}"</p>
         </div>
 
         <div class="d-flex justify-content-end">
