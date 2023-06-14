@@ -15,7 +15,7 @@
             <img :src="image" style="object-fit:cover" class="listing-img img-fluid" :alt="altText" />
           </span>
           <span v-else style="width: 100%;">
-            <img src="../../css/blossom.png" style="object-fit:cover;" class="listing-img img-fluid" alt="a placeholder image" />
+            <img src="../../images/placeholder.png" style="object-fit:cover;" class="listing-img img-fluid" alt="a placeholder image" />
           </span>
         </div>
 

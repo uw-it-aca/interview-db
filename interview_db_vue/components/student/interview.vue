@@ -11,7 +11,7 @@
               :alt="altText" />
           </span>
           <span v-else style="width: 100%">
-            <img src="../../images/test.jpg" class="img-fluid mx-auto position-sticky"
+            <img src="../../images/placeholder.png" class="img-fluid mx-auto position-sticky"
               style="height: 100%; object-fit: cover; width: 100%" />
           </span>
         </div>
