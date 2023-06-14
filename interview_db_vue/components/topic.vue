@@ -27,20 +27,19 @@ export default {
     CollectionListing,
   },
   props: {
-    topicInfo: {
-      type: Object,
-      required: false,
-    },
   },
   data() {
     return {
       stories: [],
+      topicInfo: [],
     };
   },
   methods: {
     async loadData() {
-      const response = await get("/api/collections/" + this.topicInfo.id + "/");
+      const response = await get("/api/collections/" + this.$route.params.id + "/stories/");
       this.stories = response.data;
+      const info = await get("/api/collections/" + this.$route.params.id + "/");
+      this.topicInfo = info.data;
     },
   },
   created() {
