@@ -8,8 +8,8 @@
     </template>
 
     <template #content>
-      <div v-if="collectionsId">
-        <Topic :topicInfo="singleCollection" />
+      <div v-if="topicSlug">
+        <Topic />
       </div>
 
       <div v-else>
@@ -23,10 +23,9 @@
           <div v-for="collection in collections" :key="collection.id" class = "col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
             <div class="d-flex align-items-stretch flex-fill">
               <button type="button" class="bg-light p-4 mx-2 my-3 flex-fill" @click="$router.push({
-                name: 'Collections', params: {
-                  id: collection.id, topic: collection.topic,
-                  slug: collection.slug, singleCollection: JSON.stringify(collection)
-                }
+                name: 'Collections', 
+                params: {id: collection.id},
+                query: {topic: collection.slug}
               })">
                 <div class="text-start collection-button d-flex justify-content-end row">
                   <div class="col-11">
@@ -60,10 +59,6 @@ export default {
     Topic,
   },
   props: {
-    singleCollection: {
-      type: Object,
-      required: false,
-    }
   },
   data() {
     return {
@@ -75,9 +70,9 @@ export default {
     collectionsId() {
       return this.$route.params.id;
     },
-    singleCollection() {
-      return JSON.parse(this.$route.params.singleCollection);
-    }
+    topicSlug() {
+      return this.$route.query.topic;
+    },
   },
   created() {
     this.loadData();
