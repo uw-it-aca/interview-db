@@ -161,7 +161,10 @@ class RandomStudentsView(APIView):
     """
 
     def get(self, request):
-        queryset = Interview.objects.order_by("?")[:3]
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0')
         serializer = InterviewSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -188,6 +191,15 @@ class ImageView(APIView):
     def get(self, request, id):
         interview = Interview.objects.get(id=id)
         img = interview.image
+        if img == '':
+            return Response('Interview has no image',
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        if interview.no_identifying_photo:
+            if interview.image_is_not_identifying is False:
+                return Response('Image not shown for privacy',
+                                status=status.HTTP_400_BAD_REQUEST)
+
         response = HttpResponse(FileWrapper(img))
         return response
 

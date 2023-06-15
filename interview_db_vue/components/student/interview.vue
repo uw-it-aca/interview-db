@@ -110,12 +110,16 @@ export default {
       if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
         return;
       }
+      if (this.interviewInfo.image == null) return;
       this.altText = this.interviewInfo.image_alt_text;
 
       // create blob for image
-      const blob = await get("/api/students/" + this.interviewId + "/image/", { responseType: 'blob' });
-      this.image = blob.data;
-      this.image = URL.createObjectURL(this.image);
+      try {
+        const blob = await get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
+        this.image = URL.createObjectURL(blob.data);
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   created() {
