@@ -214,7 +214,6 @@
         "pk": 1,
         "fields": {
             "topic": "Getting Help",
-            "slug": "getting-help",
             "codes": [
                 4,
                 12,
@@ -229,7 +228,6 @@
         "pk": 2,
         "fields": {
             "topic": "Advice",
-            "slug": "advice",
             "codes": [],
             "subcodes": [
                 6
@@ -242,7 +240,6 @@
         "pk": 3,
         "fields": {
             "topic": "Working Towards Goals",
-            "slug": "working-towards-goals",
             "codes": [],
             "subcodes": [
                 2,
@@ -258,7 +255,6 @@
         "pk": 4,
         "fields": {
             "topic": "Coming to College",
-            "slug": "coming-to-college",
             "codes": [
                 6,
                 5,
@@ -274,7 +270,6 @@
         "pk": 5,
         "fields": {
             "topic": "Choosing a Major",
-            "slug": "choosing-a-major",
             "codes": [
                 7,
                 8
@@ -288,7 +283,6 @@
         "pk": 6,
         "fields": {
             "topic": "Finding Community",
-            "slug": "finding-community",
             "codes": [
                 15
             ],
@@ -301,7 +295,6 @@
         "pk": 7,
         "fields": {
             "topic": "Self Reflection",
-            "slug": "self-reflection",
             "codes": [
                 16,
                 17,
@@ -318,7 +311,6 @@
         "pk": 8,
         "fields": {
             "topic": "Moving Forward",
-            "slug": "moving-forward",
             "codes": [
                 9,
                 10,

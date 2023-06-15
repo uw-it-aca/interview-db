@@ -80,7 +80,19 @@ class CollectionListView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class CollectionDetailView(APIView):
+class CollectionInfoView(APIView):
+    """
+    API endpoint returning basic info of single collection
+    """
+
+    def get(self, request, id):
+        queryset = Collection.objects.get(id=id)
+        serializer = CollectionSerializer(queryset, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
+class CollectionStoryView(APIView):
     """
     API endpoint returning single collection of stories
     """
@@ -178,13 +190,6 @@ class ImageView(APIView):
         img = interview.image
         response = HttpResponse(FileWrapper(img))
         return response
-
-    # require admin auth
-    def delete(self, request, id):
-        interview = Interview.objects.get(id=id)
-        img = interview.img
-        img.delete()
-        return HttpResponse(status=200)
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')

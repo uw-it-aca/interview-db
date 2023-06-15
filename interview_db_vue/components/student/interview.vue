@@ -7,18 +7,20 @@
     {{ studentInfo }}
     {{ studentInfo.major.full_title }}
     <div class="card border-0">
-      <div class="row g-0 mx-auto">
-        <div class="col-4">
-          <span v-if="image">
-            <img :src="image" class="img-fluid mx-auto d-block" alt={{altText}}/>
+      <div class="row g-0 mx-auto interview-height">
+        <div class="col-lg-6 col-12" style="height: inherit;">
+          <span v-if="image" style="width: 100%">
+            <img :src="image" class="img-fluid mx-auto position-sticky" style="height: 100%; object-fit: cover;"
+              :alt="altText" />
           </span>
-          <span v-else>
-            <img src="../../css/quad.png" class="img-fluid mx-auto d-block" alt="a placeholder image"/>
+          <span v-else style="width: 100%">
+            <img src="../../images/placeholder.png" class="img-fluid mx-auto position-sticky"
+              style="height: 100%; object-fit: cover; width: 100%" />
           </span>
         </div>
 
-        <div class="col-8 p-5">
-          <h2 class="card-title display-6 mb-2 fw-bold">{{ studentInfo.first_name }}</h2>
+        <div class="col-lg-6 col-12 p-5 scroll-area">
+          <h2 class="card-title display-4 mb-2 text-gold fw-bold">{{ studentInfo.first_name }}</h2>
           <div class="row">
             <div class="col">
               <span v-if="interviewInfo.standing">
@@ -36,17 +38,17 @@
 
           <div class="border-top border-primary py-4">
             <p class="text-start">They talk about...</p>
-            <div class="justify-content-start col-10">
-              <span v-for="story in stories" :key="story.id">
-                <span v-for="collection in story.code" :key="collection.id">
-                  <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
-                    {{ collection.code }}
-                  </button>
-                </span>
+            <div class="justify-content-start col-12">
+              <span v-for="topic in topics" :key="topic.topic">
+                <input type="checkbox" class="btn-check btn-outline-success" :id=topic.id autocomplete="off">
+                <label class="btn btn-outline-success button-outline m-1" :for=topic.id>
+                  {{ topic.topic }}
+                </label>
               </span>
-              <button type="button" class="btn btn-outline-info ms-3" data-bs-toggle="button" autocomplete="off">
+              <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
+              <label class="btn btn-outline-success m-1" for="clear-all">
                 Clear All
-              </button>
+              </label>
             </div>
 
             <div v-for="story in stories" :key="story.id">
@@ -85,6 +87,7 @@ export default {
     return {
       stories: [],
       interviewInfo: [],
+      topics: [],
       studentInfo: [],
       interviewDate: null,
       image: null,
@@ -97,7 +100,10 @@ export default {
       this.stories = response.data;
       this.interviewInfo = this.stories[0].interview;
       this.studentInfo = this.interviewInfo.student;
-      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');  
+      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
+
+      const topics = await get("/api/students/" + this.interviewId + "/topics/");
+      this.topics = topics.data;
 
       if (this.interviewInfo.image) {
         this.loadImage();
@@ -110,7 +116,7 @@ export default {
       this.altText = this.interviewInfo.image_alt_text;
 
       // create blob for image
-      const blob = await get("/api/students/"+ this.interviewId + "/image/", {responseType: 'blob'});
+      const blob = await get("/api/students/" + this.interviewId + "/image/", { responseType: 'blob' });
       this.image = blob.data;
       this.image = URL.createObjectURL(this.image);
     },
