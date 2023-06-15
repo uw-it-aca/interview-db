@@ -164,7 +164,7 @@ class RandomStudentsView(APIView):
         queryset = Interview.objects.exclude(
             pull_quote__isnull=True).exclude(
             pull_quote__exact='').exclude(
-            pull_quote__exact='0').count()
+            pull_quote__exact='0')
         serializer = InterviewSerializer(queryset, many=True)
         return Response(serializer.data)
 
