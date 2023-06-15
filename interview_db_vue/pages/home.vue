@@ -29,12 +29,12 @@
                 <div v-for="student, index in randomStudents" :key="student.id">
                   <div v-if="index == 0">
                     <div class="carousel-item active justify-content-center">
-                      <StudentCarousel :studentInfo="student" class="justify-content-center mx-auto" />
+                      <InterviewListing :interviewInfo="student" :carousel=true class="justify-content-center mx-auto" />
                     </div>
                   </div>
                   <div v-else>
                     <div class="carousel-item justify-content-center">
-                      <StudentCarousel :studentInfo="student" class="justify-content-center mx-auto"/>
+                      <InterviewListing :interviewInfo="student" :carousel=true class="justify-content-center mx-auto"/>
                     </div>
                   </div>
                 </div>
@@ -93,24 +93,16 @@
 
 <script>
 import Layout from "../layout.vue";
-import StudentCard from "../components/student/student-card.vue";
-import ProcessCard from "../components/process.vue";
-import StudentCarousel from "../components/carousel.vue";
+import InterviewListing from "../components/student/interview-listing.vue";
 import { get } from "axios";
 
 export default {
   name: "PagesHome",
   components: {
     layout: Layout,
-    StudentCard,
-    ProcessCard,
-    StudentCarousel,
+    InterviewListing,
   },
   props: {
-    singleStudent: {
-      type: String,
-      required: false,
-    },
   },
   data() {
     return {
@@ -120,11 +112,6 @@ export default {
       studentCount: 0,
     };
   },
-  // computed: {
-  //  singleStudentInfo() {
-  //    return JSON.parse(this.$route.params.singleStudent);
-  //  },
-  //},
   created() {
     this.loadData();
   },
