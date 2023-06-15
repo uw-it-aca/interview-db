@@ -67,10 +67,10 @@ export default {
     return {
       pageTitle: "Students",
       students: [],
+      filtered: [],
       filters: {
         year: this.$route.query.year,
         major: this.$route.query.major,
-        trait: this.$route.query.trait,
         topic: this.$route.query.topic,
       },
     };
@@ -86,29 +86,20 @@ export default {
     updateFilters() {
       this.filters.year = this.$route.query.year;
       this.filters.major = this.$route.query.major;
-      this.filters.trait = this.$route.query.trait;
       this.filters.topic = this.$route.query.topic;
     },
-    test() {
-      if (this.filters.major !== undefined) {
-        return JSON.parse(this.filters.major);
-      }
-    },
     filteredStudents() {
-      // students = this.students.filter(student => {
-      //   for (var key in this.filters) {
-      //     if (this.filters.key.includes(student.key)) {
-      //       return true;
-      //     }
-      //     return false;
-      //   }
-      // });
-      
-      // return this.students.filter(student => this.filters.year.includes(student.standing));
-      if (this.filters.year !== undefined || this.filters.major !== undefined || this.filters.topic !== undefined) {
-        return this.students.filter(student => this.filters.major.includes(student.major.full_title));
+      this.filtered = this.students;
+
+      if (this.filters.year !== undefined && this.filters.year.length > 0) {
+        this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
       }
-      return this.students;
+
+      if (this.filters.major !== undefined && this.filters.major.length > 0) {
+        this.filtered = this.filtered.filter(student => this.filters.major.includes(student.declared_major));
+      }
+      
+      return this.filtered;
     },
   },
   created() {
