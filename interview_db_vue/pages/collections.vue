@@ -9,7 +9,7 @@
 
     <template #content>
       <div v-if="topicSlug">
-        <Topic :topicInfo="singleCollection" />
+        <Topic />
       </div>
 
       <div v-else>
