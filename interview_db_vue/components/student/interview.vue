@@ -37,9 +37,10 @@
           <div class="border-top border-primary py-4">
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-12">
-              <span v-for="topic in topics" :key="topic.topic">
-                <input type="checkbox" class="btn-check btn-outline-success" :id=topic.id autocomplete="off">
-                <label class="btn btn-outline-success button-outline m-1" :for=topic.id>
+              <span v-for="topic in topics">
+                <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic"
+                v-model="filters" autocomplete="off">
+                <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
@@ -49,14 +50,14 @@
               </label>
             </div>
 
-            <div v-for="story in stories" :key="story.id">
+            <div v-for="story in filteredStories" :key="story.id">
               <div class="border-top border-primary pt-4 pb-2">
                 <p class="display-6 fs-5">
                   {{ story.story }}
                 </p>
                 <p class="fst-italic text-end">
-                  <span v-for="collection in story.code" :key="collection.id">
-                    #{{ collection.code }}
+                  <span v-for="collection in story.collections" :key="collection.id">
+                    #{{ collection.topic }}
                   </span>
                 </p>
               </div>
@@ -79,11 +80,21 @@ export default {
   computed: {
     interviewId() {
       return this.$route.params.id;
+    },
+    filteredStories() {
+      this.filtered = this.stories;
+      if (this.filters !== undefined && this.filters.length > 0) {
+        const included = (collection) => this.filters.includes(collection.topic)
+        this.filtered = this.filtered.filter(story => story.collections.some(included))
+      }
+      return this.filtered;
     }
   },
   data() {
     return {
       stories: [],
+      filtered: [],
+      filters: [],
       interviewInfo: [],
       topics: [],
       studentInfo: [],
@@ -125,6 +136,6 @@ export default {
   },
   created() {
     this.loadData();
-  }
+  },
 };
 </script>

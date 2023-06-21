@@ -19,7 +19,6 @@
               <div class="row">
                 <div class="col-4 d-none d-lg-block">
                   <StudentFilter @clicked="updateFilters" />
-                  <!-- {{ filters }} -->
                 </div>
 
                 <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
@@ -30,6 +29,7 @@
                     </div>
                   </router-link>
                   <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
+                    {{ student.collections }}
                     <InterviewListing :interviewInfo="student" class="mb-5" />
                   </div>
                 </div>
@@ -67,6 +67,7 @@ export default {
     return {
       pageTitle: "Students",
       students: [],
+      collections: [],
       filtered: [],
       filters: {
         year: this.$route.query.year,
@@ -96,30 +97,19 @@ export default {
       }
 
       if (this.filters.major !== undefined && this.filters.major.length > 0) {
-        this.filtered = this.filtered.filter(student => this.filters.major.includes(student.declared_major));
+        const included = (major) => this.filters.major.includes(major.full_title)
+        this.filtered = this.filtered.filter(student => student.major.some(included))
       }
 
-      // if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
-      //   this.console.log("hello")
-      //   for (const student of this.filtered) {
-      //     this.console.log(student)
-      //     this.console.log(student.id);
-      //     const response = await get("/api/students/" + student.id + "/topics/");
-      //     const topics = response.data;
-      //     this.console.log(topics);
-
-      //     const included = (topic) => this.filters.topic.includes(topic)
-      //     if (!topics.some(included)) {
-      //       this.console.log(student);
-      //       var index = this.filtered.indexOf(student)
-      //       if (index > -1) {
-      //         this.filtered.splice(index, 1);
-      //       }
-      //     }
-      //   }
-      // }
+      if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
+        this.console.log("hello")
+        this.console.log(this.filters.topic)
+        const included = (topic) => this.filters.topic.includes(topic.slug)
+        this.filtered = this.filtered.filter(student => student.collections.some(included))
+        // this.filtered = this.filtered.filter(student => this.filters.topic.every(
+        //   f => student.collections.includes({"slug": "f"})))
+      }
       
-      this.console.log(this.filtered);
       return this.filtered;
     },
   },

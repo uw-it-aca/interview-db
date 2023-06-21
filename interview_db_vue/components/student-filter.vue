@@ -89,7 +89,7 @@
           <div class="card card-body border-0 mt-0">
             <div v-for="topic in data.topics" :key="topic.id">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" :value=topic id="topic" v-model="filters.topic"
+                <input class="form-check-input" type="checkbox" :value=topic.slug id="topic" v-model="filters.topic"
                   @change="updateQuery($event)">
                 <label class="form-check-label display-6 fs-6" for="topic">
                   {{ topic.topic }}
@@ -133,13 +133,13 @@ export default {
       this.data.topics = collections.data;
     },
     updateQuery(event) {
-      const query = {}
+      const query = {};
       Object.entries(this.filters).forEach(([key, value]) => {
         if (value) {
-          query[key] = (value)
+          query[key] = (value);
         }
       })
-      this.$router.push({ query })
+      this.$router.push({ query });
     }
   },
 

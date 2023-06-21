@@ -79,25 +79,36 @@ class InterviewCollectionSerializer(serializers.ModelSerializer):
 
     def get_collections(self, Interview):
         interview = Story.objects.filter(interview__id=Interview.id)
-        queryset = []
+        queryset = set()
         list = set()
-        for s in interview:
-            if (s.code.all().count() > 0):
-                # print(s.code.all())
-                list.add(s.code.all())
 
-            if (s.subcode.all().count() > 0):
-                # print(s.subcode.all())
-                list.add(s.subcode.all())
-        
+        # for s in interview:
+        #     for code in s.code.all():
+        #         if code not in list:
+        #             list.add(code)
+        #             for c in Collection.objects.all():
+        #                 if code in c.codes.all() or code in c.subcodes.all():
+        #                     queryset.add(c)
+        #     for code in s.subcode.all():
+        #         if code not in list:
+        #             list.add(code)
+        #             for c in Collection.objects.all():
+        #                 if code in c.codes.all() or code in c.subcodes.all():
+        #                     queryset.add(c)
+
+        for s in interview:
+            for c in s.code.all():
+                list.add(c)
+            for c in s.subcode.all():
+                list.add(c)
+
         for code in list:
             for c in Collection.objects.all():
-                if code[0] in c.codes.all() or code[0] in c.subcodes.all():
-                    queryset.append(c)
+                if code in c.codes.all() or code in c.subcodes.all():
+                    queryset.add(c)
 
         print("here")
-        queryset = [*set(queryset)]
-        serializer = CollectionSerializer(queryset, many=True)
+        serializer = CollectionFilterSerializer(queryset, many=True)
         return serializer.data
 
     class Meta:
@@ -129,6 +140,20 @@ class StorySerializer(serializers.ModelSerializer):
     interview = InterviewSerializer(read_only=True)
     code = CodeSerializer(many=True, read_only=True)
     subcode = SubCodeSerializer(many=True, read_only=True)
+    collections = serializers.SerializerMethodField()
+
+    def get_collections(self, Story):
+        collections = set()
+        for code in Story.code.all():
+            for c in Collection.objects.all():
+                if code in c.codes.all() or code in c.subcodes.all():
+                    collections.add(c)
+        for code in Story.subcode.all():
+            for c in Collection.objects.all():
+                if code in c.codes.all() or code in c.subcodes.all():
+                    collections.add(c)
+        serializer = CollectionSerializer(collections, many=True)
+        return serializer.data
 
     class Meta:
         model = Story
@@ -137,7 +162,8 @@ class StorySerializer(serializers.ModelSerializer):
                   'code',
                   'subcode',
                   'story',
-                  'story_order_position']
+                  'story_order_position',
+                  'collections']
 
 
 class CodingSerializer(serializers.ModelSerializer):
@@ -165,3 +191,9 @@ class CollectionSerializer(serializers.ModelSerializer):
                   'codes',
                   'subcodes',
                   'question']
+
+
+class CollectionFilterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Collection
+        fields = ['slug']
