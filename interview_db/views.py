@@ -56,6 +56,34 @@ class InterviewListView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
+class InterviewCollectionListView(APIView):
+    """
+    API endpoint returning list of interviews
+    """
+
+    def get(self, request):
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').order_by('-date')
+        serializer = InterviewCollectionSerializer(
+            queryset, many=True, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
+class InterviewDetailView(APIView):
+    """
+    API endpoint returning single interview, made up of its matching stories
+    """
+
+    def get(self, request, id):
+        queryset = Story.objects.filter(interview__id=id)
+        serializer = StorySerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewDetailView(APIView):
     """
     API endpoint returning single interview, made up of its matching stories

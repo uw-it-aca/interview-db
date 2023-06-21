@@ -98,7 +98,28 @@ export default {
       if (this.filters.major !== undefined && this.filters.major.length > 0) {
         this.filtered = this.filtered.filter(student => this.filters.major.includes(student.declared_major));
       }
+
+      // if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
+      //   this.console.log("hello")
+      //   for (const student of this.filtered) {
+      //     this.console.log(student)
+      //     this.console.log(student.id);
+      //     const response = await get("/api/students/" + student.id + "/topics/");
+      //     const topics = response.data;
+      //     this.console.log(topics);
+
+      //     const included = (topic) => this.filters.topic.includes(topic)
+      //     if (!topics.some(included)) {
+      //       this.console.log(student);
+      //       var index = this.filtered.indexOf(student)
+      //       if (index > -1) {
+      //         this.filtered.splice(index, 1);
+      //       }
+      //     }
+      //   }
+      // }
       
+      this.console.log(this.filtered);
       return this.filtered;
     },
   },
@@ -107,7 +128,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await get("/api/students/");
+      const response = await get("/api/students/collections/");
       this.students = response.data;
     },
   },

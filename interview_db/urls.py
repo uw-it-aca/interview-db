@@ -38,6 +38,8 @@ urlpatterns += [
     re_path(r'^admin', admin.site.urls),
     re_path(r"^(students|collections|about)$", DefaultPageView.as_view()),
     path('api/students/', InterviewListView.as_view(), name="student-list"),
+    path('api/students/collections/', InterviewCollectionListView.as_view(),
+         name="student-list"),
     path('api/students/<int:id>/', InterviewDetailView.as_view(),
          name="student-detail"),
     path('api/students/<int:id>/image/', ImageView.as_view(),

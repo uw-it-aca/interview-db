@@ -4,8 +4,6 @@
 <template>
 
   <div class="mt-4 pt-4">
-    {{ studentInfo }}
-    {{ studentInfo.major.full_title }}
     <div class="card border-0">
       <div class="row g-0 mx-auto interview-height">
         <div class="col-lg-6 col-12" style="height: inherit;">
@@ -105,7 +103,7 @@ export default {
       const topics = await get("/api/students/" + this.interviewId + "/topics/");
       this.topics = topics.data;
 
-      if (this.interviewInfo.image) {
+      if (this.interviewInfo.image != null) {
         this.loadImage();
       }
     },
@@ -113,7 +111,7 @@ export default {
       if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
         return;
       }
-      if (this.interviewInfo.image == null) return;
+
       this.altText = this.interviewInfo.image_alt_text;
 
       // create blob for image
