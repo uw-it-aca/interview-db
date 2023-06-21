@@ -45,7 +45,7 @@
                 </label>
               </span>
               <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
-              <label class="btn btn-outline-success m-1" for="clear-all">
+              <label class="btn btn-outline-success m-1" for="clear-all" @change="clearFilters">
                 Clear All
               </label>
             </div>
@@ -133,6 +133,9 @@ export default {
         console.log(err);
       }
     },
+    clearFilters() {
+      this.filters = [];
+    }
   },
   created() {
     this.loadData();
