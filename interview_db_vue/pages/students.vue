@@ -102,14 +102,13 @@ export default {
       }
 
       if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
-        this.console.log("hello")
-        this.console.log(this.filters.topic)
         const included = (topic) => this.filters.topic.includes(topic.slug)
         this.filtered = this.filtered.filter(student => student.collections.some(included))
         // this.filtered = this.filtered.filter(student => this.filters.topic.every(
         //   f => student.collections.includes({"slug": "f"})))
       }
-      
+
+      this.console.log(this.filtered)
       return this.filtered;
     },
   },
@@ -118,8 +117,10 @@ export default {
   },
   methods: {
     async loadData() {
+      console.time(get)
       const response = await get("/api/students/collections/");
       this.students = response.data;
+      console.timeEnd(get)
     },
   },
 };

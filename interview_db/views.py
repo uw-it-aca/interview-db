@@ -152,9 +152,13 @@ class InterviewTopicsView(APIView):
             for c in s.subcode.all():
                 list.add(c)
 
-        for code in list:
-            for c in Collection.objects.all():
-                if code in c.codes.all() or code in c.subcodes.all():
+        for c in Collection.objects.all():
+            for code in c.codes.all():
+                if code in list:
+                    queryset.add(c)
+                    continue
+            for code in c.subcodes.all():
+                if code in list:
                     queryset.add(c)
 
         serializer = CollectionSerializer(queryset, many=True)
