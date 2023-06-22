@@ -3,7 +3,7 @@
 
 <template>
   <div class="card">
-    <h2 class="m-3 fw-bold display-6">Filter Stories</h2>
+    <h2 class="m-3 fw-bold display-6 text-purple">Filter Stories</h2>
     <div class="card-body">
       <div class="mb-4">
         <p class="display-4 fw-bold fs-5 mb-0" href="#year" aria-expanded="false" aria-controls="year">
@@ -99,9 +99,10 @@
           </div>
         </div>
       </div>
-      <button type="button" class="d-lg-none btn btn-purple" @click="$router.push('students')">
-        Submit
-      </button>
+      <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
+      <label class="btn btn-gold" for="clear-all" @click="clearFilters">
+        Clear All
+      </label>
     </div>
   </div>
 </template>
@@ -140,9 +141,14 @@ export default {
         }
       })
       this.$router.push({ query })
+    },
+    clearFilters() {
+      this.filters.year = [];
+      this.filters.major = [];
+      this.filters.topic = [];
+      this.$router.push({});
     }
   },
-
   created() {
     this.loadData();
     this.$router.push({});
