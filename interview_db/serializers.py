@@ -84,7 +84,7 @@ class InterviewCollectionSerializer(serializers.ModelSerializer):
                 if code in list:
                     queryset.add(c)
 
-        serializer = CollectionSerializer(queryset, many=True)
+        serializer = CollectionFilterSerializer(queryset, many=True)
         return serializer.data
 
     class Meta:

@@ -71,9 +71,9 @@
         <div id="major">
           <div class="card card-body border-0 mt-0">
             <div class="form-group">
-              <select multiple class="form-control" id="major" data-live-search="true" v-model="filters.major"
+              <select multiple class="form-select" id="major" data-live-search="true" v-model="filters.major"
                 @change="updateQuery($event)">
-                <option v-for="major in data.majors" :key="major.id">
+                <option v-for="major in data.majors">
                   {{ major.full_title }}</option>
               </select>
             </div>
@@ -139,7 +139,7 @@ export default {
           query[key] = (value);
         }
       })
-      this.$router.push({ query });
+      this.$router.push({ query })
     }
   },
 

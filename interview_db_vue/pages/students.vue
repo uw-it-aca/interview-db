@@ -92,6 +92,7 @@ export default {
       this.filtered = this.students;
 
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
+        this.console.log(this.filters.year)
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
       }
 
