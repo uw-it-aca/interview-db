@@ -81,19 +81,7 @@ class InterviewDetailView(APIView):
 
     def get(self, request, id):
         queryset = Story.objects.filter(interview__id=id)
-        serializer = StorySerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@method_decorator(group_required(front_end_group), name='dispatch')
-class InterviewDetailView(APIView):
-    """
-    API endpoint returning single interview, made up of its matching stories
-    """
-
-    def get(self, request, id):
-        queryset = Story.objects.filter(interview__id=id)
-        serializer = StorySerializer(queryset, many=True)
+        serializer = StoryTopicSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
