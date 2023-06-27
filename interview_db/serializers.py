@@ -83,6 +83,7 @@ class InterviewCollectionSerializer(serializers.ModelSerializer):
             for code in c.subcodes.all():
                 if code in list:
                     queryset.add(c)
+                    continue
 
         serializer = CollectionFilterSerializer(queryset, many=True)
         return serializer.data

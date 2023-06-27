@@ -45,7 +45,7 @@
                 </label>
               </span>
               <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
-              <label class="btn m-1" for="clear-all" @click="clearFilters">
+              <label class="btn m-1 text-gold" for="clear-all" @click="clearFilters">
                 Clear All
               </label>
             </div>

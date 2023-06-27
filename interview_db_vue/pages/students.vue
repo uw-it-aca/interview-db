@@ -76,7 +76,6 @@ export default {
     };
   },
   computed: {
-    console: () => console,
     interviewId() {
       return this.$route.params.id;
     },
@@ -92,7 +91,6 @@ export default {
       this.filtered = this.students;
 
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
-        this.console.log(this.filters.year)
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
       }
 
@@ -102,13 +100,9 @@ export default {
       }
 
       if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
-        const included = (topic) => this.filters.topic.includes(topic.slug)
-        this.filtered = this.filtered.filter(student => student.collections.some(included))
-        // this.filtered = this.filtered.filter(student => this.filters.topic.every(
-        //   f => student.collections.includes({"slug": "f"})))
+        this.filtered = this.filtered.filter(student => this.filters.topic.every(
+          f => student.collections.some((collection) => f === collection.slug)))
       }
-
-      this.console.log(this.filtered)
       return this.filtered;
     },
   },
@@ -117,10 +111,8 @@ export default {
   },
   methods: {
     async loadData() {
-      console.time(get)
       const response = await get("/api/students/collections/");
       this.students = response.data;
-      console.timeEnd(get)
     },
   },
 };

@@ -148,6 +148,7 @@ class InterviewTopicsView(APIView):
             for code in c.subcodes.all():
                 if code in list:
                     queryset.add(c)
+                    continue
 
         serializer = CollectionSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
