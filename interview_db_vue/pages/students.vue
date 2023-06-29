@@ -19,7 +19,6 @@
               <div class="row">
                 <div class="col-4 d-none d-lg-block">
                   <StudentFilter @clicked="updateFilters" />
-                  <!-- {{ filters }} -->
                 </div>
 
                 <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
