@@ -13,12 +13,14 @@
         </div>
 
         <div v-else>
+          <vue-awesome-paginate v-model="currentPage" :total-items="count" :items-per-page="perPage" :current-page="1"
+            :on-click="onClickHandler" />
           <div class="mx-auto p-5 mb-4">
             <div class="p-auto">
               <h2 class="display-5 fw-bold mb-5 text-gold">Student Stories</h2>
               <div class="row">
                 <div class="col-4 d-none d-lg-block">
-                  <StudentFilter @clicked="updateFilters" />
+                  <StudentFilter @clicked="updatedFilters" />
                   <!-- {{ filters }} -->
                 </div>
 
@@ -73,6 +75,9 @@ export default {
         trait: this.$route.query.trait,
         topic: this.$route.query.topic,
       },
+      perPage: 20,
+      currentPage: 1,
+      count: 0,
     };
   },
   computed: {
@@ -99,7 +104,35 @@ export default {
     async loadData() {
       const response = await get("/api/students/");
       this.students = response.data;
+      this.count = response.data.length;
     },
   },
 };
 </script>
+
+<style>
+  .pagination-container {
+    display: flex;
+    column-gap: 10px;
+  }
+  .paginate-buttons {
+    height: 40px;
+    width: 40px;
+    border-radius: 1px;
+    cursor: pointer;
+    background-color: #FAF8FC;
+    border: 1px solid black;
+    color: black;
+  }
+  .paginate-buttons:hover {
+    background-color: #d8d8d8;
+  }
+  .active-page {
+    background-color: #B4A67F;
+    border: 1px solid #B4A67F;
+    color: white;
+  }
+  .active-page:hover {
+    background-color: #ccbc90;
+  }
+</style>

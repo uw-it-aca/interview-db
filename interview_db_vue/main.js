@@ -5,12 +5,14 @@ import router from "./router";
 
 import VueGtag from "vue-gtag-next";
 import { Vue3Mq, MqResponsive } from "vue3-mq";
+import VueAwesomePaginate from "vue-awesome-paginate";
 
 // bootstrap js
 import "bootstrap";
 
 // custom bootstrap theming
 import "./css/custom.scss";
+import "vue-awesome-paginate/dist/style.css";
 
 const app = createApp(App);
 
@@ -39,5 +41,7 @@ app.component("mq-responsive", MqResponsive);
 
 app.use(router);
 //app.use(store);
+app.use(VueAwesomePaginate);
 
 app.mount("#app");
+
