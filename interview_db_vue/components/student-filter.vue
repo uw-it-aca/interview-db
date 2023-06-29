@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <div class="mb-4">
+      <div v-if=!story class="mb-4">
         <p class="display-4 fs-5 fw-bold mb-0" href="#collections" aria-expanded="false" aria-controls="collections">
           Story Collection
         </p>
@@ -112,6 +112,7 @@ import { get } from "axios";
 export default {
   name: "StudentFilter",
   props: {
+    story: Boolean,
   },
   data() {
     return {
@@ -128,9 +129,9 @@ export default {
   },
   methods: {
     async loadData() {
-      const majors = await get('api/majors/');
+      const majors = await get('/api/majors/');
       this.data.majors = majors.data;
-      const collections = await get('api/collections/');
+      const collections = await get('/api/collections/');
       this.data.topics = collections.data;
     },
     updateQuery(event) {
