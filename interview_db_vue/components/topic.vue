@@ -8,7 +8,11 @@
       <p class="fs-5 mb-5">{{ topicInfo.question }}</p>
       <div class="row">
         <div class="col-4 d-none d-lg-block">
+<<<<<<< HEAD
           <StudentFilter story="True" @clicked="updateFilters"/>
+=======
+          <StudentFilter @clicked="updateFilters" />
+>>>>>>> 25b8a32a4e8e7689181ccaf82312f76633eb4ee5
         </div>
         <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
           <router-link active-class="active" aria-current="page" to="/filters">
@@ -17,7 +21,11 @@
               <i class="bi bi-filter" style="font-size: 22px"></i>
             </div>
           </router-link>
+<<<<<<< HEAD
           <div class="card-columns justify-content-end" v-for="story in filteredStories">
+=======
+          <div class="card-columns justify-content-end" v-for="story in stories" :key="story.id">
+>>>>>>> 25b8a32a4e8e7689181ccaf82312f76633eb4ee5
             <InterviewListing :interviewInfo="story.interview" :story="story.story" />
           </div>
         </div>
