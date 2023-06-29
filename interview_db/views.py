@@ -189,7 +189,7 @@ class RandomStudentsView(APIView):
             pull_quote__isnull=True).exclude(
             pull_quote__exact='').exclude(
             pull_quote__exact='0').exclude(
-            signed_release_form=False)
+            signed_release_form=False).order_by("?")[:3]
         serializer = InterviewSerializer(queryset, many=True)
         return Response(serializer.data)
 
