@@ -106,6 +106,9 @@ export default {
       this.students = response.data;
       this.count = response.data.length;
     },
+    onClickHandler(page) {
+      this.currentPage = page;
+    }
   },
 };
 </script>
