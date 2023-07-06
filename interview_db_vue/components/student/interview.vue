@@ -2,7 +2,6 @@
 // full individual student interview page
 
 <template>
-
   <div class="mt-4 pt-4">
     <div class="card border-0">
       <div class="row g-0 mx-auto interview-height">
@@ -38,8 +37,8 @@
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-12">
               <span v-for="topic in topics">
-                <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic"
-                v-model="filters" autocomplete="off">
+                <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic" v-model="filters"
+                  autocomplete="off">
                 <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
@@ -55,10 +54,13 @@
                 <p class="display-6 fs-5">
                   {{ story.story }}
                 </p>
-                <p class="fst-italic text-end">
+                <p class="fst-italic text-end text-gold">
                   <span v-for="collection in story.collections" :key="collection.id">
-                    #{{ collection.topic }}
+                    <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link"
+                      style="color: #B4A67F">#{{ collection.topic }}&nbsp
+                    </router-link>
                   </span>
+
                 </p>
               </div>
             </div>

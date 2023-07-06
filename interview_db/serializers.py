@@ -170,5 +170,6 @@ class CollectionSerializer(serializers.ModelSerializer):
 class CollectionFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collection
-        fields = ['topic',
+        fields = ['id',
+                  'topic',
                   'slug']
