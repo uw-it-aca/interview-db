@@ -2,7 +2,8 @@
 // full individual student interview page
 
 <template>
-  <div>
+
+  <div class="mt-4 pt-4">
     <div class="card border-0">
       <div class="row g-0 mx-auto interview-height">
         <div class="col-lg-6 col-12" style="height: inherit;">
@@ -36,31 +37,31 @@
           <div class="border-top border-primary py-4">
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-12">
-              <span v-for="topic in topics" :key="topic.topic">
-                <input type="checkbox" class="btn-check btn-outline-success" :id=topic.id autocomplete="off">
-                <label class="btn btn-outline-success button-outline m-1" :for=topic.id>
+              <span v-for="topic in topics">
+                <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic"
+                v-model="filters" autocomplete="off">
+                <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
               <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
-              <label class="btn btn-outline-success m-1" for="clear-all">
+              <label class="btn m-1 text-gold" for="clear-all" @click="clearFilters">
                 Clear All
               </label>
             </div>
 
-            <div v-for="story in stories" :key="story.id">
+            <div v-for="story in filteredStories" :key="story.id">
               <div class="border-top border-primary pt-4 pb-2">
                 <p class="display-6 fs-5">
                   {{ story.story }}
                 </p>
                 <p class="fst-italic text-end">
-                  <span v-for="collection in story.code" :key="collection.id">
-                    #{{ collection.code }}
+                  <span v-for="collection in story.collections" :key="collection.id">
+                    #{{ collection.topic }}
                   </span>
                 </p>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -78,11 +79,21 @@ export default {
   computed: {
     interviewId() {
       return this.$route.params.id;
+    },
+    filteredStories() {
+      this.filtered = this.stories;
+      if (this.filters !== undefined && this.filters.length > 0) {
+        const included = (collection) => this.filters.includes(collection.topic)
+        this.filtered = this.filtered.filter(story => story.collections.some(included))
+      }
+      return this.filtered;
     }
   },
   data() {
     return {
       stories: [],
+      filtered: [],
+      filters: [],
       interviewInfo: [],
       topics: [],
       studentInfo: [],
@@ -102,7 +113,7 @@ export default {
       const topics = await get("/api/students/" + this.interviewId + "/topics/");
       this.topics = topics.data;
 
-      if (this.interviewInfo.image) {
+      if (this.interviewInfo.image != null) {
         this.loadImage();
       }
     },
@@ -110,7 +121,7 @@ export default {
       if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
         return;
       }
-      if (this.interviewInfo.image == null) return;
+
       this.altText = this.interviewInfo.image_alt_text;
 
       // create blob for image
@@ -121,9 +132,12 @@ export default {
         console.log(err);
       }
     },
+    clearFilters() {
+      this.filters = [];
+    }
   },
   created() {
     this.loadData();
-  }
+  },
 };
 </script>

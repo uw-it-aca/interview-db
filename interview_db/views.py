@@ -49,9 +49,27 @@ class InterviewListView(APIView):
         queryset = Interview.objects.exclude(
             pull_quote__isnull=True).exclude(
             pull_quote__exact='').exclude(
-            pull_quote__exact='0').order_by('-date')
+            pull_quote__exact='0').exclude(
+            signed_release_form=False).order_by('-date')
         serializer = InterviewSerializer(queryset, many=True,
                                          context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@method_decorator(group_required(front_end_group), name='dispatch')
+class InterviewCollectionListView(APIView):
+    """
+    API endpoint returning list of interviews
+    """
+
+    def get(self, request):
+        queryset = Interview.objects.exclude(
+            pull_quote__isnull=True).exclude(
+            pull_quote__exact='').exclude(
+            pull_quote__exact='0').exclude(
+            signed_release_form=False).order_by('-date')
+        serializer = InterviewCollectionSerializer(
+            queryset, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -63,7 +81,7 @@ class InterviewDetailView(APIView):
 
     def get(self, request, id):
         queryset = Story.objects.filter(interview__id=id)
-        serializer = StorySerializer(queryset, many=True)
+        serializer = StoryTopicSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -114,18 +132,24 @@ class InterviewTopicsView(APIView):
 
     def get(self, request, id):
         interview = Story.objects.filter(interview__id=id)
-        queryset = []
-        list = []
+        queryset = set()
+        list = set()
         for s in interview:
-            list.append(s.code.all())
-            list.append(s.subcode.all())
+            for c in s.code.all():
+                list.add(c)
+            for c in s.subcode.all():
+                list.add(c)
 
-        for code in list:
-            for c in Collection.objects.all():
-                if code[0] in c.codes.all() or code[0] in c.subcodes.all():
-                    queryset.append(c)
+        for c in Collection.objects.all():
+            for code in c.codes.all():
+                if code in list:
+                    queryset.add(c)
+                    continue
+            for code in c.subcodes.all():
+                if code in list:
+                    queryset.add(c)
+                    continue
 
-        queryset = [*set(queryset)]
         serializer = CollectionSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -164,7 +188,8 @@ class RandomStudentsView(APIView):
         queryset = Interview.objects.exclude(
             pull_quote__isnull=True).exclude(
             pull_quote__exact='').exclude(
-            pull_quote__exact='0')
+            pull_quote__exact='0').exclude(
+            signed_release_form=False).order_by("?")[:3]
         serializer = InterviewSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -172,7 +197,7 @@ class RandomStudentsView(APIView):
 @method_decorator(group_required(front_end_group), name='dispatch')
 class RecentStudentsView(APIView):
     """
-    API endpoint returning three random students
+    API endpoint returning three most recent students
     """
 
     def get(self, request):
