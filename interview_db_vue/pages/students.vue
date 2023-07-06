@@ -28,11 +28,13 @@
                       <i class="bi bi-filter" style="font-size: 22px"></i>
                     </div>
                   </router-link>
+                  <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
+                    :current-page="1" :on-click="onClickHandler" />
                   <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
                     <InterviewListing :interviewInfo="student" class="mb-5" />
                   </div>
-                  <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
-            :on-click="onClickHandler" />
+                  <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
+                    :current-page="1" :on-click="onClickHandler" />
                 </div>
               </div>
             </div>
@@ -75,7 +77,7 @@ export default {
         major: this.$route.query.major,
         topic: this.$route.query.topic,
       },
-      perPage: 12,
+      perPage: 10,
       currentPage: 1,
       count: 0,
     };
@@ -131,28 +133,32 @@ export default {
 </script>
 
 <style>
-  .pagination-container {
-    display: flex;
-    column-gap: 10px;
-  }
-  .paginate-buttons {
-    height: 40px;
-    width: 40px;
-    border-radius: 1px;
-    cursor: pointer;
-    background-color: #FAF8FC;
-    border: 1px solid black;
-    color: black;
-  }
-  .paginate-buttons:hover {
-    background-color: #d8d8d8;
-  }
-  .active-page {
-    background-color: #B4A67F;
-    border: 1px solid #B4A67F;
-    color: white;
-  }
-  .active-page:hover {
-    background-color: #ccbc90;
-  }
+.pagination-container {
+  display: flex;
+  column-gap: 10px;
+}
+
+.paginate-buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 1px;
+  cursor: pointer;
+  background-color: #FAF8FC;
+  border: 1px solid black;
+  color: black;
+}
+
+.paginate-buttons:hover {
+  background-color: #d8d8d8;
+}
+
+.active-page {
+  background-color: #B4A67F;
+  border: 1px solid #B4A67F;
+  color: white;
+}
+
+.active-page:hover {
+  background-color: #ccbc90;
+}
 </style>
