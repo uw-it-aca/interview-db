@@ -17,9 +17,13 @@
               <i class="bi bi-filter" style="font-size: 22px"></i>
             </div>
           </router-link>
+          <vue-awesome-paginate v-if="filtered.length > 0" v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
+                    :current-page="1" :on-click="onClickHandler" />
           <div class="card-columns justify-content-end" v-for="story in filteredStories">
-            <InterviewListing :interviewInfo="story.interview" :story="story.story" />
+            <InterviewListing :interviewInfo="story.interview" :story="story.story" class="mb-5"/>
           </div>
+          <vue-awesome-paginate v-if="filtered.length > 0" v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
+                    :current-page="1" :on-click="onClickHandler" />
         </div>
       </div>
     </div>
@@ -48,6 +52,9 @@ export default {
         major: this.$route.query.major,
       },
       filtered: [],
+      perPage: 18,
+      currentPage: 1,
+      count: 0,
     };
   },
   computed: {
@@ -67,19 +74,61 @@ export default {
         this.filtered = this.filtered.filter(student => student.interview.major.some(included))
       }
 
-      return this.filtered;
+      // pagination
+      const start = this.perPage * (this.currentPage - 1);
+      const end = start + this.perPage;
+      if (this.currentPage > this.filtered.length / this.perPage) {
+        this.currentPage = 1;
+        return this.filtered.slice(0, this.per)
+      }
+      return this.filtered.slice(start, end);
     }
   },
   methods: {
     async loadData() {
       const response = await get("/api/collections/" + this.$route.params.id + "/stories/");
       this.stories = response.data;
+      this.count = response.data.length;
       const info = await get("/api/collections/" + this.$route.params.id + "/");
       this.topicInfo = info.data;
     },
+    onClickHandler(page) {
+      this.currentPage = page;
+    }
   },
   created() {
     this.loadData();
   },
 };
 </script>
+
+<style>
+.pagination-container {
+  display: flex;
+  column-gap: 10px;
+}
+
+.paginate-buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 1px;
+  cursor: pointer;
+  background-color: #FAF8FC;
+  border: 1px solid black;
+  color: black;
+}
+
+.paginate-buttons:hover {
+  background-color: #d8d8d8;
+}
+
+.active-page {
+  background-color: #B4A67F;
+  border: 1px solid #B4A67F;
+  color: white;
+}
+
+.active-page:hover {
+  background-color: #ccbc90;
+}
+</style>

@@ -28,12 +28,12 @@
                       <i class="bi bi-filter" style="font-size: 22px"></i>
                     </div>
                   </router-link>
-                  <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
+                  <vue-awesome-paginate v-if="filtered.length > 0" v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
                     :current-page="1" :on-click="onClickHandler" />
                   <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
                     <InterviewListing :interviewInfo="student" class="mb-5" />
                   </div>
-                  <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
+                  <vue-awesome-paginate v-if="filtered.length > 0" v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
                     :current-page="1" :on-click="onClickHandler" />
                 </div>
               </div>
@@ -77,7 +77,7 @@ export default {
         major: this.$route.query.major,
         topic: this.$route.query.topic,
       },
-      perPage: 10,
+      perPage: 15,
       currentPage: 1,
       count: 0,
     };
@@ -111,8 +111,13 @@ export default {
           f => student.collections.some((collection) => f === collection.slug)))
       }
 
+      // pagination
       const start = this.perPage * (this.currentPage - 1);
       const end = start + this.perPage;
+      if (this.currentPage > this.filtered.length / this.perPage) {
+        this.currentPage = 1;
+        return this.filtered.slice(0, this.per)
+      }
       return this.filtered.slice(start, end);
     },
   },
