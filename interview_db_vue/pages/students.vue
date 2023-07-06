@@ -13,8 +13,6 @@
         </div>
 
         <div v-else>
-          <vue-awesome-paginate v-model="currentPage" :total-items="count" :items-per-page="perPage" :current-page="1"
-            :on-click="onClickHandler" />
           <div class="mx-auto p-5 mb-4">
             <div class="p-auto">
               <h2 class="display-5 fw-bold mb-5 text-gold">Student Stories</h2>
@@ -33,6 +31,8 @@
                   <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
                     <InterviewListing :interviewInfo="student" class="mb-5" />
                   </div>
+                  <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
+            :on-click="onClickHandler" />
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default {
         major: this.$route.query.major,
         topic: this.$route.query.topic,
       },
-      perPage: 20,
+      perPage: 12,
       currentPage: 1,
       count: 0,
     };
@@ -108,7 +108,10 @@ export default {
         this.filtered = this.filtered.filter(student => this.filters.topic.every(
           f => student.collections.some((collection) => f === collection.slug)))
       }
-      return this.filtered;
+
+      const start = this.perPage * (this.currentPage - 1);
+      const end = start + this.perPage;
+      return this.filtered.slice(start, end);
     },
   },
   created() {
