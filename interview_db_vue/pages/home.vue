@@ -78,8 +78,8 @@
         <div class="col-md-4 col-12 pt-5 mx-5 text-center">
           <h2 class="display-4 fw-bold mb-5 text-gold">Collections</h2>
           <p class="mb-4">
-            Navigate common themes among students on topics such as
-            transitioning to college and finding community, and moving forward after graduation.
+            Navigate common themes among students on topics such as<br>
+            transitioning to college, finding community, and <br> moving forward after graduation.
           </p>
           <button type="button" class="btn btn-purple" @click="$router.push('collections')">
             Browse Collections <i class="bi bi-chevron-right"></i>

@@ -104,3 +104,9 @@ export default {
   },
 };
 </script>
+
+<style>
+button.btn-card:hover {
+  background-color: #eeeaf3;
+}
+</style>

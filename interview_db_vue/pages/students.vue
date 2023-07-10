@@ -13,9 +13,15 @@
         </div>
 
         <div v-else>
+          <div style="position: relative">
+            <img class="banner-image" src="../images/mich.jpg" />
+            <div class="title-div">
+              <h1 class="text-gold fw-bold display-5">Student Stories</h1>
+            </div>
+          </div>
+
           <div class="mx-auto p-5 mb-4">
             <div class="p-auto">
-              <h2 class="display-5 fw-bold mb-5 text-gold">Student Stories</h2>
               <div class="row">
                 <div class="col-4 d-none d-lg-block">
                   <StudentFilter @clicked="updateFilters" />
@@ -32,7 +38,7 @@
                   <div v-if="filteredStudents.length > 0">
                     <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length"
                     :items-per-page="perPage" :current-page="1" :on-click="onClickHandler" />
-                    <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
+                    <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id" :hide-prev-next-when-ends="true">
                       <InterviewListing :interviewInfo="student" class="mb-5" />
                     </div>
                     <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length"
@@ -160,16 +166,16 @@ export default {
 }
 
 .paginate-buttons:hover {
-  background-color: #d8d8d8;
+  background-color: #eeeaf3;
 }
 
 .active-page {
-  background-color: #B4A67F;
-  border: 1px solid #B4A67F;
+  background-color: #4B2E83;
+  border: 1px solid #4B2E83;
   color: white;
 }
 
 .active-page:hover {
-  background-color: #ccbc90;
+  background-color: #583b92;
 }
 </style>

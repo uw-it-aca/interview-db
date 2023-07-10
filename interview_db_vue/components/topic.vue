@@ -21,7 +21,7 @@
           <div v-if="filteredStories.length > 0">
             <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
               :current-page="1" :on-click="onClickHandler" />
-            <div class="card-columns justify-content-end" v-for="story in filteredStories">
+            <div class="card-columns justify-content-end" v-for="story in filteredStories" :key="story">
               <InterviewListing :interviewInfo="story.interview" :story="story.story" class="mb-5" />
             </div>
             <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
@@ -125,16 +125,16 @@ export default {
 }
 
 .paginate-buttons:hover {
-  background-color: #d8d8d8;
+  background-color: #eeeaf3;
 }
 
 .active-page {
-  background-color: #B4A67F;
-  border: 1px solid #B4A67F;
+  background-color: #4B2E83;
+  border: 1px solid #4B2E83;
   color: white;
 }
 
 .active-page:hover {
-  background-color: #ccbc90;
+  background-color: #5b3d98;
 }
 </style>

@@ -36,17 +36,16 @@
           <div class="border-top border-primary py-4">
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-12">
-              <span v-for="topic in topics">
+              <span v-for="topic in topics" :key="topic.id">
                 <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic" v-model="filters"
                   autocomplete="off">
                 <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
-              <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
-              <label class="btn m-1 text-gold" for="clear-all" @click="clearFilters">
+              <button type="button" class="btn btn-gold" @click="clearFilters">
                 Clear All
-              </label>
+              </button>
             </div>
 
             <div v-for="story in filteredStories" :key="story.id">
@@ -143,3 +142,9 @@ export default {
   },
 };
 </script>
+<style>
+.btn-check+.btn:hover {
+  color: #FFFF !important;
+  background-color: #4B2E83 !important;
+}
+</style>
