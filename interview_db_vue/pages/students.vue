@@ -137,6 +137,14 @@ export default {
     this.loadData();
     console.log("oncreate", this.$route.query)
   },
+  watch : {
+    "$route.query.page": {
+      immediate: true,
+      handler(n) {
+        this.currentPage = JSON.parse(n)
+      }
+    }
+  },
   methods: {
     async loadData() {
       const response = await get("/api/students/collections/");

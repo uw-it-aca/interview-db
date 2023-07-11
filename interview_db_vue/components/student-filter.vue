@@ -153,7 +153,6 @@ export default {
   },
   created() {
     this.loadData();
-    this.$router.push({});
   }
 };
 </script>
