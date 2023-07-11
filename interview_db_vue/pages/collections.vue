@@ -34,7 +34,7 @@
                   })">
                     <div class="text-start d-flex justify-content-end row">
                       <div class="col-11">
-                        <h2 class="fw-bold fs-3 mb-4 text-purple col-12">{{ collection.topic }}</h2>
+                        <h2 class="fw-bold display-4 fs-3 mb-4 text-purple col-12">{{ collection.topic }}</h2>
                         <p class="display-4 fs-6 mx-auto col-12">
                           {{ collection.question }}
                         </p>

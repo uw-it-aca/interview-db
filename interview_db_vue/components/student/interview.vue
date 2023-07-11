@@ -50,7 +50,7 @@
 
             <div v-for="story in filteredStories" :key="story.id">
               <div class="border-top border-primary pt-4 pb-2">
-                <p class="display-6 fs-6">
+                <p class="display-6 fs-6 lh-base">
                   {{ story.story }}
                 </p>
                 <p class="fst-italic text-end text-gold">

@@ -2,14 +2,52 @@
 // shown on full students page, individual topic page, or home page as random carousel cards
 
 <template>
-  <button type="button" class="btn-card mt-5" style="height:fit-content;" @click="$router.push({
+  <button type="button" class="btn-card mt-5" @click="$router.push({
     name: 'Students',
     params: {
       id: interviewInfo.id,
     },
   })
     ">
-    <div class="d-flex card-clickable">
+    <div v-if="carousel" class="d-flex card-clickable">
+      <div class="row p-0 m-x-0">
+        <div class="col-md-4 col-sm-4 row-xs mx-auto ps-4 img-div shift-up">
+          <img v-if="image" :src="image" style="width:100%; object-fit:cover" class="listing-img img-fluid"
+            :alt="altText" />
+          <img v-else src="../../images/placeholder.png" style="width:100%; object-fit:cover" class="listing-img img-fluid" alt="a placeholder image" />
+        </div>
+
+        <div class="col-md-8 col-sm-8 p-4 m-0">
+          <div class="row">
+            <p v-if="!carousel" class="fs-6 text-end">{{ interviewDate }}</p>
+            <h2 class="card-title fw-bold text-purple display-4 fs-3 mb-2">
+              {{ interviewInfo.student.first_name }}
+            </h2>
+            <p class="pb-4 border-bottom border-primary">
+              <span v-if="interviewInfo.standing">
+                {{ interviewInfo.standing + ", studying" }}
+              </span>
+              <span v-else> Studying </span>
+              {{ interviewInfo.declared_major }}
+            </p>
+          </div>
+        </div>
+
+        <div class="card-text px-4">
+          <p v-if="carousel" class="lh-base">"{{ interviewInfo.pull_quote }}"</p>
+          <p v-else-if=story class="display-4 fs-6 lh-base">"{{ story }}"</p>
+          <p v-else class="display-4 fs-5 lh-base">"{{ interviewInfo.pull_quote }}"</p>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <u class="text-purple" style="display:inline;">Read More</u>
+          <p>&nbsp;</p>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+
+    <div v-else class="d-flex card-clickable">
       <div class="row p-0 m-x-0">
         <div class="col-md-4 col-sm-5 row-xs mx-auto ps-4 img-div shift-up">
           <img v-if="image" :src="image" style="width:100%; object-fit:cover" class="listing-img img-fluid"
@@ -24,7 +62,7 @@
             <h2 class="card-title fw-bold text-purple display-6 mb-2">
               {{ interviewInfo.student.first_name }}
             </h2>
-            <p class="display-4 fs-6 pb-4 border-bottom border-primary">
+            <p class="display-4 fs-5 pb-4 border-bottom border-primary">
               <span v-if="interviewInfo.standing">
                 {{ interviewInfo.standing + ", studying" }}
               </span>
@@ -35,18 +73,18 @@
         </div>
 
         <div class="card-text px-4">
-          <p v-if="carousel" class="display-4 fs-6">"{{ interviewInfo.pull_quote }}"</p>
-          <p v-else-if=story class="display-4 fs-6">"{{ story }}"</p>
-          <p v-else class="display-4 fs-6">"{{ interviewInfo.pull_quote }}"</p>
+          <p v-if="carousel" class="display-4 fs-6 lh-base">"{{ interviewInfo.pull_quote }}"</p>
+          <p v-else-if=story class="display-4 fs-6 lh-base">"{{ story }}"</p>
+          <p v-else class="display-4 fs-5 lh-base">"{{ interviewInfo.pull_quote }}"</p>
         </div>
 
         <div class="d-flex justify-content-end">
-          <u class="text-purple" style="display:inline;">Read More</u>
+          <u class="display-4 fs-6 text-purple" style="display:inline;">Read More</u>
+          <p>&nbsp;</p>
           <i class="bi bi-chevron-right"></i>
         </div>
       </div>
     </div>
-
   </button>
 </template>
 

@@ -130,29 +130,24 @@ export default {
         this.currentPage = 1;
         return this.filtered.slice(0, this.perPage)
       }
-      const query = this.$route.query
-      query['page'] = (this.currentPage)
-      this.$router.push({ query })
       return this.filtered.slice(start, end);
     },
   },
   created() {
     this.loadData();
+    console.log("oncreate", this.$route.query)
   },
   methods: {
     async loadData() {
       const response = await get("/api/students/collections/");
       this.students = response.data;
       this.count = response.data.length;
+      this.$router.push({ query: {'page': this.currentPage} })
     },
     onClickHandler(page) {
-      this.currentPage = page;
-      const query = this.$route.query
-      query['page'] = (page)
-      console.log(query)
-      // this.$router.push({ query: {page: page} })
-      this.$router.replace({path: this.$route.path, query: {...this.$route.query, page: page}})
-      console.log(this.$route.query)   
+      console.log("current", this.currentPage)
+      this.$router.push({name: 'Students', query: {...this.$route.query, 'page': page} })
+      console.log("after", this.$route.query)   
     }
   },
 };

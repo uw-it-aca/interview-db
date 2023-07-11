@@ -135,18 +135,20 @@ export default {
     },
     updateQuery(event) {
       const query = {};
+      query['page'] = 1
       Object.entries(this.filters).forEach(([key, value]) => {
         if (value) {
           query[key] = (value);
         }
       })
-      this.$router.push({ query })
+      this.$router.replace({query})
+      console.log("hello", this.$route.query)
     },
     clearFilters() {
       this.filters.year = [];
       this.filters.major = [];
       this.filters.topic = [];
-      this.$router.push({});
+      this.$router.push({name: 'Students', query: {'page': 1} })
     }
   },
   created() {
