@@ -55,9 +55,10 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition
     }
-    if (to.path != from.path) {
-      return { top: 0 }
-    }
+    // if (to.path != from.path) {
+    //   return { top: 0 }
+    // }
+    return {top: 0}
   },
   history: createWebHistory(),
   routes,

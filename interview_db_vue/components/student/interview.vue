@@ -33,9 +33,9 @@
             </div>
           </div>
 
-          <div class="border-top border-primary py-4">
+          <div class="border-top border-primary pt-4 mb-4">
             <p class="text-start">They talk about...</p>
-            <div class="justify-content-start col-12">
+            <div class="justify-content-start col-12 mb-4">
               <span v-for="topic in topics" :key="topic.id">
                 <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic" v-model="filters"
                   autocomplete="off">
@@ -43,14 +43,14 @@
                   {{ topic.topic }}
                 </label>
               </span>
-              <button type="button" class="btn btn-gold" @click="clearFilters">
+              <button type="button" class="btn btn-gold m-1" @click="clearFilters">
                 Clear All
               </button>
             </div>
 
             <div v-for="story in filteredStories" :key="story.id">
               <div class="border-top border-primary pt-4 pb-2">
-                <p class="display-6 fs-5">
+                <p class="display-6 fs-6">
                   {{ story.story }}
                 </p>
                 <p class="fst-italic text-end text-gold">
@@ -59,7 +59,6 @@
                       style="color: #B4A67F">#{{ collection.topic }}&nbsp
                     </router-link>
                   </span>
-
                 </p>
               </div>
             </div>

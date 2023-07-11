@@ -12,7 +12,7 @@
         <div style="position: relative">
           <img class="banner-image" src="../images/aboutUsImage.png"/>
           <div class="title-div">
-            <h1 class="text-gold fw-bold">About Us</h1>
+            <h1 class="text-gold fw-bold display-5">About Us</h1>
           </div>
         </div>
         <div class="mx-auto p-5">

@@ -130,6 +130,9 @@ export default {
         this.currentPage = 1;
         return this.filtered.slice(0, this.perPage)
       }
+      const query = this.$route.query
+      query['page'] = (this.currentPage)
+      this.$router.push({ query })
       return this.filtered.slice(start, end);
     },
   },
@@ -144,6 +147,12 @@ export default {
     },
     onClickHandler(page) {
       this.currentPage = page;
+      const query = this.$route.query
+      query['page'] = (page)
+      console.log(query)
+      // this.$router.push({ query: {page: page} })
+      this.$router.replace({path: this.$route.path, query: {...this.$route.query, page: page}})
+      console.log(this.$route.query)   
     }
   },
 };

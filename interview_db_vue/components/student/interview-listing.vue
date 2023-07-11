@@ -18,13 +18,13 @@
             class="listing-img img-fluid" alt="a placeholder image" />
         </div>
 
-        <div class="col-md-8 col-sm-7 ps-4 m-0">
+        <div class="col-md-8 col-sm-7 p-4 m-0">
           <div class="row">
             <p v-if="!carousel" class="fs-6 text-end">{{ interviewDate }}</p>
             <h2 class="card-title fw-bold text-purple display-6 mb-2">
               {{ interviewInfo.student.first_name }}
             </h2>
-            <p class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary">
+            <p class="display-4 fs-6 pb-4 border-bottom border-primary">
               <span v-if="interviewInfo.standing">
                 {{ interviewInfo.standing + ", studying" }}
               </span>
@@ -35,9 +35,9 @@
         </div>
 
         <div class="card-text px-4">
-          <p v-if="carousel" class="display-6 fs-6">"{{ interviewInfo.pull_quote }}"</p>
-          <p v-else-if=story class="display-6 fs-5">"{{ story }}"</p>
-          <p v-else class="display-6 fs-5">"{{ interviewInfo.pull_quote }}"</p>
+          <p v-if="carousel" class="display-4 fs-6">"{{ interviewInfo.pull_quote }}"</p>
+          <p v-else-if=story class="display-4 fs-6">"{{ story }}"</p>
+          <p v-else class="display-4 fs-6">"{{ interviewInfo.pull_quote }}"</p>
         </div>
 
         <div class="d-flex justify-content-end">
