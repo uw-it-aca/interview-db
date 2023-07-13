@@ -89,7 +89,7 @@ export default {
         major: this.$route.query.major,
         topic: this.$route.query.topic,
       },
-      perPage: 15,
+      perPage: 12,
       currentPage: 1,
       count: 0,
     };

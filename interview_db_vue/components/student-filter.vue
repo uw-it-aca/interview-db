@@ -126,6 +126,22 @@ export default {
       },
     };
   },
+  watch : {
+    "$route.query": {
+      immediate: true,
+      handler(n) {
+        if (n.year === undefined) {
+           this.filters.year = [] 
+        }
+        if (n.major === undefined) {
+          this.filters.major = []
+        }
+        if (n.topic === undefined) {
+          this.filters.topic = []
+        }
+      }
+    }
+  },
   methods: {
     async loadData() {
       const majors = await get('/api/majors/');
