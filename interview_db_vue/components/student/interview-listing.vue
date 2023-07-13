@@ -34,9 +34,7 @@
         </div>
 
         <div class="card-text px-4">
-          <p v-if="carousel" class="lh-base">"{{ interviewInfo.pull_quote }}"</p>
-          <p v-else-if=story class="display-4 fs-6 lh-base">"{{ story }}"</p>
-          <p v-else class="display-4 fs-5 lh-base">"{{ interviewInfo.pull_quote }}"</p>
+          <p class="lh-base">"{{ interviewInfo.pull_quote }}"</p>
         </div>
 
         <div class="d-flex justify-content-end">
@@ -73,9 +71,8 @@
         </div>
 
         <div class="card-text px-4">
-          <p v-if="carousel" class="display-4 fs-6 lh-base">"{{ interviewInfo.pull_quote }}"</p>
-          <p v-else-if=story class="display-4 fs-6 lh-base">"{{ story }}"</p>
-          <p v-else class="display-4 fs-5 lh-base">"{{ interviewInfo.pull_quote }}"</p>
+          <p v-if=story class="display-4 fs-6 lh-base">"{{ story }}"</p>
+          <p v-else class="display-4 fs-6 lh-base">"{{ interviewInfo.pull_quote }}"</p>
         </div>
 
         <div class="d-flex justify-content-end">
