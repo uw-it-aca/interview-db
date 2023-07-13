@@ -71,9 +71,8 @@
         <div id="major">
           <div class="card card-body border-0 mt-0">
             {{ filters.major }}
-            <br>
-            {{ data.majors }}
-            <Multiselect v-model="filters.major" :options="data.majors" :searchable="true" mode="multiple" @click="updateQuery($event)"/>
+            <Multiselect mode="tags" v-model="filters.major" :options="data.majors" :searchable="true"
+              :close-on-select="false" @click="updateQuery()" @deselect="updateQuery()"/>
           </div>
         </div>
       </div>
@@ -130,13 +129,11 @@ export default {
     async loadData() {
       const majors = await get('api/majors/');
       console.log(majors.data)
-      
       majors.data.forEach(e => this.data.majors.push(e.full_title))
-
       const collections = await get('api/collections/');
       this.data.topics = collections.data;
     },
-    updateQuery(event) {
+    updateQuery() {
       const query = {};
       Object.entries(this.filters).forEach(([key, value]) => {
         if (value) {
