@@ -70,13 +70,10 @@
         </p>
         <div id="major">
           <div class="card card-body border-0 mt-0">
-            <div class="form-group">
-              <select multiple class="form-select" id="major" data-live-search="true" v-model="filters.major"
-                @change="updateQuery($event)">
-                <option v-for="major in data.majors">
-                  {{ major.full_title }}</option>
-              </select>
-            </div>
+            {{ filters.major }}
+            <br>
+            {{ data.majors }}
+            <Multiselect v-model="filters.major" :options="data.majors" :searchable="true" mode="multiple" @click="updateQuery($event)"/>
           </div>
         </div>
       </div>
@@ -109,9 +106,12 @@
 
 <script>
 import { get } from "axios";
+import Multiselect from '@vueform/multiselect'
+
 export default {
   name: "StudentFilter",
-  props: {
+  components: {
+    Multiselect,
   },
   data() {
     return {
@@ -129,7 +129,10 @@ export default {
   methods: {
     async loadData() {
       const majors = await get('api/majors/');
-      this.data.majors = majors.data;
+      console.log(majors.data)
+      
+      majors.data.forEach(e => this.data.majors.push(e.full_title))
+
       const collections = await get('api/collections/');
       this.data.topics = collections.data;
     },
@@ -155,3 +158,5 @@ export default {
   }
 };
 </script>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
