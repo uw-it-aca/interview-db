@@ -2,7 +2,7 @@
 // to filter student interviews
 
 <template>
-  <div class="card">
+  <div class="card p-2">
     <h2 class="m-3 fw-bold display-6 text-purple">Filter Stories</h2>
     <div class="card-body">
       <div class="mb-4">
@@ -70,9 +70,8 @@
         </p>
         <div id="major">
           <div class="card card-body border-0 mt-0">
-            {{ filters.major }}
             <Multiselect mode="tags" v-model="filters.major" :options="data.majors" :searchable="true"
-              :close-on-select="false" @click="updateQuery()" @deselect="updateQuery()"/>
+              :close-on-select="false" @click="updateQuery()" @deselect="updateQuery()" />
           </div>
         </div>
       </div>
@@ -156,4 +155,33 @@ export default {
 };
 </script>
 
-<style src="@vueform/multiselect/themes/default.css"></style>
+<!-- <style src="@vueform/multiselect/themes/default.css">  -->
+<style>
+@import "@vueform/multiselect/themes/default.css";
+.multiselect {
+  --ms-line-height: 1;
+  --ms-border-color: #1E1E1E;
+  --ms-border-width: 1.5px;
+  --ms-radius: 0.1rem;
+  --ms-py: 0.875rem;
+  --ms-px: 0.875rem;
+
+  --ms-caret-color: #1E1E1E;
+
+  --ms-tag-font-size: 1rem;
+  --ms-tag-line-height: 1.25rem;
+  --ms-tag-font-weight: 400;
+  --ms-tag-bg: #4B2E83;
+  --ms-tag-color: #F8F9fA;
+  --ms-tag-radius: 1.5px;
+  --ms-tag-py: 0.5rem;
+  --ms-tag-px: 0.5rem;
+  --ms-tag-my: 0.5rem;
+  --ms-tag-mx: 0.5rem;
+
+  --ms-dropdown-bg: #FFFFFF;
+  --ms-dropdown-border-color: #1E1E1E;
+  --ms-dropdown-border-width: 1.5px;
+  --ms-dropdown-radius: 0.1rem;
+}
+</style>
