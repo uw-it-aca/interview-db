@@ -141,7 +141,9 @@ export default {
     "$route.query.page": {
       immediate: true,
       handler(n) {
-        this.currentPage = JSON.parse(n)
+        if (n !== undefined) {
+          this.currentPage = JSON.parse(n)
+        }
       }
     }
   },
