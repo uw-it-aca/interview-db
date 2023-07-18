@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <div class="mb-4">
+      <div v-if=!story class="mb-4">
         <p class="display-4 fs-5 fw-bold mb-0" href="#collections" aria-expanded="false" aria-controls="collections">
           Story Collection
         </p>
@@ -122,6 +122,8 @@ export default {
   name: "StudentFilter",
   components: {
     Multiselect,
+  props: {
+    story: Boolean,
   },
   data() {
     return {

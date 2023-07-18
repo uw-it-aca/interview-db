@@ -11,37 +11,14 @@
     ">
     <div class="d-flex card-clickable">
       <div class="row p-0 m-x-0">
-        <div v-if="story" class="col-md-3 col-sm-3 row-xs mx-auto ps-4 img-div shift-up">
+        <div class="col-md-4 col-sm-5 row-xs mx-auto ps-4 img-div shift-up">
           <img v-if="image" :src="image" style="width:100%; object-fit:cover" class="listing-img img-fluid"
             :alt="altText" />
           <img v-else src="../../images/placeholder.png" style="width: 100%; object-fit:cover;"
             class="listing-img img-fluid" alt="a placeholder image" />
         </div>
 
-        <div v-else class="col-md-5 col-sm-6 row-xs mx-auto ps-4 img-div shift-up">
-          <img v-if="image" :src="image" style="width:100%; object-fit:cover" class="listing-img img-fluid"
-            :alt="altText" />
-          <img v-else src="../../images/placeholder.png" style="width: 100%; object-fit:cover;"
-            class="listing-img img-fluid" alt="a placeholder image" />
-        </div>
-
-        <div v-if="story" class="col-md-9 col-sm-9 ps-4 m-0">
-          <div class="row">
-            <p v-if="!carousel" class="fs-6 text-end">{{ interviewDate }}</p>
-            <h2 class="card-title fw-bold text-purple display-6 mb-2">
-              {{ interviewInfo.student.first_name }}
-            </h2>
-            <p class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary">
-              <span v-if="interviewInfo.standing">
-                {{ interviewInfo.standing + ", studying" }}
-              </span>
-              <span v-else> Studying </span>
-              {{ interviewInfo.declared_major }}
-            </p>
-          </div>
-        </div>
-
-        <div v-else class="col-md-7 col-sm-6 ps-4 m-0">
+        <div class="col-md-8 col-sm-7 ps-4 m-0">
           <div class="row">
             <p v-if="!carousel" class="fs-6 text-end">{{ interviewDate }}</p>
             <h2 class="card-title fw-bold text-purple display-6 mb-2">
