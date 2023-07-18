@@ -5,7 +5,6 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import re_path, path
 from django.views.generic import TemplateView
-from django.conf.urls.static import static
 from interview_db.views import *
 
 app_name = "interview_db"
@@ -55,7 +54,6 @@ urlpatterns += [
          CollectionStoryView.as_view(),
          name="collection-stories",),
     path('api/majors/', MajorListView.as_view(), name="major-list"),
-    path('api/types/', StudentTypeListView.as_view(), name="type-list"),
     path('api/random/', RandomStudentsView.as_view(), name="random-students"),
     path('api/recent/', RecentStudentsView.as_view(), name="recent-students"),
     path('api/students/<int:id>/topics/', InterviewTopicsView.as_view(),
@@ -63,7 +61,5 @@ urlpatterns += [
     path('api/students/count/', InterviewCountView.as_view(),
          name="interview-count"),
     path('api/stories/count/', StoryCountView.as_view(), name="stories-count"),
-    re_path(r"^.*$", TemplateView.as_view(
-        template_name="vue.html"),
-        name="home"),
+    re_path(r"^.*$", DefaultPageView.as_view(), name="home"),
 ]
