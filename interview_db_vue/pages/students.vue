@@ -19,7 +19,6 @@
               <div class="row">
                 <div class="col-4 d-none d-lg-block">
                   <StudentFilter @clicked="updateFilters" />
-                  <!-- {{ filters }} -->
                 </div>
 
                 <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
@@ -67,10 +66,11 @@ export default {
     return {
       pageTitle: "Students",
       students: [],
+      collections: [],
+      filtered: [],
       filters: {
         year: this.$route.query.year,
         major: this.$route.query.major,
-        trait: this.$route.query.trait,
         topic: this.$route.query.topic,
       },
     };
@@ -82,14 +82,28 @@ export default {
     singleStudentInfo() {
       return JSON.parse(this.$route.params.singleStudent);
     },
-    updatedFilters() {
+    updateFilters() {
       this.filters.year = this.$route.query.year;
       this.filters.major = this.$route.query.major;
-      this.filters.trait = this.$route.query.trait;
       this.filters.topic = this.$route.query.topic;
     },
     filteredStudents() {
-      return this.students;
+      this.filtered = this.students;
+
+      if (this.filters.year !== undefined && this.filters.year.length > 0) {
+        this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
+      }
+
+      if (this.filters.major !== undefined && this.filters.major.length > 0) {
+        const included = (major) => this.filters.major.includes(major.full_title)
+        this.filtered = this.filtered.filter(student => student.major.some(included))
+      }
+
+      if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
+        this.filtered = this.filtered.filter(student => this.filters.topic.every(
+          f => student.collections.some((collection) => f === collection.slug)))
+      }
+      return this.filtered;
     },
   },
   created() {
@@ -97,7 +111,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await get("/api/students/");
+      const response = await get("/api/students/collections/");
       this.students = response.data;
     },
   },
