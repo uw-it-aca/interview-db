@@ -8,7 +8,7 @@
       <p class="fs-5 mb-5">{{ topicInfo.question }}</p>
       <div class="row">
         <div class="col-4 d-none d-lg-block">
-          <StudentFilter story="True" @clicked="updateFilters" />
+          <StudentFilter story="True" @clicked="updateFilters"/>
         </div>
         <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
           <router-link active-class="active" aria-current="page" to="/filters">
