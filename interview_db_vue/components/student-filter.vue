@@ -4,7 +4,8 @@
 <template>
   <div class="card p-2">
     <div class="row justify-content-end m-3">
-      <button type="button" class="btn-close" aria-label="Close" @click="$router.push({ name: 'Students', query: { ...this.$route.query }})"></button>
+      <button type="button" class="btn-close" aria-label="Close"
+        @click="$router.push({ name: 'Students', query: { ...this.$route.query } })"></button>
     </div>
     <h2 class="m-3 fw-bold display-6 text-purple">Filter Stories</h2>
     <div class="card-body">
@@ -85,15 +86,15 @@
         </p>
         <div class="mt-0" id="collections">
           <div class="justify-content-start col-12">
-          <div class="card card-body border-0 mt-0">
-            <span v-for="topic in data.topics" :key="topic.id">
-              <input type="checkbox" class="btn-check" :id="topic.id" :value=topic.slug v-model="filters.topic"
-              @change="updateQuery($event)">
-              <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
-                {{ topic.topic }}
-              </label>
-            </span>
-          </div>
+            <div class="card card-body border-0 mt-0">
+              <span v-for="topic in data.topics" :key="topic.id">
+                <input type="checkbox" class="btn-check" :id="topic.id" :value=topic.slug v-model="filters.topic"
+                  @change="updateQuery($event)">
+                <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
+                  {{ topic.topic }}
+                </label>
+              </span>
+            </div>
             <!-- <div v-for="topic in data.topics" :key="topic.id">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" :value=topic.slug id="topic" v-model="filters.topic"
@@ -122,54 +123,55 @@ export default {
   name: "StudentFilter",
   components: {
     Multiselect,
-  props: {
-    story: Boolean,
-  },
-  data() {
-    return {
-      data: {
-        majors: [],
-        topics: [],
+    props: {
+      story: Boolean,
+    },
+    data() {
+      return {
+        data: {
+          majors: [],
+          topics: [],
+        },
+        filters: {
+          year: [],
+          major: [],
+          topic: [],
+        },
+      };
+    },
+    methods: {
+      async loadData() {
+        const majors = await get('api/majors/');
+        majors.data.forEach(e => this.data.majors.push(e.full_title))
+        const collections = await get('api/collections/');
+        this.data.topics = collections.data;
       },
-      filters: {
-        year: [],
-        major: [],
-        topic: [],
+      curQuery() {
+        console.log(this.$route.query);
+        return this.$route.query;
       },
-    };
-  },
-  methods: {
-    async loadData() {
-      const majors = await get('api/majors/');
-      majors.data.forEach(e => this.data.majors.push(e.full_title))
-      const collections = await get('api/collections/');
-      this.data.topics = collections.data;
+      updateQuery() {
+        const query = {};
+        Object.entries(this.filters).forEach(([key, value]) => {
+          if (value) {
+            query[key] = (value);
+          }
+        })
+        this.$router.push({ query })
+      },
+      clearFilters() {
+        this.filters.year = [];
+        this.filters.major = [];
+        this.filters.topic = [];
+        this.$router.push({});
+      }
     },
-    curQuery() {
-      console.log(this.$route.query);
-      return this.$route.query;
-    },
-    updateQuery() {
-      const query = {};
-      Object.entries(this.filters).forEach(([key, value]) => {
-        if (value) {
-          query[key] = (value);
-        }
-      })
-      this.$router.push({ query })
-    },
-    clearFilters() {
-      this.filters.year = [];
-      this.filters.major = [];
-      this.filters.topic = [];
+    created() {
+      this.loadData();
       this.$router.push({});
-    }
-  },
-  created() {
-    this.loadData();
-    this.$router.push({});
+    },
   }
-};
+}
 </script>
 
 <!-- <style src="@vueform/multiselect/themes/default.css">  -->
