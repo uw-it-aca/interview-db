@@ -40,7 +40,7 @@ class DefaultPageView(PageView):
 @method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewListView(APIView):
     """
-    API endpoint returning list of interviews
+    API endpoint returning list of interviews without collections
     """
 
     def get(self, request):
@@ -57,7 +57,7 @@ class InterviewListView(APIView):
 @method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewCollectionListView(APIView):
     """
-    API endpoint returning list of interviews
+    API endpoint returning list of interviews with their collections
     """
 
     def get(self, request):
@@ -98,7 +98,8 @@ class CollectionListView(APIView):
 @method_decorator(group_required(front_end_group), name='dispatch')
 class CollectionInfoView(APIView):
     """
-    API endpoint returning basic info of single collection
+    API endpoint returning basic info of single collection without its
+    stories
     """
 
     def get(self, request, id):

@@ -27,24 +27,6 @@ class UnpublishedInterviewsTest(TestCase):
         )
         self.no_release = no_release
 
-        stu = Student.objects.create(
-            first_name="Stu",
-            follow_up_consent=True,
-        )
-        needs_follow_up = Interview.objects.create(
-            student=stu,
-            date="2021-09-29",
-            signed_release_form=False,
-            image_is_not_identifying=True,
-            intended_major=True,
-            no_identifying_photo=True,
-            no_real_name=False,
-            no_publishing_stories=False,
-            pull_quote="Some pull quote",
-            other_publishing_restrictions=False
-        )
-        self.needs_follow_up = needs_follow_up
-
         publishable = Interview.objects.create(
             student=joe,
             date="2021-09-29",
@@ -72,7 +54,12 @@ class UnpublishedInterviewsTest(TestCase):
         )
         self.no_quote = no_quote
 
-    def test_release_form(self):
+    def tearDown(self):
+        Interview.objects.all().delete()
+        Student.objects.all().delete()
+        Major.objects.all().delete()
+
+    def test_no_release_form(self):
         """
         Tests an interview without a signed release form is not published
         """
@@ -82,20 +69,21 @@ class UnpublishedInterviewsTest(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTrue(self.no_release.id not in interviews)
 
-    def test_follow_up_consent(self):
+    def test_no_pull_quote(self):
         """
-        Tests an interview needing follow up consent is not published
+        Tests an interview without a pull quote is not published
         """
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
         interviews = json.loads(response.content)
         self.assertEquals(response.status_code, 200)
-        self.assertTrue(self.needs_follow_up.id not in interviews)
+        self.assertTrue(self.no_quote.id not in interviews)
 
-    def test_no_pull_quote(self):
+    def test_invalid_pull_quote(self):
         """
-        Tests an interview without a pull quote is not published
+        Tests an interview with an invalid pull quote is not published
         """
+        self.no_quote.pull_quote = ''
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
         interviews = json.loads(response.content)
