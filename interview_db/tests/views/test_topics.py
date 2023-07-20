@@ -7,7 +7,7 @@ from interview_db.models import *
 import json
 
 
-class CollectionsTest(TestCase):
+class InterviewTopicsTest(TestCase):
     fixtures = ["interview.json"]
 
     def setUp(self):
@@ -51,6 +51,8 @@ class CollectionsTest(TestCase):
         c_joe_2.subcode = SubCode.objects.get_or_create(subcode="Context")[0]
         c_joe_2.save()
 
+        self.s_joe = s_joe
+        self.s_joe_2 = s_joe_2
         self.i_joe = i_joe
 
     def tearDown(self):
@@ -89,3 +91,23 @@ class CollectionsTest(TestCase):
         topic_2 = stories[1]['collections']
         self.assertEquals(topic_2[0]['topic'], "Finding Community")
         self.assertEquals(response.status_code, 200)
+
+    def test_collection_stories(self):
+        """
+        Tests the correct corresponding stories are returned with a
+        single collection
+        """
+        self_reflection = Collection.objects.get(topic="Self Reflection")
+        finding_community = Collection.objects.get(topic="Finding Community")
+
+        url = reverse("interview_db:collection-stories", kwargs={
+            "id": self_reflection.id})
+        response = self.client.get(url, follow=True)
+        stories = json.loads(response.content)
+        self.assertEquals(stories[0]['id'], self.s_joe.id)
+
+        url = reverse("interview_db:collection-stories", kwargs={
+            "id": finding_community.id})
+        response = self.client.get(url, follow=True)
+        stories = json.loads(response.content)
+        self.assertEquals(stories[0]['id'], self.s_joe_2.id)
