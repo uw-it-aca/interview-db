@@ -54,3 +54,4 @@ class InterviewTopicsTest(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertEquals(len(topics), 1)
         self.assertEquals(topics[0]['topic'], "Self Reflection")
+        print(response.content)
