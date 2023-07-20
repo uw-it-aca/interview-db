@@ -48,6 +48,11 @@ class ModelsTest(TestCase):
         i_joe.major.set([cse, hcde, comm])
         self.i_joe = i_joe
 
+    def tearDown(self):
+        Interview.objects.all().delete()
+        Student.objects.all().delete()
+        Major.objects.all().delete()
+
     def test_major_str(self):
         self.assertEqual(str(self.comm), 'COMM')
         self.assertEqual(str(self.hcde), 'HCDE')
