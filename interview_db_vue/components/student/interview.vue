@@ -55,8 +55,8 @@
                 </p>
                 <p class="fst-italic text-end text-gold">
                   <span v-for="collection in story.collections" :key="collection.id">
-                    <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link"
-                      style="color: #B4A67F">#{{ collection.topic }}&nbsp
+                    <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link">
+                      #{{ collection.topic }}&nbsp
                     </router-link>
                   </span>
                 </p>
@@ -143,7 +143,14 @@ export default {
 </script>
 <style>
 .btn-check+.btn:hover {
-  color: #FFFF !important;
+  color: white !important;
   background-color: #4B2E83 !important;
+}
+a.active-link {
+  text-decoration: none;
+  color: #B4A67F;
+}
+a.active-link:hover{
+  color: #827252;
 }
 </style>

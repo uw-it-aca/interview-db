@@ -158,7 +158,6 @@ export default {
         }
       })
       this.$router.replace({query})
-      console.log("hello", this.$route.query)
     },
     clearFilters() {
       this.filters.year = [];

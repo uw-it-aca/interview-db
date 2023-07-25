@@ -125,7 +125,7 @@ export default {
 }
 
 .paginate-buttons:hover {
-  background-color: #eeeaf3;
+  background-color: #f6f4f8;
 }
 
 .active-page {
