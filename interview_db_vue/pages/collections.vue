@@ -94,6 +94,6 @@ export default {
 </script>
 <style>
 button.btn-card:hover {
-  background-color: #f6f4f8;
+  background-color: #f2eff6;
 }
 </style>

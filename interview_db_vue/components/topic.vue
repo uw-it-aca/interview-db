@@ -8,7 +8,7 @@
       <p class="fs-5 mb-5">{{ topicInfo.question }}</p>
       <div class="row">
         <div class="col-4 d-none d-lg-block">
-          <StudentFilter story="True" @clicked="updateFilters"/>
+          <StudentFilter :story="true" @clicked="updateFilters"/>
         </div>
         <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
           <router-link active-class="active" aria-current="page" to="/filters">
@@ -47,17 +47,15 @@ export default {
     InterviewListing,
     StudentFilter
   },
-  props: {
-  },
   data() {
     return {
       stories: [],
       topicInfo: [],
+      filtered: [],
       filters: {
         year: this.$route.query.year,
         major: this.$route.query.major,
       },
-      filtered: [],
       perPage: 18,
       currentPage: 1,
       count: 0,
@@ -70,7 +68,6 @@ export default {
     },
     filteredStories() {
       this.filtered = this.stories;
-
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.interview.standing));
       }
@@ -83,10 +80,6 @@ export default {
       // pagination
       const start = this.perPage * (this.currentPage - 1);
       const end = start + this.perPage;
-      if (this.currentPage > this.filtered.length / this.perPage + 1) {
-        this.currentPage = 1;
-        return this.filtered.slice(0, this.perPage)
-      }
       return this.filtered.slice(start, end);
     }
   },
@@ -97,9 +90,20 @@ export default {
       this.count = response.data.length;
       const info = await get("/api/collections/" + this.$route.params.id + "/");
       this.topicInfo = info.data;
+      this.$router.push({ query: {'page': this.currentPage} })
     },
     onClickHandler(page) {
-      this.currentPage = page;
+      this.$router.push({query: {...this.$route.query, 'page': page} })
+    }
+  },
+  watch : {
+    "$route.query.page": {
+      immediate: true,
+      handler(n) {
+        if (n !== undefined) {
+          this.currentPage = JSON.parse(n)
+        }
+      }
     }
   },
   created() {

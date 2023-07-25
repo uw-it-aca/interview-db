@@ -108,7 +108,6 @@ export default {
     },
     filteredStudents() {
       this.filtered = this.students;
-
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
       }
@@ -126,16 +125,8 @@ export default {
       // pagination
       const start = this.perPage * (this.currentPage - 1);
       const end = start + this.perPage;
-      if (this.currentPage > this.filtered.length / this.perPage + 1) {
-        this.currentPage = 1;
-        return this.filtered.slice(0, this.perPage)
-      }
       return this.filtered.slice(start, end);
     },
-  },
-  created() {
-    this.loadData();
-    console.log("oncreate", this.$route.query)
   },
   watch : {
     "$route.query.page": {
@@ -155,10 +146,11 @@ export default {
       this.$router.push({ query: {'page': this.currentPage} })
     },
     onClickHandler(page) {
-      console.log("current", this.currentPage)
-      this.$router.push({name: 'Students', query: {...this.$route.query, 'page': page} })
-      console.log("after", this.$route.query)   
+      this.$router.push({query: {...this.$route.query, 'page': page} })
     }
+  },
+  created() {
+    this.loadData();
   },
 };
 </script>
@@ -180,7 +172,7 @@ export default {
 }
 
 .paginate-buttons:hover {
-  background-color: #eeeaf3;
+  background-color: #f6f4f8;
 }
 
 .active-page {

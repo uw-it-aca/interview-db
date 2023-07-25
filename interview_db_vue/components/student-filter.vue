@@ -163,7 +163,7 @@ export default {
       this.filters.year = [];
       this.filters.major = [];
       this.filters.topic = [];
-      this.$router.push({name: 'Students', query: {'page': 1} })
+      this.$router.push({query: {'page': 1} })
     }
   },
   created() {
