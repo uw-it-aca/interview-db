@@ -75,7 +75,7 @@
         <div id="major">
           <div class="card card-body border-0 mt-0">
             <Multiselect mode="tags" v-model="filters.major" :options="data.majors" :searchable="true"
-              :close-on-select="false" @click="updateQuery()" @deselect="updateQuery()" />
+              :close-on-select="false" @click="updateQuery()" @select="updateQuery()" @deselect="updateQuery()" @close="updateQuery()"/>
           </div>
         </div>
       </div>
@@ -168,6 +168,7 @@ export default {
   --ms-line-height: 1;
   --ms-border-color: #1E1E1E;
   --ms-border-width: 1.5px;
+  --ms-ring-color: #f6f4f8;
   --ms-radius: 0.1rem;
   --ms-py: 0.875rem;
   --ms-px: 0.875rem;
@@ -189,5 +190,10 @@ export default {
   --ms-dropdown-border-color: #1E1E1E;
   --ms-dropdown-border-width: 1.5px;
   --ms-dropdown-radius: 0.1rem;
+
+}
+
+.multiselect-tag {
+  max-width: 100%;
 }
 </style>
