@@ -17,49 +17,49 @@
           <div class="card card-body border-0">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Freshman" id="Freshman" v-model="filters.year"
-                @change="updateQuery($event)">
+                @change="updateQuery()">
               <label class="form-check-label display-6 fs-6" for="freshman">
                 Freshman
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Sophomore" id="Sophomore" v-model="filters.year"
-                @change="updateQuery($event)">
+                @change="updateQuery()">
               <label class="form-check-label display-6 fs-6" for="sophomore">
                 Sophomore
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Junior" id="Junior" v-model="filters.year"
-                @change="updateQuery($event)">
+                @change="updateQuery()">
               <label class="form-check-label display-6 fs-6" for="Junior">
                 Junior
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Senior" id="Senior" v-model="filters.year"
-                @change="updateQuery($event)">
+                @change="updateQuery()">
               <label class="form-check-label display-6 fs-6" for="Senior">
                 Senior
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Alumni - undergrad" id="Alumni"
-                v-model="filters.year" @change="updateQuery($event)">
+                v-model="filters.year" @change="updateQuery()">
               <label class="form-check-label display-6 fs-6" for="Alumni">
                 Alumni
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Masters" id="Masters" v-model="filters.year"
-                @change="updateQuery($event)">
+                @change="updateQuery()">
               <label class="form-check-label display-6 fs-6" for="Masters">
                 Masters
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="PhD" id="PhD" v-model="filters.year"
-                @change="updateQuery($event)">
+                @change="updateQuery()">
               <label class="form-check-label display-6 fs-6" for="PhD">
                 PhD
               </label>
@@ -89,21 +89,12 @@
             <div class="card card-body border-0 mt-0">
               <span v-for="topic in data.topics" :key="topic.id">
                 <input type="checkbox" class="btn-check" :id="topic.id" :value=topic.slug v-model="filters.topic"
-                  @change="updateQuery($event)">
+                  @change="updateQuery()">
                 <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
             </div>
-            <!-- <div v-for="topic in data.topics" :key="topic.id">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" :value=topic.slug id="topic" v-model="filters.topic"
-                  @change="updateQuery($event)">
-                <label class="form-check-label display-6 fs-6" for="topic">
-                  {{ topic.topic }}
-                </label>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
@@ -146,10 +137,6 @@ export default {
         const collections = await get('api/collections/');
         this.data.topics = collections.data;
       },
-      curQuery() {
-        console.log(this.$route.query);
-        return this.$route.query;
-      },
       updateQuery() {
         const query = {};
         Object.entries(this.filters).forEach(([key, value]) => {
@@ -174,7 +161,6 @@ export default {
 }
 </script>
 
-<!-- <style src="@vueform/multiselect/themes/default.css">  -->
 <style>
 @import "@vueform/multiselect/themes/default.css";
 
