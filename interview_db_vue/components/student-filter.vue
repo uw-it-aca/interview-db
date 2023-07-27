@@ -108,56 +108,56 @@
 
 <script>
 import { get } from "axios";
-import Multiselect from '@vueform/multiselect'
+import Multiselect from '@vueform/multiselect';
 
 export default {
   name: "StudentFilter",
   components: {
     Multiselect,
-    props: {
-      story: Boolean,
-    },
-    data() {
-      return {
-        data: {
-          majors: [],
-          topics: [],
-        },
-        filters: {
-          year: [],
-          major: [],
-          topic: [],
-        },
-      };
-    },
-    methods: {
-      async loadData() {
-        const majors = await get('api/majors/');
-        majors.data.forEach(e => this.data.majors.push(e.full_title))
-        const collections = await get('api/collections/');
-        this.data.topics = collections.data;
+  },
+  props: {
+    story: Boolean,
+  },
+  data() {
+    return {
+      data: {
+        majors: [],
+        topics: [],
       },
-      updateQuery() {
-        const query = {};
-        Object.entries(this.filters).forEach(([key, value]) => {
-          if (value) {
-            query[key] = (value);
-          }
-        })
-        this.$router.push({ query })
+      filters: {
+        year: [],
+        major: [],
+        topic: [],
       },
-      clearFilters() {
-        this.filters.year = [];
-        this.filters.major = [];
-        this.filters.topic = [];
-        this.$router.push({});
-      }
+    };
+  },
+  methods: {
+    async loadData() {
+      const majors = await get('api/majors/');
+      majors.data.forEach(e => this.data.majors.push(e.full_title))
+      const collections = await get('api/collections/');
+      this.data.topics = collections.data;
     },
-    created() {
-      this.loadData();
+    updateQuery() {
+      const query = {};
+      Object.entries(this.filters).forEach(([key, value]) => {
+        if (value) {
+          query[key] = (value);
+        }
+      })
+      this.$router.push({ query })
+    },
+    clearFilters() {
+      this.filters.year = [];
+      this.filters.major = [];
+      this.filters.topic = [];
       this.$router.push({});
-    },
-  }
+    }
+  },
+  created() {
+    this.loadData();
+    this.$router.push({});
+  },
 }
 </script>
 
