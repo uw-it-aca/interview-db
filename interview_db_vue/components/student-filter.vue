@@ -85,8 +85,8 @@
           Story Collection
         </p>
         <div class="mt-0" id="collections">
-          <div class="justify-content-start col-12">
-            <div class="card card-body border-0 mt-0">
+          <div class="card card-body border-0 mt-0">
+            <div class="justify-content-start col-12">  
               <span v-for="topic in data.topics" :key="topic.id">
                 <input type="checkbox" class="btn-check" :id="topic.id" :value=topic.slug v-model="filters.topic"
                   @change="updateQuery()">
