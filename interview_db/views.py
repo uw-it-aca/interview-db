@@ -10,11 +10,9 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 from wsgiref.util import FileWrapper
 from django.http import HttpResponse
-from django.core.files.images import ImageFile
 from uw_saml.decorators import group_required
 from .serializers import *
 from .models import *
-import base64
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
@@ -42,7 +40,7 @@ class DefaultPageView(PageView):
 @method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewListView(APIView):
     """
-    API endpoint returning list of interviews
+    API endpoint returning list of interviews without collections
     """
 
     def get(self, request):
@@ -59,7 +57,7 @@ class InterviewListView(APIView):
 @method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewCollectionListView(APIView):
     """
-    API endpoint returning list of interviews
+    API endpoint returning list of interviews with their collections
     """
 
     def get(self, request):
@@ -100,7 +98,8 @@ class CollectionListView(APIView):
 @method_decorator(group_required(front_end_group), name='dispatch')
 class CollectionInfoView(APIView):
     """
-    API endpoint returning basic info of single collection
+    API endpoint returning basic info of single collection without its
+    stories
     """
 
     def get(self, request, id):
@@ -164,18 +163,6 @@ class MajorListView(APIView):
         queryset = Major.objects.all()
         serializer = MajorSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@method_decorator(group_required(front_end_group), name='dispatch')
-class StudentTypeListView(APIView):
-    """
-    API endpoint returning all student types
-    """
-
-    def get(self, request):
-        queryset = StudentType.objects.all()
-        serializer = StudentTypeSerializer(queryset, many=True)
-        return Response(serializer.data)
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
