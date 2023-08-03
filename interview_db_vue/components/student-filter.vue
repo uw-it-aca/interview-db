@@ -190,10 +190,10 @@ export default {
   --ms-dropdown-border-color: #1E1E1E;
   --ms-dropdown-border-width: 1.5px;
   --ms-dropdown-radius: 0.1rem;
-
+  width: 100%;
 }
 
 .multiselect-tag {
-  max-width: 100%;
+  white-space: normal;
 }
 </style>
