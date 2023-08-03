@@ -164,6 +164,10 @@ export default {
 <style>
 @import "@vueform/multiselect/themes/default.css";
 
+.btn-outline-success {
+  --bs-btn-bg: white !important;
+  --bs-btn-color: #1E1E1E !important;
+}
 .multiselect {
   --ms-line-height: 1;
   --ms-border-color: #1E1E1E;
@@ -195,5 +199,11 @@ export default {
 
 .multiselect-tag {
   white-space: normal;
+  margin-left: var(--ms-tag-mx,.25rem);;
+}
+
+.multiselect-tags-search {
+  max-width: 100%;
+  display: flex;
 }
 </style>

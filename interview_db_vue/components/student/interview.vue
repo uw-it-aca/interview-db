@@ -141,3 +141,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.btn-outline-success {
+  --bs-btn-bg: white !important;
+  --bs-btn-color: #1E1E1E !important;
+}
+</style>
