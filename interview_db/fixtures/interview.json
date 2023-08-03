@@ -327,5 +327,1403 @@
             "subcodes": [],
             "question": "What are your plans for the future?"
         }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 1,
+        "fields": {
+            "full_title": "Industrial & Systems Engineering",
+            "major_abbreviation": "ISE"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 2,
+        "fields": {
+            "full_title": "Computer Science & Engineering",
+            "major_abbreviation": "CSE"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 3,
+        "fields": {
+            "full_title": "Informatics",
+            "major_abbreviation": "INFO"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 4,
+        "fields": {
+            "full_title": "Political Science",
+            "major_abbreviation": "POL S"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 5,
+        "fields": {
+            "full_title": "Psychology",
+            "major_abbreviation": "PSYCH"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 6,
+        "fields": {
+            "full_title": "Human Computer Design & Engineering",
+            "major_abbreviation": "HCDE"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 7,
+        "fields": {
+            "full_title": "Oceanography",
+            "major_abbreviation": "OCEAN"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 9,
+        "fields": {
+            "full_title": "Business Administration",
+            "major_abbreviation": "BA"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 10,
+        "fields": {
+            "full_title": "Electrical Engineering",
+            "major_abbreviation": "EE"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 11,
+        "fields": {
+            "full_title": "Communications",
+            "major_abbreviation": "CMU"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 12,
+        "fields": {
+            "full_title": "Drama",
+            "major_abbreviation": "DRAMA"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 13,
+        "fields": {
+            "full_title": "Anthropology",
+            "major_abbreviation": "ANTH"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 14,
+        "fields": {
+            "full_title": "ART",
+            "major_abbreviation": "ART"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 15,
+        "fields": {
+            "full_title": "Economics",
+            "major_abbreviation": "ECON"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 16,
+        "fields": {
+            "full_title": "Neurobiology",
+            "major_abbreviation": "NBIO"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 17,
+        "fields": {
+            "full_title": "Public Health",
+            "major_abbreviation": "PH"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 18,
+        "fields": {
+            "full_title": "Biology",
+            "major_abbreviation": "BIOL"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 19,
+        "fields": {
+            "full_title": "Biochemistry",
+            "major_abbreviation": "BIOC"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 20,
+        "fields": {
+            "full_title": "Engineering",
+            "major_abbreviation": "ENGR"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 21,
+        "fields": {
+            "full_title": "Physics",
+            "major_abbreviation": "PHYS"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 22,
+        "fields": {
+            "full_title": "Mechanical Engineering",
+            "major_abbreviation": "ME"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 23,
+        "fields": {
+            "full_title": "Earth and Space Sciences",
+            "major_abbreviation": "ESS"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 24,
+        "fields": {
+            "full_title": "Mathematics",
+            "major_abbreviation": "MATH"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 25,
+        "fields": {
+            "full_title": "International Studies",
+            "major_abbreviation": "SIS"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 26,
+        "fields": {
+            "full_title": "History",
+            "major_abbreviation": "HIST"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 27,
+        "fields": {
+            "full_title": "Speech and Hearing Sciences",
+            "major_abbreviation": "SPHSC"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 28,
+        "fields": {
+            "full_title": "Certificate in Global Business",
+            "major_abbreviation": "GBC"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 29,
+        "fields": {
+            "full_title": "Communication",
+            "major_abbreviation": "COM"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 30,
+        "fields": {
+            "full_title": "Applied & Computational Mathematical Sciences",
+            "major_abbreviation": "ACMS"
+        }
+    },
+    {
+        "model": "interview_db.major",
+        "pk": 31,
+        "fields": {
+            "full_title": "Biology - Physiology",
+            "major_abbreviation": "BIOL: PHYS"
+        }
+    },
+    {
+        "model": "interview_db.location",
+        "pk": 1,
+        "fields": {
+            "location": "By George"
+        }
+    },
+    {
+        "model": "interview_db.location",
+        "pk": 2,
+        "fields": {
+            "location": "HUB"
+        }
+    },
+    {
+        "model": "interview_db.location",
+        "pk": 3,
+        "fields": {
+            "location": "AXDD"
+        }
+    },
+    {
+        "model": "interview_db.location",
+        "pk": 4,
+        "fields": {
+            "location": "Red Square"
+        }
+    },
+    {
+        "model": "interview_db.location",
+        "pk": 5,
+        "fields": {
+            "location": "ODE"
+        }
+    },
+    {
+        "model": "interview_db.location",
+        "pk": 6,
+        "fields": {
+            "location": "Quad"
+        }
+    },
+    {
+        "model": "interview_db.location",
+        "pk": 7,
+        "fields": {
+            "location": "HUB - Starbucks"
+        }
+    },
+    {
+        "model": "interview_db.location",
+        "pk": 8,
+        "fields": {
+            "location": "HUB - Lawn"
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 1,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Doe",
+            "uw_netid": "jdoe",
+            "email": "jdoe@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": true
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 2,
+        "fields": {
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "uw_netid": "jadoe",
+            "email": "jadoe@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 3,
+        "fields": {
+            "first_name": "A",
+            "last_name": "B",
+            "uw_netid": "ab",
+            "email": "ab@gmail.com",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 4,
+        "fields": {
+            "first_name": "Sam",
+            "last_name": "Stu",
+            "uw_netid": "samstu",
+            "email": "samstu@yahoo.com",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 5,
+        "fields": {
+            "first_name": "Billy",
+            "last_name": "Bob",
+            "uw_netid": "bbob",
+            "email": "bbob@gmail.com",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 6,
+        "fields": {
+            "first_name": "C",
+            "last_name": "D",
+            "uw_netid": "cd",
+            "email": "cd@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 7,
+        "fields": {
+            "first_name": "Justin",
+            "last_name": "Bieber",
+            "uw_netid": "jbieb",
+            "email": "jbieb@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 8,
+        "fields": {
+            "first_name": "Taylor",
+            "last_name": "Swift",
+            "uw_netid": "tswift",
+            "email": "tswift@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 9,
+        "fields": {
+            "first_name": "Cillian",
+            "last_name": "Murphy",
+            "uw_netid": "cmurphy",
+            "email": "cmurphy@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 10,
+        "fields": {
+            "first_name": "Florence",
+            "last_name": "Pugh",
+            "uw_netid": "fpugh",
+            "email": "fpugh@gmail.com",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 11,
+        "fields": {
+            "first_name": "Greta",
+            "last_name": "Gerwig",
+            "uw_netid": "ggerwig",
+            "email": "ggerwig@gmail.com",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 12,
+        "fields": {
+            "first_name": "Rami",
+            "last_name": "Malek",
+            "uw_netid": "rmalek",
+            "email": "rmalek@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 13,
+        "fields": {
+            "first_name": "Bryan",
+            "last_name": "Cranston",
+            "uw_netid": "bcranston",
+            "email": "bcranston@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 14,
+        "fields": {
+            "first_name": "Aaron",
+            "last_name": "Paul",
+            "uw_netid": "apaul",
+            "email": "apaul@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 15,
+        "fields": {
+            "first_name": "Anna",
+            "last_name": "Gunn",
+            "uw_netid": "agunn",
+            "email": "agunn@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": true
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 16,
+        "fields": {
+            "first_name": "Troy",
+            "last_name": "Bond",
+            "uw_netid": "tbond",
+            "email": "tbond@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 17,
+        "fields": {
+            "first_name": "Anon",
+            "last_name": null,
+            "uw_netid": null,
+            "email": null,
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 18,
+        "fields": {
+            "first_name": "Random",
+            "last_name": "Stu",
+            "uw_netid": "rstu",
+            "email": "rstu@uw.edu",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.student",
+        "pk": 19,
+        "fields": {
+            "first_name": "ReallyLongFirstName",
+            "last_name": "ReallyLongLastName",
+            "uw_netid": "name",
+            "email": "name@gmail.com",
+            "artifacts_url": "https://google.com/",
+            "follow_up_consent": false
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 1,
+        "fields": {
+            "student": 1,
+            "date": "2014-01-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "So",
+            "years_until_graduation": "2",
+            "current_year": "2",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                3
+            ],
+            "major": [
+                1
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 2,
+        "fields": {
+            "student": 2,
+            "date": "2017-01-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "So",
+            "years_until_graduation": "2",
+            "current_year": "2",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                4
+            ],
+            "major": [
+                2,
+                3
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 3,
+        "fields": {
+            "student": 3,
+            "date": "2015-01-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "So",
+            "years_until_graduation": "2",
+            "current_year": "2",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                1
+            ],
+            "major": [
+                4
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 4,
+        "fields": {
+            "student": 4,
+            "date": "2020-01-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "Jr",
+            "years_until_graduation": "1",
+            "current_year": "1",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                1
+            ],
+            "major": [
+                5
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 5,
+        "fields": {
+            "student": 5,
+            "date": "2019-10-29",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "Fr",
+            "years_until_graduation": "3",
+            "current_year": "1",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [],
+            "major": [
+                6
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 6,
+        "fields": {
+            "student": 6,
+            "date": "2019-10-31",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "Jr",
+            "years_until_graduation": "2",
+            "current_year": "3",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": true,
+            "other_publishing_restrictions_notes": "prefer full name attributed to comments.",
+            "interview_location": [],
+            "major": [
+                7
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 7,
+        "fields": {
+            "student": 7,
+            "date": "2019-10-31",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "So",
+            "years_until_graduation": "2",
+            "current_year": "2",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [],
+            "major": [
+                3
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 8,
+        "fields": {
+            "student": 8,
+            "date": "2015-01-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "So",
+            "years_until_graduation": "2",
+            "current_year": "2",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [],
+            "major": [
+                9
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 9,
+        "fields": {
+            "student": 9,
+            "date": "2015-01-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "Fr",
+            "years_until_graduation": "4",
+            "current_year": "1",
+            "no_identifying_photo": false,
+            "no_real_name": true,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": true,
+            "other_publishing_restrictions_notes": "Please send me a follow-up of the project!",
+            "interview_location": [],
+            "major": [
+                9
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 10,
+        "fields": {
+            "student": 10,
+            "date": "2019-10-30",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "So",
+            "years_until_graduation": "2",
+            "current_year": "2",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [],
+            "major": [
+                9
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 11,
+        "fields": {
+            "student": 11,
+            "date": "2018-10-30",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "Ma",
+            "years_until_graduation": "2",
+            "current_year": "1",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [],
+            "major": [
+                10
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 12,
+        "fields": {
+            "student": 12,
+            "date": "2021-10-30",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "Sr",
+            "years_until_graduation": "< 1",
+            "current_year": "4",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [],
+            "major": [
+                11,
+                12
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 13,
+        "fields": {
+            "student": 13,
+            "date": "2016-10-01",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "Jr",
+            "years_until_graduation": "1",
+            "current_year": "3",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                1
+            ],
+            "major": [
+                13
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 14,
+        "fields": {
+            "student": 14,
+            "date": "2019-11-01",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": true,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "Jr",
+            "years_until_graduation": "1",
+            "current_year": "3",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [],
+            "major": [
+                14,
+                9
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 15,
+        "fields": {
+            "student": 15,
+            "date": "2015-12-01",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "Jr",
+            "years_until_graduation": "1",
+            "current_year": "3",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": true,
+            "other_publishing_restrictions": true,
+            "other_publishing_restrictions_notes": "Email before publishing stories (for permission).",
+            "interview_location": [],
+            "major": [
+                4
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 16,
+        "fields": {
+            "student": 16,
+            "date": "2022-11-01",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "Fr",
+            "years_until_graduation": "4",
+            "current_year": "1",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [],
+            "major": [
+                16
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 17,
+        "fields": {
+            "student": 17,
+            "date": "2022-10-01",
+            "interview_quarter": "au",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "Jr",
+            "years_until_graduation": "1",
+            "current_year": "3",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [],
+            "major": [
+                17
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 18,
+        "fields": {
+            "student": 18,
+            "date": "2021-01-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "Sr",
+            "years_until_graduation": "< 1",
+            "current_year": "4",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                2
+            ],
+            "major": [
+                18
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 19,
+        "fields": {
+            "student": 19,
+            "date": "2022-02-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "So",
+            "years_until_graduation": "2",
+            "current_year": "2",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                2
+            ],
+            "major": [
+                19
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 20,
+        "fields": {
+            "student": 19,
+            "date": "2022-02-21",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": null,
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "Fr",
+            "years_until_graduation": "4",
+            "current_year": "1",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                2
+            ],
+            "major": [
+                18
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 21,
+        "fields": {
+            "student": 1,
+            "date": "2022-03-11",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "Fr",
+            "years_until_graduation": "4",
+            "current_year": "1",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": true,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                2
+            ],
+            "major": [
+                20
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 22,
+        "fields": {
+            "student": 2,
+            "date": "2022-01-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": true,
+            "standing": "Fr",
+            "years_until_graduation": "4",
+            "current_year": "1",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                1
+            ],
+            "major": [
+                9
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 23,
+        "fields": {
+            "student": 3,
+            "date": "2023-01-01",
+            "interview_quarter": "wi",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "So",
+            "years_until_graduation": "2",
+            "current_year": "2",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                2
+            ],
+            "major": [
+                21
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 24,
+        "fields": {
+            "student": 4,
+            "date": "2023-04-01",
+            "interview_quarter": "sp",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "Jr",
+            "years_until_graduation": "1",
+            "current_year": "3",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                2
+            ],
+            "major": [
+                2
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.interview",
+        "pk": 25,
+        "fields": {
+            "student": 5,
+            "date": "2023-05-01",
+            "interview_quarter": "sp",
+            "signed_release_form": true,
+            "pull_quote": "A really interesting pull quote about this interview",
+            "interview_notes_url": "https://google.com/",
+            "image": "interview_db_images/fakeimage.jpg",
+            "image_is_not_identifying": false,
+            "image_alt_text": "image alt text",
+            "intended_major": false,
+            "standing": "So",
+            "years_until_graduation": "2",
+            "current_year": "2",
+            "no_identifying_photo": false,
+            "no_real_name": false,
+            "no_publishing_stories": false,
+            "other_publishing_restrictions": false,
+            "other_publishing_restrictions_notes": "",
+            "interview_location": [
+                2
+            ],
+            "major": [
+                22
+            ],
+            "student_type": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 1,
+        "fields": {
+            "interview": 1,
+            "story": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo.", 
+            "story_order_position": 1,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 2,
+        "fields": {
+            "interview": 1,
+            "story": "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.",
+            "story_order_position": 2,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 3,
+        "fields": {
+            "interview": 1,
+            "story": "Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.",
+            "story_order_position": 3,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 4,
+        "fields": {
+            "interview": 1,
+            "story": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo.", 
+            "story_order_position": 4,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 5,
+        "fields": {
+            "interview": 1,
+            "story": "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.",
+            "story_order_position": 5,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 6,
+        "fields": {
+            "interview": 1,
+            "story": "Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.",
+            "story_order_position": 6,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 7,
+        "fields": {
+            "interview": 2,
+            "story": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.",
+            "story_order_position": 1,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 8,
+        "fields": {
+            "interview": 2,
+            "story": "It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.",
+            "story_order_position": 2,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 9,
+        "fields": {
+            "interview": 2,
+            "story": "The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.",
+            "story_order_position": 3,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 10,
+        "fields": {
+            "interview": 2,
+            "story": "When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.",
+            "story_order_position": 4,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 11,
+        "fields": {
+            "interview": 2,
+            "story": "On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word and and the Little Blind Text should turn around and return to its own, safe country.",
+            "story_order_position": 5,
+            "related_resource_links": []
+        }
+    },
+    {
+        "model": "interview_db.story",
+        "pk": 12,
+        "fields": {
+            "interview": 2,
+            "story": "But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their projects again and again. And if she hasn’t been rewritten, then they are still using her.",
+            "story_order_position": 6,
+            "related_resource_links": []
+        }
     }
 ]
