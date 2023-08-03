@@ -167,6 +167,7 @@ export default {
 .btn-outline-success {
   --bs-btn-bg: white !important;
   --bs-btn-color: #1E1E1E !important;
+  --bs-btn-border-color: #1E1E1E !important;
 }
 .multiselect {
   --ms-line-height: 1;
@@ -188,7 +189,7 @@ export default {
   --ms-tag-py: 0.5rem;
   --ms-tag-px: 0.5rem;
   --ms-tag-my: 0.5rem;
-  --ms-tag-mx: 0.5rem;
+  --ms-tag-mx: 0.25rem;
 
   --ms-dropdown-bg: #FFFFFF;
   --ms-dropdown-border-color: #1E1E1E;
@@ -197,9 +198,12 @@ export default {
   width: 100%;
 }
 
+.multiselect-clear {
+  margin: 0.25rem;
+}
+
 .multiselect-tag {
   white-space: normal;
-  margin-left: var(--ms-tag-mx,.25rem);;
 }
 
 .multiselect-tags-search {
