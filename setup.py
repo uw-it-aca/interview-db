@@ -22,7 +22,7 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django~=3.2',
+        'Django~=4.2',
         'Pillow',
         'UW-Django-SAML2~=1.7',
         'django-compressor',
