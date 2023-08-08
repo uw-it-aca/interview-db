@@ -13,7 +13,7 @@
               Husky Voices
             </router-link>
           </h2>
-          <router-link v-if="mq.current === 'mobile'" active-class="active" aria-current="page" to="/menu">
+          <router-link v-if="mq.mobile || mq.tablet" active-class="active" aria-current="page" to="/menu">
             <i class="bi bi-list hamburger-menu"></i>
           </router-link>
         </div>

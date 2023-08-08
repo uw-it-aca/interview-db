@@ -4,8 +4,8 @@
 <template>
   <div class="card p-2">
     <div class="row justify-content-end m-3">
-      <button type="button" class="btn-close" aria-label="Close"
-        @click="$router.push({ name: 'Students', query: { ...this.$route.query } })"></button>
+      <button v-if="mq.tablet || mq.mobile" type="button" class="btn-close" aria-label="Close"
+        @click="$router.replace({ name: 'Students', query: { ...this.$route.query } })"></button>
     </div>
     <h2 class="m-3 fw-bold display-6 text-purple">Filter Stories</h2>
     <div class="card-body">
@@ -75,7 +75,8 @@
         <div id="major">
           <div class="card card-body border-0 mt-0">
             <Multiselect mode="tags" v-model="filters.major" :options="data.majors" :searchable="true"
-              :close-on-select="false" @click="updateQuery()" @select="updateQuery()" @deselect="updateQuery()" @close="updateQuery()"/>
+              :close-on-select="false" @click="updateQuery()" @select="updateQuery()" @deselect="updateQuery()"
+              @close="updateQuery()" />
           </div>
         </div>
       </div>
@@ -86,7 +87,7 @@
         </p>
         <div class="mt-0" id="collections">
           <div class="card card-body border-0 mt-0">
-            <div class="justify-content-start col-12">  
+            <div class="justify-content-start col-12">
               <span v-for="topic in data.topics" :key="topic.id">
                 <input type="checkbox" class="btn-check" :id="topic.id" :value=topic.slug v-model="filters.topic"
                   @change="updateQuery()">
@@ -98,10 +99,19 @@
           </div>
         </div>
       </div>
-      <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
-      <label class="btn btn-gold" for="clear-all" @click="clearFilters">
-        Clear All
-      </label>
+      <div>
+        <div v-if="mq.mobile || mq.tablet">
+          <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
+          <label class="btn btn-success me-4" for="clear-all"
+            @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
+            Apply Filters
+          </label>
+        </div>
+        <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
+        <label class="btn btn-outline-gold" for="clear-all" @click="clearFilters">
+          Clear All
+        </label>
+      </div>
     </div>
   </div>
 </template>
@@ -112,6 +122,7 @@ import Multiselect from '@vueform/multiselect';
 
 export default {
   name: "StudentFilter",
+  inject: ["mq"],
   components: {
     Multiselect,
   },
@@ -156,7 +167,7 @@ export default {
   },
   created() {
     this.loadData();
-    this.$router.push({});
+    // this.$router.push({});
   },
 }
 </script>
@@ -169,6 +180,7 @@ export default {
   --bs-btn-color: #1E1E1E !important;
   --bs-btn-border-color: #1E1E1E !important;
 }
+
 .multiselect {
   --ms-line-height: 1;
   --ms-border-color: #1E1E1E;

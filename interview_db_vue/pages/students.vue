@@ -12,6 +12,10 @@
           <Interview />
         </div>
 
+        <div v-else-if="filter">
+          <StudentFilter @clicked="updateFilters" />
+        </div>
+
         <div v-else>
           <div class="mx-auto p-5 mb-4">
             <div class="p-auto">
@@ -22,12 +26,21 @@
                 </div>
 
                 <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
-                  <router-link active-class="active" aria-current="page" to="/filters">
-                    <div class="d-flex d-lg-none justify-content-end">
+                  <!-- <button type="button" aria-label="Close" @click="$router.push({ query: { 'filter': true } })">bruhfilters
+                    button</button> -->
+
+                  <!-- <router-link v-if="mq.tablet || mq.mobile" active-class="active" aria-current="page"
+                    :to="{ name: 'Filters', query: { ...this.$route.query } }">
+                    <div class="d-flex justify-content-end">
                       <u class="text-purple fs-5" style="display: inline;">Filters</u>
                       <i class="bi bi-filter" style="font-size: 22px"></i>
                     </div>
-                  </router-link>
+                  </router-link> -->
+
+                  <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success btn-sm"
+                    @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
+                    <i class="bi bi-filter fw-bold justify-content-end d-flex" style="font-size: 32px"></i>
+                  </button>
                   <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
                     <InterviewListing :interviewInfo="student" class="mb-5" />
                   </div>
@@ -50,6 +63,7 @@ import { get } from "axios";
 
 export default {
   name: "PagesStudents",
+  inject: ["mq"],
   components: {
     layout: Layout,
     InterviewListing,
@@ -76,6 +90,9 @@ export default {
     };
   },
   computed: {
+    filter() {
+      return this.$route.query.filter;
+    },
     interviewId() {
       return this.$route.params.id;
     },
