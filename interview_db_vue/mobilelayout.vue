@@ -13,7 +13,7 @@
               </h2>
           </div> -->
         <div class="row mt-2 px-4">
-          <button type="button" class="btn-close justify-content-end" aria-label="Close" @click="$router.push({ name: 'Home' })"></button>
+          <button type="button" class="btn-close justify-content-end" aria-label="Close" @click="$router.go(-1)"></button>
         </div>
         <ul class="nav mt-2 p-2 flex-column justify-content-start">
             <li class="nav-item">
