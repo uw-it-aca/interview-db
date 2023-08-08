@@ -73,6 +73,7 @@ if not DEBUG:
         '/gcs/credentials.json')
     GS_CACHE_CONTROL = 'public, max-age=604800'
     GS_DEFAULT_ACL = 'publicRead'
+    CSRF_TRUSTED_ORIGINS = ['https://' + os.getenv('CLUSTER_CNAME')]
 
 INTERVIEW_DB_AUTHZ_GROUPS = {
     'admin': os.getenv("ID_ADMIN_GROUP", 'u_test_admin'),
