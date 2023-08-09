@@ -14,7 +14,7 @@ ADD --chown=acait:acait docker/ /app/project/
 
 RUN /app/bin/pip install -r requirements.txt
 
-FROM node:14.18.1-stretch AS node-bundler
+FROM node:lts-bullseye AS node-bundler
 
 ADD ./package.json /app/
 WORKDIR /app/

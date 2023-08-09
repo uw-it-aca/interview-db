@@ -8,7 +8,7 @@
       <p class="fs-5 mb-5">{{ topicInfo.question }}</p>
       <div class="row">
         <div class="col-4 d-none d-lg-block">
-          <StudentFilter story="True" @clicked="updateFilters"/>
+          <StudentFilter :story="true" @clicked="updateFilters"/>
         </div>
         <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
           <router-link active-class="active" aria-current="page" to="/filters">
@@ -17,8 +17,18 @@
               <i class="bi bi-filter" style="font-size: 22px"></i>
             </div>
           </router-link>
-          <div class="card-columns justify-content-end" v-for="story in filteredStories">
-            <InterviewListing :interviewInfo="story.interview" :story="story.story" />
+
+          <div v-if="filteredStories.length > 0">
+            <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
+              :current-page="1" :on-click="onClickHandler" />
+            <div class="card-columns justify-content-end" v-for="story in filteredStories" :key="story">
+              <InterviewListing :interviewInfo="story.interview" :story="story.story" class="mb-5" />
+            </div>
+            <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
+              :current-page="1" :on-click="onClickHandler" />
+          </div>
+          <div v-else-if="stories.length > 0 && filteredStories.length == 0">
+            <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories were found.</p>
           </div>
         </div>
       </div>
@@ -37,17 +47,18 @@ export default {
     InterviewListing,
     StudentFilter
   },
-  props: {
-  },
   data() {
     return {
       stories: [],
       topicInfo: [],
+      filtered: [],
       filters: {
         year: this.$route.query.year,
         major: this.$route.query.major,
       },
-      filtered: [],
+      perPage: 18,
+      currentPage: 1,
+      count: 0,
     };
   },
   computed: {
@@ -57,7 +68,6 @@ export default {
     },
     filteredStories() {
       this.filtered = this.stories;
-
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.interview.standing));
       }
@@ -67,19 +77,68 @@ export default {
         this.filtered = this.filtered.filter(student => student.interview.major.some(included))
       }
 
-      return this.filtered;
+      // pagination
+      const start = this.perPage * (this.currentPage - 1);
+      const end = start + this.perPage;
+      return this.filtered.slice(start, end);
     }
   },
   methods: {
     async loadData() {
       const response = await get("/api/collections/" + this.$route.params.id + "/stories/");
       this.stories = response.data;
+      this.count = response.data.length;
       const info = await get("/api/collections/" + this.$route.params.id + "/");
       this.topicInfo = info.data;
+      this.$router.push({ query: {'page': this.currentPage} })
     },
+    onClickHandler(page) {
+      this.$router.push({query: {...this.$route.query, 'page': page} })
+    }
+  },
+  watch : {
+    "$route.query.page": {
+      immediate: true,
+      handler(n) {
+        if (n !== undefined) {
+          this.currentPage = JSON.parse(n)
+        }
+      }
+    }
   },
   created() {
     this.loadData();
   },
 };
 </script>
+
+<style>
+.pagination-container {
+  display: flex;
+  column-gap: 10px;
+}
+
+.paginate-buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 1px;
+  cursor: pointer;
+  background-color: #FAF8FC;
+  border: 1px solid black;
+  color: black;
+}
+
+.paginate-buttons:hover {
+  background-color: #f6f4f8;
+}
+
+.active-page {
+  background-color: #4B2E83;
+  border: 1px solid #4B2E83;
+  color: white;
+}
+
+.active-page:hover {
+  background-color: #5b3d98;
+}
+</style>

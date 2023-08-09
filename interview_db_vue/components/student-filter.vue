@@ -73,7 +73,7 @@
             <div class="form-group">
               <select multiple class="form-select" id="major" data-live-search="true" v-model="filters.major"
                 @change="updateQuery($event)">
-                <option v-for="major in data.majors">
+                <option v-for="major in data.majors" :key="major">
                   {{ major.full_title }}</option>
               </select>
             </div>
@@ -99,10 +99,9 @@
           </div>
         </div>
       </div>
-      <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
-      <label class="btn btn-gold" for="clear-all" @click="clearFilters">
+      <button type="button" class="btn btn-gold" @click="clearFilters">
         Clear All
-      </label>
+      </button>
     </div>
   </div>
 </template>
@@ -127,6 +126,22 @@ export default {
       },
     };
   },
+  watch : {
+    "$route.query": {
+      immediate: true,
+      handler(n) {
+        if (n.year === undefined) {
+           this.filters.year = [] 
+        }
+        if (n.major === undefined) {
+          this.filters.major = []
+        }
+        if (n.topic === undefined) {
+          this.filters.topic = []
+        }
+      }
+    }
+  },
   methods: {
     async loadData() {
       const majors = await get('/api/majors/');
@@ -136,23 +151,23 @@ export default {
     },
     updateQuery(event) {
       const query = {};
+      query['page'] = 1
       Object.entries(this.filters).forEach(([key, value]) => {
         if (value) {
           query[key] = (value);
         }
       })
-      this.$router.push({ query })
+      this.$router.replace({query})
     },
     clearFilters() {
       this.filters.year = [];
       this.filters.major = [];
       this.filters.topic = [];
-      this.$router.push({});
+      this.$router.push({query: {'page': 1} })
     }
   },
   created() {
     this.loadData();
-    this.$router.push({});
   }
 };
 </script>

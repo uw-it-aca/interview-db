@@ -50,13 +50,15 @@ View your application using your specified port number in the .env file
 
         Demo: http://localhost:8000/
 
-To load collections models, you can call:
+### Loading data (inside the container)
 
-        $ ./manage.py loaddata /app/interview_db/fixtures/interview.json
+Use the integrated terminal in the Docker Desktop dashboard to access the filesystem in the container. You can also SSH into the container using the following steps:
+        
+        $ ???
 
-Optionally, to create some sample interviews--which will wipe existing interview data:
+To load collections models and sample data, you can call:
 
-        $ ./manage.py create_sample_interviews
+        $ bin/python manage.py loaddata /app/interview_db/fixtures/interview.json
 
 ## Testing
 
@@ -81,7 +83,7 @@ Run Stylelint for CSS linting
 
 Run unittest
 
-        $ docker-compose run --rm app bin/python manage.py test
+        $ docker compose run --rm app bin/python manage.py test
 
 ## Authors
 

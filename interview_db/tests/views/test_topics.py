@@ -8,7 +8,7 @@ import json
 
 
 class InterviewTopicsTest(TestCase):
-    fixtures = ["interview.json"]
+    fixtures = ["collections.json"]
 
     def setUp(self):
         # creates test interview
