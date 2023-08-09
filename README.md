@@ -50,10 +50,11 @@ View your application using your specified port number in the .env file
 
         Demo: http://localhost:8000/
 
+### Loading data (inside the container)
+
 To load collections models and sample data, you can call:
 
-        $ ./manage.py loaddata /app/interview_db/fixtures/interview.json
-
+        $ bin/python manage.py loaddata /app/interview_db/fixtures/interview.json
 
 ## Testing
 
@@ -78,7 +79,7 @@ Run Stylelint for CSS linting
 
 Run unittest
 
-        $ docker-compose run --rm app bin/python manage.py test
+        $ docker compose run --rm app bin/python manage.py test
 
 ## Authors
 
