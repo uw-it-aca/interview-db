@@ -52,6 +52,10 @@ View your application using your specified port number in the .env file
 
 ### Loading data (inside the container)
 
+Use the integrated terminal in the Docker Desktop dashboard to access the filesystem in the container. You can also SSH into the container using the following steps:
+        
+        $ ???
+
 To load collections models and sample data, you can call:
 
         $ bin/python manage.py loaddata /app/interview_db/fixtures/interview.json
