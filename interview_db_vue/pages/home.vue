@@ -7,43 +7,33 @@
     </template>
 
     <template #content>
-      <div class="row g-0 mb-4" style="background: linear-gradient(#FBFBFB, #f8f9fa)">
-        <div class="col-md-6 col-lg-5 col-12 col-xl-5 d-flex align-items-center justify-content-start">
+      <div class="row g-0 mb-5" style="background: linear-gradient(#FBFBFB, #f8f9fa)">
+        <div class="col-12 col-md-6 col-lg-5 col-xl-5 d-flex align-items-center justify-content-start">
           <div class="card bg-light p-4 mx-auto my-4 border-1 border-light shadow">
             <div class="card-body">
-            <h2 class="display-5 mb-4 fw-bold text-gold">REAL STUDENTS<br>REAL STORIES</h2>
-            <p class="mb-4">
-              Sharing the stories of UW students through a series of authentic and personal interviews.
-            </p>
-            <button type="button" class="btn btn-purple" @click="$router.push('students')">
-              Explore Student Stories <i class="bi bi-chevron-right"></i>
-            </button>
-          </div>
+              <h2 class="display-5 mb-4 fw-bold text-gold">REAL STUDENTS<br>REAL STORIES</h2>
+              <p class="mb-4">
+                Sharing the stories of UW students through a series of authentic and personal interviews.
+              </p>
+              <button type="button" class="btn btn-purple" @click="$router.push('students')">
+                Explore Student Stories <i class="bi bi-chevron-right"></i>
+              </button>
+            </div>
           </div>
         </div>
         <div class="col-12 col-lg-7 col-md-6 col-xl-7 pr-2 justify-content-center">
           <div class="row justify-content-center mx-auto my-auto">
-            <div id="carouselExampleControls" class="carousel slide justify-content-center mx-auto col-12 col-lg-8"
-              data-bs-ride="carousel">
+            <div id="carousel" class="h-100 carousel slide justify-content-center mx-auto col-12 col-lg-8" data-bs-ride="carousel">
               <div class="carousel-inner justify-content-center mx-auto">
                 <div v-for="student, index in randomStudents" :key="student.id">
-                  <div v-if="index == 0">
-                    <div class="carousel-item active justify-content-center">
-                      <InterviewListing :interviewInfo="student" :carousel=true class="justify-content-center mx-auto" />
-                    </div>
+                  <div v-if="index == 0" class="carousel-item active justify-content-center">
+                    <InterviewListing :interviewInfo="student" :carousel=true class="h-100 justify-content-center mx-auto" />
                   </div>
-                  <div v-else>
-                    <div class="carousel-item justify-content-center">
-                      <InterviewListing :interviewInfo="student" :carousel=true class="justify-content-center mx-auto"/>
-                    </div>
+                  <div v-else class="carousel-item justify-content-center">
+                    <InterviewListing :interviewInfo="student" :carousel=true class="h-100 justify-content-center mx-auto" />
                   </div>
                 </div>
               </div>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
         </div>
@@ -52,14 +42,14 @@
       <div class="card border-0 mb-5">
         <img class="home-img" src="../images/homequad.png" alt="The quad during cherry blossom season">
         <div class="card-img-overlay text-center justify-content-center">
-          <div class="pt-3 row justify-content-center">
+          <div class="pt-2 row justify-content-center">
             <span class="col-md-2 col-6">
               <h2 class="text-gold display-4 fw-bold">{{ studentCount }}</h2>
-              <p class="text-gold font-weight-bold">Students Interviewed</p>
+              <p class="text-gold fw-bold">Students Interviewed</p>
             </span>
             <span class="col-md-2 col-6">
               <h2 class="text-gold display-4 fw-bold">{{ storyCount }}</h2>
-              <p class="text-gold font-weight-bold">Stories Shared</p>
+              <p class="text-gold fw-bold">Stories Shared</p>
             </span>
           </div>
         </div>
@@ -78,8 +68,8 @@
         <div class="col-md-4 col-12 pt-5 mx-5 text-center">
           <h2 class="display-4 fw-bold mb-5 text-gold">Collections</h2>
           <p class="mb-4">
-            Navigate common themes among students on topics such as
-            transitioning to college and finding community, and moving forward after graduation.
+            Navigate common themes among students on topics such as<br>
+            transitioning to college, finding community, and <br> moving forward after graduation.
           </p>
           <button type="button" class="btn btn-purple" @click="$router.push('collections')">
             Browse Collections <i class="bi bi-chevron-right"></i>
@@ -127,3 +117,6 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>
