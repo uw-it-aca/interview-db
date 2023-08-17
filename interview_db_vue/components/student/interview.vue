@@ -2,7 +2,6 @@
 // full individual student interview page
 
 <template>
-
   <div class="mt-4 pt-4">
     <div class="card border-0">
       <div class="row g-0 mx-auto interview-height">
@@ -34,30 +33,31 @@
             </div>
           </div>
 
-          <div class="border-top border-primary py-4">
+          <div class="border-top border-primary pt-4 mb-4">
             <p class="text-start">They talk about...</p>
-            <div class="justify-content-start col-12">
-              <span v-for="topic in topics">
-                <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic"
-                v-model="filters" autocomplete="off">
+            <div class="justify-content-start col-12 mb-4">
+              <span v-for="topic in topics" :key="topic.id">
+                <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic" v-model="filters"
+                  autocomplete="off">
                 <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
-              <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
-              <label class="btn m-1 text-gold" for="clear-all" @click="clearFilters">
+              <button type="button" class="btn btn-gold m-1" @click="clearFilters">
                 Clear All
-              </label>
+              </button>
             </div>
 
             <div v-for="story in filteredStories" :key="story.id">
               <div class="border-top border-primary pt-4 pb-2">
-                <p class="display-6 fs-5">
+                <p class="display-6 fs-6 lh-base">
                   {{ story.story }}
                 </p>
-                <p class="fst-italic text-end">
+                <p class="fst-italic text-end text-gold">
                   <span v-for="collection in story.collections" :key="collection.id">
-                    #{{ collection.topic }}
+                    <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link">
+                      #{{ collection.topic }}&nbsp
+                    </router-link>
                   </span>
                 </p>
               </div>
@@ -146,5 +146,16 @@ export default {
 .btn-outline-success {
   --bs-btn-bg: white !important;
   --bs-btn-color: #1E1E1E !important;
+}
+.btn-check+.btn:hover {
+  color: white !important;
+  background-color: #4B2E83 !important;
+}
+a.active-link {
+  text-decoration: none;
+  color: #B4A67F;
+}
+a.active-link:hover{
+  color: #827252;
 }
 </style>

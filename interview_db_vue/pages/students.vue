@@ -17,9 +17,15 @@
         </div>
 
         <div v-else>
+          <div style="position: relative">
+            <img class="banner-image" src="../images/mich.jpg" />
+            <div class="title-div">
+              <h1 class="text-gold fw-bold display-5">Student Stories</h1>
+            </div>
+          </div>
+
           <div class="mx-auto p-5 mb-4">
             <div class="p-auto">
-              <h2 class="display-5 fw-bold mb-5 text-gold">Student Stories</h2>
               <div class="row">
                 <div class="col-4 d-none d-lg-block">
                   <StudentFilter @clicked="updateFilters" />
@@ -41,8 +47,18 @@
                     @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
                     <i class="bi bi-filter fw-bold justify-content-end d-flex" style="font-size: 32px"></i>
                   </button>
-                  <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
-                    <InterviewListing :interviewInfo="student" class="mb-5" />
+                  
+                  <div v-if="filteredStudents.length > 0">
+                    <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length"
+                    :items-per-page="perPage" :current-page="1" :on-click="onClickHandler" />
+                    <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id" :hide-prev-next-when-ends="true">
+                      <InterviewListing :interviewInfo="student" class="mb-5" />
+                    </div>
+                    <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length"
+                    :items-per-page="perPage" :current-page="1" :on-click="onClickHandler" />
+                  </div>
+                  <div v-else-if="students.length > 0 && filteredStudents.length == 0">
+                    <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories were found.</p>
                   </div>
                 </div>
               </div>
@@ -87,6 +103,9 @@ export default {
         major: this.$route.query.major,
         topic: this.$route.query.topic,
       },
+      perPage: 12,
+      currentPage: 1,
+      count: 0,
     };
   },
   computed: {
@@ -106,7 +125,6 @@ export default {
     },
     filteredStudents() {
       this.filtered = this.students;
-
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
       }
@@ -120,17 +138,67 @@ export default {
         this.filtered = this.filtered.filter(student => this.filters.topic.every(
           f => student.collections.some((collection) => f === collection.slug)))
       }
-      return this.filtered;
+
+      // pagination
+      const start = this.perPage * (this.currentPage - 1);
+      const end = start + this.perPage;
+      return this.filtered.slice(start, end);
     },
   },
-  created() {
-    this.loadData();
+  watch : {
+    "$route.query.page": {
+      immediate: true,
+      handler(n) {
+        if (n !== undefined) {
+          this.currentPage = JSON.parse(n)
+        }
+      }
+    }
   },
   methods: {
     async loadData() {
       const response = await get("/api/students/collections/");
       this.students = response.data;
+      this.count = response.data.length;
+      this.$router.push({ query: {'page': this.currentPage} })
     },
+    onClickHandler(page) {
+      this.$router.push({query: {...this.$route.query, 'page': page} })
+    }
+  },
+  created() {
+    this.loadData();
   },
 };
 </script>
+
+<style>
+.pagination-container {
+  display: flex;
+  column-gap: 10px;
+}
+
+.paginate-buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 1px;
+  cursor: pointer;
+  background-color: #FAF8FC;
+  border: 1px solid black;
+  color: black;
+}
+
+.paginate-buttons:hover {
+  background-color: #f6f4f8;
+}
+
+.active-page {
+  background-color: #4B2E83;
+  border: 1px solid #4B2E83;
+  color: white;
+}
+
+.active-page:hover {
+  background-color: #583b92;
+}
+</style>
