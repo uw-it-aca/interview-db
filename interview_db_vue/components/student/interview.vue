@@ -2,7 +2,7 @@
 // full individual student interview page
 
 <template>
-  <div class="mt-4 pt-4">
+  <div>
     <div class="card border-0">
       <div class="row g-0 mx-auto interview-height">
         <div class="col-lg-6 col-12" style="height: inherit;">
@@ -18,8 +18,8 @@
 
         <div class="col-lg-6 col-12 p-5 scroll-area">
           <h2 class="card-title display-4 mb-2 text-gold fw-bold">{{ studentInfo.first_name }}</h2>
-          <div class="row">
-            <div class="col">
+          <div class="row mb-2">
+            <div class="col-9">
               <span v-if="interviewInfo.standing">
                 {{ interviewInfo.standing + ", studying" }}
               </span>
@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <div class="border-top border-primary pt-4 mb-4">
+          <div class="border-top border-info pt-4 mb-4">
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-12 mb-4">
               <span v-for="topic in topics" :key="topic.id">
@@ -49,15 +49,16 @@
             </div>
 
             <div v-for="story in filteredStories" :key="story.id">
-              <div class="border-top border-primary pt-4 pb-2">
+              <div class="border-top border-info pt-4 pb-2">
                 <p class="display-6 fs-6 lh-base">
                   {{ story.story }}
                 </p>
-                <p class="fst-italic text-end text-gold">
+                <p class="fst-italic text-end text-secondary">
                   <span v-for="collection in story.collections" :key="collection.id">
                     <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link">
-                      #{{ collection.topic }}&nbsp
+                      #{{ collection.topic }}
                     </router-link>
+                    &nbsp
                   </span>
                 </p>
               </div>
@@ -153,9 +154,10 @@ export default {
 }
 a.active-link {
   text-decoration: none;
-  color: #B4A67F;
+  color: #827252;
 }
 a.active-link:hover{
   color: #827252;
+  text-decoration: underline;
 }
 </style>
