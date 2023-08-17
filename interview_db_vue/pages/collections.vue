@@ -27,11 +27,12 @@
               <div v-for="collection in collections" :key="collection.id"
                 class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
                 <div class="d-flex align-items-stretch flex-fill">
-                  <button type="button" class="btn-card p-4 mx-2 my-3 flex-fill" @click="$router.push({
-                    name: 'Collections',
-                    params: { id: collection.id },
-                    // query: { topic: collection.slug }
-                  })">
+                  <button type="button" class="btn-card p-4 mx-2 my-3 flex-fill"
+                      @click="$router.push({
+                      name: 'Collections',
+                      params: { id: collection.id },
+                      // query: { topic: collection.slug }
+                    })">
                     <div class="text-start d-flex justify-content-end row">
                       <div class="col-11">
                         <h2 class="fw-bold display-4 fs-3 mb-4 text-purple col-12">{{ collection.topic }}</h2>
@@ -61,6 +62,7 @@ import { get } from "axios";
 
 export default {
   name: "PagesCollections",
+  inject: ["mq"],
   components: {
     layout: Layout,
     Topic,
@@ -93,7 +95,4 @@ export default {
 };
 </script>
 <style>
-button.btn-card:hover {
-  background-color: #f6f4f8;
-}
 </style>

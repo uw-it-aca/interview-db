@@ -61,6 +61,10 @@ button.btn-card {
   border-width: 1.5px;
 }
 
+button.btn-card:hover {
+  background-color: #f6f4f8;
+}
+
 .interview-filter {
   background: white !important;
   border-style: solid !important;
