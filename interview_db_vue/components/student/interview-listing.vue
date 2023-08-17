@@ -19,11 +19,11 @@
 
         <div class="col-md-8 col-sm-7 p-4 m-0">
           <div class="row">
-            <p v-if=!carousel class="fs-6 text-end">{{ interviewDate }}</p>
-            <h2 class="card-title fw-bold text-purple" :class="carousel ? 'display-4 fs-3 mb-2' : 'display-6 mb-2'">
+            <p v-if="!carousel && !(mq.mobile || mq.tablet)"  class="fs-6 text-end">{{ interviewDate }}</p>
+            <h2 class="card-title fw-bold text-purple" :class="(carousel || (mq.mobile || mq.tablet)) ? 'display-4 fs-3 mb-2' : 'display-6 mb-2'">
               {{ interviewInfo.student.first_name }}
             </h2>
-            <p class="pb-4 border-bottom border-primary" :class="carousel ? '' : 'display-4 fs-5'">
+            <p class="pb-4 border-bottom border-primary" :class="(carousel || (mq.mobile || mq.tablet)) ? '' : 'display-4 fs-5'">
               <span v-if="interviewInfo.standing">
                 {{ interviewInfo.standing + ", studying" }}
               </span>
@@ -50,8 +50,10 @@
 
 <script>
 import { get } from "axios";
+
 export default {
   name: "StudentListing",
+  inject: ["mq"],
   props: {
     interviewInfo: {
       type: Object,

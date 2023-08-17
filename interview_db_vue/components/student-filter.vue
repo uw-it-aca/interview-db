@@ -106,10 +106,10 @@
             @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
             Apply Filters
           </label>
+          <button type="button" class="btn btn-gold" @click="clearFilters">
+            Clear All
+          </button>
         </div>
-        <button type="button" class="btn btn-gold" @click="clearFilters">
-          Clear All
-        </button>
       </div>
     </div>
   </div>
@@ -183,7 +183,6 @@ export default {
   },
   created() {
     this.loadData();
-    // this.$router.push({});
   },
 }
 </script>

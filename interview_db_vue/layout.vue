@@ -55,7 +55,7 @@
       <div class="col-md-6 col-12 footer-img d-flex">
         <img src="./images/washingtonlogo.svg" />
       </div>
-      <div class="col-md-6 col-12 align-items-center footer-copyright d-flex">
+      <div class="col-md-6 col-12 align-items-center footer-copyright d-flex" :class="(mq.mobile || mq.tablet) ? 'text-center' : ''">
         <p class="">Copyright &copy; 2023 University of Washington</p>
       </div>
     </div>

@@ -32,30 +32,34 @@
                 </div>
 
                 <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
-                  <!-- <button type="button" aria-label="Close" @click="$router.push({ query: { 'filter': true } })">bruhfilters
+                  <!-- <button type="button" class="mb-4" aria-label="Close" @click="$router.push({ query: { 'filter': true } })">filters
                     button</button> -->
-
-                  <!-- <router-link v-if="mq.tablet || mq.mobile" active-class="active" aria-current="page"
+                  <!-- 
+                  <router-link v-if="mq.tablet || mq.mobile" active-class="active" aria-current="page"
                     :to="{ name: 'Filters', query: { ...this.$route.query } }">
                     <div class="d-flex justify-content-end">
                       <u class="text-purple fs-5" style="display: inline;">Filters</u>
                       <i class="bi bi-filter" style="font-size: 22px"></i>
                     </div>
                   </router-link> -->
+                  <div class="d-flex justify-content-center mb-4">
+                    <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
+                      @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
+                      <i class="bi bi-filter"></i>&nbsp;Filter</button>
+                  </div>
 
-                  <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success btn-sm"
-                    @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
-                    <i class="bi bi-filter fw-bold justify-content-end d-flex" style="font-size: 32px"></i>
-                  </button>
-                  
+
                   <div v-if="filteredStudents.length > 0">
-                    <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length"
-                    :items-per-page="perPage" :current-page="1" :on-click="onClickHandler" />
-                    <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id" :hide-prev-next-when-ends="true">
-                      <InterviewListing :interviewInfo="student" class="mb-5" />
+                    <vue-awesome-paginate class="me-2 justify-content-center d-flex" v-model="currentPage"
+                      :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
+                      :on-click="onClickHandler" />
+                    <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id"
+                      :hide-prev-next-when-ends="true">
+                      <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
-                    <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length"
-                    :items-per-page="perPage" :current-page="1" :on-click="onClickHandler" />
+                    <vue-awesome-paginate class="mt-2 justify-content-center d-flex" v-model="currentPage"
+                      :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
+                      :on-click="onClickHandler" />
                   </div>
                   <div v-else-if="students.length > 0 && filteredStudents.length == 0">
                     <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories were found.</p>
@@ -145,7 +149,7 @@ export default {
       return this.filtered.slice(start, end);
     },
   },
-  watch : {
+  watch: {
     "$route.query.page": {
       immediate: true,
       handler(n) {
@@ -160,10 +164,10 @@ export default {
       const response = await get("/api/students/collections/");
       this.students = response.data;
       this.count = response.data.length;
-      this.$router.push({ query: {'page': this.currentPage} })
+      this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } })
     },
     onClickHandler(page) {
-      this.$router.push({query: {...this.$route.query, 'page': page} })
+      this.$router.push({ query: { ...this.$route.query, 'page': page } })
     }
   },
   created() {
@@ -181,7 +185,7 @@ export default {
 .paginate-buttons {
   height: 40px;
   width: 40px;
-  border-radius: 1px;
+  border-radius: 0.1rem;
   cursor: pointer;
   background-color: #FAF8FC;
   border: 1px solid black;
