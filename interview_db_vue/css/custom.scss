@@ -11,7 +11,7 @@ $white: #F8F9fA; // background color
 $min-contrast-ratio: 2.5;
 
 // button styling
-$btn-border-width: 0;
+$btn-border-width: 1px;
 $bs-btn-color: $white;
 $bs-btn-active-color: $info;
 $btn-transition: all 0.15s ease 0s;
@@ -58,7 +58,7 @@ button.btn-card {
   padding: 1rem;
   border-color: $primary;
   border-radius: 0.1rem;
-  border-width: 1.5px;
+  border-width: 1px;
 }
 
 button.btn-card:hover {
@@ -69,7 +69,7 @@ button.btn-card:hover {
   background: white !important;
   border-style: solid !important;
   border-color: $primary !important;
-  border-width: 1.5px !important;
+  border-width: 1px !important;
   padding: 4px !important;
   margin: 8px !important;
 }
@@ -244,7 +244,7 @@ html {
 }
 
 $border-color: $primary;
-$border-width: 1.5px;
+$border-width: 1px;
 $border-radius: 0.1rem;
 
 // bootstrap theme + utility merging

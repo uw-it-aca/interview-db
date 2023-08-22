@@ -39,7 +39,7 @@
         </div>
 
         <div class="d-flex justify-content-end">
-          <u class="text-purple" style="display:inline;">Read More</u>
+          <p class="text-purple" style="display:inline;">Read More</p>
           <p>&nbsp;</p>
           <i class="bi bi-chevron-right"></i>
         </div>

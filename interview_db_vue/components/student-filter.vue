@@ -91,7 +91,7 @@
               <span v-for="topic in data.topics" :key="topic.id">
                 <input type="checkbox" class="btn-check" :id="topic.id" :value=topic.slug v-model="filters.topic"
                   @change="updateQuery()">
-                <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
+                <label class="btn btn-outline-success  m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
@@ -100,12 +100,21 @@
         </div>
       </div>
       <div>
-        <div v-if="mq.mobile || mq.tablet">
-          <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
-          <label class="btn btn-success me-4" for="clear-all"
-            @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
-            Apply Filters
-          </label>
+        <div v-if="mq.mobile || mq.tablet" class="row">
+          <div class="col-6 justify-content-start d-flex">
+            <button type="button" class="btn btn-gold" @click="clearFilters">
+              Clear All
+            </button>
+          </div>
+          <div class="col-6 justify-content-end d-flex">
+            <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
+            <label class="btn btn-success" for="clear-all"
+              @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
+              Apply Filters
+            </label>
+          </div> 
+        </div>
+        <div v-else>
           <button type="button" class="btn btn-gold" @click="clearFilters">
             Clear All
           </button>
@@ -192,14 +201,14 @@ export default {
 
 .btn-outline-success {
   --bs-btn-bg: white !important;
-  --bs-btn-color: #1E1E1E !important;
   --bs-btn-border-color: #1E1E1E !important;
+  --bs-btn-color: #1E1E1E !important;
 }
 
 .multiselect {
   --ms-line-height: 1;
   --ms-border-color: #1E1E1E;
-  --ms-border-width: 1.5px;
+  --ms-border-width: 1px;
   --ms-ring-color: #f6f4f8;
   --ms-radius: 0.1rem;
   --ms-py: 0.875rem;
@@ -220,7 +229,7 @@ export default {
 
   --ms-dropdown-bg: #FFFFFF;
   --ms-dropdown-border-color: #1E1E1E;
-  --ms-dropdown-border-width: 1.5px;
+  --ms-dropdown-border-width: 1px;
   --ms-dropdown-radius: 0.1rem;
   width: 100%;
 }

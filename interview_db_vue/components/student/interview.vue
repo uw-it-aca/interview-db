@@ -58,7 +58,7 @@
                     <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link">
                       #{{ collection.topic }}
                     </router-link>
-                    &nbsp
+                    &nbsp;
                   </span>
                 </p>
               </div>
