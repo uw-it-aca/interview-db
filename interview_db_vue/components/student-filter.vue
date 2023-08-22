@@ -2,15 +2,23 @@
 // to filter student interviews
 
 <template>
-  <div class="card p-2">
-    <div class="row justify-content-end m-3">
-      <button v-if="mq.tablet || mq.mobile" type="button" class="btn-close" aria-label="Close"
-        @click="$router.replace({ name: 'Students', query: { ...this.$route.query } })"></button>
+  <div class="card p-2" :class="(mq.tablet || mq.mobile) ? 'card-100 border-0' : 'card'">
+    <div class="row mx-3 mt-3">
+      <div class="col-6 justify-content-start align-bottom d-flex">
+        <button v-if="mq.tablet || mq.mobile" type="button" class="btn-close" aria-label="Close"
+          @click="$router.replace({ name: 'Students', query: { ...this.$route.query } })"></button>
+      </div>
+      <div class="col-6 justify-content-end d-flex">
+        <a v-if="!emptyFilters" class="text-secondary active-link" :class="(mq.tablet || mq.mobile) ? '' : 'active-link-hover'" @click="clearFilters">
+          Clear All
+        </a>
+      </div>
     </div>
     <h2 class="m-3 fw-bold display-6 text-purple">Filter Stories</h2>
     <div class="card-body">
       <div class="mb-4">
-        <p class="display-4 fw-bold fs-5 mb-0" href="#year" aria-expanded="false" aria-controls="year">
+        <p class="display-4 fw-bold fs-5 mb-0 dropdown-toggle" data-bs-toggle="collapse" href="#year" aria-expanded="true"
+          aria-controls="year">
           Student Year
         </p>
         <div class="mt-0" id="year">
@@ -69,10 +77,11 @@
       </div>
 
       <div class="mb-4">
-        <p class="display-4 fs-5 fw-bold mb-0" href="#major" aria-expanded="false" aria-controls="major">
+        <p class="display-4 fs-5 fw-bold mb-0 dropdown-toggle" data-bs-toggle="collapse" href="#major"
+          aria-expanded="true" aria-controls="major">
           Major
         </p>
-        <div id="major">
+        <div class="mt-0e" id="major">
           <div class="card card-body border-0 mt-0">
             <Multiselect mode="tags" v-model="filters.major" :options="data.majors" :searchable="true"
               :close-on-select="false" @click="updateQuery()" @select="updateQuery()" @deselect="updateQuery()"
@@ -82,7 +91,8 @@
       </div>
 
       <div v-if=!story class="mb-4">
-        <p class="display-4 fs-5 fw-bold mb-0" href="#collections" aria-expanded="false" aria-controls="collections">
+        <p class="display-4 fs-5 fw-bold mb-0 dropdown-toggle" data-bs-toggle="collapse" href="#collections"
+          aria-expanded="true" aria-controls="collections">
           Story Collection
         </p>
         <div class="mt-0" id="collections">
@@ -91,7 +101,7 @@
               <span v-for="topic in data.topics" :key="topic.id">
                 <input type="checkbox" class="btn-check" :id="topic.id" :value=topic.slug v-model="filters.topic"
                   @change="updateQuery()">
-                <label class="btn btn-outline-success  m-1" :for="topic.id">
+                <label class="btn btn-outline-success m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
@@ -101,24 +111,19 @@
       </div>
       <div>
         <div v-if="mq.mobile || mq.tablet" class="row">
-          <div class="col-6 justify-content-start d-flex">
-            <button type="button" class="btn btn-gold" @click="clearFilters">
-              Clear All
-            </button>
-          </div>
-          <div class="col-6 justify-content-end d-flex">
-            <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
-            <label class="btn btn-success" for="clear-all"
-              @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
-              Apply Filters
-            </label>
-          </div> 
+          <!-- <div class="justify-content-center d-flex"> -->
+          <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
+          <label class="btn btn-success" for="clear-all"
+            @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
+            Apply Filters
+          </label>
+          <!-- </div> -->
         </div>
-        <div v-else>
+        <!-- <div v-else>
           <button type="button" class="btn btn-gold" @click="clearFilters">
             Clear All
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -188,10 +193,15 @@ export default {
       this.filters.major = [];
       this.filters.topic = [];
       this.$router.push({ query: { 'page': 1 } })
-    }
+    },
   },
   created() {
     this.loadData();
+  },
+  computed: {
+    emptyFilters() {
+      return this.filters.year.length == 0 && this.filters.major.length == 0 && this.filters.topic.length == 0;
+    },
   },
 }
 </script>
@@ -203,6 +213,11 @@ export default {
   --bs-btn-bg: white !important;
   --bs-btn-border-color: #1E1E1E !important;
   --bs-btn-color: #1E1E1E !important;
+}
+
+.btn-check+.btn:hover {
+  color: white !important;
+  background-color: #4B2E83 !important;
 }
 
 .multiselect {
@@ -245,5 +260,27 @@ export default {
 .multiselect-tags-search {
   max-width: 100%;
   display: flex;
+}
+
+.dropdown-toggle[aria-expanded="true"]:after {
+  transform: rotate(-180deg);
+}
+
+.dropdown-toggle:after {
+  transition: 0.3s;
+}
+
+.dropdown-toggle-split {
+  justify-content: flex-end;
+}
+
+a.active-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.active-link-hover:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>

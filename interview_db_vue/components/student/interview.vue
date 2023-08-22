@@ -39,7 +39,7 @@
               <span v-for="topic in topics" :key="topic.id">
                 <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic" v-model="filters"
                   autocomplete="off">
-                <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
+                <label class="btn btn-outline-success m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
@@ -146,12 +146,10 @@ export default {
 <style>
 .btn-outline-success {
   --bs-btn-bg: white !important;
+  --bs-btn-border-color: #1E1E1E !important;
   --bs-btn-color: #1E1E1E !important;
 }
-.btn-check+.btn:hover {
-  color: white !important;
-  background-color: #4B2E83 !important;
-}
+
 a.active-link {
   text-decoration: none;
   color: #827252;

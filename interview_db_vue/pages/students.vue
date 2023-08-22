@@ -42,11 +42,17 @@
                       <i class="bi bi-filter" style="font-size: 22px"></i>
                     </div>
                   </router-link> -->
-                  <div class="d-flex justify-content-center mb-4">
+                  <div class="row mb-4">
+                    <div class="col-6 justify-content-start">
+                    <p v-if="filtered.length > 0" class="display-4 fs-5 fw-bold">{{ filtered.length }} Stories Found</p>
+                  </div>
+                  <div class="d-flex justify-content-end col-6">
                     <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
                       @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
                       <i class="bi bi-filter"></i>&nbsp;Filter</button>
                   </div>
+                  </div>
+                  
 
 
                   <div v-if="filteredStudents.length > 0">

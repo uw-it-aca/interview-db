@@ -119,4 +119,8 @@ export default {
 </script>
 
 <style>
+img.home-img {
+  height: 500px;
+  object-fit: cover;
+}
 </style>
