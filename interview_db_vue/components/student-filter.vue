@@ -4,7 +4,7 @@
 <template>
   <div class="card p-2" :class="(mq.tablet || mq.mobile) ? 'card-100 border-0' : 'card'">
     <div class="row mx-3 mt-3">
-      <div class="col-6 justify-content-start align-bottom d-flex">
+      <div class="col-6 justify-content-start d-flex p-0">
         <button v-if="mq.tablet || mq.mobile" type="button" class="btn-close" aria-label="Close"
           @click="$router.replace({ name: 'Students', query: { ...this.$route.query } })"></button>
       </div>
