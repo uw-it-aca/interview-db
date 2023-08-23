@@ -111,19 +111,12 @@
       </div>
       <div>
         <div v-if="mq.mobile || mq.tablet" class="row">
-          <!-- <div class="justify-content-center d-flex"> -->
           <input type="checkbox" class="btn-check" id="clear-all" autocomplete="off">
           <label class="btn btn-success" for="clear-all"
             @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
             Apply Filters
           </label>
-          <!-- </div> -->
         </div>
-        <!-- <div v-else>
-          <button type="button" class="btn btn-gold" @click="clearFilters">
-            Clear All
-          </button>
-        </div> -->
       </div>
     </div>
   </div>
@@ -161,12 +154,18 @@ export default {
       handler(n) {
         if (n.year === undefined) {
           this.filters.year = []
+        } else {
+          this.filters.year = n.year;
         }
         if (n.major === undefined) {
           this.filters.major = []
+        } else {
+          this.filters.major = n.major;
         }
         if (n.topic === undefined) {
           this.filters.topic = []
+        } else {
+          this.filters.topic = n.topic;
         }
       }
     }

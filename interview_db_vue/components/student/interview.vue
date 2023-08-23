@@ -19,7 +19,7 @@
         <div class="col-lg-6 col-12 p-5 scroll-area">
           <h2 class="card-title display-4 mb-2 text-gold fw-bold">{{ studentInfo.first_name }}</h2>
           <div class="row mb-2">
-            <div class="col-9">
+            <div :class="mq.mobile ? '': 'col-9'">
               <span v-if="interviewInfo.standing">
                 {{ interviewInfo.standing + ", studying" }}
               </span>
@@ -28,12 +28,12 @@
               </span>
               {{ interviewInfo.declared_major }}
             </div>
-            <div class="col">
-              <p class="fs-6 text-end">{{ interviewDate }}</p>
+            <div  :class="mq.mobile ? 'mt-2': 'col text-end'">
+              <p class="fs-6">{{ interviewDate }}</p>
             </div>
           </div>
 
-          <div class="border-top border-info pt-4 mb-4">
+          <div class="border-top border-success pt-4 mb-4">
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-12 mb-4">
               <span v-for="topic in topics" :key="topic.id">
@@ -49,7 +49,7 @@
             </div>
 
             <div v-for="story in filteredStories" :key="story.id">
-              <div class="border-top border-info pt-4 pb-2">
+              <div class="border-top border-success pt-4 pb-2">
                 <p class="display-6 fs-6 lh-base">
                   {{ story.story }}
                 </p>
@@ -75,6 +75,7 @@ import { get } from "axios";
 
 export default {
   name: "Interview",
+  inject: ["mq"],
   components: {
   },
   computed: {

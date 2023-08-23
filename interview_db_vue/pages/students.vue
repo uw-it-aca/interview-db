@@ -44,7 +44,7 @@
                   </router-link> -->
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                    <p v-if="filtered.length > 0" class="display-4 fs-5 fw-bold">{{ filtered.length }} Stories Found</p>
+                    <p v-if="filtered.length > 0" class="display-4 fs-5 fw-bold">{{ filtered.length }} Stories </p>
                   </div>
                   <div class="d-flex justify-content-end col-6">
                     <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
@@ -68,7 +68,7 @@
                       :on-click="onClickHandler" />
                   </div>
                   <div v-else-if="students.length > 0 && filteredStudents.length == 0">
-                    <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories were found.</p>
+                    <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories found.</p>
                   </div>
                 </div>
               </div>
