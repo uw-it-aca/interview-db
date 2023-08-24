@@ -8,6 +8,8 @@ import json
 
 
 class UnpublishedInterviewsTest(TestCase):
+    fixtures = ["collections.json"]
+
     def setUp(self):
         joe = Student.objects.create(
             first_name="Joe",
@@ -22,7 +24,7 @@ class UnpublishedInterviewsTest(TestCase):
             no_identifying_photo=True,
             no_real_name=False,
             no_publishing_stories=False,
-            pull_quote="Some pull quote",
+            pull_quote="Did not sighn release form",
             other_publishing_restrictions=False
         )
         self.no_release = no_release
@@ -36,7 +38,7 @@ class UnpublishedInterviewsTest(TestCase):
             no_identifying_photo=True,
             no_real_name=False,
             no_publishing_stories=False,
-            pull_quote="Some pull quote",
+            pull_quote="Able to be published",
             other_publishing_restrictions=False
         )
         self.publishable = publishable
@@ -54,6 +56,58 @@ class UnpublishedInterviewsTest(TestCase):
         )
         self.no_quote = no_quote
 
+        story_publishable = Story.objects.create(
+            interview=publishable,
+            story="This is a publishable story about Getting Help",
+            story_order_position=1,
+            )
+        coding_publishable = Coding(
+            code=Code.objects.get_or_create(topic="Career",
+                                            code="Getting Help")[0],
+            story=story_publishable,
+        )
+        coding_publishable.subcode = SubCode.objects.get_or_create(
+            subcode="Context")[0]
+        coding_publishable.save()
+
+        coding_publishable_2 = Coding(
+            code=Code.objects.get_or_create(code="Lifelong Learning")[0],
+            story=story_publishable,
+        )
+        coding_publishable_2.subcode = SubCode.objects.get_or_create(
+            subcode="Context")[0]
+        coding_publishable_2.save()
+        self.story_publishable = story_publishable
+
+        story_no_release = Story.objects.create(
+            interview=no_release,
+            story="This is a no-release story about Getting Help",
+            story_order_position=1,
+            )
+        coding_no_release = Coding(
+            code=Code.objects.get_or_create(topic="Career",
+                                            code="Getting Help")[0],
+            story=story_no_release,
+        )
+        coding_no_release.subcode = SubCode.objects.get_or_create(
+            subcode="Context")[0]
+        coding_no_release.save()
+        self.story_no_release = story_no_release
+
+        story_no_quote = Story.objects.create(
+            interview=no_quote,
+            story="This is a no-quote story about Working Towards Goals",
+            story_order_position=1,
+            )
+        coding_no_quote = Coding(
+            code=Code.objects.get_or_create(code="Lifelong Learning")[0],
+            story=story_no_quote,
+        )
+        coding_no_quote.subcode = SubCode.objects.get_or_create(
+            subcode="Context")[0]
+        coding_no_quote.save()
+        self.story_no_quote = story_no_quote
+
     def tearDown(self):
         Interview.objects.all().delete()
         Student.objects.all().delete()
@@ -66,8 +120,18 @@ class UnpublishedInterviewsTest(TestCase):
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
         interviews = json.loads(response.content)
-        self.assertEquals(response.status_code, 200)
-        self.assertTrue(self.no_release.id not in interviews)
+        self.assertTrue(self.publishable.id in interview["id"]
+                        for interview in interviews)
+        self.assertTrue(self.no_release.id not in interview["id"]
+                        for interview in interviews)
+
+        url = reverse("interview_db:random-students")
+        response = self.client.get(url, follow=True)
+        random = json.loads(response.content)
+        self.assertTrue(self.publishable.id in interview["id"]
+                        for interview in random)
+        self.assertTrue(self.no_release.id not in interview["id"]
+                        for interview in random)
 
     def test_no_pull_quote(self):
         """
@@ -76,8 +140,18 @@ class UnpublishedInterviewsTest(TestCase):
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
         interviews = json.loads(response.content)
-        self.assertEquals(response.status_code, 200)
-        self.assertTrue(self.no_quote.id not in interviews)
+        self.assertTrue(self.publishable.id in interview["id"]
+                        for interview in interviews)
+        self.assertTrue(self.no_quote.id not in interview["id"]
+                        for interview in interviews)
+
+        url = reverse("interview_db:random-students")
+        response = self.client.get(url, follow=True)
+        random = json.loads(response.content)
+        self.assertTrue(self.publishable.id in interview["id"]
+                        for interview in random)
+        self.assertTrue(self.no_quote.id not in interview["id"]
+                        for interview in random)
 
     def test_invalid_pull_quote(self):
         """
@@ -87,5 +161,32 @@ class UnpublishedInterviewsTest(TestCase):
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
         interviews = json.loads(response.content)
-        self.assertEquals(response.status_code, 200)
-        self.assertTrue(self.no_quote.id not in interviews)
+        self.assertTrue(self.publishable.id in interview["id"]
+                        for interview in interviews)
+        self.assertTrue(self.no_quote.id not in interview["id"]
+                        for interview in interviews)
+
+        url = reverse("interview_db:random-students")
+        response = self.client.get(url, follow=True)
+        random = json.loads(response.content)
+        self.assertTrue(self.publishable.id in interview["id"]
+                        for interview in random)
+        self.assertTrue(self.no_quote.id not in interview["id"]
+                        for interview in random)
+
+    def test_collection_no_release(self):
+        """
+        Tests a collection will not return stories from interviews without
+        a signed release form
+        """
+        topic_id = Collection.objects.get(topic="Getting Help").id
+        url = reverse("interview_db:collection-stories",  kwargs={
+            "id": topic_id})
+        response = self.client.get(url, follow=True)
+        stories = json.loads(response.content)
+        self.assertEqual(len(stories), 1)
+        self.assertEqual(self.story_publishable.id, stories[0]["id"])
+        self.assertNotEqual(self.story_no_release.id, stories[0]["id"])
+
+    def tearDown(self):
+        pass

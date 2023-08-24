@@ -111,3 +111,6 @@ class InterviewTopicsTest(TestCase):
         response = self.client.get(url, follow=True)
         stories = json.loads(response.content)
         self.assertEquals(stories[0]['id'], self.s_joe_2.id)
+
+    def tearDown(self):
+        pass

@@ -71,3 +71,6 @@ class ModelsTest(TestCase):
             topic='Majors',
             question='How did you choose your major?')
         self.assertEqual(str(col), 'Majors')
+
+    def tearDown(self):
+        pass
