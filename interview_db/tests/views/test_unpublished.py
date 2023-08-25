@@ -71,7 +71,8 @@ class UnpublishedInterviewsTest(TestCase):
         coding_publishable.save()
 
         coding_publishable_2 = Coding(
-            code=Code.objects.get_or_create(code="Lifelong Learning")[0],
+            code=Code.objects.get_or_create(topic="Learning",
+                                            code="Lifelong Learning")[0],
             story=story_publishable,
         )
         coding_publishable_2.subcode = SubCode.objects.get_or_create(
@@ -187,6 +188,20 @@ class UnpublishedInterviewsTest(TestCase):
         self.assertEqual(len(stories), 1)
         self.assertEqual(self.story_publishable.id, stories[0]["id"])
         self.assertNotEqual(self.story_no_release.id, stories[0]["id"])
+
+    def test_collection_no_quote(self):
+        """
+        Tests a collection will not return stories from interviews without
+        a valid pull quote
+        """
+        topic_id = Collection.objects.get(topic="Self Reflection").id
+        url = reverse("interview_db:collection-stories",  kwargs={
+            "id": topic_id})
+        response = self.client.get(url, follow=True)
+        stories = json.loads(response.content)
+        self.assertEqual(len(stories), 1)
+        self.assertEqual(self.story_publishable.id, stories[0]["id"])
+        self.assertNotEqual(self.story_no_quote.id, stories[0]["id"])
 
     def tearDown(self):
         pass

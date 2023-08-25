@@ -118,7 +118,11 @@ class CollectionStoryView(APIView):
         collection = Collection.objects.get(id=id)
         queryset = Story.objects.filter(
             Q(code__in=collection.codes.all()) |
-            Q(subcode__in=collection.subcodes.all()))
+            Q(subcode__in=collection.subcodes.all())).exclude(
+            interview__pull_quote__isnull=True).exclude(
+            interview__pull_quote__exact='').exclude(
+            interview__pull_quote__exact='0').exclude(
+            interview__signed_release_form=False)
         serializer = StorySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
