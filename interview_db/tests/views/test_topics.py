@@ -26,7 +26,8 @@ class InterviewTopicsTest(TestCase):
             no_identifying_photo=True,
             no_real_name=False,
             no_publishing_stories=False,
-            other_publishing_restrictions=False
+            other_publishing_restrictions=False,
+            pull_quote="Able to be published",
         )
 
         s_joe = Story.objects.create(
