@@ -207,6 +207,12 @@ class ImageView(APIView):
     def get(self, request, id):
         interview = Interview.objects.get(id=id)
         img = interview.image
+
+        # check if publishable in the first place
+        if interview.signed_release_form is False:
+            return Response('Image not shown for privacy',
+                            status=status.HTTP_400_BAD_REQUEST)
+
         if img == '':
             return Response('Interview has no image',
                             status=status.HTTP_400_BAD_REQUEST)
