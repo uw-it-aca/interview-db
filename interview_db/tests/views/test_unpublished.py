@@ -121,18 +121,14 @@ class UnpublishedInterviewsTest(TestCase):
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
         interviews = json.loads(response.content)
-        self.assertTrue(self.publishable.id in interview["id"]
-                        for interview in interviews)
-        self.assertTrue(self.no_release.id not in interview["id"]
-                        for interview in interviews)
+        self.assertEqual(self.publishable.id, interviews[0]["id"])
+        self.assertNotEqual(self.no_release.id, interviews[0]["id"])
 
         url = reverse("interview_db:random-students")
         response = self.client.get(url, follow=True)
         random = json.loads(response.content)
-        self.assertTrue(self.publishable.id in interview["id"]
-                        for interview in random)
-        self.assertTrue(self.no_release.id not in interview["id"]
-                        for interview in random)
+        self.assertEqual(self.publishable.id, random[0]["id"])
+        self.assertNotEqual(self.no_release.id, random[0]["id"])
 
     def test_no_pull_quote(self):
         """
@@ -141,18 +137,14 @@ class UnpublishedInterviewsTest(TestCase):
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
         interviews = json.loads(response.content)
-        self.assertTrue(self.publishable.id in interview["id"]
-                        for interview in interviews)
-        self.assertTrue(self.no_quote.id not in interview["id"]
-                        for interview in interviews)
+        self.assertEqual(self.publishable.id, interviews[0]["id"])
+        self.assertNotEqual(self.no_release.id, interviews[0]["id"])
 
         url = reverse("interview_db:random-students")
         response = self.client.get(url, follow=True)
         random = json.loads(response.content)
-        self.assertTrue(self.publishable.id in interview["id"]
-                        for interview in random)
-        self.assertTrue(self.no_quote.id not in interview["id"]
-                        for interview in random)
+        self.assertEqual(self.publishable.id, random[0]["id"])
+        self.assertNotEqual(self.no_release.id, random[0]["id"])
 
     def test_invalid_pull_quote(self):
         """
@@ -162,18 +154,14 @@ class UnpublishedInterviewsTest(TestCase):
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
         interviews = json.loads(response.content)
-        self.assertTrue(self.publishable.id in interview["id"]
-                        for interview in interviews)
-        self.assertTrue(self.no_quote.id not in interview["id"]
-                        for interview in interviews)
+        self.assertEqual(self.publishable.id, interviews[0]["id"])
+        self.assertNotEqual(self.no_release.id, interviews[0]["id"])
 
         url = reverse("interview_db:random-students")
         response = self.client.get(url, follow=True)
         random = json.loads(response.content)
-        self.assertTrue(self.publishable.id in interview["id"]
-                        for interview in random)
-        self.assertTrue(self.no_quote.id not in interview["id"]
-                        for interview in random)
+        self.assertEqual(self.publishable.id, random[0]["id"])
+        self.assertNotEqual(self.no_release.id, random[0]["id"])
 
     def test_collection_no_release(self):
         """
@@ -202,6 +190,15 @@ class UnpublishedInterviewsTest(TestCase):
         self.assertEqual(len(stories), 1)
         self.assertEqual(self.story_publishable.id, stories[0]["id"])
         self.assertNotEqual(self.story_no_quote.id, stories[0]["id"])
+
+    def test_interview_count(self):
+        """
+        Tests interview count returns a count of only publishable interviews
+        """
+        url = reverse("interview_db:interview-count")
+        response = self.client.get(url, follow=True)
+        count = json.loads(response.content)
+        self.assertEqual(count, 1)
 
     def tearDown(self):
         pass

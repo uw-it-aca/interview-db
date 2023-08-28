@@ -4,6 +4,7 @@
 
 from django.test import TestCase
 from interview_db.models import *
+import json
 
 
 class ModelsTest(TestCase):
@@ -62,6 +63,17 @@ class ModelsTest(TestCase):
         self.assertEqual(self.i_joe.declared_major(), 'Communications, '
                          'Computer Science Engineering, '
                          'Human Centered Design and Engineering')
+
+    def test_major_list(self):
+        url = reverse("interview_db:major-list")
+        response = self.client.get(url, follow=True)
+        majors = json.loads(response.content)
+        self.assertEquals(len(majors), 3)
+        self.assertEqual('Communications', majors[0]['full_title'])
+        self.assertEqual('Computer Science Engineering',
+                         majors[1]['full_title'])
+        self.assertEqual('Human Centered Design and Engineering',
+                         majors[2]['full_title'])
 
     def test_student_str(self):
         self.assertEqual(str(self.student), 'Joe Average')

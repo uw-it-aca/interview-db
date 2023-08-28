@@ -17,7 +17,7 @@ class AdminTest(TestCase):
 
     def test_redirect(self):
         """
-        Test navigating to admin endpoint redirects to SAML login page
+        Test navigating to admin redirects to SAML login page
         """
         url = reverse("admin:index")
         response = self.client.get(url)
