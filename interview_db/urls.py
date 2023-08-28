@@ -35,7 +35,9 @@ if settings.DEBUG:
 
 urlpatterns += [
     re_path(r'^admin', admin.site.urls),
-    re_path(r"^(students|collections|about)$", DefaultPageView.as_view()),
+    path('students', DefaultPageView.as_view(), name="students"),
+    path('collections', DefaultPageView.as_view(), name="collections"),
+    path('about', DefaultPageView.as_view(), name="about"),
     path('api/students/', InterviewListView.as_view(), name="student-list"),
     path('api/students/collections/', InterviewCollectionListView.as_view(),
          name="student-list-collections"),
