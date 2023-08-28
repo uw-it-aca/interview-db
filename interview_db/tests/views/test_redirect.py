@@ -35,9 +35,19 @@ class LoginRedirect(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["Location"], "/saml/login?next=/")
 
+    def test_redirect_student_list(self):
+        """
+        Test navigating to students page redirects to SAML login page
+        """
+        url = reverse("interview_db:student-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response["Location"],
+                         "/saml/login?next=/api/students/")
+
     def test_redirect_interview(self):
         """
-        Test navigating to student inteview page redirects to SAML login page
+        Test navigating to single interview page redirects to SAML login page
         """
         url = reverse("interview_db:student-detail",
                       kwargs={"id": self.interview.id})
@@ -45,3 +55,10 @@ class LoginRedirect(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["Location"],
                          "/saml/login?next=/api/students/1/")
+
+    def test_redirect_random(self):
+        url = reverse("interview_db:random-students")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response["Location"],
+                         "/saml/login?next=/api/random/")

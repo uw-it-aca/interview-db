@@ -235,7 +235,8 @@ class InterviewCountView(APIView):
         queryset = Interview.objects.exclude(
             pull_quote__isnull=True).exclude(
             pull_quote__exact='').exclude(
-            pull_quote__exact='0').count()
+            pull_quote__exact='0').exclude(
+            signed_release_form=False).count()
         return Response(queryset, status=status.HTTP_200_OK)
 
 
