@@ -186,19 +186,6 @@ class RandomStudentsView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class RecentStudentsView(APIView):
-    """
-    API endpoint returning three most recent students
-    """
-
-    def get(self, request):
-        queryset = Interview.objects.all().order_by('-date')[:3]
-        serializer = InterviewSerializer(queryset, many=True,
-                                         context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@method_decorator(group_required(front_end_group), name='dispatch')
 class ImageView(APIView):
     """
     API endpoint returning images

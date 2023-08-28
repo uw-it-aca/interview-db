@@ -57,7 +57,6 @@ urlpatterns += [
          name="collection-stories",),
     path('api/majors/', MajorListView.as_view(), name="major-list"),
     path('api/random/', RandomStudentsView.as_view(), name="random-students"),
-    path('api/recent/', RecentStudentsView.as_view(), name="recent-students"),
     path('api/students/count/', InterviewCountView.as_view(),
          name="interview-count"),
     path('api/stories/count/', StoryCountView.as_view(), name="stories-count"),
