@@ -200,5 +200,14 @@ class UnpublishedInterviewsTest(TestCase):
         count = json.loads(response.content)
         self.assertEqual(count, 1)
 
+    def test_story_count(self):
+        """
+        Tests story count view
+        """
+        url = reverse("interview_db:story-count")
+        response = self.client.get(url, follow=True)
+        count = json.loads(response.content)
+        self.assertEqual(count, 3)
+
     def tearDown(self):
         pass

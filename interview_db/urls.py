@@ -59,6 +59,6 @@ urlpatterns += [
     path('api/random/', RandomStudentsView.as_view(), name="random-students"),
     path('api/students/count/', InterviewCountView.as_view(),
          name="interview-count"),
-    path('api/stories/count/', StoryCountView.as_view(), name="stories-count"),
+    path('api/stories/count/', StoryCountView.as_view(), name="story-count"),
     re_path(r"^.*$", DefaultPageView.as_view(), name="home"),
 ]

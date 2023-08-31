@@ -213,6 +213,7 @@ class ImageView(APIView):
         return response
 
 
+# include undisplayed interviews?
 @method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewCountView(APIView):
     """
