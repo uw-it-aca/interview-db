@@ -118,7 +118,11 @@ class CollectionStoryView(APIView):
         collection = Collection.objects.get(id=id)
         queryset = Story.objects.filter(
             Q(code__in=collection.codes.all()) |
-            Q(subcode__in=collection.subcodes.all()))
+            Q(subcode__in=collection.subcodes.all())).exclude(
+            interview__pull_quote__isnull=True).exclude(
+            interview__pull_quote__exact='').exclude(
+            interview__pull_quote__exact='0').exclude(
+            interview__signed_release_form=False)
         serializer = StorySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -182,19 +186,6 @@ class RandomStudentsView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class RecentStudentsView(APIView):
-    """
-    API endpoint returning three most recent students
-    """
-
-    def get(self, request):
-        queryset = Interview.objects.all().order_by('-date')[:3]
-        serializer = InterviewSerializer(queryset, many=True,
-                                         context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@method_decorator(group_required(front_end_group), name='dispatch')
 class ImageView(APIView):
     """
     API endpoint returning images
@@ -203,6 +194,12 @@ class ImageView(APIView):
     def get(self, request, id):
         interview = Interview.objects.get(id=id)
         img = interview.image
+
+        # check if publishable in the first place
+        if interview.signed_release_form is False:
+            return Response('Image not shown for privacy',
+                            status=status.HTTP_400_BAD_REQUEST)
+
         if img == '':
             return Response('Interview has no image',
                             status=status.HTTP_400_BAD_REQUEST)
@@ -216,6 +213,7 @@ class ImageView(APIView):
         return response
 
 
+# include undisplayed interviews?
 @method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewCountView(APIView):
     """
@@ -225,7 +223,8 @@ class InterviewCountView(APIView):
         queryset = Interview.objects.exclude(
             pull_quote__isnull=True).exclude(
             pull_quote__exact='').exclude(
-            pull_quote__exact='0').count()
+            pull_quote__exact='0').exclude(
+            signed_release_form=False).count()
         return Response(queryset, status=status.HTTP_200_OK)
 
 
