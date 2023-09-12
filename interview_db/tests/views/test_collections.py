@@ -26,3 +26,25 @@ class CollectionsTest(TestCase):
         self.assertEqual(info["topic"], title)
         self.assertEqual(info["question"], question)
         self.assertEqual(info["slug"], slug)
+
+    def test_collection_list(self):
+        url = reverse("interview_db:collection-list")
+        response = self.client.get(url, follow=True)
+        collections = json.loads(response.content)
+        self.assertEqual(len(collections), 8)
+        self.assertTrue("Getting Help" in collection["topic"] for collection
+                        in collections)
+        self.assertTrue("Moving Forward" in collection["topic"] for collection
+                        in collections)
+        self.assertTrue("Finding Community" in collection["topic"] for
+                        collection in collections)
+        self.assertTrue("Self Reflection" in collection["topic"] for collection
+                        in collections)
+        self.assertTrue("Choosing a Major" in collection["topic"] for
+                        collection in collections)
+        self.assertTrue("Coming to College" in collection["topic"] for
+                        collection in collections)
+        self.assertTrue("Advice" in collection["topic"] for collection
+                        in collections)
+        self.assertTrue("Working Towards Goals" in collection["topic"] for
+                        collection in collections)

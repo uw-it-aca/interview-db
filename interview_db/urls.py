@@ -35,7 +35,9 @@ if settings.DEBUG:
 
 urlpatterns += [
     re_path(r'^admin', admin.site.urls),
-    re_path(r"^(students|collections|about)$", DefaultPageView.as_view()),
+    path('students', DefaultPageView.as_view(), name="students"),
+    path('collections', DefaultPageView.as_view(), name="collections"),
+    path('about', DefaultPageView.as_view(), name="about"),
     path('api/students/', InterviewListView.as_view(), name="student-list"),
     path('api/students/collections/', InterviewCollectionListView.as_view(),
          name="student-list-collections"),
@@ -55,9 +57,8 @@ urlpatterns += [
          name="collection-stories",),
     path('api/majors/', MajorListView.as_view(), name="major-list"),
     path('api/random/', RandomStudentsView.as_view(), name="random-students"),
-    path('api/recent/', RecentStudentsView.as_view(), name="recent-students"),
     path('api/students/count/', InterviewCountView.as_view(),
          name="interview-count"),
-    path('api/stories/count/', StoryCountView.as_view(), name="stories-count"),
+    path('api/stories/count/', StoryCountView.as_view(), name="story-count"),
     re_path(r"^.*$", DefaultPageView.as_view(), name="home"),
 ]

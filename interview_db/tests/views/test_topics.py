@@ -26,7 +26,8 @@ class InterviewTopicsTest(TestCase):
             no_identifying_photo=True,
             no_real_name=False,
             no_publishing_stories=False,
-            other_publishing_restrictions=False
+            other_publishing_restrictions=False,
+            pull_quote="Able to be published",
         )
 
         s_joe = Story.objects.create(
@@ -111,3 +112,6 @@ class InterviewTopicsTest(TestCase):
         response = self.client.get(url, follow=True)
         stories = json.loads(response.content)
         self.assertEquals(stories[0]['id'], self.s_joe_2.id)
+
+    def tearDown(self):
+        pass
