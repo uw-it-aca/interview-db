@@ -9,7 +9,7 @@
           @click="$router.replace({ name: 'Students', query: { ...this.$route.query } })"></button>
       </div>
       <div class="col-6 justify-content-end d-flex">
-        <a v-if="!emptyFilters" class="text-secondary active-link" :class="(mq.tablet || mq.mobile) ? '' : 'active-link-hover'" @click="clearFilters">
+        <a v-if="!emptyFilters" class="text-secondary active-link active-link-hover" @click="clearFilters">
           Clear All
         </a>
       </div>
@@ -21,7 +21,7 @@
           aria-controls="year">
           Student Year
         </p>
-        <div class="mt-0" id="year">
+        <div class="mt-0 collapse show" id="year">
           <div class="card card-body border-0">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="Freshman" id="Freshman" v-model="filters.year"
@@ -81,7 +81,7 @@
           aria-expanded="true" aria-controls="major">
           Major
         </p>
-        <div class="mt-0e" id="major">
+        <div class="mt-0 collapse show" id="major">
           <div class="card card-body border-0 mt-0">
             <Multiselect mode="tags" v-model="filters.major" :options="data.majors" :searchable="true"
               :close-on-select="false" @click="updateQuery()" @select="updateQuery()" @deselect="updateQuery()"
@@ -95,7 +95,7 @@
           aria-expanded="true" aria-controls="collections">
           Story Collection
         </p>
-        <div class="mt-0" id="collections">
+        <div class="mt-0 collapse show" id="collections">
           <div class="card card-body border-0 mt-0">
             <div class="justify-content-start col-12">
               <span v-for="topic in data.topics" :key="topic.id">

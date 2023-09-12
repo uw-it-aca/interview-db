@@ -58,14 +58,14 @@
                   <div v-if="filteredStudents.length > 0">
                     <vue-awesome-paginate class="me-2 justify-content-center d-flex" v-model="currentPage"
                       :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
-                      :on-click="onClickHandler" />
+                      :on-click="paginateHandler" />
                     <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id"
                       :hide-prev-next-when-ends="true">
                       <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
                     <vue-awesome-paginate class="mt-2 justify-content-center d-flex" v-model="currentPage"
                       :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
-                      :on-click="onClickHandler" />
+                      :on-click="paginateHandler" />
                   </div>
                   <div v-else-if="students.length > 0 && filteredStudents.length == 0">
                     <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories found.</p>
@@ -172,7 +172,7 @@ export default {
       this.count = response.data.length;
       this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } })
     },
-    onClickHandler(page) {
+    paginateHandler(page) {
       this.$router.push({ query: { ...this.$route.query, 'page': page } })
     }
   },
