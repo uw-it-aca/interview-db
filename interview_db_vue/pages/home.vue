@@ -62,7 +62,7 @@
             Find out more about who we are, our interview process, and get involved by telling your story!
           </p>
           <button type="button" class="btn btn-purple" @click="$router.push('about')">
-            Learn more <i class="bi bi-chevron-right"></i>
+            Learn More <i class="bi bi-chevron-right"></i>
           </button>
         </div>
         <div class="col-md-4 col-12 mx-4 p-3 mb-4">

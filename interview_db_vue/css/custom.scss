@@ -180,7 +180,7 @@ h6 {
   height: 100%;
 }
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-up(lg) {
   .hamburger-menu {
     display: none;
   }

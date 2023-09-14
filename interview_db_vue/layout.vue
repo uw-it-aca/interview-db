@@ -8,8 +8,8 @@
               style="object-fit:contain; width:100%; height:50px" alt="Husky W Logo">
           </router-link>
           <h2
-            :class="[mq.mobile ? 'fs-3 d-flex justify-content-center fw-bold' : 'fs-3 d-flex justify-content-start fw-bold',]">
-            <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
+            :class="[mq.mobile ? 'fs-3 d-flex text-center justify-content-center fw-bold' : 'fs-3 d-flex justify-content-start fw-bold',]">
+            <router-link class="flex nav-link text-purple" active-class="active" aria-current="page" to="/">
               Husky Voices
             </router-link>
           </h2>
@@ -56,7 +56,7 @@
         <img src="./images/washingtonlogo.svg" />
       </div>
       <div class="col-md-6 col-12 align-items-center footer-copyright d-flex" :class="(mq.mobile || mq.tablet) ? 'text-center' : ''">
-        <p class="">Copyright &copy; 2023 University of Washington</p>
+        <p class="mb-0">Copyright &copy; 2023 University of Washington</p>
       </div>
     </div>
   </footer>

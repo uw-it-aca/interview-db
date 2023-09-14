@@ -51,7 +51,7 @@
                   <div class="d-flex justify-content-end col-6">
                     <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
                       @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
-                      <i class="bi bi-filter"></i>&nbsp;Filter</button>
+                      <i class="bi bi-filter"></i>&nbsp;Filters</button>
                   </div>
                   </div>
                   
