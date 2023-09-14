@@ -196,6 +196,7 @@ export default {
   },
   created() {
     this.loadData();
+    // this.$router.push({});
   },
   computed: {
     emptyFilters() {
