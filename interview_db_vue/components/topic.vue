@@ -121,7 +121,8 @@ export default {
 .paginate-buttons {
   height: 40px;
   width: 40px;
-  border-radius: 1px;
+  border-radius: 0.1rem;
+  border-width: 1px;
   cursor: pointer;
   background-color: #FAF8FC;
   border: 1px solid black;

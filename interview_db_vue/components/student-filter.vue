@@ -215,8 +215,8 @@ export default {
 }
 
 .btn-check+.btn:hover {
-  color: white !important;
-  background-color: #4B2E83 !important;
+  color:#1E1E1E !important;
+  background-color: #f6f4f8 !important;
 }
 
 .multiselect {

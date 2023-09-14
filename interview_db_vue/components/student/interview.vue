@@ -43,9 +43,8 @@
                   {{ topic.topic }}
                 </label>
               </span>
-              <button type="button" class="btn btn-gold m-1" @click="clearFilters">
-                Clear All
-              </button>
+              <a v-if="filters !== undefined && filters.length > 0" class="btn border-0 text-secondary active-link active-link-hover" @click="clearFilters">Clear All
+              </a>
             </div>
 
             <div v-for="story in filteredStories" :key="story.id">
