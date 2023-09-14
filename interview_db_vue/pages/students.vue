@@ -20,7 +20,7 @@
           <div style="position: relative">
             <img class="banner-image" src="../images/mich.jpg" />
             <div class="title-div">
-              <h1 class="text-gold fw-bold display-5">Student Stories</h1>
+              <h1 class="text-gold fw-bold display-5 mb-0">Student Stories</h1>
             </div>
           </div>
 
@@ -44,7 +44,9 @@
                   </router-link> -->
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                    <p v-if="filtered.length > 0" class="display-4 fs-5 fw-bold">{{ filtered.length }} Stories </p>
+                    <p v-if="filteredStudents.length > 1" class="display-4 fs-5 fw-bold">{{ filteredStudents.length }} Stories </p>
+                    <p v-else-if="filteredStudents.length > 0" class="display-4 fs-5 fw-bold">{{ filteredStudents.length }} Story </p>
+
                   </div>
                   <div class="d-flex justify-content-end col-6">
                     <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
