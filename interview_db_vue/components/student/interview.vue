@@ -141,7 +141,12 @@ export default {
   },
 };
 </script>
+
 <style>
+.btn-outline-success {
+  --bs-btn-bg: white !important;
+  --bs-btn-color: #1E1E1E !important;
+}
 .btn-check+.btn:hover {
   color: white !important;
   background-color: #4B2E83 !important;
