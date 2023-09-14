@@ -52,7 +52,7 @@
                 <p class="display-6 fs-6 lh-base">
                   {{ story.story }}
                 </p>
-                <p class="fst-italic text-end text-secondary">
+                <p class="fst-italic text-secondary" :class="mq.mobile ? 'text-start' : 'text-end'">
                   <span v-for="collection in story.collections" :key="collection.id">
                     <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link">
                       #{{ collection.topic }}
@@ -152,6 +152,7 @@ export default {
 a.active-link {
   text-decoration: none;
   color: #827252;
+  white-space: nowrap;
 }
 a.active-link:hover{
   color: #827252;
