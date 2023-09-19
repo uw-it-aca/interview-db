@@ -3,7 +3,7 @@
 
 <template>
   <div class="card p-2" :class="(mq.tablet || mq.mobile) ? 'card-100 border-0' : 'card'">
-    <div class="row mx-3 mt-3">
+    <div class="row m-3">
       <div class="col-6 justify-content-start d-flex p-0">
         <button v-if="mq.tablet || mq.mobile" type="button" class="btn-close" aria-label="Close"
           @click="$router.replace({ name: 'Students', query: { ...this.$route.query } })"></button>
@@ -48,28 +48,7 @@
               <input class="form-check-input" type="checkbox" value="Senior" id="Senior" v-model="filters.year"
                 @change="updateQuery()">
               <label class="form-check-label display-6 fs-6" for="Senior">
-                Senior
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Alumni - undergrad" id="Alumni"
-                v-model="filters.year" @change="updateQuery()">
-              <label class="form-check-label display-6 fs-6" for="Alumni">
-                Alumni
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Masters" id="Masters" v-model="filters.year"
-                @change="updateQuery()">
-              <label class="form-check-label display-6 fs-6" for="Masters">
-                Masters
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="PhD" id="PhD" v-model="filters.year"
-                @change="updateQuery()">
-              <label class="form-check-label display-6 fs-6" for="PhD">
-                PhD
+                Senior+
               </label>
             </div>
           </div>
