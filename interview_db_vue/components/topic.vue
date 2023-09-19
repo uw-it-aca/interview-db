@@ -69,6 +69,12 @@ export default {
     filteredStories() {
       this.filtered = this.stories;
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
+        // combine senior and above years into Senior+
+        if (this.filters.year.includes('Senior')) {
+          this.filters.year += 'Masters';
+          this.filters.year += 'Alumni - undergrad';
+          this.filters.year += 'PhD';
+        }
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.interview.standing));
       }
 
