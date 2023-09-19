@@ -42,14 +42,14 @@
       <div class="card border-0 mb-5">
         <img class="home-img" src="../images/homequad.png" alt="The quad during cherry blossom season">
         <div class="card-img-overlay text-center justify-content-center">
-          <div class="pt-2 row justify-content-center">
-            <span class="col-md-2 col-6">
-              <h2 class="text-gold display-5 fw-bold">{{ studentCount }}</h2>
-              <p class="text-gold fw-bold">Students Interviewed</p>
+          <div class="pt-3 row justify-content-center">
+            <span class="col-md-2 col-12">
+              <h2 class="text-gold display-5 fw-bold mb-0">{{ studentCount }}</h2>
+              <p class="text-gold">Students Interviewed</p>
             </span>
-            <span class="col-md-2 col-6">
-              <h2 class="text-gold display-5 fw-bold">{{ storyCount }}</h2>
-              <p class="text-gold fw-bold">Stories Shared</p>
+            <span class="col-md-2 col-12">
+              <h2 class="text-gold display-5 fw-bold mb-0">{{ storyCount }}</h2>
+              <p class="text-gold">Stories Shared</p>
             </span>
           </div>
         </div>
