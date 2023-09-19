@@ -44,29 +44,29 @@
                   </router-link> -->
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                    <p v-if="filteredStudents.length > 1" class="display-4 fs-5 fw-bold">{{ filteredStudents.length }} Stories </p>
-                    <p v-else-if="filteredStudents.length > 0" class="display-4 fs-5 fw-bold">{{ filteredStudents.length }} Story </p>
+                    <p v-if="filtered.length > 1" class="display-4 fs-5 fw-bold">{{ filtered.length }} Stories </p>
+                    <p v-else-if="filtered.length > 0" class="display-4 fs-5 fw-bold">{{ filtered.length }} Story </p>
 
                   </div>
                   <div class="d-flex justify-content-end col-6">
                     <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
                       @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
-                      <i class="bi bi-filter"></i>&nbsp;Filters</button>
+                      <i class="bi bi-filter"></i>&nbsp;Filters
+                      <!-- <p v-if="filtersLength > 0">&nbsp;Filters ({{filtersLength}})</p>
+                      <p v-else>&nbsp;Filters</p> -->
+                    </button>
                   </div>
                   </div>
                   
 
 
                   <div v-if="filteredStudents.length > 0">
-                    <vue-awesome-paginate class="me-2 justify-content-center d-flex" v-model="currentPage"
-                      :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
-                      :on-click="paginateHandler" />
-                    <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id"
-                      :hide-prev-next-when-ends="true">
+                    <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
                       <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
-                    <vue-awesome-paginate class="mt-2 justify-content-center d-flex" v-model="currentPage"
+                    <vue-awesome-paginate v-if="filtered.length > perPage" class="mt-2 justify-content-center d-flex" v-model="currentPage"
                       :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
+                      :hide-prev-next-when-ends="true"
                       :on-click="paginateHandler" />
                   </div>
                   <div v-else-if="students.length > 0 && filteredStudents.length == 0">
@@ -115,6 +115,7 @@ export default {
         major: this.$route.query.major,
         topic: this.$route.query.topic,
       },
+      filtersLength: 0,
       perPage: 12,
       currentPage: 1,
       count: 0,
@@ -137,16 +138,20 @@ export default {
     },
     filteredStudents() {
       this.filtered = this.students;
+      this.filtersLength = 0;
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
+        this.filtersLength += this.filters.year.length;
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
       }
 
       if (this.filters.major !== undefined && this.filters.major.length > 0) {
+        this.filtersLength += this.filters.major.length;
         const included = (major) => this.filters.major.includes(major.full_title)
         this.filtered = this.filtered.filter(student => student.major.some(included))
       }
 
       if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
+        this.filtersLength += this.filters.topic.length;
         this.filtered = this.filtered.filter(student => this.filters.topic.every(
           f => student.collections.some((collection) => f === collection.slug)))
       }
@@ -187,17 +192,16 @@ export default {
 <style>
 .pagination-container {
   display: flex;
-  column-gap: 10px;
+  column-gap: 5px;
 }
 
 .paginate-buttons {
-  height: 40px;
-  width: 40px;
+  height: 2.2rem;
+  width: 2.2rem;
   border-radius: 0.1rem;
-  border-width: 1px;
   cursor: pointer;
-  background-color: #FAF8FC;
-  border: 1px solid black;
+  background-color: inherit;
+  border: none;
   color: black;
 }
 
@@ -207,7 +211,7 @@ export default {
 
 .active-page {
   background-color: #4B2E83;
-  border: 1px solid #4B2E83;
+  border: none;
   color: white;
 }
 

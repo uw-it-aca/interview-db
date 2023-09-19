@@ -213,6 +213,7 @@ export default {
   --bs-btn-bg: white !important;
   --bs-btn-border-color: #1E1E1E !important;
   --bs-btn-color: #1E1E1E !important;
+  padding: 0.5rem !important;
 }
 
 .btn-check+.btn:hover {

@@ -113,25 +113,6 @@ export default {
 </script>
 
 <style>
-.pagination-container {
-  display: flex;
-  column-gap: 10px;
-}
-
-.paginate-buttons {
-  height: 40px;
-  width: 40px;
-  border-radius: 0.1rem;
-  border-width: 1px;
-  cursor: pointer;
-  background-color: #FAF8FC;
-  border: 1px solid black;
-  color: black;
-}
-
-.paginate-buttons:hover {
-  background-color: #f6f4f8;
-}
 
 .active-page {
   background-color: #4B2E83;

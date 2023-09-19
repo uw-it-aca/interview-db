@@ -123,4 +123,7 @@ img.home-img {
   height: 500px;
   object-fit: cover;
 }
+.btn {
+  padding: 0.75rem !important;
+}
 </style>

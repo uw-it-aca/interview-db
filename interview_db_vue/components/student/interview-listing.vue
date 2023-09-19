@@ -2,7 +2,7 @@
 // shown on full students page, individual topic page, or as carousel on home page
 
 <template>
-  <button type="button" class="btn-card mt-5" style="height:fit-content;" @click="$router.push({
+  <button type="button" class="shadow-sm btn-card mt-5" style="height:fit-content;" @click="$router.push({
     name: 'Students',
     params: {
       id: interviewInfo.id,

@@ -27,7 +27,8 @@
               <div v-for="collection in collections" :key="collection.id"
                 class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
                 <div class="d-flex align-items-stretch flex-fill">
-                  <button type="button" class="btn-card p-4 mx-2 my-3 flex-fill" @click="$router.push({
+                  <button type="button" class="btn-card shadow-sm p-4 mx-2 my-3 flex-fill" 
+                  @click="$router.push({
                     name: 'Collections',
                     params: { id: collection.id },
                     // query: { topic: collection.slug }

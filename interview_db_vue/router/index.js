@@ -58,7 +58,7 @@ const router = createRouter({
     if (to.path != from.path) {
       return { top: 0 }
     }
-    // return {top: 0}
+    return {top: 0}
   },
   history: createWebHistory(),
   routes,
