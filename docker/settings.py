@@ -3,7 +3,7 @@ import os
 from google.oauth2 import service_account
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('ENV', 'prod') == 'localdev'
+DEBUG = os.getenv('ENV', 'localdev') == 'localdev'
 
 INSTALLED_APPS.remove('django.contrib.admin')
 INSTALLED_APPS += [
@@ -63,21 +63,9 @@ ADMIN_REORDER = (
     ('app2', 'Interview'),
 )
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
-# MEDIA_URL = '/media/'
-
-if not DEBUG:
-    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')
-    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        '/gcs/credentials.json')
-    GS_CACHE_CONTROL = 'public, max-age=604800'
-    GS_DEFAULT_ACL = 'publicRead'
-    CSRF_TRUSTED_ORIGINS = ['https://' + os.getenv('CLUSTER_CNAME')]
-
 INTERVIEW_DB_AUTHZ_GROUPS = {
-    'admin': os.getenv("ID_ADMIN_GROUP", 'u_test_admin'),
-    'front-end': os.getenv("ID_FRONT_END_GROUP", 'u_test_front_end'),
+    'admin': os.getenv('ID_ADMIN_GROUP', 'u_test_admin'),
+    'front-end': os.getenv('ID_FRONT_END_GROUP', 'u_test_front_end'),
 }
 
 if os.getenv('AUTH', 'NONE') == 'SAML_MOCK':
@@ -86,15 +74,20 @@ if os.getenv('AUTH', 'NONE') == 'SAML_MOCK':
         INTERVIEW_DB_AUTHZ_GROUPS['front-end'],
     ]
 
-if os.getenv("ENV") == "localdev":
-    DEBUG = True
-
-if os.getenv("ENV") == "localdev":
+if os.getenv('ENV', 'localdev') == 'localdev':
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    MEDIA_ROOT = os.getenv('MEDIA_ROOT', '/app/media')
     VITE_MANIFEST_PATH = os.path.join(
-        BASE_DIR, "interview_db", "static", "manifest.json"
+        BASE_DIR, 'interview_db', 'static', 'manifest.json'
     )
 else:
-    VITE_MANIFEST_PATH = os.path.join(os.sep, "static", "manifest.json")
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    GS_PROJECT_ID = os.getenv('STORAGE_PROJECT_ID', '')
+    GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME', '')
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        '/gcs/credentials.json')
+    VITE_MANIFEST_PATH = os.path.join(os.sep, 'static', 'manifest.json')
+    CSRF_TRUSTED_ORIGINS = ['https://' + os.getenv('CLUSTER_CNAME')]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
