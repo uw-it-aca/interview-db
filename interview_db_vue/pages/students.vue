@@ -44,21 +44,23 @@
                   </router-link> -->
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                    <p v-if="filtered.length > 1" class="display-4 fs-5 fw-bold">{{ filtered.length }} Stories </p>
-                    <p v-else-if="filtered.length > 0" class="display-4 fs-5 fw-bold">{{ filtered.length }} Story </p>
+                    <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ filtered.length }} Results </p>
+                    <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">{{ filtered.length }} Result </p>
 
                   </div>
                   <div class="d-flex justify-content-end col-6">
-                    <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
+                    <!-- <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
                       @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
                       <i class="bi bi-filter"></i>&nbsp;Filters
-                      <!-- <p v-if="filtersLength > 0">&nbsp;Filters ({{filtersLength}})</p>
-                      <p v-else>&nbsp;Filters</p> -->
-                    </button>
+                    </button> -->
+                    <u v-if="filtersLength > 0" class="align-middle fw-bold" @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter ({{filtersLength}})</u>
+                    <u v-else class="align-middle fw-bold" @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                   </div>
                   </div>
                   
-
+                  <div v-if="filtersLength > 0">
+                    
+                  </div>
 
                   <div v-if="filteredStudents.length > 0">
                     <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
