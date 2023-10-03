@@ -161,7 +161,7 @@ export default {
       if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
         this.filtersLength += this.filters.topic.length;
         this.filtered = this.filtered.filter(student => this.filters.topic.every(
-          f => student.collections.some((collection) => f === collection.slug)))
+          f => student.collections.some((collection) => f === collection.topic)))
       }
 
       // pagination

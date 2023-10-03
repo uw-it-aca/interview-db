@@ -21,11 +21,10 @@
         </div>
       </div>
       <div class="mb-5">
-        <p class="display-4 fw-bold fs-5 mb-3 dropdown-toggle" data-bs-toggle="collapse" href="#year" aria-expanded="true"
-          aria-controls="year">
+        <p class="display-4 fw-bold fs-5 mb-3">
           Student Year
         </p>
-        <div class="mt-0 collapse show" id="year">
+        <div class="mt-0" id="year">
           <div class="justify-content-start col-12">
             <input type="checkbox" class="btn-check" id="Freshman" value="Freshman" v-model="filters.year"
               @change="updateQuery()">
@@ -52,11 +51,10 @@
       </div>
 
       <div class="mb-5">
-        <p class="display-4 fs-5 fw-bold mb-3 dropdown-toggle" data-bs-toggle="collapse" href="#major"
-          aria-expanded="true" aria-controls="major">
+        <p class="display-4 fs-5 fw-bold mb-3">
           Major
         </p>
-        <div class="mt-0 collapse show" id="major">
+        <div class="mt-0" id="major">
           <Multiselect mode="tags" v-model="filters.major" :options="data.majors" :searchable="true"
             :close-on-select="false" @click="updateQuery()" @select="updateQuery()" @deselect="updateQuery()"
             @close="updateQuery()" />
@@ -64,25 +62,20 @@
       </div>
 
       <div v-if=!story class="mb-5">
-        <p class="display-4 fs-5 fw-bold mb-3 dropdown-toggle" data-bs-toggle="collapse" href="#collections"
-          aria-expanded="true" aria-controls="collections">
+        <p class="display-4 fs-5 fw-bold mb-3">
           Story Collection
         </p>
-        <div class="mt-0 collapse show" id="collections">
-          <div class="justify-content-start col-12">
-            <span v-for="topic in data.topics" :key="topic.id">
-              <input type="checkbox" class="btn-check" :id="topic.id" :value=topic.slug v-model="filters.topic"
-                @change="updateQuery()">
-              <label class="btn btn-outline-success m-1" :for="topic.id">
-                {{ topic.topic }}
-              </label>
-            </span>
+        <div class="mt-0" id="collections">
+          <div class="mt-0" id="major">
+          <Multiselect mode="tags" v-model="filters.topic" :options="data.topics" :searchable="true"
+            :close-on-select="false" @click="updateQuery()" @select="updateQuery()" @deselect="updateQuery()"
+            @close="updateQuery()" />
           </div>
         </div>
       </div>
 
       <div>
-        <div v-if="mq.mobile || mq.tablet" class="row">
+        <div v-if="mq.mobile || mq.tablet" class="row align-bottom">
           <button class="btn btn-white btn-block w-50" for="clear-all" @click="clearFilters">
             Clear All
           </button>
@@ -150,7 +143,7 @@ export default {
       const majors = await get('/api/majors/');
       majors.data.forEach(e => this.data.majors.push(e.full_title))
       const collections = await get('/api/collections/');
-      this.data.topics = collections.data;
+      collections.data.forEach(c => this.data.topics.push(c.topic))
     },
     updateQuery() {
       const query = {};
