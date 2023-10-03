@@ -44,32 +44,53 @@
                   </router-link> -->
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                    <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ filtered.length }} Results </p>
-                    <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">{{ filtered.length }} Result </p>
+                      <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ filtered.length }} Results
+                      </p>
+                      <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">{{ filtered.length }}
+                        Result </p>
 
-                  </div>
-                  <div class="d-flex justify-content-end col-6">
-                    <!-- <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
+                    </div>
+                    <div class="d-flex justify-content-end col-6">
+                      <!-- <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
                       @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
                       <i class="bi bi-filter"></i>&nbsp;Filters
                     </button> -->
-                    <u v-if="filtersLength > 0" class="align-middle fw-bold" @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter ({{filtersLength}})</u>
-                    <u v-else class="align-middle fw-bold" @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
+                      <u v-if="filtersLength > 0" class="align-middle fw-bold"
+                        @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
+                        ({{ filtersLength }})</u>
+                      <u v-else class="align-middle fw-bold"
+                        @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
+                    </div>
                   </div>
-                  </div>
-                  
-                  <div v-if="filtersLength > 0">
-                    
+                  {{ allFilters }}
+                  <div v-if="filtersLength > 0" class="container scroll-group">
+                    <div class="row flex-row flex-nowrap">
+                      <div> 
+                        <div class="col">
+                          <button type="button" class="btn btn-success me-2" v-for="filter in allFilters">{{ filter }}</button>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="col">
+                          <button type="button" class="btn btn-success me-2" v-for="major in this.filters.major">{{ major }}</button>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="col">
+                          <button type="button" class="btn btn-success me-2" v-for="topic in this.filters.topic">{{ topic }}</button>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
 
                   <div v-if="filteredStudents.length > 0">
                     <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
                       <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
-                    <vue-awesome-paginate v-if="filtered.length > perPage" class="mt-2 justify-content-center d-flex" v-model="currentPage"
-                      :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
-                      :hide-prev-next-when-ends="true"
-                      :on-click="paginateHandler" />
+                    <vue-awesome-paginate v-if="filtered.length > perPage" class="mt-2 justify-content-center d-flex"
+                      v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
+                      :hide-prev-next-when-ends="true" :on-click="paginateHandler" />
                   </div>
                   <div v-else-if="students.length > 0 && filteredStudents.length == 0">
                     <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories found.</p>
@@ -135,8 +156,11 @@ export default {
     },
     updateFilters() {
       this.filters.year = this.$route.query.year;
-      this.filters.major = this.$route.query.major;
+      this.filters.year = this.$route.query.major;
       this.filters.topic = this.$route.query.topic;
+    },
+    allFilters() {
+      return [].concat(this.filters.year).concat(this.filters.major).concat(this.filters.topic);
     },
     filteredStudents() {
       this.filtered = this.students;
@@ -225,5 +249,11 @@ export default {
 
 .active-page:hover {
   background-color: #583b92;
+
+.scroll-group {
+  height: inherit;
+    overflow-y: scroll !important;
+    overflow: hidden;
 }
-</style>
+
+}</style>
