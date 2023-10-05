@@ -75,7 +75,7 @@
       </div>
 
       <div>
-        <div v-if="mq.mobile || mq.tablet" class="row align-bottom">
+        <div v-if="mq.mobile || mq.tablet" class="row fixed-bottom">
           <button class="btn btn-white btn-block w-50" for="clear-all" @click="clearFilters">
             Clear All
           </button>
