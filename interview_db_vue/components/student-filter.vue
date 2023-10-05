@@ -28,7 +28,7 @@
           <div class="justify-content-start col-12">
             <input type="checkbox" class="btn-check" id="Freshman" value="Freshman" v-model="filters.year"
               @change="updateQuery()">
-            <label class="btn btn-outline-success m-1" for="freshman">
+            <label class="btn btn-outline-success m-1" for="Freshman">
               Freshman
             </label>
             <input type="checkbox" class="btn-check" id="Sophomore" value="Sophomore" v-model="filters.year"

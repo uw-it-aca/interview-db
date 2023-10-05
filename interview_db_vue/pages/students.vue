@@ -62,26 +62,16 @@
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
                   </div>
-                  {{ allFilters }}
-                  <div v-if="filtersLength > 0" class="container scroll-group">
-                    <div class="row flex-row flex-nowrap">
-                      <div> 
-                        <div class="col">
-                          <button type="button" class="btn btn-success me-2" v-for="filter in allFilters">{{ filter }}</button>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="col">
-                          <button type="button" class="btn btn-success me-2" v-for="major in this.filters.major">{{ major }}</button>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="col">
-                          <button type="button" class="btn btn-success me-2" v-for="topic in this.filters.topic">{{ topic }}</button>
-                        </div>
-                      </div>
+                  allFilters: {{ allFilters }} <br/>
+                  
+                  Year: {{ filters.year }}<br/>
 
-                    </div>
+                  Major: {{ filters.major }}<br/>
+
+                  Topic: {{ filters.topic }}<br/>
+
+                  <div v-if="filtersLength > 0" class="container scroll-group flex flex-column">
+                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in allFilters">{{ filter }}</button>
                   </div>
 
                   <div v-if="filteredStudents.length > 0">
@@ -156,11 +146,12 @@ export default {
     },
     updateFilters() {
       this.filters.year = this.$route.query.year;
-      this.filters.year = this.$route.query.major;
+      this.filters.major = this.$route.query.major;
       this.filters.topic = this.$route.query.topic;
     },
     allFilters() {
-      return [].concat(this.filters.year).concat(this.filters.major).concat(this.filters.topic);
+      const concat = (...arrays) => [].concat(...arrays.filter(Array.isArray));
+      return concat(this.filters.year, this.filters.major, this.filters.topic);
     },
     filteredStudents() {
       this.filtered = this.students;
@@ -169,9 +160,7 @@ export default {
         this.filtersLength += this.filters.year.length;
         // combine senior and above years into Senior+
         if (this.filters.year.includes('Senior')) {
-          this.filters.year += 'Masters';
-          this.filters.year += 'Alumni - undergrad';
-          this.filters.year += 'PhD';
+          this.filters.year.concat(['Masters', 'Alumni - undergrad', 'PhD']);
         }
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
       }
@@ -249,11 +238,11 @@ export default {
 
 .active-page:hover {
   background-color: #583b92;
-
-.scroll-group {
-  height: inherit;
-    overflow-y: scroll !important;
-    overflow: hidden;
 }
 
-}</style>
+.scroll-group {
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
+</style>
