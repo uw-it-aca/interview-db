@@ -62,16 +62,31 @@
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
                   </div>
-                  allFilters: {{ allFilters }} <br/>
+                  <!-- allFilters: {{ allFilters }} <br/>
                   
                   Year: {{ filters.year }}<br/>
 
                   Major: {{ filters.major }}<br/>
 
-                  Topic: {{ filters.topic }}<br/>
+                  Topic: {{ filters.topic }}<br/> -->
 
-                  <div v-if="allFilters.length > 0" class="container scroll-group flex flex-column">
-                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in allFilters">{{ filter }}</button>
+                  <div v-if="allFilters.length > 0" class="p-0 container scroll-group flex flex-column mb-4">
+                    <!-- <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in allFilters" @click="removeQuery()">{{ filter }}</button> -->
+                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.year" @click="removeYear(filter)">{{ filter }}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                      </svg>
+                    </button>
+                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.major" @click="removeMajor(filter)">{{ filter }}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                      </svg>
+                    </button>
+                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.topic" @click="removeTopic(filter)">{{ filter }}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                      </svg>
+                    </button>
                   </div>
 
                   <div v-if="filteredStudents.length > 0">
@@ -197,7 +212,25 @@ export default {
     },
     paginateHandler(page) {
       this.$router.push({ query: { ...this.$route.query, 'page': page } })
-    }
+    },
+    removeYear(filter) {
+      const index = this.filters.year.indexOf(filter);
+      if (index > -1) {
+        this.filters.year.splice(index, 1);
+      }
+    },
+    removeMajor(filter) {
+      const index = this.filters.major.indexOf(filter);
+      if (index > -1) {
+        this.filters.major.splice(index, 1);
+      }
+    },
+    removeTopic(filter) {
+      const index = this.filters.topic.indexOf(filter);
+      if (index > -1) {
+        this.filters.topic.splice(index, 1);
+      }
+    },
   },
   created() {
     this.loadData();
