@@ -55,9 +55,9 @@
                       @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
                       <i class="bi bi-filter"></i>&nbsp;Filters
                     </button> -->
-                      <u v-if="filtersLength > 0" class="align-middle fw-bold"
+                      <u v-if="allFilters.length > 0" class="align-middle fw-bold"
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
-                        ({{ filtersLength }})</u>
+                        ({{ allFilters.length }})</u>
                       <u v-else class="align-middle fw-bold"
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
@@ -70,7 +70,7 @@
 
                   Topic: {{ filters.topic }}<br/>
 
-                  <div v-if="filtersLength > 0" class="container scroll-group flex flex-column">
+                  <div v-if="allFilters.length > 0" class="container scroll-group flex flex-column">
                     <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in allFilters">{{ filter }}</button>
                   </div>
 
@@ -128,7 +128,6 @@ export default {
         major: this.$route.query.major,
         topic: this.$route.query.topic,
       },
-      filtersLength: 0,
       perPage: 12,
       currentPage: 1,
       count: 0,
@@ -155,9 +154,7 @@ export default {
     },
     filteredStudents() {
       this.filtered = this.students;
-      this.filtersLength = 0;
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
-        this.filtersLength += this.filters.year.length;
         // combine senior and above years into Senior+
         if (this.filters.year.includes('Senior')) {
           this.filters.year.concat(['Masters', 'Alumni - undergrad', 'PhD']);
@@ -166,13 +163,11 @@ export default {
       }
 
       if (this.filters.major !== undefined && this.filters.major.length > 0) {
-        this.filtersLength += this.filters.major.length;
         const included = (major) => this.filters.major.includes(major.full_title)
         this.filtered = this.filtered.filter(student => student.major.some(included))
       }
 
       if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
-        this.filtersLength += this.filters.topic.length;
         this.filtered = this.filtered.filter(student => this.filters.topic.every(
           f => student.collections.some((collection) => f === collection.topic)))
       }
