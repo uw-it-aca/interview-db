@@ -31,7 +31,7 @@
                   <StudentFilter @clicked="updateFilters" />
                 </div>
 
-                <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
+                <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
                   <!-- <button type="button" class="mb-4" aria-label="Close" @click="$router.push({ query: { 'filter': true } })">filters
                     button</button> -->
                   <!-- 
@@ -62,29 +62,37 @@
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
                   </div>
-                  <!-- allFilters: {{ allFilters }} <br/>
-                  
-                  Year: {{ filters.year }}<br/>
 
-                  Major: {{ filters.major }}<br/>
+                  <div v-if="allFilters.length > 0"
+                    class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
+                    <span v-for="filter in filters.year">
+                      <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
+                        v-if="filter != 'Masters' && filter != 'Alumni - undergrad' && filter != 'PhD'"
+                        @click="removeYear(filter)">
+                        <span v-if="filter == 'Senior'">Senior +</span>
+                        <span v-else>{{ filter }}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                      </button>
+                    </span>
 
-                  Topic: {{ filters.topic }}<br/> -->
-
-                  <div v-if="allFilters.length > 0" class="p-0 container scroll-group flex flex-column mb-4">
-                    <!-- <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in allFilters" @click="removeQuery()">{{ filter }}</button> -->
-                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.year" @click="removeYear(filter)">{{ filter }}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.major"
+                      @click="removeMajor(filter)">{{ filter }}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
+                        <path
+                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                       </svg>
                     </button>
-                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.major" @click="removeMajor(filter)">{{ filter }}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                      </svg>
-                    </button>
-                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.topic" @click="removeTopic(filter)">{{ filter }}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.topic"
+                      @click="removeTopic(filter)">{{ filter }}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
+                        <path
+                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                       </svg>
                     </button>
                   </div>
@@ -170,9 +178,9 @@ export default {
     filteredStudents() {
       this.filtered = this.students;
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
-        // combine senior and above years into Senior+
-        if (this.filters.year.includes('Senior')) {
-          this.filters.year.concat(['Masters', 'Alumni - undergrad', 'PhD']);
+        // combine senior and older into Senior+
+        if (this.filters.year.includes('Senior') && !this.filters.year.includes('Masters') && !this.filters.year.includes('Alumni - undergrad') && !this.filters.year.includes('PhD')) {
+          this.filters.year.push('Masters', 'Alumni - undergrad', 'PhD');
         }
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
       }
@@ -218,6 +226,16 @@ export default {
       if (index > -1) {
         this.filters.year.splice(index, 1);
       }
+      if (filter == 'Senior') {
+        const years = ['Masters', 'Alumni - undergrad', 'PhD'];
+        years.forEach(year => {
+          const index = this.filters.year.indexOf(year);
+          if (index > -1) {
+            this.filters.year.splice(index, 1);
+          }
+        })
+      }
+      this.updateQuery();
     },
     removeMajor(filter) {
       const index = this.filters.major.indexOf(filter);
@@ -229,7 +247,20 @@ export default {
       const index = this.filters.topic.indexOf(filter);
       if (index > -1) {
         this.filters.topic.splice(index, 1);
+        this.$router.replace({ filters })
       }
+    },
+    updateQuery() {
+      console.log("updating")
+      const query = {};
+      query['page'] = 1
+      Object.entries(this.filters).forEach(([key, value]) => {
+        if (value) {
+          query[key] = (value);
+        }
+      })
+      console.log(query)
+      this.$router.replace({ query })
     },
   },
   created() {
@@ -272,5 +303,4 @@ export default {
   white-space: nowrap;
   overflow-x: scroll;
 }
-
 </style>
