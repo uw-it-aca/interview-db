@@ -75,17 +75,26 @@ if os.getenv('AUTH', 'NONE') == 'SAML_MOCK':
     ]
 
 if os.getenv('ENV', 'localdev') == 'localdev':
-    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     MEDIA_ROOT = os.getenv('MEDIA_ROOT', '/app/media')
     VITE_MANIFEST_PATH = os.path.join(
         BASE_DIR, 'interview_db', 'static', 'manifest.json'
     )
 else:
-    # DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    # GS_PROJECT_ID = os.getenv('STORAGE_PROJECT_ID', '')
-    # GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME', '')
-    # GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    #     '/gcs/credentials.json')
+    STORAGES = {
+        'default': {
+            'BACKEND': 'storages.backends.gcloud.GoogleCloudStorage',
+            'OPTIONS': {
+                'project_id': os.getenv('STORAGE_PROJECT_ID', ''),
+                'bucket_name': os.getenv('STORAGE_BUCKET_NAME', ''),
+                'location': os.path.join(os.getenv('STORAGE_DATA_ROOT', '')),
+                'credentials': service_account.Credentials.from_service_account_file(
+                    '/gcs/credentials.json'),
+            }
+        },
+        'staticfiles': {
+            'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
+        },
+    }
     VITE_MANIFEST_PATH = os.path.join(os.sep, 'static', 'manifest.json')
     CSRF_TRUSTED_ORIGINS = ['https://' + os.getenv('CLUSTER_CNAME')]
 
@@ -99,3 +108,5 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ]
 }
+
+IMAGE_CACHE_EXPIRES = 60 * 60
