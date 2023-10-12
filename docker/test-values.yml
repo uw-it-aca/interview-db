@@ -38,7 +38,7 @@ externalService:
 gcsCredentials:
   mounted: true
   secretName: test.huskyvoices.uw.edu-gcs-credentials
-repo: interview-db
+repo: huskyvoices
 instance: test
 metrics:
   enabled: true

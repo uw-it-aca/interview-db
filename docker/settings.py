@@ -81,11 +81,11 @@ if os.getenv('ENV', 'localdev') == 'localdev':
         BASE_DIR, 'interview_db', 'static', 'manifest.json'
     )
 else:
-    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    GS_PROJECT_ID = os.getenv('STORAGE_PROJECT_ID', '')
-    GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME', '')
-    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        '/gcs/credentials.json')
+    # DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    # GS_PROJECT_ID = os.getenv('STORAGE_PROJECT_ID', '')
+    # GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME', '')
+    # GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    #     '/gcs/credentials.json')
     VITE_MANIFEST_PATH = os.path.join(os.sep, 'static', 'manifest.json')
     CSRF_TRUSTED_ORIGINS = ['https://' + os.getenv('CLUSTER_CNAME')]
 
