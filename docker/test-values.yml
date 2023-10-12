@@ -104,7 +104,11 @@ environmentVariablesSecrets:
     name: IDP_CERT
     secretName: test.huskyvoices.uw.edu-uw-idp-cert
     secretKey: uw-idp-cert
-  gcsBucketName:
-    name: GCS_BUCKET_NAME
+  storageBucketName:
+    name: STORAGE_BUCKET_NAME
     secretName: test.huskyvoices.uw.edu-secrets
     secretKey: storage-bucket-name
+  storageProjectId:
+    name: STORAGE_PROJECT_ID
+    secretName: test.huskyvoices.uw.edu-secrets
+    secretKey: storage-project-id
