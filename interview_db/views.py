@@ -2,16 +2,15 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from django.conf import settings
-from django.core.files.storage import default_storage
 from django.views.generic import TemplateView
-from django.db.models import Q
-from django.utils.decorators import method_decorator
-from django.http import HttpResponse, StreamingHttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.db.models import Q
+from django.utils.decorators import method_decorator
+from wsgiref.util import FileWrapper
+from django.http import HttpResponse
 from uw_saml.decorators import group_required
-from datetime import datetime, timedelta
 from .serializers import *
 from .models import *
 
@@ -191,6 +190,7 @@ class ImageView(APIView):
     """
     API endpoint returning images
     """
+
     def get(self, request, id):
         interview = Interview.objects.get(id=id)
         img = interview.image
@@ -209,19 +209,7 @@ class ImageView(APIView):
                 return Response('Image not shown for privacy',
                                 status=status.HTTP_400_BAD_REQUEST)
 
-        expires = datetime.utcnow() + timedelta(
-            seconds=settings.IMAGE_CACHE_EXPIRES)
-
-        try:
-            with default_storage.open(img, mode='r') as i:
-                data = i.read()
-
-            response = StreamingHttpResponse(data, content_type='image/jpeg')
-            response['Cache-Control'] = 'public,max-age={}'.format(
-                settings.IMAGE_CACHE_EXPIRES)
-            response['Expires'] = expires.strftime('%a, %d %b %Y %H:%M:%S GMT')
-        except IOError:
-            response = Response('Not found', status=status.HTTP_404_NOT_FOUND)
+        response = HttpResponse(FileWrapper(img))
         return response
 
 
