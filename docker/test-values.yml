@@ -54,6 +54,8 @@ externalSecrets:
           property: django-secret
         - name: storage-bucket-name
           property: storage-bucket-name
+        - name: storage-project-id
+          property: storage-project-id
     - name: test.huskyvoices.uw.edu-sql-secrets
       externalKey: huskyvoices/test/sql-secrets
       data:
