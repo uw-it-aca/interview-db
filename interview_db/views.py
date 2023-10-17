@@ -1,18 +1,21 @@
 # Copyright 2023 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
+import io
 from django.conf import settings
+from django.core.files.storage import default_storage
 from django.views.generic import TemplateView
+from django.db.models import Q
+from django.utils.decorators import method_decorator
+from django.http import HttpResponse, StreamingHttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.db.models import Q
-from django.utils.decorators import method_decorator
-from wsgiref.util import FileWrapper
-from django.http import HttpResponse
 from uw_saml.decorators import group_required
+from datetime import datetime, timedelta
 from .serializers import *
 from .models import *
+from PIL import Image
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
@@ -209,7 +212,23 @@ class ImageView(APIView):
                 return Response('Image not shown for privacy',
                                 status=status.HTTP_400_BAD_REQUEST)
 
-        response = HttpResponse(FileWrapper(img))
+        expires = datetime.utcnow() + timedelta(
+            seconds=settings.IMAGE_CACHE_EXPIRES)
+
+        try:
+            with Image.open(img, mode='r') as i:
+                data = io.BytesIO()
+                i.save(data, format=i.format)
+                data = data.getvalue()
+                print(type(data))
+
+            response = StreamingHttpResponse(streaming_content=data,
+                                             content_type='image/jpeg')
+            response['Cache-Control'] = 'public,max-age={}'.format(
+                settings.IMAGE_CACHE_EXPIRES)
+            response['Expires'] = expires.strftime('%a, %d %b %Y %H:%M:%S GMT')
+        except IOError:
+            response = Response('Not found', status=status.HTTP_404_NOT_FOUND)
         return response
 
 

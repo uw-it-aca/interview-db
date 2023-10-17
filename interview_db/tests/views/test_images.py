@@ -1,6 +1,7 @@
 # Copyright 2023 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
+import io
 from django.test import TestCase
 from django.urls import reverse
 from interview_db.models import *
@@ -46,7 +47,7 @@ class ImagesTest(TestCase):
         url = reverse("interview_db:student-image", kwargs={
             "id": self.interview.id})
         response = self.client.get(url, follow=True)
-        with Image.open(BytesIO(response.content)) as image:
+        with Image.open(response.streaming_content) as image:
             orig = Image.open("%s/../resources/test_image.png" % TEST_ROOT)
             self.assertEquals(image.size[0], orig.size[0])
             self.assertEquals(image.size[1], orig.size[1])
