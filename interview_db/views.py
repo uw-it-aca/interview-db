@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import io
+from wsgiref.util import FileWrapper
 from django.conf import settings
 from django.core.files.storage import default_storage
 from django.views.generic import TemplateView
@@ -216,14 +217,7 @@ class ImageView(APIView):
             seconds=settings.IMAGE_CACHE_EXPIRES)
 
         try:
-            with Image.open(img, mode='r') as i:
-                data = io.BytesIO()
-                i.save(data, format=i.format)
-                data = data.getvalue()
-                print(type(data))
-
-            response = StreamingHttpResponse(streaming_content=data,
-                                             content_type='image/jpeg')
+            response = HttpResponse(img, content_type='image/jpeg')
             response['Cache-Control'] = 'public,max-age={}'.format(
                 settings.IMAGE_CACHE_EXPIRES)
             response['Expires'] = expires.strftime('%a, %d %b %Y %H:%M:%S GMT')

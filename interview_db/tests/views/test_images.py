@@ -47,7 +47,7 @@ class ImagesTest(TestCase):
         url = reverse("interview_db:student-image", kwargs={
             "id": self.interview.id})
         response = self.client.get(url, follow=True)
-        with Image.open(response.streaming_content) as image:
+        with Image.open(BytesIO(response.content)) as image:
             orig = Image.open("%s/../resources/test_image.png" % TEST_ROOT)
             self.assertEquals(image.size[0], orig.size[0])
             self.assertEquals(image.size[1], orig.size[1])
