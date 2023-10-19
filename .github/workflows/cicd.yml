@@ -33,7 +33,7 @@ name: Build, Test and Deploy
 
 env:
   # Release name must match "repo" value in docker/*-values.yml
-  RELEASE_NAME: interview-db
+  RELEASE_NAME: huskyvoices
   DJANGO_APP: interview_db
 
 # Be sure that branches defined here have corresponding steps
