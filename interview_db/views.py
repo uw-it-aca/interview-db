@@ -1,14 +1,11 @@
 # Copyright 2023 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
-import io
-from wsgiref.util import FileWrapper
 from django.conf import settings
-from django.core.files.storage import default_storage
 from django.views.generic import TemplateView
 from django.db.models import Q
 from django.utils.decorators import method_decorator
-from django.http import HttpResponse, StreamingHttpResponse
+from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -16,7 +13,6 @@ from uw_saml.decorators import group_required
 from datetime import datetime, timedelta
 from .serializers import *
 from .models import *
-from PIL import Image
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']

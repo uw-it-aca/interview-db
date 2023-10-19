@@ -1,7 +1,6 @@
 # Copyright 2023 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
-import io
 from django.test import TestCase
 from django.urls import reverse
 from interview_db.models import *
