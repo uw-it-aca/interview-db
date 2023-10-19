@@ -55,9 +55,12 @@
                       @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
                       <i class="bi bi-filter"></i>&nbsp;Filters
                     </button> -->
-                      <u v-if="allFilters.length > 0" class="align-middle fw-bold"
+                      <u v-if="allFilters.length > 0 && allFilters.indexOf('Senior') > -1" class="align-middle fw-bold"
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
-                        ({{ allFilters.length }})</u>
+                        ({{ allFilters.length - 3 }})</u>
+                      <u v-else-if="allFilters.length > 0" class="align-middle fw-bold"
+                      @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
+                      ({{ allFilters.length }})</u>
                       <u v-else class="align-middle fw-bold"
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
@@ -251,7 +254,6 @@ export default {
       }
     },
     updateQuery() {
-      console.log("updating")
       const query = {};
       query['page'] = 1
       Object.entries(this.filters).forEach(([key, value]) => {
@@ -259,7 +261,6 @@ export default {
           query[key] = (value);
         }
       })
-      console.log(query)
       this.$router.replace({ query })
     },
   },
