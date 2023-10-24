@@ -32,33 +32,16 @@
                 </div>
 
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
-                  <!-- <button type="button" class="mb-4" aria-label="Close" @click="$router.push({ query: { 'filter': true } })">filters
-                    button</button> -->
-                  <!-- 
-                  <router-link v-if="mq.tablet || mq.mobile" active-class="active" aria-current="page"
-                    :to="{ name: 'Filters', query: { ...this.$route.query } }">
-                    <div class="d-flex justify-content-end">
-                      <u class="text-purple fs-5" style="display: inline;">Filters</u>
-                      <i class="bi bi-filter" style="font-size: 22px"></i>
-                    </div>
-                  </router-link> -->
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
                       <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ filtered.length }} Results
                       </p>
                       <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">{{ filtered.length }}
                         Result </p>
-
                     </div>
-                    <div class="d-flex justify-content-end col-6">
-                      <!-- <button v-if="mq.tablet || mq.mobile" type="button" class="btn btn-success"
-                      @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">
-                      <i class="bi bi-filter"></i>&nbsp;Filters
-                    </button> -->
-                      <u v-if="allFilters.length > 0 && allFilters.indexOf('Senior') > -1" class="align-middle fw-bold"
-                        @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
-                        ({{ allFilters.length - 3 }})</u>
-                      <u v-else-if="allFilters.length > 0" class="align-middle fw-bold"
+
+                    <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
+                      <u v-if="allFilters.length > 0" class="align-middle fw-bold"
                       @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
                       ({{ allFilters.length }})</u>
                       <u v-else class="align-middle fw-bold"
@@ -66,11 +49,10 @@
                     </div>
                   </div>
 
-                  <div v-if="allFilters.length > 0"
+                  <div v-if="allFilters.length > 0 && (mq.mobile || mq.tablet)" 
                     class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
                     <span v-for="filter in filters.year">
                       <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
-                        v-if="filter != 'Masters' && filter != 'Alumni - undergrad' && filter != 'PhD'"
                         @click="removeYear(filter)">
                         <span v-if="filter == 'Senior'">Senior +</span>
                         <span v-else>{{ filter }}</span>
@@ -181,8 +163,8 @@ export default {
     filteredStudents() {
       this.filtered = this.students;
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
-        // combine senior and older into Senior+
-        if (this.filters.year.includes('Senior') && !this.filters.year.includes('Masters') && !this.filters.year.includes('Alumni - undergrad') && !this.filters.year.includes('PhD')) {
+        // check for Senior+
+        if (this.filters.year.includes('Senior')) {
           this.filters.year.push('Masters', 'Alumni - undergrad', 'PhD');
         }
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
@@ -196,6 +178,10 @@ export default {
       if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
         this.filtered = this.filtered.filter(student => this.filters.topic.every(
           f => student.collections.some((collection) => f === collection.topic)))
+      }
+
+      if (this.filters.year !== undefined && this.filters.year.includes('Masters')) {
+        this.filters.year.splice(this.filters.year.length - 3, this.filters.year.length);
       }
 
       // pagination
