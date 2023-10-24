@@ -30,7 +30,9 @@
                 <div class="col-4 d-none d-lg-block">
                   <StudentFilter @clicked="updateFilters" />
                 </div>
-
+                
+                {{ allFilters }}
+                {{ this.$route.query }}
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
@@ -176,8 +178,12 @@ export default {
       }
 
       if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
-        this.filtered = this.filtered.filter(student => this.filters.topic.every(
-          f => student.collections.some((collection) => f === collection.topic)))
+        if (Array.isArray(this.filtered.topic)) {
+          this.filtered = this.filtered.filter(student => this.filters.topic.every(
+            f => student.collections.some((collection) => f === collection.topic)))
+        } else {
+          this.filtered = this.filtered.filter(student => student.collections.some((collection) => this.filtered.topic === collection.topic))
+        }
       }
 
       if (this.filters.year !== undefined && this.filters.year.includes('Masters')) {
@@ -215,15 +221,6 @@ export default {
       if (index > -1) {
         this.filters.year.splice(index, 1);
       }
-      if (filter == 'Senior') {
-        const years = ['Masters', 'Alumni - undergrad', 'PhD'];
-        years.forEach(year => {
-          const index = this.filters.year.indexOf(year);
-          if (index > -1) {
-            this.filters.year.splice(index, 1);
-          }
-        })
-      }
       this.updateQuery();
     },
     removeMajor(filter) {
@@ -231,13 +228,14 @@ export default {
       if (index > -1) {
         this.filters.major.splice(index, 1);
       }
+      this.updateQuery();
     },
     removeTopic(filter) {
       const index = this.filters.topic.indexOf(filter);
       if (index > -1) {
         this.filters.topic.splice(index, 1);
-        this.$router.replace({ filters })
       }
+      this.updateQuery();
     },
     updateQuery() {
       const query = {};
@@ -247,7 +245,8 @@ export default {
           query[key] = (value);
         }
       })
-      this.$router.replace({ query })
+      console.log("query now: ", query)
+      this.$router.replace({ name: 'Students', query: { ...this.$route.query } })
     },
   },
   created() {

@@ -10,7 +10,7 @@
         </a>
       </div>
     </div>
-
+    {{ filters }}
     <div class="card-body">
       <div class="row mb-4">
         <h2 class="d-flex fw-bold display-6 text-gold justify-content-start"
@@ -153,6 +153,7 @@ export default {
           query[key] = (value);
         }
       })
+      console.log("filter's query: ", query)
       this.$router.replace({ query })
     },
     clearFilters() {
