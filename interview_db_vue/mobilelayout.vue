@@ -13,8 +13,7 @@
       </li>
       <li class="nav-item">
         <h6>
-          <router-link class="nav-link text-purple row" active-class="active" aria-current="page" to="/students">Student
-            Stories
+          <router-link class="nav-link text-purple row" active-class="active" aria-current="page" to="/students">Students
           </router-link>
         </h6>
       </li>

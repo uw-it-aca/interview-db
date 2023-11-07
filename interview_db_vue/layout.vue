@@ -20,8 +20,7 @@
         <ul class="nav mt-2 p-2 col-6 justify-content-end nav-list">
           <li class="nav-item">
             <h6>
-              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/students">Student
-                Stories
+              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/students">Students
               </router-link>
             </h6>
           </li>

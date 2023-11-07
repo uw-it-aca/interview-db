@@ -211,7 +211,7 @@ export default {
       const response = await get("/api/students/collections/");
       this.students = response.data;
       this.count = response.data.length;
-      this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } })
+      this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
     },
     paginateHandler(page) {
       this.$router.push({ query: { ...this.$route.query, 'page': page } })
@@ -221,7 +221,15 @@ export default {
       if (index > -1) {
         this.filters.year.splice(index, 1);
       }
-      this.updateQuery();
+      const query = {};
+      query['page'] = 1
+      Object.entries(this.filters).forEach(([key, value]) => {
+        if (value) {
+          query[key] = (value);
+        }
+      })
+      console.log("query now: ", query)
+      this.$router.replace({ query });
     },
     removeMajor(filter) {
       const index = this.filters.major.indexOf(filter);
@@ -245,8 +253,8 @@ export default {
           query[key] = (value);
         }
       })
-      console.log("query now: ", query)
-      this.$router.replace({ name: 'Students', query: { ...this.$route.query } })
+      console.log("query now: ", this.$route.query)
+      this.$router.replace({ query: {...this.$route.query } })
     },
   },
   created() {
