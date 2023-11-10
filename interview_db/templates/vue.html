@@ -1,0 +1,26 @@
+{% load static %}
+{% load vite %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
+  <!-- vite css bundle -->
+  {% vite_styles 'interview_db_vue/main.js' %}
+</head>
+
+<body {% if google_analytics %}data-google-analytics="{{ google_analytics }}"{% endif %} {% if logout_url %}data-logout-url="{{ logout_url }}"{% endif %} data-django-debug="{{ django_debug|lower}}">
+    {% csrf_token %}
+
+    <!-- vue app will be injected here -->
+    <div id="app"></div>
+
+    <!-- vite js bundle -->
+    {% vite_scripts 'interview_db_vue/main.js' %}
+
+</body>
+</html>

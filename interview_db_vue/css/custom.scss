@@ -1,0 +1,289 @@
+// import entire bootstrap library
+
+// setting bootstrap color variables
+$light: #FAF8FC; // card color
+$primary: #1E1E1E; // text
+$secondary: #827252; // default button
+$success: #4B2E83;
+$info: #B4A67F; // active button
+$white: #F8F9fA; // background color
+
+$min-contrast-ratio: 2.5;
+
+// button styling
+$btn-border-width: 0;
+$bs-btn-color: $white;
+$bs-btn-active-color: $info;
+$btn-transition: all 0.15s ease 0s;
+$btn-box-shadow: 0 .5rem 1rem rgba($secondary, .5);
+$btn-padding-y: 0.75rem;
+$btn-padding-x: 0.75rem;
+
+// card styling
+$border-radius: 0.1rem;
+$card-bg: $light;
+$card-border-color: $primary;
+$card-cap-bg: $light;
+$card-cap-color: $primary;
+
+@use "sass:map";
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// app custom colors
+$custom-colors: (
+  "background": #F8F9fA,
+  "purple": #4B2E83,
+  "gold": #827252
+);
+
+// a.active-link {
+//   text-decoration: none;
+//   color: $white;
+// }
+
+a.nav-link {
+  margin: auto 0.25em;
+  font-size: larger;
+}
+
+// button-card styling
+button.btn-card {
+  color: $primary;
+  display: inline-block;
+  text-align: start;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  background-color: $light;
+  padding: 1rem;
+  border-color: $primary;
+  border-radius: 0.1rem;
+  border-width: 1.5px;
+}
+
+.interview-filter {
+  background: white !important;
+  border-style: solid !important;
+  border-color: $primary !important;
+  border-width: 1.5px !important;
+  padding: 4px !important;
+  margin: 8px !important;
+}
+
+.img-div {
+  display: flex;
+  flex-shrink: 1 !important;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+
+.card-card-clickable {
+  --bs-card-bg: none;
+  --bs-card-border-width: 0;
+}
+
+
+img.listing-img {
+  width: 100%;
+  height: 80%;
+  z-index: 1;
+  line-height: 0;
+  border-radius: 1.5px;
+  max-width: 100%;
+  object-fit: cover;
+  filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
+}
+
+
+
+// Open Sans for all body text
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+header,
+main {
+  font-family: 'Open Sans', sans-serif;
+  text-transform: none;
+  text-decoration: none;
+}
+
+// Times for all headers
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.nav-list {
+  display: none !important;
+}
+
+.hamburger-menu {
+  display: inline;
+  font-size: 50px;
+}
+
+.footer-img {
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.footer-copyright {
+  justify-content: center;
+}
+
+// styling for W + Husky Voices title in nav
+.title-logo {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.shift-up {
+  margin-top: -40px !important;
+}
+
+.banner-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+img.home-img {
+  height: 500px;
+  object-fit: cover;
+}
+
+.button-outline {
+  background-color: transparent;
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-color: #4B2E83 !important;
+}
+
+// title banner styling for over banner-image
+.title-div {
+  position: absolute;
+  top: 25%;
+  background-color: $light;
+  border-style: solid;
+  border-color: $primary;
+  border-width: 0.5px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.interview-height {
+  height: 100%;
+}
+
+@include media-breakpoint-up(sm) {
+  .hamburger-menu {
+    display: none;
+  }
+
+  .nav-list {
+    display: flex !important;
+  }
+
+  .title-logo {
+    justify-content: left;
+  }
+
+  // title card styling
+  .title-div {
+    position: absolute;
+    top: 40%;
+    background-color: $light;
+    border-style: solid;
+    border-color: $primary;
+    border-width: 1px;
+    padding-left: 3rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .shift-up {
+    margin-top: -40px !important;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .footer-copyright {
+    justify-content: end;
+  }
+
+  .footer-img {
+    justify-content: start;
+    padding-bottom: 0px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .scroll-area {
+    height: inherit;
+    overflow-y: scroll !important;
+    overflow: hidden;
+  }
+
+  .interview-height {
+    height: 76vh;
+  }
+}
+
+html {
+  height: 100vh;
+}
+
+$border-color: $primary;
+$border-width: 1.5px;
+$border-radius: 0.1rem;
+
+// bootstrap theme + utility merging
+$theme-colors: map-merge($theme-colors, $custom-colors);
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+$utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text");
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
+$utilities: (
+  // MARK: bg-color-hover (changes bg-color on hover)
+  "background-color": (property: background-color,
+    class: bg,
+    state: hover focus,
+    values: map-merge($theme-colors,
+      ("body": $body-bg,
+        "white": $white,
+        "transparent": transparent,
+      )),
+  ),
+  // MARK: text-color-hover (changes text-color on hover)
+  "color": (property: color,
+    class: text,
+    state: hover focus,
+    values: map-merge($theme-colors,
+      ("white": $white,
+        "transparent": transparent,
+      )),
+  )
+);
+
+// additional non-bootstrap styles
+// .btn-info {
+//   border-radius: 20px;
+//   background: transparent;
+//   transition: all 0.3s ease 0s;
+// }
+
+// .btn-info:hover {
+//   color: $info;
+//   background: $info;
+// }
+
+
+// MARK: import bootstrap and bootstrap-icons last
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
