@@ -229,6 +229,5 @@ class ResourceLinkAdmin(SAMLModelAdmin):
 
 @admin.register(Collection, site=saml_admin_site)
 class CollectionAdmin (SAMLModelAdmin):
-    has_access = False
     prepopulated_fields = {"slug": ("topic",)}
     list_display = ('topic', 'question')
