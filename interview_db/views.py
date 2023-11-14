@@ -3,14 +3,14 @@
 
 from django.conf import settings
 from django.views.generic import TemplateView
+from django.db.models import Q
+from django.utils.decorators import method_decorator
+from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.db.models import Q
-from django.utils.decorators import method_decorator
-from wsgiref.util import FileWrapper
-from django.http import HttpResponse
 from uw_saml.decorators import group_required
+from datetime import datetime, timedelta
 from .serializers import *
 from .models import *
 
@@ -209,7 +209,16 @@ class ImageView(APIView):
                 return Response('Image not shown for privacy',
                                 status=status.HTTP_400_BAD_REQUEST)
 
-        response = HttpResponse(FileWrapper(img))
+        expires = datetime.utcnow() + timedelta(
+            seconds=settings.IMAGE_CACHE_EXPIRES)
+
+        try:
+            response = HttpResponse(img, content_type='image/jpeg')
+            response['Cache-Control'] = 'public,max-age={}'.format(
+                settings.IMAGE_CACHE_EXPIRES)
+            response['Expires'] = expires.strftime('%a, %d %b %Y %H:%M:%S GMT')
+        except IOError:
+            response = Response('Not found', status=status.HTTP_404_NOT_FOUND)
         return response
 
 

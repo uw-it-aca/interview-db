@@ -38,7 +38,7 @@ externalService:
 gcsCredentials:
   mounted: true
   secretName: huskyvoices.uw.edu-gcs-credentials
-repo: interview-db
+repo: huskyvoices
 instance: prod
 metrics:
   enabled: true
@@ -54,6 +54,8 @@ externalSecrets:
           property: django-secret
         - name: storage-bucket-name
           property: storage-bucket-name
+        - name: storage-project-id
+          property: storage-project-id
     - name: huskyvoices.uw.edu-sql-secrets
       externalKey: huskyvoices/prod/sql-secrets
       data:
@@ -104,7 +106,11 @@ environmentVariablesSecrets:
     name: IDP_CERT
     secretName: huskyvoices.uw.edu-uw-idp-cert
     secretKey: uw-idp-cert
-  gcsBucketName:
-    name: GCS_BUCKET_NAME
+  storageBucketName:
+    name: STORAGE_BUCKET_NAME
     secretName: huskyvoices.uw.edu-secrets
     secretKey: storage-bucket-name
+  storageProjectId:
+    name: STORAGE_PROJECT_ID
+    secretName: huskyvoices.uw.edu-secrets
+    secretKey: storage-project-id
