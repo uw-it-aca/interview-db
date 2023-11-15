@@ -52,13 +52,12 @@ const routes = [
 
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
+    if (to.name != from.name || to.query.page != from.query.page) {
+      return { top: 0 }
+    }
     if (savedPosition) {
       return savedPosition
     }
-    if (to.path != from.path) {
-      return { top: 0 }
-    }
-    // return {top: 0}
   },
   history: createWebHistory(),
   routes,
