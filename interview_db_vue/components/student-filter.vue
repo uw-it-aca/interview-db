@@ -17,7 +17,7 @@
           :class="mq.tablet || mq.mobile ? 'col-9' : ''">Filter Stories</h2>
         <div class="d-flex col-3 justify-content-end p-0">
           <button v-if="mq.tablet || mq.mobile" type="button" class="btn-close" aria-label="Close"
-            @click="$router.replace({ query: { ...this.$route.query } })"></button>
+            @click="$router.replace({ path: '/students', query: { ...this.$route.query } })"></button>
         </div>
       </div>
       <div class="mb-5">
