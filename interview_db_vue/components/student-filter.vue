@@ -163,6 +163,9 @@ export default {
     },
   },
   created() {
+    if (this.mq.desktop) {
+      this.$router.replace({ path: '/students'});
+    }
     this.loadData();
   },
   computed: {
