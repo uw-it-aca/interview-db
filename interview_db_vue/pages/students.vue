@@ -50,7 +50,8 @@
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
                   </div>
-
+                  
+                  all filters: {{ allFilters }}
                   <div v-if="allFilters.length > 0 && (mq.mobile || mq.tablet)" 
                     class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
                     <span v-for="filter in filters.year">
@@ -65,7 +66,6 @@
                         </svg>
                       </button>
                     </span>
-
                     <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.major"
                       @click="removeMajor(filter)">{{ filter }}
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
@@ -159,8 +159,18 @@ export default {
       this.filters.topic = this.$route.query.topic;
     },
     allFilters() {
-      const concat = (...arrays) => [].concat(...arrays.filter(Array.isArray));
-      return concat(this.filters.year, this.filters.major, this.filters.topic);
+      // need to treat single objects as array and exclude undefined
+      const arr = (obj) => !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
+      const years = arr(this.filters.year);
+      const majors = arr(this.filters.major);
+      const topic = arr(this.filters.topic);
+
+      const concat = (...arrays) => [].concat(...arrays.filter(array => Array.isArray(array) && array !== undefined));
+      const result = concat(years, majors, topic);
+      // const result = concat(arr(this.filters.year), arr(this.filters.major), arr(this.filters.topic));
+
+      console.log("res ", result)
+      return result
     },
     filteredStudents() {
       this.filtered = this.students;
@@ -254,7 +264,10 @@ export default {
         }
       })
       console.log("query now: ", this.$route.query)
-      this.$router.replace({ query: {...this.$route.query } })
+      this.$router.push({ path: '/students', query: {...this.$route.query } }).then(() => {
+    console.log('Updated route', this.$route)
+    // process the updated route params
+  })
     },
   },
   created() {
