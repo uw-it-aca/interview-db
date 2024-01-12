@@ -30,7 +30,7 @@
                 <div class="col-4 d-none d-lg-block">
                   <StudentFilter @clicked="updateFilters" />
                 </div>
-                
+
                 {{ allFilters }}
                 {{ this.$route.query }}
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
@@ -44,15 +44,15 @@
 
                     <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
                       <u v-if="allFilters.length > 0" class="align-middle fw-bold"
-                      @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
-                      ({{ allFilters.length }})</u>
+                        @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
+                        ({{ allFilters.length }})</u>
                       <u v-else class="align-middle fw-bold"
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
                   </div>
-                  
+
                   all filters: {{ allFilters }}
-                  <div v-if="allFilters.length > 0 && (mq.mobile || mq.tablet)" 
+                  <div v-if="allFilters.length > 0 && (mq.mobile || mq.tablet)"
                     class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
                     <span v-for="filter in filters.year">
                       <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
@@ -169,7 +169,7 @@ export default {
       const result = concat(years, majors, topic);
       // const result = concat(arr(this.filters.year), arr(this.filters.major), arr(this.filters.topic));
 
-      console.log("res ", result)
+      // console.log("res ", result)
       return result
     },
     filteredStudents() {
@@ -214,6 +214,13 @@ export default {
           this.currentPage = JSON.parse(n)
         }
       }
+    },
+    "$route.query.year": {
+      immediate: true,
+      handler(n) {
+        console.log("route query changed:")
+        this.$forceUpdate();
+      }
     }
   },
   methods: {
@@ -239,7 +246,8 @@ export default {
         }
       })
       console.log("query now: ", query)
-      this.$router.replace({ query });
+      // /this.$router.replace({ query });
+      this.$router.push({ path: '/students', query: { ...this.$route.query } }).catch(err => { })
     },
     removeMajor(filter) {
       const index = this.filters.major.indexOf(filter);
@@ -264,10 +272,12 @@ export default {
         }
       })
       console.log("query now: ", this.$route.query)
-      this.$router.push({ path: '/students', query: {...this.$route.query } }).then(() => {
-    console.log('Updated route', this.$route)
-    // process the updated route params
-  })
+      this.$router.push({ path: '/students', query: { ...this.$route.query } }).then(() => {
+        console.log('Updated route', this.$route)
+        // process the updated route params
+      })
+
+      this.$router.push({ path: '/students', query: { ...this.$route.query } }).catch(err => { })
     },
   },
   created() {

@@ -10,6 +10,7 @@
         </a>
       </div>
     </div>
+    
     {{ filters }}
     <div class="card-body">
       <div class="row mb-4">

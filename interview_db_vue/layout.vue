@@ -55,8 +55,8 @@
         <img src="./images/washingtonlogo.svg" />
       </div>
       <div class="col-md-6 col-12 align-items-center footer-copyright d-flex" :class="(mq.mobile || mq.tablet) ? 'text-center' : ''">
-        <p v-if="mq.mobile" class="mb-0">Copyright &copy; 2023 <br/>University of Washington</p>
-        <p v-else class="mb-0">Copyright &copy; 2023 University of Washington</p>
+        <p v-if="mq.mobile" class="mb-0">Copyright &copy; 2024 <br/>University of Washington</p>
+        <p v-else class="mb-0">Copyright &copy; 2024 University of Washington</p>
       </div>
     </div>
   </footer>
