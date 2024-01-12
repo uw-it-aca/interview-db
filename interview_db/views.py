@@ -164,7 +164,7 @@ class MajorListView(APIView):
     """
 
     def get(self, request):
-        queryset = Major.objects.all()
+        queryset = Major.objects.all().order_by('full_title')
         serializer = MajorSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
