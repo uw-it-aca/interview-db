@@ -4,5 +4,6 @@
 
 from django.contrib.admin.apps import AdminConfig
 
+
 class InterviewAdminConfig(AdminConfig):
     default_site = 'interview_db.admin.SAMLAdminSite'

@@ -23,6 +23,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='collection',
             name='subcodes',
-            field=models.ManyToManyField(blank=True, to='interview_db.SubCode'),
+            field=models.ManyToManyField(
+                blank=True, to='interview_db.SubCode'),
         ),
     ]
