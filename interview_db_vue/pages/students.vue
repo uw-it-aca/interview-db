@@ -52,6 +52,7 @@
                   </div>
 
                   all filters: {{ allFilters }}
+                  year: {{ filters.year }}
                   <div v-if="allFilters.length > 0 && (mq.mobile || mq.tablet)"
                     class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
                     <span v-for="filter in filters.year">
@@ -134,14 +135,45 @@ export default {
       collections: [],
       filtered: [],
       filters: {
-        year: this.$route.query.year,
-        major: this.$route.query.major,
-        topic: this.$route.query.topic,
+        year: [],
+        major: [],
+        topic: [],
       },
       perPage: 12,
       currentPage: 1,
       count: 0,
     };
+  },
+  watch: {
+    "$route.query": {
+      immediate: true,
+      handler(n) {
+        // const arr = (obj) => !Array.isArray(obj) ? [obj] : obj;
+        if (n.year === undefined) {
+          this.filters.year = []
+        } else {
+          this.filters.year = this.filters.year;
+        }
+        if (n.major === undefined) {
+          this.filters.major = []
+        } else {
+          this.filters.major = n.major;
+        }
+        if (n.topic === undefined) {
+          this.filters.topic = []
+        } else {
+          this.filters.topic = n.topic;
+        }
+      }
+    },
+    "$route.query.page": {
+      immediate: true,
+      handler(n) {
+        if (n !== undefined) {
+          this.currentPage = JSON.parse(n)
+        }
+      }
+    },
   },
   computed: {
     filter() {
@@ -161,15 +193,12 @@ export default {
     allFilters() {
       // need to treat single objects as array and exclude undefined
       const arr = (obj) => !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
-      const years = arr(this.filters.year);
-      const majors = arr(this.filters.major);
-      const topic = arr(this.filters.topic);
-
+      console.log("years before: ", this.filters.year)
+      console.log("years after ", arr(this.filters.year))
       const concat = (...arrays) => [].concat(...arrays.filter(array => Array.isArray(array) && array !== undefined));
-      const result = concat(years, majors, topic);
-      // const result = concat(arr(this.filters.year), arr(this.filters.major), arr(this.filters.topic));
-
-      // console.log("res ", result)
+      // const result = concat(this.filters.year, this.filters.major, this.filters.topic);
+      const result = concat(arr(this.filters.year), arr(this.filters.major), arr(this.filters.topic));
+      console.log("concat: ", result)
       return result
     },
     filteredStudents() {
@@ -196,6 +225,7 @@ export default {
         }
       }
 
+      // remove Senior+ from filters
       if (this.filters.year !== undefined && this.filters.year.includes('Masters')) {
         this.filters.year.splice(this.filters.year.length - 3, this.filters.year.length);
       }
@@ -205,23 +235,6 @@ export default {
       const end = start + this.perPage;
       return this.filtered.slice(start, end);
     },
-  },
-  watch: {
-    "$route.query.page": {
-      immediate: true,
-      handler(n) {
-        if (n !== undefined) {
-          this.currentPage = JSON.parse(n)
-        }
-      }
-    },
-    "$route.query.year": {
-      immediate: true,
-      handler(n) {
-        console.log("route query changed:")
-        this.$forceUpdate();
-      }
-    }
   },
   methods: {
     async loadData() {
@@ -238,16 +251,7 @@ export default {
       if (index > -1) {
         this.filters.year.splice(index, 1);
       }
-      const query = {};
-      query['page'] = 1
-      Object.entries(this.filters).forEach(([key, value]) => {
-        if (value) {
-          query[key] = (value);
-        }
-      })
-      console.log("query now: ", query)
-      // /this.$router.replace({ query });
-      this.$router.push({ path: '/students', query: { ...this.$route.query } }).catch(err => { })
+      this.updateQuery();
     },
     removeMajor(filter) {
       const index = this.filters.major.indexOf(filter);
@@ -272,10 +276,10 @@ export default {
         }
       })
       console.log("query now: ", this.$route.query)
-      this.$router.push({ path: '/students', query: { ...this.$route.query } }).then(() => {
-        console.log('Updated route', this.$route)
-        // process the updated route params
-      })
+      // this.$router.push({ path: '/students', query: { ...this.$route.query } }).then(() => {
+      //   console.log('Updated route', this.$route)
+      //   // process the updated route params
+      // })
 
       this.$router.push({ path: '/students', query: { ...this.$route.query } }).catch(err => { })
     },
