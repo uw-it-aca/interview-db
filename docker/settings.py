@@ -87,7 +87,8 @@ else:
                 'project_id': os.getenv('STORAGE_PROJECT_ID', ''),
                 'bucket_name': os.getenv('STORAGE_BUCKET_NAME', ''),
                 'location': os.path.join(os.getenv('STORAGE_DATA_ROOT', '')),
-                'credentials': service_account.Credentials.from_service_account_file(
+                'credentials': service_account.Credentials.
+                from_service_account_file(
                     '/gcs/credentials.json'),
             }
         },

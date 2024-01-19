@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 from django.conf import settings
@@ -90,7 +90,7 @@ class CollectionListView(APIView):
     """
 
     def get(self, request):
-        queryset = Collection.objects.all()
+        queryset = Collection.objects.all().order_by('topic')
         serializer = CollectionSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -164,7 +164,7 @@ class MajorListView(APIView):
     """
 
     def get(self, request):
-        queryset = Major.objects.all()
+        queryset = Major.objects.all().order_by('full_title')
         serializer = MajorSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
