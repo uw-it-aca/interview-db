@@ -31,7 +31,6 @@
                   <StudentFilter @clicked="updateFilters" />
                 </div>
 
-                {{ allFilters }}
                 {{ this.$route.query }}
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
                   <div class="row mb-4">
@@ -43,17 +42,15 @@
                     </div>
 
                     <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
-                      <u v-if="allFilters.length > 0" class="align-middle fw-bold"
+                      <u v-if="filtersLength > 0" class="align-middle fw-bold"
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
-                        ({{ allFilters.length }})</u>
+                        ({{ filtersLength }})</u>
                       <u v-else class="align-middle fw-bold"
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
                   </div>
 
-                  all filters: {{ allFilters }}
-                  year: {{ filters.year }}
-                  <div v-if="allFilters.length > 0 && (mq.mobile || mq.tablet)"
+                  <div v-if="filtersLength > 0 && (mq.mobile || mq.tablet)"
                     class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
                     <span v-for="filter in filters.year">
                       <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
@@ -148,11 +145,12 @@ export default {
     "$route.query": {
       immediate: true,
       handler(n) {
-        // const arr = (obj) => !Array.isArray(obj) ? [obj] : obj;
+        const arr = (obj) => !Array.isArray(obj) ? [obj] : obj;
         if (n.year === undefined) {
           this.filters.year = []
         } else {
-          this.filters.year = this.filters.year;
+          console.log("are we an array???", !Array.isArray(n.year));
+          this.filters.year = n.year;
         }
         if (n.major === undefined) {
           this.filters.major = []
@@ -190,16 +188,10 @@ export default {
       this.filters.major = this.$route.query.major;
       this.filters.topic = this.$route.query.topic;
     },
-    allFilters() {
-      // need to treat single objects as array and exclude undefined
+    filtersLength() {
       const arr = (obj) => !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
-      console.log("years before: ", this.filters.year)
-      console.log("years after ", arr(this.filters.year))
-      const concat = (...arrays) => [].concat(...arrays.filter(array => Array.isArray(array) && array !== undefined));
-      // const result = concat(this.filters.year, this.filters.major, this.filters.topic);
-      const result = concat(arr(this.filters.year), arr(this.filters.major), arr(this.filters.topic));
-      console.log("concat: ", result)
-      return result
+      const length = (obj) => obj === undefined ? 0 : obj.length;
+      return length(arr(this.filters.year)) + length(arr(this.filters.major)) + length(arr(this.filters.topic));
     },
     filteredStudents() {
       this.filtered = this.students;
@@ -252,6 +244,8 @@ export default {
         this.filters.year.splice(index, 1);
       }
       this.updateQuery();
+      // this.$router.replace({ query: { ...this.$route.query, 'year': this.filters.year } })
+      // this.$router.push({ path: this.$route.fullPath, query: { 'year': this.filters.year } })
     },
     removeMajor(filter) {
       const index = this.filters.major.indexOf(filter);
@@ -281,7 +275,9 @@ export default {
       //   // process the updated route params
       // })
 
-      this.$router.push({ path: '/students', query: { ...this.$route.query } }).catch(err => { })
+      this.$router.push({ path: '/students', query: { ...this.$route.query } }).catch(err => {console.log(err)})
+      // this.$router.push({ path: '/students', query: { ...this.$route.query } })
+      // this.$router.push({ path: this.$route.fullPath, query: { ...this.$route.query } })
     },
   },
   created() {
