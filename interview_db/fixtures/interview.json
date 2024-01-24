@@ -1189,7 +1189,7 @@
     "pk": 23,
     "fields": {
       "student": 3,
-      "date": "2023-01-01",
+      "date": "2024-01-01",
       "interview_quarter": "wi",
       "signed_release_form": true,
       "pull_quote": "A really interesting pull quote about this interview",
@@ -1220,7 +1220,7 @@
     "pk": 24,
     "fields": {
       "student": 4,
-      "date": "2023-04-01",
+      "date": "2024-04-01",
       "interview_quarter": "sp",
       "signed_release_form": true,
       "pull_quote": "A really interesting pull quote about this interview",
@@ -1251,7 +1251,7 @@
     "pk": 25,
     "fields": {
       "student": 5,
-      "date": "2023-05-01",
+      "date": "2024-05-01",
       "interview_quarter": "sp",
       "signed_release_form": true,
       "pull_quote": "A really interesting pull quote about this interview",
