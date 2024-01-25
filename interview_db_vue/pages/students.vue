@@ -31,11 +31,11 @@
                   <StudentFilter @clicked="updateFilters" />
                 </div>
 
-                {{ this.$route.query }}
+                this.$route.query: {{ this.$route.query }}
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                      <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ filtered.length }} Results
+                      <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ resultsLength }} of {{ filtered.length }} Results
                       </p>
                       <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">{{ filtered.length }}
                         Result </p>
@@ -142,28 +142,29 @@ export default {
     };
   },
   watch: {
-    "$route.query": {
-      immediate: true,
-      handler(n) {
-        const arr = (obj) => !Array.isArray(obj) ? [obj] : obj;
-        if (n.year === undefined) {
-          this.filters.year = []
-        } else {
-          console.log("are we an array???", !Array.isArray(n.year));
-          this.filters.year = n.year;
-        }
-        if (n.major === undefined) {
-          this.filters.major = []
-        } else {
-          this.filters.major = n.major;
-        }
-        if (n.topic === undefined) {
-          this.filters.topic = []
-        } else {
-          this.filters.topic = n.topic;
-        }
-      }
-    },
+    // "$route.query": {
+    //   immediate: true,
+    //   deep: true,
+    //   handler(n) {
+    //     console.log("query: ", n)
+    //     const arr = (obj) => !Array.isArray(obj) ? [obj] : obj;
+    //     if (n.year !== undefined) {
+    //       console.log("is year an array: ", Array.isArray(n.year));
+    //       console.log("n.year type", typeof n.year)
+    //       this.filters.year = arr(n.year);
+    //       console.log(this.filters.year)
+    //     }
+    //     if (n.major !== undefined) {
+    //       console.log("is major an array: ", Array.isArray(n.major));
+    //       this.filters.major = arr(n.major);
+    //       console.log(this.filters.major)
+    //       console.log("now is major an array: ", Array.isArray(n.major));
+    //     }
+    //     if (n.topic === undefined) {
+    //       this.filters.topic = arr(n.topic);
+    //     }
+    //   }
+    // },
     "$route.query.page": {
       immediate: true,
       handler(n) {
@@ -227,6 +228,9 @@ export default {
       const end = start + this.perPage;
       return this.filtered.slice(start, end);
     },
+    resultsLength() {
+      return this.perPage * (this.currentPage - 1) + this.filteredStudents.length;
+    }
   },
   methods: {
     async loadData() {
@@ -244,8 +248,6 @@ export default {
         this.filters.year.splice(index, 1);
       }
       this.updateQuery();
-      // this.$router.replace({ query: { ...this.$route.query, 'year': this.filters.year } })
-      // this.$router.push({ path: this.$route.fullPath, query: { 'year': this.filters.year } })
     },
     removeMajor(filter) {
       const index = this.filters.major.indexOf(filter);
@@ -262,6 +264,7 @@ export default {
       this.updateQuery();
     },
     updateQuery() {
+      console.log("student query first: ", this.$route.query)
       const query = {};
       query['page'] = 1
       Object.entries(this.filters).forEach(([key, value]) => {
@@ -269,15 +272,11 @@ export default {
           query[key] = (value);
         }
       })
-      console.log("query now: ", this.$route.query)
-      // this.$router.push({ path: '/students', query: { ...this.$route.query } }).then(() => {
-      //   console.log('Updated route', this.$route)
-      //   // process the updated route params
-      // })
-
-      this.$router.push({ path: '/students', query: { ...this.$route.query } }).catch(err => {console.log(err)})
-      // this.$router.push({ path: '/students', query: { ...this.$route.query } })
-      // this.$router.push({ path: this.$route.fullPath, query: { ...this.$route.query } })
+      this.$router.push({ path: '/students', query: { ...this.$route.query } }).then(() => {
+        console.log('Updated route', this.$route)
+      })
+      // this.$router.push({ path: '/students', query: { ...this.$route.query } }).catch(err => {console.log(err)})
+      console.log("student query second: ", this.$route.query)
     },
   },
   created() {
