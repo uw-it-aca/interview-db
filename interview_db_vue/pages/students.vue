@@ -142,29 +142,6 @@ export default {
     };
   },
   watch: {
-    // "$route.query": {
-    //   immediate: true,
-    //   deep: true,
-    //   handler(n) {
-    //     console.log("query: ", n)
-    //     const arr = (obj) => !Array.isArray(obj) ? [obj] : obj;
-    //     if (n.year !== undefined) {
-    //       console.log("is year an array: ", Array.isArray(n.year));
-    //       console.log("n.year type", typeof n.year)
-    //       this.filters.year = arr(n.year);
-    //       console.log(this.filters.year)
-    //     }
-    //     if (n.major !== undefined) {
-    //       console.log("is major an array: ", Array.isArray(n.major));
-    //       this.filters.major = arr(n.major);
-    //       console.log(this.filters.major)
-    //       console.log("now is major an array: ", Array.isArray(n.major));
-    //     }
-    //     if (n.topic === undefined) {
-    //       this.filters.topic = arr(n.topic);
-    //     }
-    //   }
-    // },
     "$route.query.page": {
       immediate: true,
       handler(n) {
@@ -185,9 +162,21 @@ export default {
       return JSON.parse(this.$route.params.singleStudent);
     },
     updateFilters() {
-      this.filters.year = this.$route.query.year;
-      this.filters.major = this.$route.query.major;
-      this.filters.topic = this.$route.query.topic;
+      if (this.$route.query.year !== undefined) {
+        this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+      } else {
+        this.filters.year = [];
+      }
+      if (this.$route.query.major !== undefined) {
+        this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
+      } else {
+        this.filters.major = [];
+      }
+      if (this.$route.query.topic !== undefined) {
+        this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
+      } else {
+        this.filters.topic = [];
+      }
     },
     filtersLength() {
       const arr = (obj) => !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
@@ -272,11 +261,7 @@ export default {
           query[key] = (value);
         }
       })
-      this.$router.push({ path: '/students', query: { ...this.$route.query } }).then(() => {
-        console.log('Updated route', this.$route)
-      })
-      // this.$router.push({ path: '/students', query: { ...this.$route.query } }).catch(err => {console.log(err)})
-      console.log("student query second: ", this.$route.query)
+      this.$router.replace({ query: query });
     },
   },
   created() {
