@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import { get } from "axios";
+import axios from 'axios';
 import Multiselect from '@vueform/multiselect';
 
 export default {
@@ -148,9 +148,9 @@ export default {
   },
   methods: {
     async loadData() {
-      const majors = await get('/api/majors/');
+      const majors = await axios.get('/api/majors/');
       majors.data.forEach(e => this.data.majors.push(e.full_title))
-      const collections = await get('/api/collections/');
+      const collections = await axios.get('/api/collections/');
       this.data.topics = collections.data;
     },
     updateQuery() {
