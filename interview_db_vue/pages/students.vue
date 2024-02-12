@@ -35,7 +35,8 @@
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                      <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ resultsLength }} of {{ filtered.length }} Results
+                      <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ resultsLength }} of {{
+                        filtered.length }} Results
                       </p>
                       <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">{{ filtered.length }}
                         Result </p>
@@ -52,9 +53,7 @@
 
                   <div v-if="filtersLength > 0 && (mq.mobile || mq.tablet)"
                     class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
-                    <!-- is filters.year an array? : {{ Array.isArray(filters.year) }} -->
                     <span v-for="filter in Array.isArray(filters.year) ? filters.year : [filters.year]">
-                      <!-- <span> -->
                       <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
                         @click="removeYear(filter)">
                         <span v-if="filter == 'Senior'">Senior +</span>
@@ -74,12 +73,10 @@
                           d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                       </svg>
                     </button>
-                    is filters.topic an array? : {{ Array.isArray(filters.topic) }}
-                    {{ console.log(filters.topic.length) }}
-                    <span v-if="Array.isArray(filters.topic) ? filters.topic.length > 1 : [filters.topic].length > 1">
-                      {{ console.log("what is this") }}
-                      <button type="button" class="btn btn-success me-2 inline-block" 
-                        @click="removeTopic(filter)">{{ filter }}
+                    {{ console.log("topics is array: ", Array.isArray(filters.topic) + ", with length " + filters.topic.length )}}
+                    <span v-if="Array.isArray(filters.topic) && filters.topic.length > 1">
+                      <button type="button" class="btn btn-success me-2 inline-block" @click="removeTopic(filter)" v-for="filter in filters.topic">{{
+                        filter }}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
                           viewBox="0 0 16 16">
                           <path
@@ -87,15 +84,17 @@
                         </svg>
                       </button>
                     </span>
-                    <span v-else-if="filters.topic.length == 1">
-                      <button type="button" class="btn btn-success me-2 inline-block"
-                        @click="removeTopic(filters.topic)">{{ filters.topic }}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
-                          viewBox="0 0 16 16">
-                          <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                      </button>
+                    <span v-else>
+                      <span v-for="filter in filters.topic">
+                        <button type="button" class="btn btn-success me-2 inline-block"
+                          @click="removeTopic(filter)">{{ filter }}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-x" viewBox="0 0 16 16">
+                            <path
+                              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                          </svg>
+                        </button>
+                      </span>
                     </span>
                   </div>
 
@@ -178,31 +177,6 @@ export default {
     singleStudentInfo() {
       return JSON.parse(this.$route.params.singleStudent);
     },
-    updateFilters() {
-      console.log("in update filters");
-      if (this.$route.query.year !== undefined) {
-        this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
-      } else {
-        this.filters.year = [];
-      }
-      if (this.$route.query.major !== undefined) {
-        this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
-      } else {
-        this.filters.major = [];
-      }
-      if (this.$route.query.topic !== undefined) {
-        if (Array.isArray(this.$route.query.topic)) {
-          this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
-        } else {
-          this.filters.topic = [];
-          this.filters.topic.push(JSON.parse(JSON.stringify(this.$route.query.topic)));
-          console.log(this.filters.topic)
-          console.log(Array.isArray(this.filters.topic))
-        }
-      } else {
-        this.filters.topic = [];
-      }
-    },
     filtersLength() {
       const arr = (obj) => !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
       const length = (obj) => obj === undefined ? 0 : obj.length;
@@ -278,7 +252,7 @@ export default {
       this.updateQuery();
     },
     updateQuery() {
-      console.log("student query first: ", this.$route.query)
+      console.log("update query called: ", this.$route.query)
       const query = {};
       query['page'] = 1
       Object.entries(this.filters).forEach(([key, value]) => {
@@ -288,9 +262,28 @@ export default {
       })
       this.$router.replace({ query: query });
     },
+    updateFilters() {
+      console.log("update filters");
+      if (this.$route.query.year !== undefined) {
+        this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+      } else {
+        this.filters.year = [];
+      }
+      if (this.$route.query.major !== undefined) {
+        this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
+      } else {
+        this.filters.major = [];
+      }
+      if (this.$route.query.topic !== undefined) {
+        this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
+      } else {
+        this.filters.topic = [];
+      }
+    },
   },
   created() {
     this.loadData();
+    this.updateFilters();
   },
 };
 </script>
