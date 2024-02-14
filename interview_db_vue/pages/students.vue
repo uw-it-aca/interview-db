@@ -265,7 +265,12 @@ export default {
     updateFilters() {
       console.log("update filters");
       if (this.$route.query.year !== undefined) {
-        this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+        if (Array.isArray(this.$route.query.year)) {
+          this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+        } else {
+          this.filters.year = [];
+          this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
+        }
       } else {
         this.filters.year = [];
       }
