@@ -11,7 +11,6 @@
       </div>
     </div>
     
-    {{ filters }}
     <div class="card-body">
       <div class="row mb-4">
         <h2 class="d-flex fw-bold display-6 text-gold justify-content-start"
@@ -129,12 +128,22 @@ export default {
         if (n.major === undefined) {
           this.filters.major = []
         } else {
-          this.filters.major = n.major;
+          if (!Array.isArray(n.major)) {
+            this.filters.major = []
+            this.filters.major.push(n.major)
+          } else {
+            this.filters.major = n.major;
+          }
         }
         if (n.topic === undefined) {
           this.filters.topic = []
         } else {
-          this.filters.topic = n.topic;
+          if (!Array.isArray(n.topic)) {
+            this.filters.topic = []
+            this.filters.topic.push(n.topic)
+          } else {
+            this.filters.topic = n.topic
+          }
         }
       }
     }
