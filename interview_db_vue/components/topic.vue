@@ -11,12 +11,22 @@
           <StudentFilter :story="true" @clicked="updateFilters" />
         </div>
         <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
-          <router-link active-class="active" aria-current="page" to="/filters">
-            <div class="d-flex d-lg-none justify-content-end">
-              <u class="text-purple fs-5" style="display: inline;">Filters</u>
-              <i class="bi bi-filter" style="font-size: 22px"></i>
+          <div class="row mb-4">
+            <div class="col-6 justify-content-start">
+              <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">
+              {{ resultsLength }} of {{filtered.length }} Results
+              </p>
+              <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">
+                {{ filtered.length }} Result </p>
             </div>
-          </router-link>
+            <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
+              <u v-if="filtersLength > 0" class="align-middle fw-bold"
+                @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
+                ({{ filtersLength }})</u>
+              <u v-else class="align-middle fw-bold"
+                @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
+            </div>
+          </div>
 
           <div v-if="filteredStories.length > 0">
             <div class="card-columns justify-content-end" v-for="story in filteredStories" :key="story">
@@ -67,6 +77,11 @@ export default {
       this.filters.year = this.$route.query.year;
       this.filters.major = this.$route.query.major;
     },
+    filtersLength() {
+      const arr = (obj) => !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
+      const length = (obj) => obj === undefined ? 0 : obj.length;
+      return length(arr(this.filters.year)) + length(arr(this.filters.major)) + length(arr(this.filters.topic));
+    },
     filteredStories() {
       this.filtered = this.stories;
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
@@ -86,6 +101,9 @@ export default {
       const start = this.perPage * (this.currentPage - 1);
       const end = start + this.perPage;
       return this.filtered.slice(start, end);
+    },
+    resultsLength() {
+      return this.perPage * (this.currentPage - 1) + this.filteredStories.length;
     }
   },
   methods: {
