@@ -8,7 +8,7 @@
       <p class="fs-5 mb-5">{{ topicInfo.question }}</p>
       <div class="row">
         <div class="col-4 d-none d-lg-block">
-          <StudentFilter :story="true" @clicked="updateFilters"/>
+          <StudentFilter :story="true" @clicked="updateFilters" />
         </div>
         <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
           <router-link active-class="active" aria-current="page" to="/filters">
@@ -19,13 +19,13 @@
           </router-link>
 
           <div v-if="filteredStories.length > 0">
-            <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
-              :current-page="1" :on-click="onClickHandler" />
             <div class="card-columns justify-content-end" v-for="story in filteredStories" :key="story">
-              <InterviewListing :interviewInfo="story.interview" :story="story.story" class="mb-5" />
+              <InterviewListing :interviewInfo="story.interview" :story="story.story"
+                :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
             </div>
-            <vue-awesome-paginate v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage"
-              :current-page="1" :on-click="onClickHandler" />
+            <vue-awesome-paginate v-if="filtered.length > perPage" class="mt-2 justify-content-center d-flex"
+              v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
+              :hide-prev-next-when-ends="true" :on-click="paginateHandler" />
           </div>
           <div v-else-if="stories.length > 0 && filteredStories.length == 0">
             <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories were found.</p>
@@ -43,6 +43,7 @@ import { get } from "axios";
 
 export default {
   name: "Topic",
+  inject: ["mq"],
   components: {
     InterviewListing,
     StudentFilter
@@ -56,7 +57,7 @@ export default {
         year: this.$route.query.year,
         major: this.$route.query.major,
       },
-      perPage: 18,
+      perPage: 8,
       currentPage: 1,
       count: 0,
     };
@@ -69,11 +70,9 @@ export default {
     filteredStories() {
       this.filtered = this.stories;
       if (this.filters.year !== undefined && this.filters.year.length > 0) {
-        // combine senior and above years into Senior+
+        // combine for Senior+
         if (this.filters.year.includes('Senior')) {
-          this.filters.year += 'Masters';
-          this.filters.year += 'Alumni - undergrad';
-          this.filters.year += 'PhD';
+          this.filters.year.push('Masters', 'Alumni - undergrad', 'PhD');
         }
         this.filtered = this.filtered.filter(student => this.filters.year.includes(student.interview.standing));
       }
@@ -96,13 +95,13 @@ export default {
       this.count = response.data.length;
       const info = await get("/api/collections/" + this.$route.params.id + "/");
       this.topicInfo = info.data;
-      this.$router.push({ query: {'page': this.currentPage} })
+      this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
     },
-    onClickHandler(page) {
-      this.$router.push({query: {...this.$route.query, 'page': page} })
+    paginateHandler(page) {
+      this.$router.push({ query: { ...this.$route.query, 'page': page } })
     }
   },
-  watch : {
+  watch: {
     "$route.query.page": {
       immediate: true,
       handler(n) {
@@ -119,14 +118,37 @@ export default {
 </script>
 
 <style>
+.pagination-container {
+  display: flex;
+  column-gap: 5px;
+}
+
+.paginate-buttons {
+  height: 2.2rem;
+  width: 2.2rem;
+  border-radius: 0.1rem;
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+  color: black;
+}
+
+.paginate-buttons:hover {
+  background-color: #f6f4f8;
+}
 
 .active-page {
   background-color: #4B2E83;
-  border: 1px solid #4B2E83;
+  border: none;
   color: white;
 }
 
 .active-page:hover {
-  background-color: #5b3d98;
+  background-color: #583b92;
+}
+
+.scroll-group {
+  white-space: nowrap;
+  overflow-x: scroll;
 }
 </style>
