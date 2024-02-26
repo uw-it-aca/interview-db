@@ -31,13 +31,14 @@ class ImagesTest(TestCase):
             pull_quote="Some pull quote",
             other_publishing_restrictions=False
         )
+        image_fh = open("%s/../resources/test_image.png" % TEST_ROOT, 'rb')
         interview.image = SimpleUploadedFile(
             name='test_image.png',
-            content=open("%s/../resources/test_image.png" % TEST_ROOT, 'rb').
-            read(),
+            content=image_fh.read(),
             content_type='image/png')
         interview.save()
         self.interview = interview
+        image_fh.close()
 
     def test_get_image(self):
         """
@@ -51,6 +52,7 @@ class ImagesTest(TestCase):
             self.assertEqual(image.size[0], orig.size[0])
             self.assertEqual(image.size[1], orig.size[1])
             self.assertEqual(image.format, "PNG")
+            orig.close()
 
     def test_redirect_images(self):
         """
