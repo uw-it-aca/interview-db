@@ -48,9 +48,9 @@ class ImagesTest(TestCase):
         response = self.client.get(url, follow=True)
         with Image.open(BytesIO(response.content)) as image:
             orig = Image.open("%s/../resources/test_image.png" % TEST_ROOT)
-            self.assertEquals(image.size[0], orig.size[0])
-            self.assertEquals(image.size[1], orig.size[1])
-            self.assertEquals(image.format, "PNG")
+            self.assertEqual(image.size[0], orig.size[0])
+            self.assertEqual(image.size[1], orig.size[1])
+            self.assertEqual(image.format, "PNG")
 
     def test_redirect_images(self):
         """
@@ -72,9 +72,9 @@ class ImagesTest(TestCase):
         url = reverse("interview_db:student-image", kwargs={
             "id": self.interview.id})
         response = self.client.get(url, follow=True)
-        self.assertEquals(response.status_code, 400)
-        self.assertEquals(json.loads(response.content),
-                          'Image not shown for privacy')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(json.loads(response.content),
+                         'Image not shown for privacy')
 
     def test_no_identifying_photo(self):
         """
@@ -88,9 +88,9 @@ class ImagesTest(TestCase):
         url = reverse("interview_db:student-image", kwargs={
             "id": self.interview.id})
         response = self.client.get(url, follow=True)
-        self.assertEquals(response.status_code, 400)
-        self.assertEquals(json.loads(response.content),
-                          'Image not shown for privacy')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(json.loads(response.content),
+                         'Image not shown for privacy')
 
     def test_no_image(self):
         """
@@ -101,6 +101,6 @@ class ImagesTest(TestCase):
         url = reverse("interview_db:student-image", kwargs={
             "id": self.interview.id})
         response = self.client.get(url, follow=True)
-        self.assertEquals(response.status_code, 400)
-        self.assertEquals(json.loads(response.content),
-                          'Interview has no image')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(json.loads(response.content),
+                         'Interview has no image')
