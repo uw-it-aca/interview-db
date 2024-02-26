@@ -79,7 +79,7 @@ class ModelsTest(TestCase):
         url = reverse("interview_db:major-list")
         response = self.client.get(url, follow=True)
         majors = json.loads(response.content)
-        self.assertEquals(len(majors), 3)
+        self.assertEqual(len(majors), 3)
         self.assertEqual('Communications', majors[0]['full_title'])
         self.assertEqual('Computer Science Engineering',
                          majors[1]['full_title'])
