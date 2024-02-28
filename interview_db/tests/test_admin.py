@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 from django.test import TestCase, RequestFactory
@@ -168,13 +168,12 @@ class AdminTest(TestCase):
 
     def test_permission_collection(self):
         self.assertEqual(self.collection_admin.has_view_permission(
-            self.request), False)
+            self.request), True)
         self.assertEqual(self.collection_admin.has_add_permission(
-            self.request), False)
+            self.request), True)
         self.assertEqual(self.collection_admin.has_change_permission(
-            self.request), False)
+            self.request), True)
         self.assertEqual(self.collection_admin.has_delete_permission(
-            self.request), False)
+            self.request), True)
         self.assertEqual(self.collection_admin.has_module_permission(
-            self.request),
-                         False)
+            self.request), True)

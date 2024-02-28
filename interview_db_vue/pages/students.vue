@@ -62,7 +62,7 @@ import Layout from "../layout.vue";
 import InterviewListing from "../components/student/interview-listing.vue";
 import StudentFilter from "../components/student-filter.vue";
 import Interview from "../components/student/interview.vue";
-import { get } from "axios";
+import axios from 'axios';
 
 export default {
   name: "PagesStudents",
@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await get("/api/students/collections/");
+      const response = await axios.get("/api/students/collections/");
       this.students = response.data;
       this.count = response.data.length;
       this.$router.push({ query: {'page': this.currentPage} })

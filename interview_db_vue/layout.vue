@@ -73,7 +73,7 @@
         <img src="./images/washingtonlogo.svg" />
       </div>
       <div class="col-md-6 col-12 align-items-center footer-copyright d-flex">
-        <p class="">Copyright &copy; 2023 University of Washington</p>
+        <p class="">Copyright &copy; 2024 University of Washington</p>
       </div>
     </div>
   </footer>

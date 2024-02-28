@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 from django.db import models
@@ -196,9 +196,11 @@ class ResourceLink(models.Model):
     category = models.ForeignKey(
         ResourceCategory,
         on_delete=models.PROTECT,
-        help_text="See our <a href="
-                  'https://docs.google.com/document/d/1nDEYzdfqIDRQwOEKhRHZiiX8hHj4OxiTlNbYmF4dZUQ/edit?usp=sharing' >
-                  "category guidelines</a> for resource links.")
+        help_text=(
+            'See our <a href="https://docs.google.com/document/d/'
+            '1nDEYzdfqIDRQwOEKhRHZiiX8hHj4OxiTlNbYmF4dZUQ/edit?usp=sharing">'
+            'category guidelines</a> for resource links.')
+        )
 
     def __str__(self):
         return self.title
@@ -271,9 +273,10 @@ class Coding(models.Model):
     code = models.ForeignKey(
         Code,
         on_delete=models.PROTECT,
-        help_text="See our <a href="
-                  "'https://docs.google.com/document/d/18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing'>"
-                  "code definitions</a>."
+        help_text=(
+            'See our <a href="https://docs.google.com/document/d/'
+            '18el41a2DJ4hdHk-yPVQEDBSzGNb0HO-mlGHp33-nCqE/edit?usp=sharing">'
+            'code definitions</a>.')
     )
     subcode = models.ForeignKey(SubCode, on_delete=models.PROTECT)
 

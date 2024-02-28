@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 from django.test import TestCase
@@ -73,10 +73,10 @@ class InterviewTopicsTest(TestCase):
             "id": self.i_joe.id})
         response = self.client.get(url, follow=True)
         topics = json.loads(response.content)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(topics), 2)
-        self.assertEquals(topics[0]['topic'], "Finding Community")
-        self.assertEquals(topics[1]['topic'], "Self Reflection")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(topics), 2)
+        self.assertEqual(topics[0]['topic'], "Finding Community")
+        self.assertEqual(topics[1]['topic'], "Self Reflection")
 
     def test_story_topics(self):
         """
@@ -88,10 +88,10 @@ class InterviewTopicsTest(TestCase):
         response = self.client.get(url, follow=True)
         stories = json.loads(response.content)
         topic_1 = stories[0]['collections']
-        self.assertEquals(topic_1[0]['topic'], "Self Reflection")
+        self.assertEqual(topic_1[0]['topic'], "Self Reflection")
         topic_2 = stories[1]['collections']
-        self.assertEquals(topic_2[0]['topic'], "Finding Community")
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(topic_2[0]['topic'], "Finding Community")
+        self.assertEqual(response.status_code, 200)
 
     def test_collection_stories(self):
         """
@@ -105,13 +105,13 @@ class InterviewTopicsTest(TestCase):
             "id": self_reflection.id})
         response = self.client.get(url, follow=True)
         stories = json.loads(response.content)
-        self.assertEquals(stories[0]['id'], self.s_joe.id)
+        self.assertEqual(stories[0]['id'], self.s_joe.id)
 
         url = reverse("interview_db:collection-stories", kwargs={
             "id": finding_community.id})
         response = self.client.get(url, follow=True)
         stories = json.loads(response.content)
-        self.assertEquals(stories[0]['id'], self.s_joe_2.id)
+        self.assertEqual(stories[0]['id'], self.s_joe_2.id)
 
     def tearDown(self):
         pass

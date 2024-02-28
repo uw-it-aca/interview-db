@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { get } from "axios";
+import axios from 'axios';
 
 export default {
   name: "Interview",
@@ -104,13 +104,13 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await get("/api/students/" + this.interviewId + "/");
+      const response = await axios.get("/api/students/" + this.interviewId + "/");
       this.stories = response.data;
       this.interviewInfo = this.stories[0].interview;
       this.studentInfo = this.interviewInfo.student;
       this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
 
-      const topics = await get("/api/students/" + this.interviewId + "/topics/");
+      const topics = await axios.get("/api/students/" + this.interviewId + "/topics/");
       this.topics = topics.data;
 
       if (this.interviewInfo.image != null) {
@@ -126,7 +126,7 @@ export default {
 
       // create blob for image
       try {
-        const blob = await get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
+        const blob = await axios.get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
         this.image = URL.createObjectURL(blob.data);
       } catch (err) {
         console.log(err);

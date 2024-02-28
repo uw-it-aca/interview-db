@@ -84,7 +84,7 @@
 <script>
 import Layout from "../layout.vue";
 import InterviewListing from "../components/student/interview-listing.vue";
-import { get } from "axios";
+import axios from 'axios';
 
 export default {
   name: "PagesHome",
@@ -107,11 +107,11 @@ export default {
   },
   methods: {
     async loadData() {
-      const random = await get("/api/random/");
+      const random = await axios.get("/api/random/");
       this.randomStudents = random.data;
-      const students = await get("/api/students/count/");
+      const students = await axios.get("/api/students/count/");
       this.studentCount = students.data;
-      const stories = await get("/api/stories/count/");
+      const stories = await axios.get("/api/stories/count/");
       this.storyCount = stories.data;
     },
   },

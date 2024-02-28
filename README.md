@@ -14,7 +14,7 @@ App to collect and tag interview data, artifacts, and stories for publishing usi
 
 ## Development Stack
 
-- Django (3.2)
+- Django (4.2)
 - Vue (3.2)
 - Vite (2.9)
 - Vitest (0.10.2)
@@ -91,7 +91,7 @@ Run unittest
 
 ## License
 
-Copyright 2023 UW Information Technology, University of Washington
+Copyright 2024 UW Information Technology, University of Washington
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 from django.conf import settings
@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from uw_saml.decorators import group_required
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from .serializers import *
 from .models import *
 
@@ -209,7 +209,7 @@ class ImageView(APIView):
                 return Response('Image not shown for privacy',
                                 status=status.HTTP_400_BAD_REQUEST)
 
-        expires = datetime.utcnow() + timedelta(
+        expires = datetime.now(timezone.utc) + timedelta(
             seconds=settings.IMAGE_CACHE_EXPIRES)
 
         try:
