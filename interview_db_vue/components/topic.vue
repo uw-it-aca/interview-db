@@ -19,6 +19,7 @@
               <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">
                 {{ filtered.length }} Result </p>
             </div>
+
             <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
               <u v-if="filtersLength > 0" class="align-middle fw-bold"
                 @click="$router.push({ name: 'Filters', params: {type: 'topic', id: topicId}, query: { ...this.$route.query } })">Filter
@@ -27,6 +28,29 @@
                 @click="$router.push({ name: 'Filters', params: {type: 'topic', id: topicId}, query: { ...this.$route.query } })">Filter</u>
             </div>
           </div>
+
+          <div v-if="filtersLength > 0 && (mq.mobile || mq.tablet)"
+            class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
+            <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
+              v-for="filter in filters.year" @click="removeYear(filter)">
+              <span v-if="filter == 'Senior'">Senior +</span>
+              <span v-else>{{ filter }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                viewBox="0 0 16 16">
+                <path
+                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </button>
+            <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.major"
+              @click="removeMajor(filter)">{{ filter }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                viewBox="0 0 16 16">
+                <path
+                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </button>
+          </div>
+
 
           <div v-if="filteredStories.length > 0">
             <div class="card-columns justify-content-end" v-for="story in filteredStories" :key="story">
@@ -74,10 +98,6 @@ export default {
     };
   },
   computed: {
-    updateFilters() {
-      this.filters.year = this.$route.query.year;
-      this.filters.major = this.$route.query.major;
-    },
     filtersLength() {
       const arr = (obj) => !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
       const length = (obj) => obj === undefined ? 0 : obj.length;
@@ -118,7 +138,53 @@ export default {
     },
     paginateHandler(page) {
       this.$router.push({ query: { ...this.$route.query, 'page': page } })
-    }
+    },
+    removeYear(filter) {
+      const index = this.filters.year.indexOf(filter);
+      if (index > -1) {
+        this.filters.year.splice(index, 1);
+      }
+      this.updateQuery();
+    },
+    removeMajor(filter) {
+      const index = this.filters.major.indexOf(filter);
+      if (index > -1) {
+        this.filters.major.splice(index, 1);
+      }
+      this.updateQuery();
+    },
+    updateQuery() {
+      const query = {};
+      query['page'] = 1
+      Object.entries(this.filters).forEach(([key, value]) => {
+        if (value) {
+          query[key] = (value);
+        }
+      })
+      this.$router.replace({ query: query });
+    },
+    updateFilters() {
+      if (this.$route.query.year !== undefined) {
+        if (Array.isArray(this.$route.query.year)) {
+          this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+        } else {
+          this.filters.year = [];
+          this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
+        }
+      } else {
+        this.filters.year = [];
+      }
+      if (this.$route.query.major !== undefined) {
+        if (Array.isArray(this.$route.query.major)) {
+          this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
+        } else {
+          this.filters.major = [];
+          this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
+        }
+      } else {
+        this.filters.major = [];
+      }
+    },
   },
   watch: {
     "$route.query.page": {
