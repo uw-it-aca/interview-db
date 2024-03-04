@@ -21,10 +21,10 @@
             </div>
             <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
               <u v-if="filtersLength > 0" class="align-middle fw-bold"
-                @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
+                @click="$router.push({ name: 'Filters', params: {type: 'topic', id: topicId}, query: { ...this.$route.query } })">Filter
                 ({{ filtersLength }})</u>
               <u v-else class="align-middle fw-bold"
-                @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
+                @click="$router.push({ name: 'Filters', params: {type: 'topic', id: topicId}, query: { ...this.$route.query } })">Filter</u>
             </div>
           </div>
 
@@ -62,6 +62,7 @@ export default {
     return {
       stories: [],
       topicInfo: [],
+      topicId: this.$route.params.id,
       filtered: [],
       filters: {
         year: this.$route.query.year,

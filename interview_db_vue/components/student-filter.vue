@@ -61,7 +61,8 @@
         </div>
       </div>
 
-      <div v-if=!story class="mb-5">
+      <!-- do not filter on collections if navigated from topics page-->
+      <div v-if="!story && this.$route.params.type!='topic'" class="mb-5">
         <p class="display-4 fs-5 fw-bold mb-3">
           Story Collection
         </p>
@@ -79,9 +80,14 @@
           <button class="btn btn-light btn-block w-50" for="clear-all" @click="clearFilters">
             Clear All
           </button>
-
-          <button class="btn btn-gold btn-block fw-bold w-50"
+          
+          <!-- navigate back to students or topics page -->
+          <button v-if="this.$route.params.type!='topic'" class="btn btn-gold btn-block fw-bold w-50"
             @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
+            Apply
+          </button>
+          <button v-else class="btn btn-gold btn-block fw-bold w-50"
+            @click="$router.push({ name: 'Collections', params: {id: topicId}, query: { ...this.$route.query } })">
             Apply
           </button>
         </div>
@@ -114,6 +120,7 @@ export default {
         major: [],
         topic: [],
       },
+      topicId: this.$route.params.id,
     };
   },
   watch: {
