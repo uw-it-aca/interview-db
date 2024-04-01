@@ -49,8 +49,7 @@
 </template>
 
 <script>
-import { get } from "axios";
-
+import axios from 'axios';
 export default {
   name: "StudentListing",
   inject: ["mq"],
@@ -87,7 +86,7 @@ export default {
 
       // create blob for image
       try {
-        const blob = await get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
+        const blob = await axios.get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
         this.image = URL.createObjectURL(blob.data);
       } catch (err) {
         console.log(err);

@@ -73,7 +73,7 @@
 <script>
 import InterviewListing from "./student/interview-listing.vue";
 import StudentFilter from "./student-filter.vue";
-import { get } from "axios";
+import axios from 'axios';
 
 export default {
   name: "Topic",
@@ -129,10 +129,10 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await get("/api/collections/" + this.$route.params.id + "/stories/");
+      const response = await axios.get("/api/collections/" + this.$route.params.id + "/stories/");
       this.stories = response.data;
       this.count = response.data.length;
-      const info = await get("/api/collections/" + this.$route.params.id + "/");
+      const info = await axios.get("/api/collections/" + this.$route.params.id + "/");
       this.topicInfo = info.data;
       this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
     },

@@ -58,7 +58,7 @@
 <script>
 import Layout from "../layout.vue";
 import Topic from "../components/topic.vue";
-import { get } from "axios";
+import axios from 'axios';
 
 export default {
   name: "PagesCollections",
@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await get("/api/collections/");
+      const response = await axios.get("/api/collections/");
       this.collections = response.data;
     }
   },
