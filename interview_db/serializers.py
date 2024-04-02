@@ -67,22 +67,22 @@ class InterviewCollectionSerializer(serializers.ModelSerializer):
     def get_collections(self, Interview):
         interview = Story.objects.filter(interview__id=Interview.id)
         queryset = set()
-        list = set()
+        curr_codes = set()
 
-        for s in interview:
-            for c in s.code.all():
-                list.add(c)
-            for c in s.subcode.all():
-                list.add(c)
+        for story in interview:
+            for code in story.code.all():
+                curr_codes.add(code)
+            for code in story.subcode.all():
+                curr_codes.add(code)
 
-        for c in Collection.objects.all():
-            for code in c.codes.all():
-                if code in list:
-                    queryset.add(c)
+        for topic in Collection.objects.all():
+            for code in topic.codes.all():
+                if code in curr_codes:
+                    queryset.add(topic)
                     continue
-            for code in c.subcodes.all():
-                if code in list:
-                    queryset.add(c)
+            for code in topic.subcodes.all():
+                if code in curr_codes:
+                    queryset.add(topic)
                     continue
 
         serializer = CollectionFilterSerializer(queryset, many=True)
