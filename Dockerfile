@@ -1,4 +1,4 @@
-ARG DJANGO_CONTAINER_VERSION=2.0.1
+ARG DJANGO_CONTAINER_VERSION=2.0.2
 
 FROM us-docker.pkg.dev/uwit-mci-axdd/containers/django-container:${DJANGO_CONTAINER_VERSION} as app-prewebpack-container
 
@@ -14,7 +14,10 @@ ADD --chown=acait:acait docker/ /app/project/
 
 RUN /app/bin/pip install -r requirements.txt
 
-FROM node:lts-bullseye AS node-bundler
+# latest node + ubuntu
+FROM node:lts AS node-base
+FROM ubuntu:latest AS node-bundler
+COPY --from=node-base / /
 
 ADD ./package.json /app/
 WORKDIR /app/
