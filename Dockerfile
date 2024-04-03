@@ -15,8 +15,8 @@ ADD --chown=acait:acait docker/ /app/project/
 RUN /app/bin/pip install -r requirements.txt
 
 # latest node + ubuntu
-FROM node:20 AS node-base
-FROM ubuntu:22.04 AS node-bundler
+FROM node:lts AS node-base
+FROM ubuntu:latest AS node-bundler
 COPY --from=node-base / /
 
 ADD ./package.json /app/
