@@ -111,7 +111,7 @@ class CollectionInfoView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class CollectionStoryView(APIView):
+class CollectionStoryView(APIView, PageNumberPagination):
     """
     API endpoint returning single collection of stories
     """
@@ -125,6 +125,7 @@ class CollectionStoryView(APIView):
             interview__pull_quote__exact='').exclude(
             interview__pull_quote__exact='0').exclude(
             interview__signed_release_form=False)
+        queryset = self.paginate_queryset(queryset, request, view=self)
         serializer = StorySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

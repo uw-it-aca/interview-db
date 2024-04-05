@@ -131,7 +131,6 @@ export default {
     async loadData() {
       const response = await axios.get("/api/collections/" + this.$route.params.id + "/stories/");
       this.stories = response.data;
-      this.count = response.data.length;
       const info = await axios.get("/api/collections/" + this.$route.params.id + "/");
       this.topicInfo = info.data;
       this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
