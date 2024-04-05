@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 from uw_saml.decorators import group_required
 from datetime import datetime, timedelta, timezone
 from .serializers import *
@@ -55,7 +56,7 @@ class InterviewListView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class InterviewCollectionListView(APIView):
+class InterviewCollectionListView(APIView, PageNumberPagination):
     """
     API endpoint returning list of interviews with their collections
     """
@@ -66,6 +67,7 @@ class InterviewCollectionListView(APIView):
             pull_quote__exact='').exclude(
             pull_quote__exact='0').exclude(
             signed_release_form=False).order_by('-date')
+        queryset = self.paginate_queryset(queryset, request, view=self)
         serializer = InterviewCollectionSerializer(
             queryset, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)

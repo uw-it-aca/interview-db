@@ -34,8 +34,8 @@
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                      <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ resultsLength }} of {{
-                        filtered.length }} Results
+                      <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ filtered.length + (currentPage - 1) * perPage }} of {{
+                        totalCount }} Results
                       </p>
                       <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">{{ filtered.length }}
                         Result </p>
@@ -84,9 +84,9 @@
                     <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
                       <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
-                    <vue-awesome-paginate v-if="filtered.length > perPage" class="mt-2 justify-content-center d-flex"
-                      v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
-                      :hide-prev-next-when-ends="true" :on-click="paginateHandler" />
+                    <vue-awesome-paginate v-if="totalCount > filtered.length + (currentPage - 1) * perPage" class="mt-2 justify-content-center d-flex"
+                      v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="1"
+                      :hide-prev-next-when-ends="true" :on-click="loadData" />
                   </div>
                   <div v-else-if="students.length > 0 && filteredStudents.length == 0">
                     <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories found.</p>
@@ -134,9 +134,9 @@ export default {
         major: [],
         topic: [],
       },
-      perPage: 12,
+      perPage: 10,
       currentPage: 1,
-      count: 0,
+      totalCount: 0,
     };
   },
   watch: {
@@ -192,26 +192,20 @@ export default {
       if (this.filters.year !== undefined && this.filters.year.includes('Masters')) {
         this.filters.year.splice(this.filters.year.length - 3, this.filters.year.length);
       }
-
-      // pagination
-      const start = this.perPage * (this.currentPage - 1);
-      const end = start + this.perPage;
-      return this.filtered.slice(start, end);
+      return this.filtered;
     },
-    resultsLength() {
-      return this.perPage * (this.currentPage - 1) + this.filteredStudents.length;
-    }
   },
   methods: {
     async loadData() {
-      const response = await axios.get("/api/students/collections/");
+      const response = await axios.get("/api/students/collections/?page=" + this.currentPage);
       this.students = response.data;
-      this.count = response.data.length;
       this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
     },
-    paginateHandler(page) {
-      this.$router.push({ query: { ...this.$route.query, 'page': page } })
+    async getTotalCount() {
+      const countResponse = await axios.get("api/students/count/");
+      this.totalCount = countResponse.data;
     },
+
     removeYear(filter) {
       const index = this.filters.year.indexOf(filter);
       if (index > -1) {
@@ -278,6 +272,7 @@ export default {
   },
   created() {
     this.loadData();
+    this.getTotalCount();
     this.updateFilters();
   },
 };
