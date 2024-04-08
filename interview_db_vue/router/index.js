@@ -43,7 +43,7 @@ const routes = [
     pathToRegexpOptions: { strict: true },
   },
   {
-    path: "/filters/:type?:id?",
+    path: "/filters/:id?",
     name: "Filters",
     component: StudentFilter,
     pathToRegexpOptions: { strict: true },

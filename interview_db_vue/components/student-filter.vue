@@ -10,14 +10,17 @@
         </a>
       </div>
     </div>
-    
+
     <div class="card-body">
       <div class="row mb-4">
         <h2 class="d-flex fw-bold display-6 text-gold justify-content-start"
           :class="mq.tablet || mq.mobile ? 'col-9' : ''">Filter Stories</h2>
-        <div class="d-flex col-3 justify-content-end p-0">
-          <button v-if="mq.tablet || mq.mobile" type="button" class="btn-close" aria-label="Close"
+        <div v-if = "(mq.tablet || mq.mobile)" class="d-flex col-3 justify-content-end p-0">
+          <button v-if="this.$route.params.id == undefined" 
+            type="button" class="btn-close" aria-label="Close"
             @click="$router.replace({ path: '/students', query: { ...this.$route.query } })"></button>
+          <button v-else type="button" class="btn-close" aria-label="Close"
+          @click="$router.push({ name: 'Collections', params: {id: topicId}, query: { ...this.$route.query } })"></button>
         </div>
       </div>
       <div class="mb-5">
@@ -82,7 +85,7 @@
           </button>
           
           <!-- navigate back to students or topics page -->
-          <button v-if="this.$route.params.type!='topic'" class="btn btn-gold btn-block fw-bold w-50"
+          <button v-if="this.$route.params.id == undefined" class="btn btn-gold btn-block fw-bold w-50"
             @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
             Apply
           </button>
@@ -180,9 +183,6 @@ export default {
     },
   },
   created() {
-    if (this.mq.desktop) {
-      this.$router.replace({ path: '/students'});
-    }
     this.loadData();
   },
   computed: {

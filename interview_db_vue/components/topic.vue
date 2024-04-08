@@ -19,13 +19,12 @@
               <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">
                 {{ filtered.length }} Result </p>
             </div>
-
             <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
               <u v-if="filtersLength > 0" class="align-middle fw-bold"
-                @click="$router.push({ name: 'Filters', params: {type: 'topic', id: topicId}, query: { ...this.$route.query } })">Filter
+                @click="$router.push({ name: 'Filters', params: {id: topicId}, query: { ...this.$route.query } })">Filter
                 ({{ filtersLength }})</u>
               <u v-else class="align-middle fw-bold"
-                @click="$router.push({ name: 'Filters', params: {type: 'topic', id: topicId}, query: { ...this.$route.query } })">Filter</u>
+                @click="$router.push({ name: 'Filters', params: {id: topicId}, query: { ...this.$route.query } })">Filter</u>
             </div>
           </div>
 
