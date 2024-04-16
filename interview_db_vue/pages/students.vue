@@ -37,7 +37,7 @@
                       <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ filtered.length + (currentPage - 1) * perPage }} of {{
                         totalCount }} Results
                       </p>
-                      <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">{{ filtered.length }}
+                      <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">1
                         Result </p>
                     </div>
 
@@ -80,11 +80,11 @@
                     </button>
                   </div>
 
-                  <div v-if="filteredStudents.length > 0">
+                  <div v-if="students.length > 0">
                     <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
                       <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
-                    <vue-awesome-paginate v-if="totalCount > filtered.length + (currentPage - 1) * perPage" class="mt-2 justify-content-center d-flex"
+                    <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
                       v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="1"
                       :hide-prev-next-when-ends="true" :on-click="loadData" />
                   </div>
@@ -134,9 +134,10 @@ export default {
         major: [],
         topic: [],
       },
-      perPage: 10,
+      perPage: 0,
       currentPage: 1,
       totalCount: 0,
+      totalPages: 0,
     };
   },
   watch: {
@@ -196,16 +197,22 @@ export default {
     },
   },
   methods: {
-    async loadData() {
-      const response = await axios.get("/api/students/collections/?page=" + this.currentPage);
-      this.students = response.data;
-      this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
+    async loadData(url) {
+      var response = null;
+      if (url === undefined) {
+        response = await axios.get("/api/students/?page=" + this.currentPage);
+      } else {
+        response = await axios.get("/api" + url);
+      }
+      console.log(url)
+      this.students = response.data['results'];
+      this.perPage = response.data['page_size'];
+      this.totalCount = response.data['count'];
+      this.totalPages = response.data['page_count'];
+      if (url === undefined) {
+        this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
+      }
     },
-    async getTotalCount() {
-      const countResponse = await axios.get("api/students/count/");
-      this.totalCount = countResponse.data;
-    },
-
     removeYear(filter) {
       const index = this.filters.year.indexOf(filter);
       if (index > -1) {
@@ -236,6 +243,10 @@ export default {
         }
       })
       this.$router.replace({ query: query });
+
+      // get new data with updated url
+      console.log(this.$route.fullPath)
+      this.loadData(this.$route.fullPath);
     },
     updateFilters() {
       if (this.$route.query.year !== undefined) {
@@ -272,7 +283,6 @@ export default {
   },
   created() {
     this.loadData();
-    this.getTotalCount();
     this.updateFilters();
   },
 };

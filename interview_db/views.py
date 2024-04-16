@@ -19,6 +19,21 @@ admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
 
 
+class CustomPagination(PageNumberPagination):
+    def get_paginated_response(self, data):
+        return Response({
+            'links': {
+                'next': self.get_next_link(),
+                'previous': self.get_previous_link()
+            },
+            'count': self.page.paginator.count,
+            'page_count': self.page.paginator.num_pages,
+            'page_size': self.page_size,
+            'page_number': self.page.number,
+            'results': data,
+        })
+
+
 @method_decorator(group_required(front_end_group), name='dispatch')
 class PageView(TemplateView):
     template_name = "vue.html"
@@ -56,10 +71,19 @@ class InterviewListView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class InterviewCollectionListView(APIView, PageNumberPagination):
+class InterviewCollectionListView(APIView, CustomPagination):
     """
     API endpoint returning list of interviews with their collections
     """
+    STANDING = {
+        "Freshman": "Fr",
+        "Sophomore": "So",
+        "Junior": "Jr",
+        "Senior": "Sr",
+        "Alumni - undergrad": "Al",
+        "Masters": "Ma",
+        "PhD": "Ph",
+    }
 
     def get(self, request):
         queryset = Interview.objects.exclude(
@@ -67,10 +91,23 @@ class InterviewCollectionListView(APIView, PageNumberPagination):
             pull_quote__exact='').exclude(
             pull_quote__exact='0').exclude(
             signed_release_form=False).order_by('-date')
+        import pdb
+        pdb.set_trace()
+
+        # get each query from query params
+        years = self.request.query_params.get('year')
+
+        # can use variable_in=[a, b, c] to OR results
+        # or use Q with OR
+
+        # need to handle multiple queries for one filter type
+        # need to handle Senior+ year (includes PhD, Alum, Masters)
+        if years is not None:
+            queryset = queryset.filter(standing=self.STANDING[years])
         queryset = self.paginate_queryset(queryset, request, view=self)
         serializer = InterviewCollectionSerializer(
             queryset, many=True, context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return self.get_paginated_response(serializer.data)
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
@@ -111,7 +148,7 @@ class CollectionInfoView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class CollectionStoryView(APIView, PageNumberPagination):
+class CollectionStoryView(APIView, CustomPagination):
     """
     API endpoint returning single collection of stories
     """
@@ -127,7 +164,7 @@ class CollectionStoryView(APIView, PageNumberPagination):
             interview__signed_release_form=False)
         queryset = self.paginate_queryset(queryset, request, view=self)
         serializer = StorySerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return self.get_paginated_response(serializer.data)
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')

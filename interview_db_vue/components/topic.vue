@@ -14,10 +14,10 @@
           <div class="row mb-4">
             <div class="col-6 justify-content-start">
               <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">
-              {{ resultsLength }} of {{filtered.length }} Results
+              {{ filtered.length + (currentPage - 1) * perPage }} of {{ totalCount}} Results
               </p>
               <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">
-                {{ filtered.length }} Result </p>
+                1 Result </p>
             </div>
             <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
               <u v-if="filtersLength > 0" class="align-middle fw-bold"
@@ -56,9 +56,9 @@
               <InterviewListing :interviewInfo="story.interview" :story="story.story"
                 :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
             </div>
-            <vue-awesome-paginate v-if="filtered.length > perPage" class="mt-2 justify-content-center d-flex"
-              v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
-              :hide-prev-next-when-ends="true" :on-click="paginateHandler" />
+            <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
+              v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="this.currentPage"
+              :hide-prev-next-when-ends="true" :on-click="loadData" />
           </div>
           <div v-else-if="stories.length > 0 && filteredStories.length == 0">
             <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories were found.</p>
@@ -91,9 +91,11 @@ export default {
         year: this.$route.query.year,
         major: this.$route.query.major,
       },
-      perPage: 8,
+      perPage: 0,
       currentPage: 1,
-      count: 0,
+      currCount: 0,   // unused rn
+      totalCount: 0,
+      totalPages: 0,
     };
   },
   computed: {
@@ -117,25 +119,19 @@ export default {
         this.filtered = this.filtered.filter(student => student.interview.major.some(included))
       }
 
-      // pagination
-      const start = this.perPage * (this.currentPage - 1);
-      const end = start + this.perPage;
-      return this.filtered.slice(start, end);
+      return this.filtered;
     },
-    resultsLength() {
-      return this.perPage * (this.currentPage - 1) + this.filteredStories.length;
-    }
   },
   methods: {
     async loadData() {
-      const response = await axios.get("/api/collections/" + this.$route.params.id + "/stories/");
-      this.stories = response.data;
+      const response = await axios.get("/api/collections/" + this.$route.params.id + "/stories/?page=" + this.currentPage);
+      this.stories = response.data['results'];
+      this.perPage = response.data['page_size'];
+      this.totalCount = response.data['count'];
+      this.totalPages = response.data['page_count']
       const info = await axios.get("/api/collections/" + this.$route.params.id + "/");
       this.topicInfo = info.data;
       this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
-    },
-    paginateHandler(page) {
-      this.$router.push({ query: { ...this.$route.query, 'page': page } })
     },
     removeYear(filter) {
       const index = this.filters.year.indexOf(filter);
@@ -196,6 +192,7 @@ export default {
   },
   created() {
     this.loadData();
+    this.updateFilters();
   },
 };
 </script>
