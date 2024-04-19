@@ -156,6 +156,18 @@ class StoryTopicSerializer(serializers.ModelSerializer):
 class CollectionSerializer(serializers.ModelSerializer):
     codes = CodeSerializer(read_only=True, many=True)
     subcodes = SubCodeSerializer(read_only=True, many=True)
+    interviews = serializers.SerializerMethodField()
+
+    def get_collections(self, Story):
+        interviews = set()
+        for code in self.codes:
+            for story in code.story_set.all():
+                interviews.add(story.interview)
+        for subcode in self.subcodes:
+            for story in subcode.story_set.all():
+                interviews.add(story.interview)
+        serializer = InterviewSerializer(interviews, many=True)
+        return serializer.data
 
     class Meta:
         model = Collection
@@ -164,7 +176,8 @@ class CollectionSerializer(serializers.ModelSerializer):
                   'slug',
                   'codes',
                   'subcodes',
-                  'question']
+                  'question',
+                  'interviews']
 
 
 class CollectionFilterSerializer(serializers.ModelSerializer):
