@@ -91,19 +91,32 @@ class InterviewCollectionListView(APIView, CustomPagination):
             pull_quote__exact='').exclude(
             pull_quote__exact='0').exclude(
             signed_release_form=False).order_by('-date')
-        import pdb
-        pdb.set_trace()
-
-        # get each query from query params
-        years = self.request.query_params.get('year')
-
         # can use variable_in=[a, b, c] to OR results
         # or use Q with OR
 
-        # need to handle multiple queries for one filter type
-        # need to handle Senior+ year (includes PhD, Alum, Masters)
-        if years is not None:
-            queryset = queryset.filter(standing=self.STANDING[years])
+        # get each query from query params
+        years = self.request.GET.getlist('year')
+        if years is not None and len(years) > 0:
+            # handle Senior+ filter, which includes PhD, Alum, Masters
+            if 'Senior' in years:
+                years.append("PhD")
+                years.add("Alumni - undergrad")
+                years.add("Masters")
+            # model uses abbreviation, but query uses full title
+            years_abbr = []
+            for year in years:
+                years_abbr.append(self.STANDING[year])
+            queryset = queryset.filter(standing__in=years_abbr)
+
+        majors = self.request.GET.getlist('major')
+        if majors is not None and len(majors) > 0:
+            queryset = queryset.filter(major__full_title__in=majors)
+
+        topics = self.request.GET.getlist('topic')
+        # if topics is not None and len(topics) > 0:
+        #     queryset = queryset.filter(topic__in=topics)
+
+        # done filtering, now paginate
         queryset = self.paginate_queryset(queryset, request, view=self)
         serializer = InterviewCollectionSerializer(
             queryset, many=True, context={"request": request})
