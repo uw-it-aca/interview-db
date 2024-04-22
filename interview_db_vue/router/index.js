@@ -24,7 +24,7 @@ const routes = [
     pathToRegexpOptions: { strict: true },
   },
   {
-    path: "/students/:id?",
+    path: "/students/:id?/",
     name: "Students",
     component: Students,
     props: true,

@@ -167,51 +167,53 @@ export default {
     },
     filteredStudents() {
       this.filtered = this.students;
-      if (this.filters.year !== undefined && this.filters.year.length > 0) {
-        // check for Senior+
-        if (this.filters.year.includes('Senior')) {
-          this.filters.year.push('Masters', 'Alumni - undergrad', 'PhD');
-        }
-        this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
-      }
+      // if (this.filters.year !== undefined && this.filters.year.length > 0) {
+      //   // check for Senior+
+      //   if (this.filters.year.includes('Senior')) {
+      //     this.filters.year.push('Masters', 'Alumni - undergrad', 'PhD');
+      //   }
+      //   this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
+      // }
 
-      if (this.filters.major !== undefined && this.filters.major.length > 0) {
-        const included = (major) => this.filters.major.includes(major.full_title)
-        this.filtered = this.filtered.filter(student => student.major.some(included))
-      }
+      // if (this.filters.major !== undefined && this.filters.major.length > 0) {
+      //   const included = (major) => this.filters.major.includes(major.full_title)
+      //   this.filtered = this.filtered.filter(student => student.major.some(included))
+      // }
 
-      if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
-        if (Array.isArray(this.filtered.topic)) {
-          this.filtered = this.filtered.filter(student => this.filters.topic.every(
-            f => student.collections.some((collection) => f === collection.topic)))
-        } else {
-          this.filtered = this.filtered.filter(student => student.collections.some((collection) => this.filtered.topic === collection.topic))
-        }
-      }
+      // if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
+      //   if (Array.isArray(this.filtered.topic)) {
+      //     this.filtered = this.filtered.filter(student => this.filters.topic.every(
+      //       f => student.collections.some((collection) => f === collection.topic)))
+      //   } else {
+      //     this.filtered = this.filtered.filter(student => student.collections.some((collection) => this.filtered.topic === collection.topic))
+      //   }
+      // }
 
-      // remove Senior+ from filters
-      if (this.filters.year !== undefined && this.filters.year.includes('Masters')) {
-        this.filters.year.splice(this.filters.year.length - 3, this.filters.year.length);
-      }
+      // // remove Senior+ from filters
+      // if (this.filters.year !== undefined && this.filters.year.includes('Masters')) {
+      //   this.filters.year.splice(this.filters.year.length - 3, this.filters.year.length);
+      // }
       return this.filtered;
     },
   },
   methods: {
-    async loadData(url) {
-      var response = null;
-      if (url === undefined) {
+    async loadData() {
+      const url = this.$route.fullPath;
+      // console.log(this.$route.query['page']);
+      var response;
+
+      // on creation, no page number
+      if (this.$route.query['page'] === undefined) {
+        console.log("default")
+        this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
         response = await axios.get("/api/students/?page=" + this.currentPage);
       } else {
         response = await axios.get("/api" + url);
       }
-      console.log(url)
       this.students = response.data['results'];
       this.perPage = response.data['page_size'];
       this.totalCount = response.data['count'];
       this.totalPages = response.data['page_count'];
-      if (url === undefined) {
-        this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
-      }
     },
     removeYear(filter) {
       const index = this.filters.year.indexOf(filter);
@@ -234,6 +236,7 @@ export default {
       }
       this.updateQuery();
     },
+    // used for remove filter buttons
     updateQuery() {
       const query = {};
       query['page'] = 1
@@ -245,45 +248,48 @@ export default {
       this.$router.replace({ query: query });
 
       // get new data with updated url
-      console.log(this.$route.fullPath)
-      this.loadData(this.$route.fullPath);
+      // console.log(this.$route.fullPath)
+      // this.loadData(this.$route.fullPath);
     },
-    updateFilters() {
-      if (this.$route.query.year !== undefined) {
-        if (Array.isArray(this.$route.query.year)) {
-          this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
-        } else {
-          this.filters.year = [];
-          this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
-        }
-      } else {
-        this.filters.year = [];
-      }
-      if (this.$route.query.major !== undefined) {
-        if (Array.isArray(this.$route.query.major)) {
-          this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
-        } else {
-          this.filters.major = [];
-          this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
-        }
-      } else {
-        this.filters.major = [];
-      }
-      if (this.$route.query.topic !== undefined) {
-        if (Array.isArray(this.$route.query.topic)) {
-          this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
-        } else {
-          this.filters.topic = [];
-          this.filters.topic.push(JSON.parse(JSON.stringify(this.$route.query.topic)));
-        }
-      } else {
-        this.filters.topic = [];
-      }
+    // called when student filter component changes
+    async updateFilters() {
+      console.log(this.$route.fullPath);
+      this.loadData();
+      // if (this.$route.query.year !== undefined) {
+      //   if (Array.isArray(this.$route.query.year)) {
+      //     this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+      //   } else {
+      //     this.filters.year = [];
+      //     this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
+      //   }
+      // } else {
+      //   this.filters.year = [];
+      // }
+      // if (this.$route.query.major !== undefined) {
+      //   if (Array.isArray(this.$route.query.major)) {
+      //     this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
+      //   } else {
+      //     this.filters.major = [];
+      //     this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
+      //   }
+      // } else {
+      //   this.filters.major = [];
+      // }
+      // if (this.$route.query.topic !== undefined) {
+      //   if (Array.isArray(this.$route.query.topic)) {
+      //     this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
+      //   } else {
+      //     this.filters.topic = [];
+      //     this.filters.topic.push(JSON.parse(JSON.stringify(this.$route.query.topic)));
+      //   }
+      // } else {
+      //   this.filters.topic = [];
+      // }
     },
   },
   created() {
     this.loadData();
-    this.updateFilters();
+    // this.updateFilters();
   },
 };
 </script>
