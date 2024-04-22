@@ -56,37 +56,42 @@ class InterviewSerializer(serializers.ModelSerializer):
                   'other_publishing_restrictions']
 
 
+class InterviewIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Interview
+        fields = ['id']
+
+
 class InterviewCollectionSerializer(serializers.ModelSerializer):
     student = StudentSerializer(read_only=True)
     major = MajorSerializer(many=True, read_only=True)
     image = serializers.ImageField(max_length=None, use_url=True,
                                    allow_empty_file=True, required=False)
     standing = serializers.CharField(source='get_standing_display')
-    collections = serializers.SerializerMethodField()
+    # collections = serializers.SerializerMethodField()
 
     def get_collections(self, Interview):
         interview = Story.objects.filter(interview__id=Interview.id)
         queryset = set()
         curr_codes = set()
+        # for story in interview:
+        #     for code in story.code.all():
+        #         curr_codes.add(code)
+        #     for code in story.subcode.all():
+        #         curr_codes.add(code)
 
-        for story in interview:
-            for code in story.code.all():
-                curr_codes.add(code)
-            for code in story.subcode.all():
-                curr_codes.add(code)
+        # for topic in Collection.objects.all():
+        #     for code in topic.codes.all():
+        #         if code in curr_codes:
+        #             queryset.add(topic)
+        #             continue
+        #     for code in topic.subcodes.all():
+        #         if code in curr_codes:
+        #             queryset.add(topic)
+        #             continue
 
-        for topic in Collection.objects.all():
-            for code in topic.codes.all():
-                if code in curr_codes:
-                    queryset.add(topic)
-                    continue
-            for code in topic.subcodes.all():
-                if code in curr_codes:
-                    queryset.add(topic)
-                    continue
-
-        serializer = CollectionFilterSerializer(queryset, many=True)
-        return serializer.data
+        # serializer = CollectionFilterSerializer(queryset, many=True)
+        # return serializer.data
 
     class Meta:
         model = Interview
@@ -104,8 +109,7 @@ class InterviewCollectionSerializer(serializers.ModelSerializer):
                   'no_identifying_photo',
                   'no_real_name',
                   'no_publishing_stories',
-                  'other_publishing_restrictions',
-                  'collections']
+                  'other_publishing_restrictions']
 
 
 class StorySerializer(serializers.ModelSerializer):
@@ -156,18 +160,18 @@ class StoryTopicSerializer(serializers.ModelSerializer):
 class CollectionSerializer(serializers.ModelSerializer):
     codes = CodeSerializer(read_only=True, many=True)
     subcodes = SubCodeSerializer(read_only=True, many=True)
-    interviews = serializers.SerializerMethodField()
+    # interviews = serializers.SerializerMethodField()
 
-    def get_collections(self, Story):
-        interviews = set()
-        for code in self.codes:
-            for story in code.story_set.all():
-                interviews.add(story.interview)
-        for subcode in self.subcodes:
-            for story in subcode.story_set.all():
-                interviews.add(story.interview)
-        serializer = InterviewSerializer(interviews, many=True)
-        return serializer.data
+    # def get_interviews(self, Story):
+    #     interviews = set()
+    #     for code in self.codes:
+    #         for story in code.story_set.all():
+    #             interviews.add(story.interview)
+    #     for subcode in self.subcodes:
+    #         for story in subcode.story_set.all():
+    #             interviews.add(story.interview)
+    #     serializer = InterviewSerializer(interviews, many=True)
+    #     return serializer.data
 
     class Meta:
         model = Collection
@@ -176,8 +180,7 @@ class CollectionSerializer(serializers.ModelSerializer):
                   'slug',
                   'codes',
                   'subcodes',
-                  'question',
-                  'interviews']
+                  'question']
 
 
 class CollectionFilterSerializer(serializers.ModelSerializer):

@@ -85,6 +85,18 @@ class InterviewCollectionListView(APIView, CustomPagination):
         "PhD": "Ph",
     }
 
+    # helper to get all interview ids for a topic
+    def get_interviews(self, topic): 
+        interviews = set()
+        for code in topic.codes.all():
+            for story in code.story_set.all():
+                interviews.add(story.interview)
+        for subcode in topic.subcodes.all():
+            for story in subcode.story_set.all():
+                interviews.add(story.interview)
+        serializer = InterviewIdSerializer(interviews, many=True)
+        return serializer.data
+
     def get(self, request):
         queryset = Interview.objects.exclude(
             pull_quote__isnull=True).exclude(
@@ -108,13 +120,19 @@ class InterviewCollectionListView(APIView, CustomPagination):
                 years_abbr.append(self.STANDING[year])
             queryset = queryset.filter(standing__in=years_abbr)
 
+        # filter on majors
         majors = self.request.GET.getlist('major')
         if majors is not None and len(majors) > 0:
             queryset = queryset.filter(major__full_title__in=majors)
 
+        # filter on topics
         topics = self.request.GET.getlist('topic')
-        # if topics is not None and len(topics) > 0:
-        #     queryset = queryset.filter(topic__in=topics)
+        if topics is not None and len(topics) > 0:
+          for topic_str in Collection.objects.all():
+              topic = Collection.objects.get(topic=topic_str)
+              interviews = self.get_interviews(topic)
+              # check if interview id contained in a topic's set of ids
+              queryset = queryset.filter(id__in=interviews)
 
         # done filtering, now paginate
         queryset = self.paginate_queryset(queryset, request, view=self)
