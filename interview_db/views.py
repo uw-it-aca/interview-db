@@ -71,7 +71,7 @@ class InterviewListView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class InterviewCollectionListView(APIView, CustomPagination):
+class InterviewListView(APIView, CustomPagination):
     """
     API endpoint returning list of interviews with their collections
     """
@@ -86,16 +86,15 @@ class InterviewCollectionListView(APIView, CustomPagination):
     }
 
     # helper to get all interview ids for a topic
-    def get_interviews(self, topic): 
+    def get_interviews(self, topic):
         interviews = set()
         for code in topic.codes.all():
             for story in code.story_set.all():
-                interviews.add(story.interview)
+                interviews.add(story.interview.id)
         for subcode in topic.subcodes.all():
             for story in subcode.story_set.all():
-                interviews.add(story.interview)
-        serializer = InterviewIdSerializer(interviews, many=True)
-        return serializer.data
+                interviews.add(story.interview.id)
+        return interviews
 
     def get(self, request):
         queryset = Interview.objects.exclude(
@@ -103,13 +102,11 @@ class InterviewCollectionListView(APIView, CustomPagination):
             pull_quote__exact='').exclude(
             pull_quote__exact='0').exclude(
             signed_release_form=False).order_by('-date')
-        # can use variable_in=[a, b, c] to OR results
-        # or use Q with OR
 
-        # get each query from query params
+        # filter on years
         years = self.request.GET.getlist('year')
         if years is not None and len(years) > 0:
-            # handle Senior+ filter, which includes PhD, Alum, Masters
+            # Senior+ filter includes PhD, Alum, Masters
             if 'Senior' in years:
                 years.append("PhD")
                 years.add("Alumni - undergrad")
@@ -128,11 +125,11 @@ class InterviewCollectionListView(APIView, CustomPagination):
         # filter on topics
         topics = self.request.GET.getlist('topic')
         if topics is not None and len(topics) > 0:
-          for topic_str in Collection.objects.all():
-              topic = Collection.objects.get(topic=topic_str)
-              interviews = self.get_interviews(topic)
-              # check if interview id contained in a topic's set of ids
-              queryset = queryset.filter(id__in=interviews)
+            for topic_str in Collection.objects.all():
+                topic = Collection.objects.get(topic=topic_str)
+                interviews = self.get_interviews(topic)
+                # check if interview id contained in a topic's set of ids
+                queryset = queryset.filter(id__in=interviews)
 
         # done filtering, now paginate
         queryset = self.paginate_queryset(queryset, request, view=self)
@@ -142,7 +139,7 @@ class InterviewCollectionListView(APIView, CustomPagination):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class InterviewDetailView(APIView):
+class SingleInterviewView(APIView):
     """
     API endpoint returning single interview, made up of its matching stories
     """
