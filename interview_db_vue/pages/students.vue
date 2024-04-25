@@ -13,7 +13,7 @@
         </div>
 
         <div v-else-if="filter">
-          <StudentFilter @clicked="updateFilters" />
+          <StudentFilter @change="updateFilters" />
         </div>
 
         <div v-else>
@@ -28,16 +28,16 @@
             <div class="p-auto">
               <div class="row">
                 <div class="col-4 d-none d-lg-block">
-                  <StudentFilter @clicked="updateFilters" />
+                  <StudentFilter @change="updateFilters" />
                 </div>
 
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                      <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ filtered.length + (currentPage - 1) * perPage }} of {{
+                      <p v-if="students.length > 1" class="align-middle fw-bold opacity-75">{{ students.length + (currentPage - 1) * perPage }} of {{
                         totalCount }} Results
                       </p>
-                      <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">1
+                      <p v-else-if="students.length > 0" class="align-middle fw-bold opacity-75">1
                         Result </p>
                     </div>
 
@@ -81,14 +81,14 @@
                   </div>
 
                   <div v-if="students.length > 0">
-                    <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
+                    <div class="card-columns justify-content-end" v-for="student in students" :key="student.id">
                       <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
                     <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
                       v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="1"
                       :hide-prev-next-when-ends="true" :on-click="loadData" />
                   </div>
-                  <div v-else-if="students.length > 0 && filteredStudents.length == 0">
+                  <div v-else-if="students.length == 0">
                     <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories found.</p>
                   </div>
                 </div>
@@ -128,7 +128,6 @@ export default {
       pageTitle: "Students",
       students: [],
       collections: [],
-      filtered: [],
       filters: {
         year: [],
         major: [],
@@ -165,51 +164,14 @@ export default {
       const length = (obj) => obj === undefined ? 0 : obj.length;
       return length(arr(this.filters.year)) + length(arr(this.filters.major)) + length(arr(this.filters.topic));
     },
-    filteredStudents() {
-      this.filtered = this.students;
-      // if (this.filters.year !== undefined && this.filters.year.length > 0) {
-      //   // check for Senior+
-      //   if (this.filters.year.includes('Senior')) {
-      //     this.filters.year.push('Masters', 'Alumni - undergrad', 'PhD');
-      //   }
-      //   this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
-      // }
-
-      // if (this.filters.major !== undefined && this.filters.major.length > 0) {
-      //   const included = (major) => this.filters.major.includes(major.full_title)
-      //   this.filtered = this.filtered.filter(student => student.major.some(included))
-      // }
-
-      // if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
-      //   if (Array.isArray(this.filtered.topic)) {
-      //     this.filtered = this.filtered.filter(student => this.filters.topic.every(
-      //       f => student.collections.some((collection) => f === collection.topic)))
-      //   } else {
-      //     this.filtered = this.filtered.filter(student => student.collections.some((collection) => this.filtered.topic === collection.topic))
-      //   }
-      // }
-
-      // // remove Senior+ from filters
-      // if (this.filters.year !== undefined && this.filters.year.includes('Masters')) {
-      //   this.filters.year.splice(this.filters.year.length - 3, this.filters.year.length);
-      // }
-      return this.filtered;
-    },
   },
   methods: {
     async loadData() {
+      console.log("loading data")
+      this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } });
       const url = this.$route.fullPath;
-      // console.log(this.$route.query['page']);
-      var response;
+      const response = await axios.get("/api" + url);
 
-      // on creation, no page number
-      if (this.$route.query['page'] === undefined) {
-        console.log("default")
-        this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
-        response = await axios.get("/api/students/?page=" + this.currentPage);
-      } else {
-        response = await axios.get("/api" + url);
-      }
       this.students = response.data['results'];
       this.perPage = response.data['page_size'];
       this.totalCount = response.data['count'];
@@ -253,7 +215,6 @@ export default {
     },
     // called when student filter component changes
     async updateFilters() {
-      console.log(this.$route.fullPath);
       this.loadData();
       // if (this.$route.query.year !== undefined) {
       //   if (Array.isArray(this.$route.query.year)) {
@@ -288,6 +249,7 @@ export default {
     },
   },
   created() {
+    this.currentPage = 1;
     this.loadData();
     // this.updateFilters();
   },
