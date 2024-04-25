@@ -109,8 +109,8 @@ class InterviewListView(APIView, CustomPagination):
             # Senior+ filter includes PhD, Alum, Masters
             if 'Senior' in years:
                 years.append("PhD")
-                years.add("Alumni - undergrad")
-                years.add("Masters")
+                years.append("Alumni - undergrad")
+                years.append("Masters")
             # model uses abbreviation, but query uses full title
             years_abbr = []
             for year in years:
