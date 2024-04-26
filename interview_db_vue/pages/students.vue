@@ -86,7 +86,7 @@
                     </div>
                     <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
                       v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="1"
-                      :hide-prev-next-when-ends="true" :on-click="loadData" />
+                      :hide-prev-next-when-ends="true" :on-click="updateQuery" />
                   </div>
                   <div v-else-if="students.length == 0">
                     <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories found.</p>
@@ -148,6 +148,13 @@ export default {
         }
       }
     },
+    "$route.query": {
+      immediate: true,
+      handler(n) {
+        console.log("called query watcher, reloading data")
+        this.loadData();
+      }
+    }
   },
   computed: {
     filter() {
@@ -167,8 +174,6 @@ export default {
   },
   methods: {
     async loadData() {
-      console.log("loading data")
-      this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } });
       const url = this.$route.fullPath;
       const response = await axios.get("/api" + url);
 
@@ -201,12 +206,12 @@ export default {
     // used for remove filter buttons
     updateQuery() {
       const query = {};
-      query['page'] = 1
-      Object.entries(this.filters).forEach(([key, value]) => {
+      Object.entries(this.$route.query).forEach(([key, value]) => {
         if (value) {
           query[key] = (value);
         }
       })
+      query['page'] = this.currentPage;
       this.$router.replace({ query: query });
 
       // get new data with updated url
@@ -249,9 +254,10 @@ export default {
     },
   },
   created() {
-    this.currentPage = 1;
+    if (this.$route.query.page === undefined) {
+      this.$router.push({ query: { ...this.$route.query, 'page': 1 } });
+    }
     this.loadData();
-    // this.updateFilters();
   },
 };
 </script>
