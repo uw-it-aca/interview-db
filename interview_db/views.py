@@ -133,7 +133,7 @@ class InterviewListView(APIView, CustomPagination):
 
         # done filtering, now paginate
         queryset = self.paginate_queryset(queryset, request, view=self)
-        serializer = InterviewCollectionSerializer(
+        serializer = InterviewSerializer(
             queryset, many=True, context={"request": request})
         return self.get_paginated_response(serializer.data)
 
@@ -142,6 +142,7 @@ class InterviewListView(APIView, CustomPagination):
 class SingleInterviewView(APIView):
     """
     API endpoint returning single interview, made up of its matching stories
+    Used on single interview page to divide interview into filterable stories
     """
 
     def get(self, request, id):

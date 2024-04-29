@@ -161,9 +161,9 @@ export default {
   methods: {
     async loadData() {
       const majors = await axios.get('/api/majors/');
-      majors.data.forEach(e => this.data.majors.push(e.full_title))
+      majors.data.forEach(e => this.data.majors.push(e.full_title));
       const collections = await axios.get('/api/collections/');
-      this.data.topics = collections.data;
+      collections.data.forEach(e => this.data.topics.push(e.topic))
     },
     updateQuery() {
       const query = {};
