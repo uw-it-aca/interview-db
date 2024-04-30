@@ -125,7 +125,7 @@ class InterviewListView(APIView, CustomPagination):
         # filter on topics
         topics = self.request.GET.getlist('topic')
         if topics is not None and len(topics) > 0:
-            for topic_str in Collection.objects.all():
+            for topic_str in topics:
                 topic = Collection.objects.get(topic=topic_str)
                 interviews = self.get_interviews(topic)
                 # check if interview id contained in a topic's set of ids
