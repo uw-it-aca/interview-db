@@ -181,6 +181,15 @@ class CollectionStoryView(APIView, CustomPagination):
     """
     API endpoint returning single collection of stories
     """
+    STANDING = {
+        "Freshman": "Fr",
+        "Sophomore": "So",
+        "Junior": "Jr",
+        "Senior": "Sr",
+        "Alumni - undergrad": "Al",
+        "Masters": "Ma",
+        "PhD": "Ph",
+    }
 
     def get(self, request, id):
         collection = Collection.objects.get(id=id)
@@ -191,6 +200,26 @@ class CollectionStoryView(APIView, CustomPagination):
             interview__pull_quote__exact='').exclude(
             interview__pull_quote__exact='0').exclude(
             interview__signed_release_form=False)
+
+        # filter on years
+        years = self.request.GET.getlist('year')
+        if years is not None and len(years) > 0:
+            # Senior+ filter includes PhD, Alum, Masters
+            if 'Senior' in years:
+                years.append("PhD")
+                years.append("Alumni - undergrad")
+                years.append("Masters")
+            # model uses abbreviation, but query uses full title
+            years_abbr = []
+            for year in years:
+                years_abbr.append(self.STANDING[year])
+            queryset = queryset.filter(interview__standing__in=years_abbr)
+
+        # filter on majors
+        majors = self.request.GET.getlist('major')
+        if majors is not None and len(majors) > 0:
+            queryset = queryset.filter(interview__major__full_title__in=majors)
+
         queryset = self.paginate_queryset(queryset, request, view=self)
         serializer = StorySerializer(queryset, many=True)
         return self.get_paginated_response(serializer.data)

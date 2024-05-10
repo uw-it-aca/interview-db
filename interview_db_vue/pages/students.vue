@@ -37,7 +37,7 @@
                       <p v-if="students.length > 1" class="align-middle fw-bold opacity-75">{{ students.length + (currentPage - 1) * perPage }} of {{
                         totalCount }} Results
                       </p>
-                      <p v-else-if="students.length > 0" class="align-middle fw-bold opacity-75">1
+                      <p v-else-if="students.length > 0" class="align-middle fw-bold opacity-75">1 of 1
                         Result </p>
                     </div>
 
@@ -148,6 +148,7 @@ export default {
         }
       }
     },
+    // makes new api call when query changes
     "$route.query": {
       immediate: true,
       handler(n) {
@@ -176,7 +177,6 @@ export default {
     async loadData() {
       const url = this.$route.fullPath;
       const response = await axios.get("/api" + url);
-
       this.students = response.data['results'];
       this.perPage = response.data['page_size'];
       this.totalCount = response.data['count'];

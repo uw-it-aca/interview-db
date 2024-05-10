@@ -13,11 +13,11 @@
         <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
           <div class="row mb-4">
             <div class="col-6 justify-content-start">
-              <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">
-              {{ filtered.length + (currentPage - 1) * perPage }} of {{ totalCount}} Results
+              <p v-if="stories.length > 1" class="align-middle fw-bold opacity-75">
+              {{ stories.length + (currentPage - 1) * perPage }} of {{ totalCount}} Results
               </p>
-              <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">
-                1 Result </p>
+              <p v-else-if="stories.length > 0" class="align-middle fw-bold opacity-75">
+                1 of 1 Result </p>
             </div>
             <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
               <u v-if="filtersLength > 0" class="align-middle fw-bold"
@@ -51,16 +51,16 @@
           </div>
 
 
-          <div v-if="filteredStories.length > 0">
-            <div class="card-columns justify-content-end" v-for="story in filteredStories" :key="story">
+          <div v-if="stories.length > 0">
+            <div class="card-columns justify-content-end" v-for="story in stories" :key="story">
               <InterviewListing :interviewInfo="story.interview" :story="story.story"
                 :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
             </div>
             <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
-              v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="this.currentPage"
-              :hide-prev-next-when-ends="true" :on-click="loadData" />
+              v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="1"
+              :hide-prev-next-when-ends="true" :on-click="updateQuery" />
           </div>
-          <div v-else-if="stories.length > 0 && filteredStories.length == 0">
+          <div v-else-if="stories.length == 0">
             <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories were found.</p>
           </div>
         </div>
@@ -93,7 +93,6 @@ export default {
       },
       perPage: 0,
       currentPage: 1,
-      currCount: 0,   // unused rn
       totalCount: 0,
       totalPages: 0,
     };
@@ -104,33 +103,20 @@ export default {
       const length = (obj) => obj === undefined ? 0 : obj.length;
       return length(arr(this.filters.year)) + length(arr(this.filters.major)) + length(arr(this.filters.topic));
     },
-    filteredStories() {
-      this.filtered = this.stories;
-      if (this.filters.year !== undefined && this.filters.year.length > 0) {
-        // combine for Senior+
-        if (this.filters.year.includes('Senior')) {
-          this.filters.year.push('Masters', 'Alumni - undergrad', 'PhD');
-        }
-        this.filtered = this.filtered.filter(student => this.filters.year.includes(student.interview.standing));
-      }
-
-      if (this.filters.major !== undefined && this.filters.major.length > 0) {
-        const included = (major) => this.filters.major.includes(major.full_title)
-        this.filtered = this.filtered.filter(student => student.interview.major.some(included))
-      }
-
-      return this.filtered;
-    },
   },
   methods: {
     async loadData() {
-      const response = await axios.get("/api/collections/" + this.$route.params.id + "/stories/?page=" + this.currentPage);
+      // get stories for this topic
+      const url = this.$route.fullPath;
+      const response = await axios.get("/api" + url);
       this.stories = response.data['results'];
       this.perPage = response.data['page_size'];
       this.totalCount = response.data['count'];
-      this.totalPages = response.data['page_count']
-      const info = await axios.get("/api/collections/" + this.$route.params.id + "/");
-      this.topicInfo = info.data;
+      this.totalPages = response.data['page_count'];
+
+      // get this topic's info
+      const infoResponse = await axios.get("/api/collections/" + this.$route.params.id + "/info/");
+      this.topicInfo = infoResponse.data;
       this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
     },
     removeYear(filter) {
@@ -149,35 +135,37 @@ export default {
     },
     updateQuery() {
       const query = {};
-      query['page'] = 1
       Object.entries(this.filters).forEach(([key, value]) => {
         if (value) {
           query[key] = (value);
         }
       })
+      query['page'] = this.currentPage;
       this.$router.replace({ query: query });
     },
-    updateFilters() {
-      if (this.$route.query.year !== undefined) {
-        if (Array.isArray(this.$route.query.year)) {
-          this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
-        } else {
-          this.filters.year = [];
-          this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
-        }
-      } else {
-        this.filters.year = [];
-      }
-      if (this.$route.query.major !== undefined) {
-        if (Array.isArray(this.$route.query.major)) {
-          this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
-        } else {
-          this.filters.major = [];
-          this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
-        }
-      } else {
-        this.filters.major = [];
-      }
+    async updateFilters() {
+      this.loadData();
+      // updating stored filters
+      // if (this.$route.query.year !== undefined) {
+      //   if (Array.isArray(this.$route.query.year)) {
+      //     this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+      //   } else {
+      //     this.filters.year = [];
+      //     this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
+      //   }
+      // } else {
+      //   this.filters.year = [];
+      // }
+      // if (this.$route.query.major !== undefined) {
+      //   if (Array.isArray(this.$route.query.major)) {
+      //     this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
+      //   } else {
+      //     this.filters.major = [];
+      //     this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
+      //   }
+      // } else {
+      //   this.filters.major = [];
+      // }
     },
   },
   watch: {
@@ -188,11 +176,21 @@ export default {
           this.currentPage = JSON.parse(n)
         }
       }
+    },
+    // makes new api call when query changes
+    "$route.query": {
+      immediate: true,
+      handler(n) {
+        console.log("called query watcher, reloading data")
+        this.loadData();
+      }
     }
   },
   created() {
+    if (this.$route.query.page === undefined) {
+      this.$router.push({ query: { ...this.$route.query, 'page': 1 } });
+    }
     this.loadData();
-    this.updateFilters();
   },
 };
 </script>
