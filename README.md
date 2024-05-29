@@ -16,13 +16,13 @@ App to collect and tag interview data, artifacts, and stories for publishing usi
 
 - Django (4.2)
 - Vue (3.2)
-- Vite (2.9)
-- Vitest (0.10.2)
+- Vite (3.1)
+- Vitest (0.23.2)
 
 ## Design Stack
 
 - Bootstrap (5.2)
-- Bootstrap Icons (1.9.0)
+- Bootstrap Icons (1.10.1)
 
 ## Installation
 
@@ -51,14 +51,10 @@ View your application using your specified port number in the .env file
         Demo: http://localhost:8000/
 
 ### Loading data (inside the container)
-
-Use the integrated terminal in the Docker Desktop dashboard to access the filesystem in the container. You can also SSH into the container using the following steps:
-        
-        $ ???
-
-To load collections models and sample data, you can call:
-
+To load sample interview data and collection models, you can call respectively:
         $ bin/python manage.py loaddata /app/interview_db/fixtures/interview.json
+
+        $ bin/python manage.py loaddata /app/interview_db/fixtures/collections.json
 
 ## Testing
 
@@ -87,7 +83,7 @@ Run unittest
 
 ## Authors
 
-[Academic Experience Design & Delivery](https://github.com/uw-it-aca)
+[Univesity of Washington Teaching & Learning Systems](https://github.com/uw-it-aca)
 
 ## License
 
