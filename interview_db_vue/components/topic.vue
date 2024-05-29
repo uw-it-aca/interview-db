@@ -8,7 +8,7 @@
       <p class="fs-5 mb-5">{{ topicInfo.question }}</p>
       <div class="row">
         <div class="col-4 d-none d-lg-block">
-          <StudentFilter :story="true" @clicked="updateFilters" />
+          <StudentFilter :story="true" @clicked="loadData" />
         </div>
         <div class="col-sm-12 col-lg-7 mx-auto d-flex flex-column">
           <div class="row mb-4">
@@ -28,6 +28,7 @@
             </div>
           </div>
 
+          <!-- remove filter buttons for mobile -->
           <div v-if="filtersLength > 0 && (mq.mobile || mq.tablet)"
             class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
             <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
@@ -58,7 +59,7 @@
             </div>
             <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
               v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="1"
-              :hide-prev-next-when-ends="true" :on-click="updateQuery" />
+              :hide-prev-next-when-ends="true" :on-click="updatePage" />
           </div>
           <div v-else-if="stories.length == 0">
             <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories were found.</p>
@@ -97,6 +98,23 @@ export default {
       totalPages: 0,
     };
   },
+  watch: {
+    "$route.query.page": {
+      immediate: true,
+      handler(n) {
+        if (n !== undefined) {
+          this.currentPage = JSON.parse(n)
+        }
+      }
+    },
+    // makes new api call when query changes
+    "$route.query": {
+      immediate: true,
+      handler(n) {
+        this.loadData();
+      }
+    }
+  },
   computed: {
     filtersLength() {
       const arr = (obj) => !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
@@ -117,7 +135,6 @@ export default {
       // get this topic's info
       const infoResponse = await axios.get("/api/collections/" + this.$route.params.id + "/info/");
       this.topicInfo = infoResponse.data;
-      this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
     },
     removeYear(filter) {
       const index = this.filters.year.indexOf(filter);
@@ -143,52 +160,14 @@ export default {
       query['page'] = this.currentPage;
       this.$router.replace({ query: query });
     },
-    async updateFilters() {
-      this.loadData();
-      // updating stored filters
-      // if (this.$route.query.year !== undefined) {
-      //   if (Array.isArray(this.$route.query.year)) {
-      //     this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
-      //   } else {
-      //     this.filters.year = [];
-      //     this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
-      //   }
-      // } else {
-      //   this.filters.year = [];
-      // }
-      // if (this.$route.query.major !== undefined) {
-      //   if (Array.isArray(this.$route.query.major)) {
-      //     this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
-      //   } else {
-      //     this.filters.major = [];
-      //     this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
-      //   }
-      // } else {
-      //   this.filters.major = [];
-      // }
+    updatePage() {
+      this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } });
     },
-  },
-  watch: {
-    "$route.query.page": {
-      immediate: true,
-      handler(n) {
-        if (n !== undefined) {
-          this.currentPage = JSON.parse(n)
-        }
-      }
-    },
-    // makes new api call when query changes
-    "$route.query": {
-      immediate: true,
-      handler(n) {
-        console.log("called query watcher, reloading data")
-        this.loadData();
-      }
-    }
   },
   created() {
+    // set page to 1 if not set
     if (this.$route.query.page === undefined) {
-      this.$router.push({ query: { ...this.$route.query, 'page': 1 } });
+      this.updatePage();
     }
     this.loadData();
   },

@@ -13,7 +13,7 @@
         </div>
 
         <div v-else-if="filter">
-          <StudentFilter @change="updateFilters" />
+          <StudentFilter @change="loadData" />
         </div>
 
         <div v-else>
@@ -28,7 +28,7 @@
             <div class="p-auto">
               <div class="row">
                 <div class="col-4 d-none d-lg-block">
-                  <StudentFilter @change="updateFilters" />
+                  <StudentFilter @change="loadData" />
                 </div>
 
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
@@ -49,7 +49,8 @@
                         @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
                   </div>
-
+                  
+                  <!-- remove filter buttons for mobile -->
                   <div v-if="filtersLength > 0 && (mq.mobile || mq.tablet)"
                     class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
                     <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
@@ -86,7 +87,7 @@
                     </div>
                     <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
                       v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="1"
-                      :hide-prev-next-when-ends="true" :on-click="updateQuery" />
+                      :hide-prev-next-when-ends="true" :on-click="updatePage" />
                   </div>
                   <div v-else-if="students.length == 0">
                     <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories found.</p>
@@ -129,9 +130,9 @@ export default {
       students: [],
       collections: [],
       filters: {
-        year: [],
-        major: [],
-        topic: [],
+        year: this.$route.query.year,
+        major: this.$route.query.major,
+        topic: this.$route.query.topic,
       },
       perPage: 0,
       currentPage: 1,
@@ -152,7 +153,6 @@ export default {
     "$route.query": {
       immediate: true,
       handler(n) {
-        console.log("called query watcher, reloading data")
         this.loadData();
       }
     }
@@ -203,59 +203,24 @@ export default {
       }
       this.updateQuery();
     },
-    // used for remove filter buttons
     updateQuery() {
       const query = {};
-      Object.entries(this.$route.query).forEach(([key, value]) => {
+      Object.entries(this.filters).forEach(([key, value]) => {
         if (value) {
           query[key] = (value);
         }
       })
       query['page'] = this.currentPage;
       this.$router.replace({ query: query });
-
-      // get new data with updated url
-      // console.log(this.$route.fullPath)
-      // this.loadData(this.$route.fullPath);
     },
-    // called when student filter component changes
-    async updateFilters() {
-      this.loadData();
-      // if (this.$route.query.year !== undefined) {
-      //   if (Array.isArray(this.$route.query.year)) {
-      //     this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
-      //   } else {
-      //     this.filters.year = [];
-      //     this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
-      //   }
-      // } else {
-      //   this.filters.year = [];
-      // }
-      // if (this.$route.query.major !== undefined) {
-      //   if (Array.isArray(this.$route.query.major)) {
-      //     this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
-      //   } else {
-      //     this.filters.major = [];
-      //     this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
-      //   }
-      // } else {
-      //   this.filters.major = [];
-      // }
-      // if (this.$route.query.topic !== undefined) {
-      //   if (Array.isArray(this.$route.query.topic)) {
-      //     this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
-      //   } else {
-      //     this.filters.topic = [];
-      //     this.filters.topic.push(JSON.parse(JSON.stringify(this.$route.query.topic)));
-      //   }
-      // } else {
-      //   this.filters.topic = [];
-      // }
+    updatePage() {
+      this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } });
     },
   },
   created() {
+    // set page to 1 if not set
     if (this.$route.query.page === undefined) {
-      this.$router.push({ query: { ...this.$route.query, 'page': 1 } });
+      this.updatePage();
     }
     this.loadData();
   },

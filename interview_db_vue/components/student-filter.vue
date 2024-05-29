@@ -18,7 +18,7 @@
         <div v-if = "(mq.tablet || mq.mobile)" class="d-flex col-3 justify-content-end p-0">
           <button v-if="this.$route.params.id == undefined" 
             type="button" class="btn-close" aria-label="Close"
-            @click="$router.replace({ path: '/students', query: { ...this.$route.query } })"></button>
+            @click="$router.replace({ path: '/students/', query: { ...this.$route.query } })"></button>
           <button v-else type="button" class="btn-close" aria-label="Close"
           @click="$router.push({ name: 'Collections', params: {id: topicId}, query: { ...this.$route.query } })"></button>
         </div>
