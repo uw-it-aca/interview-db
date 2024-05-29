@@ -89,8 +89,8 @@ export default {
       topicId: this.$route.params.id,
       filtered: [],
       filters: {
-        year: this.$route.query.year,
-        major: this.$route.query.major,
+        year: [],
+        major: [],
       },
       perPage: 0,
       currentPage: 1,
@@ -135,6 +135,25 @@ export default {
       // get this topic's info
       const infoResponse = await axios.get("/api/collections/" + this.$route.params.id + "/info/");
       this.topicInfo = infoResponse.data;
+
+      // updating stored filters, fix for bug/hv-56 to handle single filter on mobile
+      // parsing then stringifying to make a deep copy so that url query updates with changes
+      if (this.$route.query.year !== undefined) {
+        if (Array.isArray(this.$route.query.year)) {
+          this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+        } else {
+          this.filters.year = [];
+          this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
+        }
+      }
+      if (this.$route.query.major !== undefined) {
+        if (Array.isArray(this.$route.query.major)) {
+          this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
+        } else {
+          this.filters.major = [];
+          this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
+        }
+      }
     },
     removeYear(filter) {
       const index = this.filters.year.indexOf(filter);
