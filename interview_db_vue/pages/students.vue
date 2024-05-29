@@ -130,9 +130,9 @@ export default {
       students: [],
       collections: [],
       filters: {
-        year: this.$route.query.year,
-        major: this.$route.query.major,
-        topic: this.$route.query.topic,
+        year: [],
+        major: [],
+        topic: [],
       },
       perPage: 0,
       currentPage: 1,
@@ -181,6 +181,33 @@ export default {
       this.perPage = response.data['page_size'];
       this.totalCount = response.data['count'];
       this.totalPages = response.data['page_count'];
+
+      // updating stored filters, fix for bug/hv-56 to treat single filter as array
+      // parsing then stringifying to make a deep copy so that url query updates with changes
+      if (this.$route.query.year !== undefined) {
+        if (Array.isArray(this.$route.query.year)) {
+          this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+        } else {
+          this.filters.year = [];
+          this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
+        }
+      }
+      if (this.$route.query.major !== undefined) {
+        if (Array.isArray(this.$route.query.major)) {
+          this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
+        } else {
+          this.filters.major = [];
+          this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
+        }
+      }
+      if (this.$route.query.topic !== undefined) {
+        if (Array.isArray(this.$route.query.topic)) {
+          this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
+        } else {
+          this.filters.topic = [];
+          this.filters.topic.push(JSON.parse(JSON.stringify(this.$route.query.topic)));
+        }
+      }
     },
     removeYear(filter) {
       const index = this.filters.year.indexOf(filter);

@@ -136,7 +136,7 @@ export default {
       const infoResponse = await axios.get("/api/collections/" + this.$route.params.id + "/info/");
       this.topicInfo = infoResponse.data;
 
-      // updating stored filters, fix for bug/hv-56 to handle single filter on mobile
+      // updating stored filters, fix for bug/hv-56 to treat single filter as array
       // parsing then stringifying to make a deep copy so that url query updates with changes
       if (this.$route.query.year !== undefined) {
         if (Array.isArray(this.$route.query.year)) {
