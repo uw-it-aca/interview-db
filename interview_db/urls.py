@@ -39,7 +39,7 @@ urlpatterns += [
     path('collections', DefaultPageView.as_view(), name="collections"),
     path('about', DefaultPageView.as_view(), name="about"),
     path('api/students/', InterviewListView.as_view(),
-         name="student-list-collections"),
+         name="student-list"),
     path('api/students/<int:id>/', SingleInterviewView.as_view(),
          name="student-detail"),
     path('api/students/<int:id>/image/', ImageView.as_view(),

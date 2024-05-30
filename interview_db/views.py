@@ -54,26 +54,10 @@ class DefaultPageView(PageView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class InterviewListView(APIView):
-    """
-    API endpoint returning list of interviews without collections
-    """
-
-    def get(self, request):
-        queryset = Interview.objects.exclude(
-            pull_quote__isnull=True).exclude(
-            pull_quote__exact='').exclude(
-            pull_quote__exact='0').exclude(
-            signed_release_form=False).order_by('-date')
-        serializer = InterviewSerializer(queryset, many=True,
-                                         context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewListView(APIView, CustomPagination):
     """
-    API endpoint returning list of interviews with their collections
+    API endpoint returning list of interviews with pagination and filtering
+    Used on students page to display all interview listings
     """
     STANDING = {
         "Freshman": "Fr",
@@ -142,6 +126,7 @@ class InterviewListView(APIView, CustomPagination):
 class SingleInterviewView(APIView):
     """
     API endpoint returning single interview, made up of its matching stories
+    Each story has the topics it mentions
     Used on single interview page to divide interview into filterable stories
     """
 
@@ -179,7 +164,8 @@ class CollectionInfoView(APIView):
 @method_decorator(group_required(front_end_group), name='dispatch')
 class CollectionStoryView(APIView, CustomPagination):
     """
-    API endpoint returning single collection of stories
+    API endpoint returning single collection of stories with
+    pagination and filtering
     """
     STANDING = {
         "Freshman": "Fr",

@@ -111,6 +111,7 @@ export default {
       this.studentInfo = this.interviewInfo.student;
       this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
 
+      // get all topics mentioned in this interview
       const topics = await axios.get("/api/students/" + this.interviewId + "/topics/");
       this.topics = topics.data;
 

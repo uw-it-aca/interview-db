@@ -78,22 +78,26 @@ class StorySerializer(serializers.ModelSerializer):
 
 
 class StoryTopicSerializer(serializers.ModelSerializer):
+    """
+    Returns a story with the topics it mentions
+    """
     interview = InterviewSerializer(read_only=True)
     code = CodeSerializer(many=True, read_only=True)
     subcode = SubCodeSerializer(many=True, read_only=True)
-    collections = serializers.SerializerMethodField()
+    topics = serializers.SerializerMethodField()
 
-    def get_collections(self, Story):
-        collections = set()
+    # get all topics mentioned in this single story
+    def get_topics(self, Story):
+        topics = set()
         for code in Story.code.all():
             for c in Collection.objects.all():
                 if code in c.codes.all() or code in c.subcodes.all():
-                    collections.add(c)
+                    topics.add(c)
         for code in Story.subcode.all():
             for c in Collection.objects.all():
                 if code in c.codes.all() or code in c.subcodes.all():
-                    collections.add(c)
-        serializer = CollectionFilterSerializer(collections, many=True)
+                    topics.add(c)
+        serializer = CollectionFilterSerializer(topics, many=True)
         return serializer.data
 
     class Meta:
@@ -104,7 +108,7 @@ class StoryTopicSerializer(serializers.ModelSerializer):
                   'subcode',
                   'story',
                   'story_order_position',
-                  'collections']
+                  'topics']
 
 
 class CollectionSerializer(serializers.ModelSerializer):
