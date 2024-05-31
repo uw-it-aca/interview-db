@@ -53,7 +53,7 @@
                   {{ story.story }}
                 </p>
                 <p class="fst-italic text-secondary" :class="mq.mobile ? 'text-start' : 'text-end'">
-                  <span v-for="collection in story.collections" :key="collection.id">
+                  <span v-for="collection in story.topics" :key="collection.id">
                     <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link">
                       #{{ collection.topic }}
                     </router-link>
@@ -83,9 +83,10 @@ export default {
     },
     filteredStories() {
       this.filtered = this.stories;
+      // consider changing to AND filters, not OR
       if (this.filters !== undefined && this.filters.length > 0) {
         const included = (collection) => this.filters.includes(collection.topic)
-        this.filtered = this.filtered.filter(story => story.collections.some(included))
+        this.filtered = this.filtered.filter(story => story.topics.some(included))
       }
       return this.filtered;
     }

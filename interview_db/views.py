@@ -165,7 +165,7 @@ class CollectionInfoView(APIView):
 class CollectionStoryView(APIView, CustomPagination):
     """
     API endpoint returning single collection of stories with
-    pagination and filtering
+    pagination and filtering, used on topics.vue
     """
     STANDING = {
         "Freshman": "Fr",
@@ -215,28 +215,20 @@ class CollectionStoryView(APIView, CustomPagination):
 class InterviewTopicsView(APIView):
     """
     API endpoint returning all the collections of a single interview
+    Used on single interview page to display all topics mentioned
     """
 
     def get(self, request, id):
         interview = Story.objects.filter(interview__id=id)
         queryset = set()
-        curr_codes = set()
 
         for story in interview:
             for code in story.code.all():
-                curr_codes.add(code)
+                for topic in code.collection_set.all():
+                    queryset.add(topic)
             for code in story.subcode.all():
-                curr_codes.add(code)
-
-        for topic in Collection.objects.all():
-            for code in topic.codes.all():
-                if code in curr_codes:
+                for topic in code.collection_set.all():
                     queryset.add(topic)
-                    continue
-            for code in topic.subcodes.all():
-                if code in curr_codes:
-                    queryset.add(topic)
-                    continue
 
         serializer = CollectionSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

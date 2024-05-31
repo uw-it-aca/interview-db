@@ -90,13 +90,11 @@ class StoryTopicSerializer(serializers.ModelSerializer):
     def get_topics(self, Story):
         topics = set()
         for code in Story.code.all():
-            for c in Collection.objects.all():
-                if code in c.codes.all() or code in c.subcodes.all():
-                    topics.add(c)
+            for topic in code.collection_set.all():
+                topics.add(topic)
         for code in Story.subcode.all():
-            for c in Collection.objects.all():
-                if code in c.codes.all() or code in c.subcodes.all():
-                    topics.add(c)
+            for topic in code.collection_set.all():
+                topics.add(topic)
         serializer = CollectionFilterSerializer(topics, many=True)
         return serializer.data
 
