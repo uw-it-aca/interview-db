@@ -31,7 +31,6 @@
                   @click="$router.push({
                     name: 'Collections',
                     params: { id: collection.id },
-                    // query: { topic: collection.slug }
                   })">
                     <div class="text-start d-flex row">
                       <div class="col-lg-10 col-md-11 col-12">

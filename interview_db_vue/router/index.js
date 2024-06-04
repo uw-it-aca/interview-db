@@ -17,14 +17,14 @@ const routes = [
     component: Home,
   },
   {
-    path: "/collections/:id?",
+    path: "/collections/:id?/",
     name: "Collections",
     component: Collections,
     props: true,
     pathToRegexpOptions: { strict: true },
   },
   {
-    path: "/students/:id?",
+    path: "/students/:id?/",
     name: "Students",
     component: Students,
     props: true,
@@ -43,7 +43,7 @@ const routes = [
     pathToRegexpOptions: { strict: true },
   },
   {
-    path: "/filters/:type?:id?",
+    path: "/filters/:topicId?",
     name: "Filters",
     component: StudentFilter,
     pathToRegexpOptions: { strict: true },

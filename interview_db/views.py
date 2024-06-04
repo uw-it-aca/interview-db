@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 from uw_saml.decorators import group_required
 from datetime import datetime, timedelta, timezone
 from .serializers import *
@@ -16,6 +17,21 @@ from .models import *
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
+
+
+class CustomPagination(PageNumberPagination):
+    def get_paginated_response(self, data):
+        return Response({
+            'links': {
+                'next': self.get_next_link(),
+                'previous': self.get_previous_link()
+            },
+            'count': self.page.paginator.count,
+            'page_count': self.page.paginator.num_pages,
+            'page_size': self.page_size,
+            'page_number': self.page.number,
+            'results': data,
+        })
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
@@ -38,10 +54,31 @@ class DefaultPageView(PageView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class InterviewListView(APIView):
+class InterviewListView(APIView, CustomPagination):
     """
-    API endpoint returning list of interviews without collections
+    API endpoint returning list of interviews with pagination and filtering
+    Used on students page to display all interview listings
     """
+    STANDING = {
+        "Freshman": "Fr",
+        "Sophomore": "So",
+        "Junior": "Jr",
+        "Senior": "Sr",
+        "Alumni - undergrad": "Al",
+        "Masters": "Ma",
+        "PhD": "Ph",
+    }
+
+    # helper to get all interview ids for a topic
+    def get_interviews(self, topic):
+        interviews = set()
+        for code in topic.codes.all():
+            for story in code.story_set.all():
+                interviews.add(story.interview.id)
+        for subcode in topic.subcodes.all():
+            for story in subcode.story_set.all():
+                interviews.add(story.interview.id)
+        return interviews
 
     def get(self, request):
         queryset = Interview.objects.exclude(
@@ -49,32 +86,48 @@ class InterviewListView(APIView):
             pull_quote__exact='').exclude(
             pull_quote__exact='0').exclude(
             signed_release_form=False).order_by('-date')
-        serializer = InterviewSerializer(queryset, many=True,
-                                         context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
+        # filter on years
+        years = self.request.GET.getlist('year')
+        if years is not None and len(years) > 0:
+            # Senior+ filter includes PhD, Alum, Masters
+            if 'Senior' in years:
+                years.append("PhD")
+                years.append("Alumni - undergrad")
+                years.append("Masters")
+            # model uses abbreviation, but query uses full title
+            years_abbr = []
+            for year in years:
+                years_abbr.append(self.STANDING[year])
+            queryset = queryset.filter(standing__in=years_abbr)
 
-@method_decorator(group_required(front_end_group), name='dispatch')
-class InterviewCollectionListView(APIView):
-    """
-    API endpoint returning list of interviews with their collections
-    """
+        # filter on majors
+        majors = self.request.GET.getlist('major')
+        if majors is not None and len(majors) > 0:
+            queryset = queryset.filter(major__full_title__in=majors)
 
-    def get(self, request):
-        queryset = Interview.objects.exclude(
-            pull_quote__isnull=True).exclude(
-            pull_quote__exact='').exclude(
-            pull_quote__exact='0').exclude(
-            signed_release_form=False).order_by('-date')
-        serializer = InterviewCollectionSerializer(
+        # filter on topics
+        topics = self.request.GET.getlist('topic')
+        if topics is not None and len(topics) > 0:
+            for topic_str in topics:
+                topic = Collection.objects.get(topic=topic_str)
+                interviews = self.get_interviews(topic)
+                # check if interview id contained in a topic's set of ids
+                queryset = queryset.filter(id__in=interviews)
+
+        # done filtering, now paginate
+        queryset = self.paginate_queryset(queryset, request, view=self)
+        serializer = InterviewSerializer(
             queryset, many=True, context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return self.get_paginated_response(serializer.data)
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class InterviewDetailView(APIView):
+class SingleInterviewView(APIView):
     """
     API endpoint returning single interview, made up of its matching stories
+    Each story has the topics it mentions
+    Used on single interview page to divide interview into filterable stories
     """
 
     def get(self, request, id):
@@ -109,10 +162,20 @@ class CollectionInfoView(APIView):
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
-class CollectionStoryView(APIView):
+class CollectionStoryView(APIView, CustomPagination):
     """
-    API endpoint returning single collection of stories
+    API endpoint returning single collection of stories with
+    pagination and filtering, used on topics.vue
     """
+    STANDING = {
+        "Freshman": "Fr",
+        "Sophomore": "So",
+        "Junior": "Jr",
+        "Senior": "Sr",
+        "Alumni - undergrad": "Al",
+        "Masters": "Ma",
+        "PhD": "Ph",
+    }
 
     def get(self, request, id):
         collection = Collection.objects.get(id=id)
@@ -123,35 +186,49 @@ class CollectionStoryView(APIView):
             interview__pull_quote__exact='').exclude(
             interview__pull_quote__exact='0').exclude(
             interview__signed_release_form=False)
+
+        # filter on years
+        years = self.request.GET.getlist('year')
+        if years is not None and len(years) > 0:
+            # Senior+ filter includes PhD, Alum, Masters
+            if 'Senior' in years:
+                years.append("PhD")
+                years.append("Alumni - undergrad")
+                years.append("Masters")
+            # model uses abbreviation, but query uses full title
+            years_abbr = []
+            for year in years:
+                years_abbr.append(self.STANDING[year])
+            queryset = queryset.filter(interview__standing__in=years_abbr)
+
+        # filter on majors
+        majors = self.request.GET.getlist('major')
+        if majors is not None and len(majors) > 0:
+            queryset = queryset.filter(interview__major__full_title__in=majors)
+
+        queryset = self.paginate_queryset(queryset, request, view=self)
         serializer = StorySerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return self.get_paginated_response(serializer.data)
 
 
 @method_decorator(group_required(front_end_group), name='dispatch')
 class InterviewTopicsView(APIView):
     """
     API endpoint returning all the collections of a single interview
+    Used on single interview page to display all topics mentioned
     """
 
     def get(self, request, id):
         interview = Story.objects.filter(interview__id=id)
         queryset = set()
-        list = set()
-        for s in interview:
-            for c in s.code.all():
-                list.add(c)
-            for c in s.subcode.all():
-                list.add(c)
 
-        for c in Collection.objects.all():
-            for code in c.codes.all():
-                if code in list:
-                    queryset.add(c)
-                    continue
-            for code in c.subcodes.all():
-                if code in list:
-                    queryset.add(c)
-                    continue
+        for story in interview:
+            for code in story.code.all():
+                for topic in code.collection_set.all():
+                    queryset.add(topic)
+            for code in story.subcode.all():
+                for topic in code.collection_set.all():
+                    queryset.add(topic)
 
         serializer = CollectionSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

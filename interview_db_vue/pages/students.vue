@@ -13,7 +13,7 @@
         </div>
 
         <div v-else-if="filter">
-          <StudentFilter @clicked="updateFilters" />
+          <StudentFilter @change="loadData" />
         </div>
 
         <div v-else>
@@ -28,28 +28,29 @@
             <div class="p-auto">
               <div class="row">
                 <div class="col-4 d-none d-lg-block">
-                  <StudentFilter @clicked="updateFilters" />
+                  <StudentFilter @change="loadData" />
                 </div>
 
                 <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                      <p v-if="filtered.length > 1" class="align-middle fw-bold opacity-75">{{ resultsLength }} of {{
-                        filtered.length }} Results
+                      <p v-if="students.length > 1" class="align-middle fw-bold opacity-75">{{ students.length + (currentPage - 1) * perPage }} of {{
+                        totalCount }} Results
                       </p>
-                      <p v-else-if="filtered.length > 0" class="align-middle fw-bold opacity-75">{{ filtered.length }}
+                      <p v-else-if="students.length > 0" class="align-middle fw-bold opacity-75">1 of 1
                         Result </p>
                     </div>
 
                     <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
                       <u v-if="filtersLength > 0" class="align-middle fw-bold"
-                        @click="$router.push({ name: 'Filters', params: {type: 'story'}, query: { ...this.$route.query } })">Filter
+                        @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
                         ({{ filtersLength }})</u>
                       <u v-else class="align-middle fw-bold"
-                        @click="$router.push({ name: 'Filters', params: {type: 'story'}, query: { ...this.$route.query } })">Filter</u>
+                        @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
                   </div>
-
+                  
+                  <!-- remove filter buttons for mobile -->
                   <div v-if="filtersLength > 0 && (mq.mobile || mq.tablet)"
                     class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
                     <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
@@ -80,15 +81,15 @@
                     </button>
                   </div>
 
-                  <div v-if="filteredStudents.length > 0">
-                    <div class="card-columns justify-content-end" v-for="student in filteredStudents" :key="student.id">
+                  <div v-if="students.length > 0">
+                    <div class="card-columns justify-content-end" v-for="student in students" :key="student.id">
                       <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
-                    <vue-awesome-paginate v-if="filtered.length > perPage" class="mt-2 justify-content-center d-flex"
-                      v-model="currentPage" :total-items="filtered.length" :items-per-page="perPage" :current-page="1"
-                      :hide-prev-next-when-ends="true" :on-click="paginateHandler" />
+                    <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
+                      v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="1"
+                      :hide-prev-next-when-ends="true" :on-click="updatePage" />
                   </div>
-                  <div v-else-if="students.length > 0 && filteredStudents.length == 0">
+                  <div v-else-if="students.length == 0">
                     <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories found.</p>
                   </div>
                 </div>
@@ -128,15 +129,15 @@ export default {
       pageTitle: "Students",
       students: [],
       collections: [],
-      filtered: [],
       filters: {
         year: [],
         major: [],
         topic: [],
       },
-      perPage: 12,
+      perPage: 0,
       currentPage: 1,
-      count: 0,
+      totalCount: 0,
+      totalPages: 0,
     };
   },
   watch: {
@@ -148,6 +149,13 @@ export default {
         }
       }
     },
+    // makes new api call when query changes
+    "$route.query": {
+      immediate: true,
+      handler(n) {
+        this.loadData();
+      }
+    }
   },
   computed: {
     filter() {
@@ -164,53 +172,42 @@ export default {
       const length = (obj) => obj === undefined ? 0 : obj.length;
       return length(arr(this.filters.year)) + length(arr(this.filters.major)) + length(arr(this.filters.topic));
     },
-    filteredStudents() {
-      this.filtered = this.students;
-      if (this.filters.year !== undefined && this.filters.year.length > 0) {
-        // check for Senior+
-        if (this.filters.year.includes('Senior')) {
-          this.filters.year.push('Masters', 'Alumni - undergrad', 'PhD');
-        }
-        this.filtered = this.filtered.filter(student => this.filters.year.includes(student.standing));
-      }
-
-      if (this.filters.major !== undefined && this.filters.major.length > 0) {
-        const included = (major) => this.filters.major.includes(major.full_title)
-        this.filtered = this.filtered.filter(student => student.major.some(included))
-      }
-
-      if (this.filters.topic !== undefined && this.filters.topic.length > 0) {
-        if (Array.isArray(this.filtered.topic)) {
-          this.filtered = this.filtered.filter(student => this.filters.topic.every(
-            f => student.collections.some((collection) => f === collection.topic)))
-        } else {
-          this.filtered = this.filtered.filter(student => student.collections.some((collection) => this.filtered.topic === collection.topic))
-        }
-      }
-
-      // remove Senior+ from filters
-      if (this.filters.year !== undefined && this.filters.year.includes('Masters')) {
-        this.filters.year.splice(this.filters.year.length - 3, this.filters.year.length);
-      }
-
-      // pagination
-      const start = this.perPage * (this.currentPage - 1);
-      const end = start + this.perPage;
-      return this.filtered.slice(start, end);
-    },
-    resultsLength() {
-      return this.perPage * (this.currentPage - 1) + this.filteredStudents.length;
-    }
   },
   methods: {
     async loadData() {
-      const response = await axios.get("/api/students/collections/");
-      this.students = response.data;
-      this.count = response.data.length;
-      this.$router.replace({ query: { ...this.$route.query, 'page': this.currentPage } })
-    },
-    paginateHandler(page) {
-      this.$router.push({ query: { ...this.$route.query, 'page': page } })
+      const url = this.$route.fullPath;
+      const response = await axios.get("/api" + url);
+      this.students = response.data['results'];
+      this.perPage = response.data['page_size'];
+      this.totalCount = response.data['count'];
+      this.totalPages = response.data['page_count'];
+
+      // updating stored filters, fix for bug/hv-56 to treat single filter as array
+      // parsing then stringifying to make a deep copy so that url query updates with changes
+      if (this.$route.query.year !== undefined) {
+        if (Array.isArray(this.$route.query.year)) {
+          this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
+        } else {
+          this.filters.year = [];
+          this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
+        }
+      }
+      if (this.$route.query.major !== undefined) {
+        if (Array.isArray(this.$route.query.major)) {
+          this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
+        } else {
+          this.filters.major = [];
+          this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
+        }
+      }
+      if (this.$route.query.topic !== undefined) {
+        if (Array.isArray(this.$route.query.topic)) {
+          this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
+        } else {
+          this.filters.topic = [];
+          this.filters.topic.push(JSON.parse(JSON.stringify(this.$route.query.topic)));
+        }
+      }
     },
     removeYear(filter) {
       const index = this.filters.year.indexOf(filter);
@@ -235,50 +232,24 @@ export default {
     },
     updateQuery() {
       const query = {};
-      query['page'] = 1
       Object.entries(this.filters).forEach(([key, value]) => {
         if (value) {
           query[key] = (value);
         }
       })
+      query['page'] = this.currentPage;
       this.$router.replace({ query: query });
     },
-    updateFilters() {
-      if (this.$route.query.year !== undefined) {
-        if (Array.isArray(this.$route.query.year)) {
-          this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
-        } else {
-          this.filters.year = [];
-          this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
-        }
-      } else {
-        this.filters.year = [];
-      }
-      if (this.$route.query.major !== undefined) {
-        if (Array.isArray(this.$route.query.major)) {
-          this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
-        } else {
-          this.filters.major = [];
-          this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
-        }
-      } else {
-        this.filters.major = [];
-      }
-      if (this.$route.query.topic !== undefined) {
-        if (Array.isArray(this.$route.query.topic)) {
-          this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
-        } else {
-          this.filters.topic = [];
-          this.filters.topic.push(JSON.parse(JSON.stringify(this.$route.query.topic)));
-        }
-      } else {
-        this.filters.topic = [];
-      }
+    updatePage() {
+      this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } });
     },
   },
   created() {
+    // set page to 1 if not set
+    if (this.$route.query.page === undefined) {
+      this.updatePage();
+    }
     this.loadData();
-    this.updateFilters();
   },
 };
 </script>

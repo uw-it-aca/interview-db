@@ -10,14 +10,17 @@
         </a>
       </div>
     </div>
-    
+
     <div class="card-body">
       <div class="row mb-4">
         <h2 class="d-flex fw-bold display-6 text-gold justify-content-start"
           :class="mq.tablet || mq.mobile ? 'col-9' : ''">Filter Stories</h2>
-        <div class="d-flex col-3 justify-content-end p-0">
-          <button v-if="mq.tablet || mq.mobile" type="button" class="btn-close" aria-label="Close"
-            @click="$router.replace({ path: '/students', query: { ...this.$route.query } })"></button>
+        <div v-if = "(mq.tablet || mq.mobile)" class="d-flex col-3 justify-content-end p-0">
+          <button v-if="topicId == undefined" 
+            type="button" class="btn-close" aria-label="Close"
+            @click="$router.replace({ path: '/students/', query: { ...this.$route.query } })"></button>
+          <button v-else type="button" class="btn-close" aria-label="Close"
+          @click="$router.push({ name: 'Collections', params: {id: topicId}, query: { ...this.$route.query } })"></button>
         </div>
       </div>
       <div class="mb-5">
@@ -61,8 +64,10 @@
         </div>
       </div>
 
-      <!-- do not filter on collections if navigated from topics page-->
-      <div v-if="!story && this.$route.params.type!='topic'" class="mb-5">
+      <!-- do not filter on collections if navigated from or on a topic page-->
+      <div v-if="story || topicId != undefined" class="mb-5">
+        </div>
+      <div v-else class="mb-5">
         <p class="display-4 fs-5 fw-bold mb-3">
           Story Collection
         </p>
@@ -74,15 +79,14 @@
           </div>
         </div>
       </div>
-
       <div>
         <div v-if="mq.mobile || mq.tablet" class="row fixed-bottom">
           <button class="btn btn-light btn-block w-50" for="clear-all" @click="clearFilters">
             Clear All
           </button>
           
-          <!-- navigate back to students or topics page -->
-          <button v-if="this.$route.params.type!='topic'" class="btn btn-gold btn-block fw-bold w-50"
+          <!-- navigate back to students or topic page, using topicId, if any -->
+          <button v-if="topicId == undefined" class="btn btn-gold btn-block fw-bold w-50"
             @click="$router.push({ name: 'Students', query: { ...this.$route.query } })">
             Apply
           </button>
@@ -120,7 +124,7 @@ export default {
         major: [],
         topic: [],
       },
-      topicId: this.$route.params.id,
+      topicId: this.$route.params.topicId,
     };
   },
   watch: {
@@ -158,9 +162,9 @@ export default {
   methods: {
     async loadData() {
       const majors = await axios.get('/api/majors/');
-      majors.data.forEach(e => this.data.majors.push(e.full_title))
+      majors.data.forEach(e => this.data.majors.push(e.full_title));
       const collections = await axios.get('/api/collections/');
-      this.data.topics = collections.data;
+      collections.data.forEach(e => this.data.topics.push(e.topic))
     },
     updateQuery() {
       const query = {};
@@ -180,9 +184,6 @@ export default {
     },
   },
   created() {
-    if (this.mq.desktop) {
-      this.$router.replace({ path: '/students'});
-    }
     this.loadData();
   },
   computed: {
