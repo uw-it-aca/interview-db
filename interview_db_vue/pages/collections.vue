@@ -21,8 +21,7 @@
             </div>
           </div>
           <div class="mx-auto p-5">
-            <p class="fs-5 mb-4">Student stories categorized by themes.
-              students.</p>
+            <p class="fs-5 mb-4">Student stories categorized by themes.</p>
             <div class="mb-5 row d-flex">
               <div v-for="collection in collections" :key="collection.id"
                 class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch">
