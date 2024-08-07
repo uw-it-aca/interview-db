@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="mx-auto p-5">
-            <p class="fs-5 mb-4">Stories categorized by similar themes, collected from a diverse group of
+            <p class="fs-5 mb-4">Student stories categorized by themes.
               students.</p>
             <div class="mb-5 row d-flex">
               <div v-for="collection in collections" :key="collection.id"
