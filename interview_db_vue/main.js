@@ -35,7 +35,11 @@ app.use(VueGtag, {
 
 // vue-mq (media queries)
 app.use(Vue3Mq, {
-  preset: "bootstrap5",
+  breakpoints: {
+    mobile: 0,
+    tablet: 576,
+    desktop: 992,
+  }
 });
 app.component("mq-responsive", MqResponsive);
 

@@ -2,7 +2,7 @@
 // full individual student interview page
 
 <template>
-  <div class="mt-4 pt-4">
+  <div>
     <div class="card border-0">
       <div class="row g-0 mx-auto interview-height">
         <div class="col-lg-6 col-12" style="height: inherit;">
@@ -18,8 +18,8 @@
 
         <div class="col-lg-6 col-12 p-5 scroll-area">
           <h2 class="card-title display-4 mb-2 text-gold fw-bold">{{ studentInfo.first_name }}</h2>
-          <div class="row">
-            <div class="col">
+          <div class="row mb-2">
+            <div :class="mq.mobile ? '': 'col-9'">
               <span v-if="interviewInfo.standing">
                 {{ interviewInfo.standing + ", studying" }}
               </span>
@@ -28,36 +28,36 @@
               </span>
               {{ interviewInfo.declared_major }}
             </div>
-            <div class="col">
-              <p class="fs-6 text-end">{{ interviewDate }}</p>
+            <div  :class="mq.mobile ? 'mt-2': 'col text-end'">
+              <p class="fs-6">{{ interviewDate }}</p>
             </div>
           </div>
 
-          <div class="border-top border-primary pt-4 mb-4">
+          <div class="border-top border-success pt-4 mb-4">
             <p class="text-start">They talk about...</p>
             <div class="justify-content-start col-12 mb-4">
               <span v-for="topic in topics" :key="topic.id">
                 <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic" v-model="filters"
                   autocomplete="off">
-                <label class="btn btn-outline-success button-outline m-1" :for="topic.id">
+                <label class="btn btn-outline-success m-1" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
-              <button type="button" class="btn btn-gold m-1" @click="clearFilters">
-                Clear All
-              </button>
+              <a v-if="filters !== undefined && filters.length > 0" class="btn border-0 text-secondary active-link active-link-hover" @click="clearFilters">Clear All
+              </a>
             </div>
 
             <div v-for="story in filteredStories" :key="story.id">
-              <div class="border-top border-primary pt-4 pb-2">
+              <div class="border-top border-success pt-4 pb-2">
                 <p class="display-6 fs-6 lh-base">
                   {{ story.story }}
                 </p>
-                <p class="fst-italic text-end text-gold">
-                  <span v-for="collection in story.collections" :key="collection.id">
+                <p class="fst-italic text-secondary" :class="mq.mobile ? 'text-start' : 'text-end'">
+                  <span v-for="collection in story.topics" :key="collection.id">
                     <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link">
-                      #{{ collection.topic }}&nbsp
+                      #{{ collection.topic }}
                     </router-link>
+                    &nbsp;
                   </span>
                 </p>
               </div>
@@ -74,6 +74,7 @@ import axios from 'axios';
 
 export default {
   name: "Interview",
+  inject: ["mq"],
   components: {
   },
   computed: {
@@ -82,9 +83,10 @@ export default {
     },
     filteredStories() {
       this.filtered = this.stories;
+      // consider changing to AND filters, not OR
       if (this.filters !== undefined && this.filters.length > 0) {
         const included = (collection) => this.filters.includes(collection.topic)
-        this.filtered = this.filtered.filter(story => story.collections.some(included))
+        this.filtered = this.filtered.filter(story => story.topics.some(included))
       }
       return this.filtered;
     }
@@ -110,6 +112,7 @@ export default {
       this.studentInfo = this.interviewInfo.student;
       this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
 
+      // get all topics mentioned in this interview
       const topics = await axios.get("/api/students/" + this.interviewId + "/topics/");
       this.topics = topics.data;
 
@@ -145,17 +148,16 @@ export default {
 <style>
 .btn-outline-success {
   --bs-btn-bg: white !important;
+  --bs-btn-border-color: #1E1E1E !important;
   --bs-btn-color: #1E1E1E !important;
-}
-.btn-check+.btn:hover {
-  color: white !important;
-  background-color: #4B2E83 !important;
 }
 a.active-link {
   text-decoration: none;
-  color: #B4A67F;
+  color: #827252;
+  white-space: nowrap;
 }
 a.active-link:hover{
   color: #827252;
+  text-decoration: underline;
 }
 </style>

@@ -87,9 +87,9 @@ class InterviewTopicsTest(TestCase):
             "id": self.i_joe.id})
         response = self.client.get(url, follow=True)
         stories = json.loads(response.content)
-        topic_1 = stories[0]['collections']
+        topic_1 = stories[0]['topics']
         self.assertEqual(topic_1[0]['topic'], "Self Reflection")
-        topic_2 = stories[1]['collections']
+        topic_2 = stories[1]['topics']
         self.assertEqual(topic_2[0]['topic'], "Finding Community")
         self.assertEqual(response.status_code, 200)
 
@@ -104,13 +104,15 @@ class InterviewTopicsTest(TestCase):
         url = reverse("interview_db:collection-stories", kwargs={
             "id": self_reflection.id})
         response = self.client.get(url, follow=True)
-        stories = json.loads(response.content)
+        results = json.loads(response.content)
+        stories = results['results']
         self.assertEqual(stories[0]['id'], self.s_joe.id)
 
         url = reverse("interview_db:collection-stories", kwargs={
             "id": finding_community.id})
         response = self.client.get(url, follow=True)
-        stories = json.loads(response.content)
+        results = json.loads(response.content)
+        stories = results['results']
         self.assertEqual(stories[0]['id'], self.s_joe_2.id)
 
     def tearDown(self):

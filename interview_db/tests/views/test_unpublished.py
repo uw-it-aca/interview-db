@@ -120,7 +120,8 @@ class UnpublishedInterviewsTest(TestCase):
         """
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
-        interviews = json.loads(response.content)
+        results = json.loads(response.content)
+        interviews = results["results"]
         self.assertEqual(self.publishable.id, interviews[0]["id"])
         self.assertNotEqual(self.no_release.id, interviews[0]["id"])
 
@@ -136,7 +137,8 @@ class UnpublishedInterviewsTest(TestCase):
         """
         url = reverse("interview_db:student-list")
         response = self.client.get(url, follow=True)
-        interviews = json.loads(response.content)
+        results = json.loads(response.content)
+        interviews = results["results"]
         self.assertEqual(self.publishable.id, interviews[0]["id"])
         self.assertNotEqual(self.no_release.id, interviews[0]["id"])
 
@@ -151,9 +153,10 @@ class UnpublishedInterviewsTest(TestCase):
         Tests an interview with an invalid pull quote is not published
         """
         self.no_quote.pull_quote = ''
-        url = reverse("interview_db:student-list")
+        url = reverse("interview_db:student-list", kwargs={})
         response = self.client.get(url, follow=True)
-        interviews = json.loads(response.content)
+        results = json.loads(response.content)
+        interviews = results["results"]
         self.assertEqual(self.publishable.id, interviews[0]["id"])
         self.assertNotEqual(self.no_release.id, interviews[0]["id"])
 
@@ -172,7 +175,8 @@ class UnpublishedInterviewsTest(TestCase):
         url = reverse("interview_db:collection-stories",  kwargs={
             "id": topic_id})
         response = self.client.get(url, follow=True)
-        stories = json.loads(response.content)
+        results = json.loads(response.content)
+        stories = results["results"]
         self.assertEqual(len(stories), 1)
         self.assertEqual(self.story_publishable.id, stories[0]["id"])
         self.assertNotEqual(self.story_no_release.id, stories[0]["id"])
@@ -186,7 +190,8 @@ class UnpublishedInterviewsTest(TestCase):
         url = reverse("interview_db:collection-stories",  kwargs={
             "id": topic_id})
         response = self.client.get(url, follow=True)
-        stories = json.loads(response.content)
+        results = json.loads(response.content)
+        stories = results["results"]
         self.assertEqual(len(stories), 1)
         self.assertEqual(self.story_publishable.id, stories[0]["id"])
         self.assertNotEqual(self.story_no_quote.id, stories[0]["id"])

@@ -31,7 +31,8 @@ setup(
         'django-storages[google]',
         'google-auth',
         'djangorestframework~=3.14',
-        'lxml<5',
+        'lxml==4.9.4',
+        'xmlsec==1.3.13'
     ],
     license='Apache License, Version 2.0',
     description=('App to collect and tag interview data, artifacts,'
