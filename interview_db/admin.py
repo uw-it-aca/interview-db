@@ -123,7 +123,7 @@ class InterviewAdmin (SAMLModelAdmin):
         }),
     )
     list_display = ('date', 'student', 'declared_major', 'get_followup',
-                    'signed_release_form','image')
+                    'signed_release_form')
     list_filter = ('major', 'standing', 'student_type', 'date')
 
     def get_followup(self, obj):
