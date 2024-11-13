@@ -56,56 +56,10 @@ class InterviewSerializer(serializers.ModelSerializer):
                   'other_publishing_restrictions']
 
 
-class InterviewCollectionSerializer(serializers.ModelSerializer):
-    student = StudentSerializer(read_only=True)
-    major = MajorSerializer(many=True, read_only=True)
-    image = serializers.ImageField(max_length=None, use_url=True,
-                                   allow_empty_file=True, required=False)
-    standing = serializers.CharField(source='get_standing_display')
-    collections = serializers.SerializerMethodField()
-
-    def get_collections(self, Interview):
-        interview = Story.objects.filter(interview__id=Interview.id)
-        queryset = set()
-        list = set()
-
-        for s in interview:
-            for c in s.code.all():
-                list.add(c)
-            for c in s.subcode.all():
-                list.add(c)
-
-        for c in Collection.objects.all():
-            for code in c.codes.all():
-                if code in list:
-                    queryset.add(c)
-                    continue
-            for code in c.subcodes.all():
-                if code in list:
-                    queryset.add(c)
-                    continue
-
-        serializer = CollectionFilterSerializer(queryset, many=True)
-        return serializer.data
-
+class InterviewIdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interview
-        fields = ['id',
-                  'student',
-                  'major',
-                  'date',
-                  'signed_release_form',
-                  'pull_quote',
-                  'declared_major',
-                  'image',
-                  'image_is_not_identifying',
-                  'image_alt_text',
-                  'standing',
-                  'no_identifying_photo',
-                  'no_real_name',
-                  'no_publishing_stories',
-                  'other_publishing_restrictions',
-                  'collections']
+        fields = ['id']
 
 
 class StorySerializer(serializers.ModelSerializer):
@@ -124,22 +78,24 @@ class StorySerializer(serializers.ModelSerializer):
 
 
 class StoryTopicSerializer(serializers.ModelSerializer):
+    """
+    Returns a story with the topics it mentions
+    """
     interview = InterviewSerializer(read_only=True)
     code = CodeSerializer(many=True, read_only=True)
     subcode = SubCodeSerializer(many=True, read_only=True)
-    collections = serializers.SerializerMethodField()
+    topics = serializers.SerializerMethodField()
 
-    def get_collections(self, Story):
-        collections = set()
+    # get all topics mentioned in this single story
+    def get_topics(self, Story):
+        topics = set()
         for code in Story.code.all():
-            for c in Collection.objects.all():
-                if code in c.codes.all() or code in c.subcodes.all():
-                    collections.add(c)
+            for topic in code.collection_set.all():
+                topics.add(topic)
         for code in Story.subcode.all():
-            for c in Collection.objects.all():
-                if code in c.codes.all() or code in c.subcodes.all():
-                    collections.add(c)
-        serializer = CollectionFilterSerializer(collections, many=True)
+            for topic in code.collection_set.all():
+                topics.add(topic)
+        serializer = CollectionFilterSerializer(topics, many=True)
         return serializer.data
 
     class Meta:
@@ -150,12 +106,24 @@ class StoryTopicSerializer(serializers.ModelSerializer):
                   'subcode',
                   'story',
                   'story_order_position',
-                  'collections']
+                  'topics']
 
 
 class CollectionSerializer(serializers.ModelSerializer):
     codes = CodeSerializer(read_only=True, many=True)
     subcodes = SubCodeSerializer(read_only=True, many=True)
+    # interviews = serializers.SerializerMethodField()
+
+    # def get_interviews(self, Story):
+    #     interviews = set()
+    #     for code in self.codes:
+    #         for story in code.story_set.all():
+    #             interviews.add(story.interview)
+    #     for subcode in self.subcodes:
+    #         for story in subcode.story_set.all():
+    #             interviews.add(story.interview)
+    #     serializer = InterviewSerializer(interviews, many=True)
+    #     return serializer.data
 
     class Meta:
         model = Collection

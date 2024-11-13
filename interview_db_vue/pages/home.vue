@@ -42,34 +42,34 @@
       <div class="card border-0 mb-5">
         <img class="home-img" src="../images/homequad.png" alt="The quad during cherry blossom season">
         <div class="card-img-overlay text-center justify-content-center">
-          <div class="pt-2 row justify-content-center">
-            <span class="col-md-2 col-6">
-              <h2 class="text-gold display-4 fw-bold">{{ studentCount }}</h2>
-              <p class="text-gold fw-bold">Students Interviewed</p>
+          <div class="pt-3 row justify-content-center">
+            <span class="col-md-2 col-12">
+              <h2 class="text-gold display-5 fw-bold mb-0">{{ studentCount }}</h2>
+              <p class="text-gold">Students Interviewed</p>
             </span>
-            <span class="col-md-2 col-6">
-              <h2 class="text-gold display-4 fw-bold">{{ storyCount }}</h2>
-              <p class="text-gold fw-bold">Stories Shared</p>
+            <span class="col-md-2 col-12">
+              <h2 class="text-gold display-5 fw-bold mb-0">{{ storyCount }}</h2>
+              <p class="text-gold">Stories Shared</p>
             </span>
           </div>
         </div>
       </div>
 
-      <div class="row g-0 justify-content-center mb-5">
-        <div class="col-md-4 col-12 mx-5 pt-5 text-center">
-          <h2 class="display-4 fw-bold mb-5 text-gold">About Us</h2>
+      <div class="row g-0 justify-content-center text-center p-4 mb-5">
+        <div class="col-md-4 col-12 mx-4 p-3 mb-4">
+          <h2 class="display-5 fw-bold mb-4 text-gold">About Us</h2>
           <p class="mb-4">
-            Find out more about who we are, our <br> interview process, and get involved by telling <br> your story!
+            Find out more about who we are, our interview process, and get involved by telling your story!
           </p>
-          <button type="button" class="btn btn-purple justify-content-end" @click="$router.push('about')">
-            Learn more <i class="bi bi-chevron-right"></i>
+          <button type="button" class="btn btn-purple" @click="$router.push('about')">
+            Learn More <i class="bi bi-chevron-right"></i>
           </button>
         </div>
-        <div class="col-md-4 col-12 pt-5 mx-5 text-center">
-          <h2 class="display-4 fw-bold mb-5 text-gold">Collections</h2>
+        <div class="col-md-4 col-12 mx-4 p-3 mb-4">
+          <h2 class="display-5 fw-bold mb-4 text-gold">Collections</h2>
           <p class="mb-4">
-            Navigate common themes among students on topics such as<br>
-            transitioning to college, finding community, and <br> moving forward after graduation.
+            Navigate common themes among students on topics such as
+            transitioning to college, finding community, and moving forward after graduation.
           </p>
           <button type="button" class="btn btn-purple" @click="$router.push('collections')">
             Browse Collections <i class="bi bi-chevron-right"></i>
@@ -119,4 +119,11 @@ export default {
 </script>
 
 <style>
+img.home-img {
+  height: 500px;
+  object-fit: cover;
+}
+.btn {
+  padding: 0.75rem !important;
+}
 </style>
