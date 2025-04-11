@@ -1,3 +1,9 @@
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+affinity:
+   podsSpanNodes: true
 ingress:
   enabled: true
   tls:
@@ -14,8 +20,6 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/client-body-buffer-size: "16K"
     nginx.ingress.kubernetes.io/proxy-body-size: "5M"
-affinity:
-   podsSpanNodes: true
 lifecycle:
   enabled: true
   preStop:

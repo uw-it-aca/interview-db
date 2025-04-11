@@ -1,4 +1,4 @@
-# Copyright 2024 UW-IT, University of Washington
+# Copyright 2025 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 from django.contrib import admin
@@ -123,7 +123,7 @@ class InterviewAdmin (SAMLModelAdmin):
         }),
     )
     list_display = ('date', 'student', 'declared_major', 'get_followup',
-                    'signed_release_form','image')
+                    'signed_release_form', 'image')
     list_filter = ('major', 'standing', 'student_type', 'date')
 
     def get_followup(self, obj):
