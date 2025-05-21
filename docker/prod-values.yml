@@ -46,10 +46,6 @@ repo: huskyvoices
 instance: prod
 namespace:
   enabled: true
-metrics:
-  enabled: true
-  serviceMonitor:
-    enabled: true
 externalSecrets:
   enabled: true
   secrets:
@@ -86,7 +82,7 @@ externalSecrets:
           property: cert
 environmentVariables:
   - name: ENV
-    value: dev
+    value: prod
   - name: AUTH
     value: SAML
   - name: ID_ADMIN_GROUP
