@@ -9,7 +9,6 @@ INSTALLED_APPS.remove('django.contrib.admin')
 INSTALLED_APPS += [
     'project.apps.InterviewAdminConfig',
     'interview_db.apps.InterviewConfig',
-    'compressor',
     'rest_framework',
 ]
 
@@ -31,32 +30,10 @@ TEMPLATES = [
     }
 ]
 
-COMPRESS_ROOT = '/static'
-
-COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
-    ('text/x-sass', 'pyscss {infile} > {outfile}'),
-    ('text/x-scss', 'pyscss {infile} > {outfile}'),
-)
-
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = False
-COMPRESS_OUTPUT_DIR = '/static'
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
-
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.cssmin.CSSMinFilter'
-]
-
-COMPRESS_JS_FILTERS = [
-    'compressor.filters.jsmin.JSMinFilter',
-]
 
 ADMIN_REORDER = (
     ('app1', ('Student', 'Story')),
