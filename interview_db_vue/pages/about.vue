@@ -24,7 +24,7 @@
             </p>
             <p class="mb-4">
               Our team operates out of the
-              <b>Academic Experience Design and Delivery (AXDD)</b> department at
+              <b>Student & Educational Technology Services (SETS)</b> unit within
               UW-IT.
             </p>
           </div>
