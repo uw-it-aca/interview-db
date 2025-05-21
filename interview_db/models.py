@@ -293,12 +293,15 @@ class Collection(models.Model):
     TOPIC = (
         ('Getting Help', 'Getting Help'),
         ('Advice', 'Advice'),
-        ('Working Towards Goals', 'Working Towards Goals'),
+        ('Mental Wellness', 'Mental Wellness'),
         ('Coming to College', 'Coming to College'),
         ('Majors', 'Majors'),
         ('Finding Community', 'Finding Community'),
         ('Self Reflection', 'Self Reflection'),
-        ('Moving Forward', 'Moving Forward'),
+        ('Applying to Majors', 'Applying to Majors'),
+        ('Balancing/Adulting', 'Balancing/Adulting'),
+        ('Getting a Job', 'Getting a Job'),
+        ('Graduation', 'Graduation'),
     )
 
     topic = models.CharField(choices=TOPIC,
