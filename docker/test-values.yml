@@ -40,6 +40,8 @@ gcsCredentials:
   secretName: test.huskyvoices.uw.edu-gcs-credentials
 repo: huskyvoices
 instance: test
+namespace:
+  enabled: true
 metrics:
   enabled: true
   serviceMonitor:
