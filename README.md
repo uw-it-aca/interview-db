@@ -51,7 +51,8 @@ View your application using your specified port number in the .env file
         Demo: http://localhost:8000/
 
 ### Loading data (inside the container)
-To load sample interview data and collection models, you can call respectively:
+To load sample interview data and collection models, you can call:
+
         $ docker exec -it interview_db_app bin/python manage.py loaddata /app/interview_db/fixtures/interview.json
 
 ## Testing
