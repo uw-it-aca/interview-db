@@ -59,17 +59,32 @@ class SAMLModelAdmin(admin.ModelAdmin):
 
 @admin.register(StudentType, site=saml_admin_site)
 class StudentTypeAdmin(SAMLModelAdmin):
-    has_access = False
+    has_access = True
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
 
 
 @admin.register(Major, site=saml_admin_site)
 class MajorAdmin(SAMLModelAdmin):
-    has_access = False
+    has_access = True
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
 
 
 @admin.register(Location, site=saml_admin_site)
 class LocationAdmin(SAMLModelAdmin):
-    has_access = False
+    has_access = True
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
 
 
 @admin.register(Student, site=saml_admin_site)
@@ -219,12 +234,22 @@ class StoryAdmin (SAMLModelAdmin):
 
 @admin.register(ResourceCategory, site=saml_admin_site)
 class ResourceCategoryAdmin(SAMLModelAdmin):
-    has_access = False
+    has_access = True
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
 
 
 @admin.register(ResourceLink, site=saml_admin_site)
 class ResourceLinkAdmin(SAMLModelAdmin):
-    has_access = False
+    has_access = True
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
 
 
 @admin.register(Collection, site=saml_admin_site)
