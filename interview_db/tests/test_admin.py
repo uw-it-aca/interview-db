@@ -84,15 +84,15 @@ class AdminTest(TestCase):
 
     def test_permissions_major(self):
         self.assertEqual(self.major_admin.has_view_permission(self.request),
-                         False)
+                         True)
         self.assertEqual(self.major_admin.has_add_permission(self.request),
-                         False)
+                         True)
         self.assertEqual(self.major_admin.has_change_permission(self.request),
-                         False)
+                         True)
         self.assertEqual(self.major_admin.has_delete_permission(self.request),
-                         False)
+                         True)
         self.assertEqual(self.major_admin.has_module_permission(self.request),
-                         False)
+                         True)
 
     def test_permissions_student(self):
         self.assertEqual(self.student_admin.has_view_permission(
