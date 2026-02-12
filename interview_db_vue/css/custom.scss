@@ -101,7 +101,10 @@ img.listing-img {
 
 
 // Open Sans for all body text
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+// Open Sans and Encode Sans for body text
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Encode+Sans:wght@100..900&display=swap');
 
 header,
 main {
@@ -110,14 +113,15 @@ main {
   text-decoration: none;
 }
 
-// Times for all headers
+// Use Encode Sans Black for all headers
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Encode Sans', sans-serif;
+  font-weight: 900 !important; // Black weight
 }
 
 .nav-list {
