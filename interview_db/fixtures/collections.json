@@ -1,0 +1,331 @@
+[
+  {
+    "model": "interview_db.subcode",
+    "pk": 1,
+    "fields": {
+      "subcode": "Context",
+      "definition": "Experience people have related to approaching the goal. Their mind-state in approaching goal."
+    }
+  },
+  {
+    "model": "interview_db.subcode",
+    "pk": 2,
+    "fields": {
+      "subcode": "Personal worry",
+      "definition": "Around achieving this goal. Not knowing or concerned about future outcome."
+    }
+  },
+  {
+    "model": "interview_db.subcode",
+    "pk": 3,
+    "fields": {
+      "subcode": "Obstacle",
+      "definition": "External barrier to achieving their goal."
+    }
+  },
+  {
+    "model": "interview_db.subcode",
+    "pk": 4,
+    "fields": {
+      "subcode": "Success",
+      "definition": "In achieving goal or on route to achieving goal."
+    }
+  },
+  {
+    "model": "interview_db.subcode",
+    "pk": 5,
+    "fields": {
+      "subcode": "Hope",
+      "definition": "In eventual outcome, but not a current success."
+    }
+  },
+  {
+    "model": "interview_db.subcode",
+    "pk": 6,
+    "fields": {
+      "subcode": "Advice",
+      "definition": "Advice for achieving this goal (student’s advice or someone else’s)"
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 2,
+    "fields": {
+      "topic": "Learning",
+      "code": "Lifelong Learning",
+      "definition": "Gaining tools or ambition for how to continue learning throughout their lives."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 3,
+    "fields": {
+      "topic": "Learning",
+      "code": "Expansion of Interests",
+      "definition": "Cultivating a broadening curiosity."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 4,
+    "fields": {
+      "topic": "Learning",
+      "code": "Getting Help",
+      "definition": "Getting help in becoming a better critical learner, an ability to be open to new information and experiences and to gain something from them."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 5,
+    "fields": {
+      "topic": "Career",
+      "code": "Choosing College",
+      "definition": "Choosing a college."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 6,
+    "fields": {
+      "topic": "Career",
+      "code": "Transition to College",
+      "definition": "Experience transitioning to college life as an entering Freshman or as a transfer student from another school."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 7,
+    "fields": {
+      "topic": "Career",
+      "code": "Choosing Major",
+      "definition": "Choosing a major."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 8,
+    "fields": {
+      "topic": "Career",
+      "code": "Getting into Major",
+      "definition": "Experience getting into their major of choice."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 9,
+    "fields": {
+      "topic": "Career",
+      "code": "Planning a Trajectory",
+      "definition": "Strategy to navigate through the UW and into a career."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 10,
+    "fields": {
+      "topic": "Career",
+      "code": "Carrying out Plan",
+      "definition": "Experience carrying out their plan to get through the UW and into their career of choice."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 11,
+    "fields": {
+      "topic": "Career",
+      "code": "Prove Myself",
+      "definition": "Get good grades, graduate, get a job.  Establish myself as successful to myself or others."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 12,
+    "fields": {
+      "topic": "Career",
+      "code": "Getting Help",
+      "definition": "Getting help in choosing the UW, choosing their major, and planning /carrying out their trajectory through the UW and into their chosen career.  This includes getting good grades, graduating, making themselves an attractive job candidate, and getting a job."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 13,
+    "fields": {
+      "topic": "Identity",
+      "code": "Adulting",
+      "definition": "Working toward self-reliance and self-sufficiency (e.g. laundry, taxes)."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 14,
+    "fields": {
+      "topic": "Identity",
+      "code": "Building Identity",
+      "definition": "Individual development of understanding who they are."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 15,
+    "fields": {
+      "topic": "Identity",
+      "code": "Finding Community",
+      "definition": "Understanding who they are through relationships with other people."
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 16,
+    "fields": {
+      "topic": "Identity",
+      "code": "Find Meaning",
+      "definition": "Finding meaning in future endeavors, setting oneself up for a “meaningful life”"
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 17,
+    "fields": {
+      "topic": "Identity",
+      "code": "Gaining Perspective",
+      "definition": "Understanding my place in the world / study abroad /  Diversity"
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 18,
+    "fields": {
+      "topic": "Identity",
+      "code": "Balance",
+      "definition": "Balancing school/work/life"
+    }
+  },
+  {
+    "model": "interview_db.code",
+    "pk": 19,
+    "fields": {
+      "topic": "Identity",
+      "code": "Getting Help",
+      "definition": "Get help in understanding who they are and their place in the world. Becoming an autonomous individual."
+    }
+  },
+  {
+    "model": "interview_db.collection",
+    "pk": 1,
+    "fields": {
+      "topic": "Getting Help",
+      "slug": "getting-help",
+      "codes": [
+        4,
+        12,
+        19
+      ],
+      "subcodes": [],
+      "question": "What resources helped you get through college?"
+    }
+  },
+  {
+    "model": "interview_db.collection",
+    "pk": 2,
+    "fields": {
+      "topic": "Advice",
+      "slug": "advice",
+      "codes": [],
+      "subcodes": [
+        6
+      ],
+      "question": "What advice would you give your past self?"
+    }
+  },
+  {
+    "model": "interview_db.collection",
+    "pk": 3,
+    "fields": {
+      "topic": "Working Towards Goals",
+      "slug": "working-towards-goals",
+      "codes": [],
+      "subcodes": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "question": "What is helping you work towards your goals?"
+    }
+  },
+  {
+    "model": "interview_db.collection",
+    "pk": 4,
+    "fields": {
+      "topic": "Coming to College",
+      "slug": "coming-to-college",
+      "codes": [
+        6,
+        5,
+        13,
+        18
+      ],
+      "subcodes": [],
+      "question": "What resources helped you get through college?"
+    }
+  },
+  {
+    "model": "interview_db.collection",
+    "pk": 5,
+    "fields": {
+      "topic": "Choosing a Major",
+      "slug": "choosing-a-major",
+      "codes": [
+        7,
+        8
+      ],
+      "subcodes": [],
+      "question": "How did you find your major and why did you choose it?"
+    }
+  },
+  {
+    "model": "interview_db.collection",
+    "pk": 6,
+    "fields": {
+      "topic": "Finding Community",
+      "slug": "finding-community",
+      "codes": [
+        15
+      ],
+      "subcodes": [],
+      "question": "How have you built your community?"
+    }
+  },
+  {
+    "model": "interview_db.collection",
+    "pk": 7,
+    "fields": {
+      "topic": "Self Reflection",
+      "slug": "self-reflection",
+      "codes": [
+        16,
+        17,
+        14,
+        2,
+        3
+      ],
+      "subcodes": [],
+      "question": "How do you feel about your time so far about the UW?"
+    }
+  },
+  {
+    "model": "interview_db.collection",
+    "pk": 8,
+    "fields": {
+      "topic": "Moving Forward",
+      "slug": "moving-forward",
+      "codes": [
+        9,
+        10,
+        11
+      ],
+      "subcodes": [],
+      "question": "What are your plans for the future?"
+    }
+  }
+]
