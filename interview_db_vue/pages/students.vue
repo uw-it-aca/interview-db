@@ -86,7 +86,7 @@
                       <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
                     <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
-                      v-model="currentPage" :total-items="totalCount" :items-per-page="perPage" :current-page="1"
+                      v-model="currentPage" :total-items="totalCount" :items-per-page="perPage"
                       :hide-prev-next-when-ends="true" :on-click="updatePage" />
                   </div>
                   <div v-else-if="students.length == 0">
@@ -155,6 +155,24 @@ export default {
       handler(n) {
         this.loadData();
       }
+    },
+    currentPage: {
+      handler(newPage, oldPage) {
+        // Only update route if currentPage differs from route's page (user clicked pagination)
+        const routePage = this.$route.query.page ? JSON.parse(this.$route.query.page) : 1;
+        if (newPage !== routePage && oldPage !== undefined) {
+          this.updatePage();
+        }
+      }
+    },
+    // Save scroll position when navigating to interview
+    "$route.params.id": {
+      handler(newId, oldId) {
+        if (oldId === undefined && newId) {
+          // Navigating to interview - save scroll position
+          this.saveScrollPosition();
+        }
+      }
     }
   },
   computed: {
@@ -181,6 +199,13 @@ export default {
       this.perPage = response.data['page_size'];
       this.totalCount = response.data['count'];
       this.totalPages = response.data['page_count'];
+      
+      // Restore scroll position if returning from interview detail
+      if (!this.interviewId) {
+        this.$nextTick(() => {
+          this.restoreScrollPosition();
+        });
+      }
 
       // updating stored filters, fix for bug/hv-56 to treat single filter as array
       // parsing then stringifying to make a deep copy so that url query updates with changes
@@ -242,6 +267,18 @@ export default {
     },
     updatePage() {
       this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } });
+    },
+    saveScrollPosition() {
+      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      sessionStorage.setItem('studentsScrollPosition', scrollY.toString());
+    },
+    restoreScrollPosition() {
+      const savedPosition = sessionStorage.getItem('studentsScrollPosition');
+      if (savedPosition) {
+        const scrollY = parseInt(savedPosition, 10);
+        window.scrollTo({ top: scrollY, behavior: 'instant' });
+        sessionStorage.removeItem('studentsScrollPosition');
+      }
     },
   },
   created() {

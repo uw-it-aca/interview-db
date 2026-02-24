@@ -16,7 +16,7 @@
           </span>
         </div>
 
-        <div class="col-lg-6 col-12 p-5 scroll-area">
+        <div class="col-lg-6 col-12 p-5 scroll-area" v-if="interviewInfo && studentInfo">
           <h2 class="card-title display-4 mb-2 text-gold fw-bold">{{ studentInfo.first_name }}</h2>
           <div class="row mb-2">
             <div :class="mq.mobile ? '': 'col-9'">
@@ -64,6 +64,9 @@
             </div>
           </div>
         </div>
+        <div class="col-lg-6 col-12 p-5 scroll-area" v-else>
+          <p class="text-center">Loading interview data...</p>
+        </div>
       </div>
     </div>
   </div>
@@ -79,7 +82,15 @@ export default {
   },
   computed: {
     interviewId() {
-      return this.$route.params.id;
+      const id = this.$route.params.id;
+      if (!id || id === 'students') {
+        return null;
+      }
+      const numId = parseInt(id, 10);
+      if (isNaN(numId) || numId <= 0) {
+        return null;
+      }
+      return numId;
     },
     filteredStories() {
       this.filtered = this.stories;
@@ -104,11 +115,35 @@ export default {
       altText: null,
     }
   },
+  watch: {
+    '$route.params.id': {
+      handler() {
+        if (this.interviewId) {
+          this.loadData();
+        }
+      }
+    }
+  },
   methods: {
     async loadData() {
-      const response = await axios.get("/api/students/" + this.interviewId + "/");
+      let response;
+      try {
+        response = await axios.get("/api/students/" + this.interviewId + "/");
+        // Check if response is HTML (error page) instead of JSON
+        if (typeof response.data === 'string' && response.data.trim().startsWith('<!DOCTYPE')) {
+          return;
+        }
+      } catch (error) {
+        return;
+      }
       this.stories = response.data;
+      if (!Array.isArray(this.stories) || this.stories.length === 0 || !this.stories[0]?.interview) {
+        return;
+      }
       this.interviewInfo = this.stories[0].interview;
+      if (!this.interviewInfo?.student) {
+        return;
+      }
       this.studentInfo = this.interviewInfo.student;
       this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
 
@@ -132,7 +167,7 @@ export default {
         const blob = await axios.get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
         this.image = URL.createObjectURL(blob.data);
       } catch (err) {
-        console.log(err);
+        // Image not available or failed to load
       }
     },
     clearFilters() {
@@ -140,7 +175,9 @@ export default {
     }
   },
   created() {
-    this.loadData();
+    if (this.interviewId) {
+      this.loadData();
+    }
   },
 };
 </script>

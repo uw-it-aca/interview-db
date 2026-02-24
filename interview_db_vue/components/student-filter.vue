@@ -2,7 +2,7 @@
 // to filter student interviews
 
 <template>
-  <div class="card p-3" :class="(mq.tablet || mq.mobile) ? 'card-100 border-0' : 'card'">
+  <div class="card p-3 border-0 filter-card" :class="(mq.tablet || mq.mobile) ? 'card-100 border-0' : 'card'">
     <div v-if="!mq.tablet && !mq.mobile" class="row m-3">
       <div class="justify-content-end d-flex">
         <a v-if="!emptyFilters" class="text-secondary active-link active-link-hover" @click="clearFilters">
@@ -13,7 +13,7 @@
 
     <div class="card-body">
       <div class="row mb-4">
-        <h2 class="d-flex fw-bold display-6 text-gold justify-content-start"
+        <h2 class="d-flex fw-bold display-6 text-purple justify-content-start"
           :class="mq.tablet || mq.mobile ? 'col-9' : ''">Filter Stories</h2>
         <div v-if = "(mq.tablet || mq.mobile)" class="d-flex col-3 justify-content-end p-0">
           <button v-if="topicId == undefined" 
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="mb-5">
-        <p class="display-4 fw-bold fs-5 mb-3">
+        <p class="display-4 text-purple fw-bold fs-5 mb-3">
           Student Year
         </p>
         <div class="mt-0" id="year">
@@ -54,7 +54,7 @@
       </div>
 
       <div class="mb-5">
-        <p class="display-4 fs-5 fw-bold mb-3">
+        <p class="display-4 fs-5 fw-bold text-purple mb-3">
           Major
         </p>
         <div class="mt-0" id="major">
@@ -68,7 +68,7 @@
       <div v-if="story || topicId != undefined" class="mb-5">
         </div>
       <div v-else class="mb-5">
-        <p class="display-4 fs-5 fw-bold mb-3">
+        <p class="display-4 fs-5 text-purple fw-bold mb-3">
           Story Collection
         </p>
         <div class="mt-0" id="collections">
