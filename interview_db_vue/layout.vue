@@ -48,16 +48,27 @@
     <slot name="content" />
   </main>
 
-
-  <footer class="py-4 px-5 footer bg-purple text-white">
-    <div class="row">
-      <div class="col-md-6 col-12 footer-img d-flex">
-        <img src="./images/washingtonlogo.svg" />
-      </div>
-      <div class="col-md-6 col-12 align-items-center footer-copyright d-flex" :class="(mq.mobile || mq.tablet) ? 'text-center' : ''">
-        <p v-if="mq.mobile" class="mb-0">Copyright &copy; 2024 <br/>University of Washington</p>
-        <p v-else class="mb-0">Copyright &copy; 2024 University of Washington</p>
-      </div>
+  <footer class="uw-footer text-white text-center">
+    <div class="container py-5">
+      <!-- word mark -->
+      <a href="https://www.washington.edu" class="footer-wordmark d-block mx-auto mb-1">
+        <span class="visually-hidden">University of Washington</span>
+      </a>
+      <!-- be boundless -->
+      <a href="https://www.washington.edu/boundless/" class="d-block mx-auto my-0">
+        <span class="be-boundless d-block mx-auto">
+          <span class="visually-hidden">Be boundless</span>
+        </span>
+      </a>
+      <hr class="uw-footer-rule" />
+      <!-- husky voices -->
+      <h4 class="m-0 fw-normal">Husky Voices</h4>
+      <!-- line -->
+      <hr class="uw-footer-rule" />
+      <!-- copyright info -->
+      <p class="mb-0 small">
+        © 2026 University of Washington <span class="opacity-75">|</span> Seattle, WA
+      </p>
     </div>
   </footer>
 </template>
