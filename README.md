@@ -1,6 +1,6 @@
 # interview-db
 
-[![Build Status](https://github.com/uw-it-aca/interview-db/workflows/Build%2C%20Test%20and%20Deploy/badge.svg?branch=main)](https://github.com/uw-it-aca/interview-db/actions)
+[![Build Status](https://github.com/uw-it-aca/interview-db/workflows/Build%2C%20Test%20and%20Deploy/badge.svg)](https://github.com/uw-it-aca/interview-db/actions)
 [![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/interview-db/badge.svg?branch=main)](https://coveralls.io/github/uw-it-aca/interview-db?branch=main)
 
 
@@ -9,13 +9,13 @@ App to collect and tag interview data, artifacts, and stories for publishing usi
 
 ## System Requirements
 
-- Python (3+)
+- Python (3.12+)
 - Docker
 - Node
 
 ## Development Stack
 
-- Django (4.2)
+- Django (5.2)
 - Vue (3.2)
 - Vite (3.1)
 - Vitest (0.23.2)
