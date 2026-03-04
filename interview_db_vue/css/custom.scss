@@ -98,8 +98,6 @@ img.listing-img {
   filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
 }
 
-
-
 // Open Sans for all body text
 // @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
@@ -125,6 +123,22 @@ h6 {
   font-weight: 900 !important; // Black weight
 }
 
+// HEADER
+
+.bg-purple {
+  background: #4B2E83;
+}
+
+.w-logo {
+  width: 163px;
+  height: 90px;
+  background: url("../images/uw-sprite.svg") no-repeat 0 0 transparent;
+}
+
+.w-logo:hover,.w-logo:focus{
+  background: url("../images/uw-sprite-focus.svg") no-repeat 0 0 transparent;
+}
+
 .nav-list {
   display: none !important;
 }
@@ -132,15 +146,6 @@ h6 {
 .hamburger-menu {
   display: inline;
   font-size: 50px;
-}
-
-.footer-img {
-  justify-content: center;
-  padding-bottom: 20px;
-}
-
-.footer-copyright {
-  justify-content: center;
 }
 
 // styling for W + Husky Voices title in nav
@@ -158,7 +163,6 @@ h6 {
   height: 250px;
   object-fit: cover;
 }
-
 
 .button-outline {
   background-color: transparent;
@@ -193,13 +197,13 @@ h6 {
 }
 
 // footer uw wordmark
-.footer-wordmark{
+.wordmark{
   width: 335px;
   height: 60px;
   background: url("../images/uw-sprite.svg") no-repeat 0 -432px transparent;
 }
 
-.footer-wordmark:hover,.footer-wordmark:focus{
+.wordmark:hover,.wordmark:focus{
   background: url("../images/uw-sprite-focus.svg") no-repeat 0 -432px transparent;
 }
 
@@ -249,17 +253,6 @@ h6 {
 
   .shift-up {
     margin-top: -40px !important;
-  }
-}
-
-@include media-breakpoint-up(md) {
-  .footer-copyright {
-    justify-content: end;
-  }
-
-  .footer-img {
-    justify-content: start;
-    padding-bottom: 0px;
   }
 }
 

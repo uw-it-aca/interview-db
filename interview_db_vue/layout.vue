@@ -1,5 +1,17 @@
 <template>
-  <header>
+  <header class="bg-purple">
+    <nav class="navbar navbar-expand-md py-2 py-md-3">
+      <div class="container-xxl d-flex align-items-center justify-content-between">
+        <!-- branding -->
+         <div class="d-flex align-items-center gap-3 gap-md-4">
+          <router-link to="/" aria-label="Home" class="d-inline-flex align-items-center">
+            <span class="w-logo" aria-hidden="true"></span>
+          </router-link>
+         </div>
+      </div>
+    </nav>
+  </header>
+  <!-- <header>
     <nav class="bg-white p-2">
       <div class="d-flex flex-md-row text-purple justify-content-between">
         <div class="d-flex flex-row title-logo">
@@ -40,7 +52,7 @@
         </ul>
       </div>
     </nav>
-  </header>
+  </header> -->
 
   <main>
     <slot name="title" />
@@ -51,7 +63,7 @@
   <footer class="uw-footer text-white text-center">
     <div class="container py-5">
       <!-- word mark -->
-      <a href="https://www.washington.edu" class="footer-wordmark d-block mx-auto mb-1">
+      <a href="https://www.washington.edu" class="wordmark d-block mx-auto mb-1">
         <span class="visually-hidden">University of Washington</span>
       </a>
       <!-- be boundless -->
