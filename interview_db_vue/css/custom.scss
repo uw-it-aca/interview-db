@@ -107,7 +107,8 @@ img.listing-img {
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Encode+Sans:wght@100..900&display=swap');
 
 header,
-main {
+main,
+footer {
   font-family: 'Open Sans', sans-serif;
   text-transform: none;
   text-decoration: none;
@@ -182,6 +183,41 @@ h6 {
 
 .interview-height {
   height: 100%;
+}
+
+// footer styling
+.uw-footer {
+  background: url("../images/footer.jpg") center bottom / cover no-repeat;
+  background-color: #4b2e83;
+  border-top: 7px solid #d1d1d1;
+}
+
+// footer uw wordmark
+.footer-wordmark{
+  width: 335px;
+  height: 60px;
+  background: url("../images/uw-sprite.svg") no-repeat 0 -432px transparent;
+}
+
+.footer-wordmark:hover,.footer-wordmark:focus{
+  background: url("../images/uw-sprite-focus.svg") no-repeat 0 -432px transparent;
+}
+
+// uw be boundless
+.be-boundless{
+  width: 260px;
+  height: 40px;
+  background: url("../images/boundless.png") no-repeat center top transparent;
+}
+
+// div lines
+.uw-footer-rule{
+  width: 85px;
+  height: 1px;
+  margin: 20px auto;
+  background-color: #9184aa;
+  border: 0;
+  opacity: 1;
 }
 
 @include media-breakpoint-up(lg) {
