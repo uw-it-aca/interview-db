@@ -2,12 +2,36 @@
   <header class="bg-purple">
     <nav class="navbar navbar-expand-md py-2 py-md-3">
       <div class="container-xxl d-flex align-items-center justify-content-between">
-        <!-- branding -->
+        <!-- UW branding -->
          <div class="d-flex align-items-center gap-3 gap-md-4">
-          <router-link to="/" aria-label="Home" class="d-inline-flex align-items-center">
-            <span class="w-logo" aria-hidden="true"></span>
+          <router-link to="/" class="d-inline-flex align-items-center" aria-label="Home">
+            <span class="clip" aria-hidden="true">
+              <span class="w-logo"></span>
+            </span>
           </router-link>
-         </div>
+          <router-link to="/" aria-label="Home" class="d-inline-flex align-items-center">
+            <span class="wordmark" aria-hidden="true"></span>
+          </router-link>
+          <!-- Husky Voices -->
+          <h2 class="mb-0 lh-1 text-light">
+            <router-link to="/" class="nav-link p-0 text-light fw-bold fs-4">
+              <span class="opacity-75 me-2">|</span>Husky Voices
+            </router-link>
+          </h2>
+          <!-- hamburger -->
+          <router-link v-if="mq.mobile || mq.tablet" active-class="active" aria-current="page" to="/menu">
+            <i class="bi bi-list hamburger-menu"></i>
+          </router-link>
+        </div>
+         <!-- nav links -->
+        <ul class="nav d-none d-md-flex align-items-center gap-4 gap-lg-5 mb-0">
+          <li class="nav-item">
+            <router-link class="nav-link px-0 text-light fw-bold" to="/students">Student Stories</router-link>
+          </li>
+          <li>
+            <router-link class="nav-link px-0 text-light fw-bold" to="/about">About Us</router-link>
+          </li>
+        </ul>
       </div>
     </nav>
   </header>

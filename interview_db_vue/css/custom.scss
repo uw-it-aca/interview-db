@@ -86,7 +86,6 @@ button.btn-card:hover {
   --bs-card-border-width: 0;
 }
 
-
 img.listing-img {
   width: 100%;
   height: 80%;
@@ -97,9 +96,6 @@ img.listing-img {
   object-fit: cover;
   filter: drop-shadow(0 .5rem 0.5rem rgba($secondary, .25));
 }
-
-// Open Sans for all body text
-// @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
 // Open Sans and Encode Sans for body text
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Encode+Sans:wght@100..900&display=swap');
@@ -196,32 +192,50 @@ h6 {
   border-top: 7px solid #d1d1d1;
 }
 
-// footer uw wordmark
-.wordmark{
+// uw wordmark
+.wordmark {
   width: 335px;
   height: 60px;
   background: url("../images/uw-sprite.svg") no-repeat 0 -432px transparent;
 }
 
-.wordmark:hover,.wordmark:focus{
+.wordmark:hover,.wordmark:focus {
   background: url("../images/uw-sprite-focus.svg") no-repeat 0 -432px transparent;
 }
 
+// clip
+.clip {
+  display: inline-block;
+  overflow: hidden;
+  height: 56px;
+}
+
 // uw be boundless
-.be-boundless{
+.be-boundless {
   width: 260px;
   height: 40px;
   background: url("../images/boundless.png") no-repeat center top transparent;
 }
 
 // div lines
-.uw-footer-rule{
+.uw-footer-rule {
   width: 85px;
   height: 1px;
   margin: 20px auto;
   background-color: #9184aa;
   border: 0;
   opacity: 1;
+}
+
+.nav-link {
+  font-family: 'Encode Sans', sans-serif;
+  text-decoration: none;
+  color: #F8F9FA;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #B4A67F !important;
 }
 
 @include media-breakpoint-up(lg) {
