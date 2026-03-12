@@ -2,72 +2,107 @@
 // full individual student interview page
 
 <template>
-  <div>
-    <div class="card border-0">
-      <div class="row g-0 mx-auto interview-height">
-        <div class="col-lg-6 col-12" style="height: inherit;">
-          <span v-if="image" style="width: 100%">
-            <img :src="image" class="img-fluid mx-auto position-sticky" style="height: 100%; object-fit: cover;"
-              :alt="altText" />
-          </span>
-          <span v-else style="width: 100%">
-            <img src="../../images/placeholder.png" class="img-fluid mx-auto position-sticky"
-              style="height: 100%; object-fit: cover; width: 100%" />
-          </span>
+  <div class="interview-page">
+    <div class="interview-card" v-if="interviewInfo && studentInfo">
+      <!-- Main body: image + content -->
+      <div class="interview-body">
+        <div class="interview-image-wrapper">
+          <img
+            v-if="image"
+            :src="image"
+            class="interview-image"
+            :alt="altText"
+          />
+          <img
+            v-else
+            src="../../images/placeholder.png"
+            class="interview-image"
+            alt="placeholder image"
+          />
         </div>
 
-        <div class="col-lg-6 col-12 p-5 scroll-area" v-if="interviewInfo && studentInfo">
-          <h2 class="card-title display-4 mb-2 text-gold fw-bold">{{ studentInfo.first_name }}</h2>
-          <div class="row mb-2">
-            <div :class="mq.mobile ? '': 'col-9'">
+        <div class="interview-content">
+          <!-- Name + meta -->
+          <h1 class="interview-name">
+            {{ studentInfo.first_name }}
+          </h1>
+
+          <div class="interview-meta">
+            <span class="interview-meta-main">
               <span v-if="interviewInfo.standing">
                 {{ interviewInfo.standing + ", studying" }}
               </span>
               <span v-else>
                 Studying
               </span>
-              {{ interviewInfo.declared_major }}
-            </div>
-            <div  :class="mq.mobile ? 'mt-2': 'col text-end'">
-              <p class="fs-6">{{ interviewDate }}</p>
-            </div>
+              {{ " " + interviewInfo.declared_major }}
+            </span>
+            <span class="interview-meta-date">
+              {{ interviewDate }}
+            </span>
           </div>
 
-          <div class="border-top border-success pt-4 mb-4">
-            <p class="text-start">They talk about...</p>
-            <div class="justify-content-start col-12 mb-4">
+          <!-- Topics filter row -->
+          <div class="interview-topics">
+            <p class="interview-topics-label">They talk about...</p>
+            <div class="interview-topics-chips">
               <span v-for="topic in topics" :key="topic.id">
-                <input type="checkbox" class="btn-check" :id="topic.id" :value="topic.topic" v-model="filters"
-                  autocomplete="off">
-                <label class="btn btn-outline-success m-1" :for="topic.id">
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  :id="topic.id"
+                  :value="topic.topic"
+                  v-model="filters"
+                  autocomplete="off"
+                />
+                <label class="topic-chip" :for="topic.id">
                   {{ topic.topic }}
                 </label>
               </span>
-              <a v-if="filters !== undefined && filters.length > 0" class="btn border-0 text-secondary active-link active-link-hover" @click="clearFilters">Clear All
-              </a>
+              <button
+                v-if="filters && filters.length > 0"
+                type="button"
+                class="interview-clear-filters"
+                @click="clearFilters"
+              >
+                Clear all
+              </button>
             </div>
+          </div>
 
-            <div v-for="story in filteredStories" :key="story.id">
-              <div class="border-top border-success pt-4 pb-2">
-                <p class="display-6 fs-6 lh-base">
-                  {{ story.story }}
-                </p>
-                <p class="fst-italic text-secondary" :class="mq.mobile ? 'text-start' : 'text-end'">
-                  <span v-for="collection in story.topics" :key="collection.id">
-                    <router-link :to="{ name: 'Collections', params: { id: collection.id } }" class="active-link">
-                      #{{ collection.topic }}
-                    </router-link>
-                    &nbsp;
-                  </span>
-                </p>
-              </div>
+          <!-- Stories -->
+          <div class="interview-stories">
+            <div
+              v-for="story in filteredStories"
+              :key="story.id"
+              class="interview-story"
+            >
+              <p class="interview-story-text">
+                {{ story.story }}
+              </p>
+              <p
+                class="interview-story-topics"
+                :class="mq.mobile ? 'text-start' : 'text-end'"
+              >
+                <span v-for="collection in story.topics" :key="collection.id">
+                  <router-link
+                    :to="{ name: 'Collections', params: { id: collection.id } }"
+                    class="active-link"
+                  >
+                    #{{ collection.topic }}
+                  </router-link>
+                  &nbsp;
+                </span>
+              </p>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-12 p-5 scroll-area" v-else>
-          <p class="text-center">Loading interview data...</p>
-        </div>
       </div>
+    </div>
+
+    <!-- Loading state -->
+    <div v-else class="interview-loading">
+      Loading interview data...
     </div>
   </div>
 </template>
@@ -182,7 +217,159 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.interview-page {
+  padding: 2rem 0;
+}
+
+.interview-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.interview-body {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.interview-image-wrapper {
+  flex: 0 0 320px;
+  max-width: 320px;
+}
+
+.interview-image {
+  width: 100%;
+  height: 100%;
+  max-height: 460px;
+  border-radius: 4px;
+  object-fit: cover;
+  display: block;
+}
+
+.interview-content {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.interview-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3d3d3d;
+  margin-bottom: 0.25rem;
+}
+
+.interview-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #555555;
+  margin-bottom: 1.5rem;
+}
+
+.interview-meta-main {
+  font-weight: 500;
+}
+
+.interview-meta-date {
+  font-size: 0.9rem;
+}
+
+.interview-topics {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.interview-topics-label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.interview-topics-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topic-chip {
+  display: inline-flex;
+  align-items: center;
+  background-color: #6b4ba8;
+  color: #ffffff;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 24px;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.btn-check:checked + .topic-chip {
+  background-color: #4b2e83;
+}
+
+.interview-clear-filters {
+  border: none;
+  background: none;
+  color: #6b4ba8;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: underline;
+  padding: 0.25rem 0.5rem;
+}
+
+.interview-stories {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1.25rem;
+}
+
+.interview-story + .interview-story {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.interview-story-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333333;
+  margin-bottom: 0.35rem;
+}
+
+.interview-story-topics {
+  font-style: italic;
+  color: #777777;
+}
+
+.interview-loading {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #555555;
+}
+
+@media (max-width: 992px) {
+  .interview-body {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .interview-image-wrapper {
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+
+  .interview-image {
+    max-height: 320px;
+  }
+}
+
 .btn-outline-success {
   --bs-btn-bg: white !important;
   --bs-btn-border-color: #1E1E1E !important;

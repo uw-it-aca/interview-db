@@ -18,9 +18,9 @@
 
         <div v-else>
           <div style="position: relative">
-            <img class="banner-image" src="../images/mich.jpg" />
+            <img class="banner-image" src="../images/background-rainier.png" />
             <div class="title-div">
-              <h1 class="text-gold fw-bold display-5 mb-0">Student Stories</h1>
+              <h1 class="fw-bold display-5 mb-0">Student Stories</h1>
             </div>
           </div>
 
@@ -200,7 +200,7 @@ export default {
       this.totalCount = response.data['count'];
       this.totalPages = response.data['page_count'];
       
-      // Restore scroll position if returning from interview detail
+      // restore scroll position if returning from interview detail
       if (!this.interviewId) {
         this.$nextTick(() => {
           this.restoreScrollPosition();

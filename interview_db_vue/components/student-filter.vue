@@ -2,7 +2,7 @@
 // to filter student interviews
 
 <template>
-  <div class="card p-3 border-0 filter-card" :class="(mq.tablet || mq.mobile) ? 'card-100 border-0' : 'card'">
+  <div class="card p-3 border-0 filter-card" :class="(mq.tablet || mq.mobile) ? 'card-100 border-10' : 'card'">
     <div v-if="!mq.tablet && !mq.mobile" class="row m-3">
       <div class="justify-content-end d-flex">
         <a v-if="!emptyFilters" class="text-secondary active-link active-link-hover" @click="clearFilters">
@@ -31,22 +31,22 @@
           <div class="justify-content-start col-12">
             <input type="checkbox" class="btn-check" id="Freshman" value="Freshman" v-model="filters.year"
               @change="updateQuery()">
-            <label class="btn btn-outline-success m-1" for="Freshman">
+            <label class="filter-chip" for="Freshman">
               Freshman
             </label>
             <input type="checkbox" class="btn-check" id="Sophomore" value="Sophomore" v-model="filters.year"
               @change="updateQuery()">
-            <label class="btn btn-outline-success m-1" for="Sophomore">
+            <label class="filter-chip" for="Sophomore">
               Sophomore
             </label>
             <input type="checkbox" class="btn-check" id="Junior" value="Junior" v-model="filters.year"
               @change="updateQuery()">
-            <label class="btn btn-outline-success m-1" for="Junior">
+            <label class="filter-chip" for="Junior">
               Junior
             </label>
             <input type="checkbox" class="btn-check" id="Senior" value="Senior" v-model="filters.year"
               @change="updateQuery()">
-            <label class="btn btn-outline-success m-1" for="Senior">
+            <label class="filter-chip" for="Senior">
               Senior +
             </label>
           </div>
@@ -258,6 +258,18 @@ export default {
 .dropdown-toggle:after {
   transition: 0.3s;
 }
+
+.dropdown-toggle:focus {
+  border: none;
+}
+
+.dropdown-toggle {
+  border: none;
+}
+
+.filter-section-title { font-size: 1rem; font-weight: 700; color: #4b2e83; margin-bottom: 0.75rem; } 
+.filter-chip { display: inline-flex; align-items: center; background-color: #e7e3d5; color: #1e1e1e; font-size: 0.9rem; padding: 0.3rem 0.9rem; border-radius: 24px; margin: 0.15rem 0.25rem; cursor: pointer; } 
+.btn-check:checked + .filter-chip { background-color: #4b2e83; color: #ffffff; }
 
 .dropdown-toggle-split {
   justify-content: flex-end;
