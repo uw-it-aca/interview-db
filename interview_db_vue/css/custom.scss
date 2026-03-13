@@ -308,9 +308,8 @@ h6 {
   .title-div {
     position: absolute;
     top: 40%;
-    background-color: $light;
-    border-style: solid;
-    border-color: $primary;
+    //background-color: $light;
+    border: none;
     border-width: 1px;
     padding-left: 3rem;
     padding-right: 1rem;

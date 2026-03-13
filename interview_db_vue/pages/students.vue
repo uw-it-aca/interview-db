@@ -20,7 +20,7 @@
           <div style="position: relative">
             <img class="banner-image" src="../images/background-rainier.png" />
             <div class="title-div">
-              <h1 class="fw-bold display-5 mb-0">Student Stories</h1>
+              <h1 class="text-white fw-bold display-5 mb-0">Student Stories</h1>
             </div>
           </div>
 

@@ -10,11 +10,10 @@
         <span v-if="interviewInfo.standing" class="tag">
           {{ interviewInfo.standing }}
         </span>
-
+        <span style="color: white; margin: 0 4px;"> | </span>
         <span class="tag">
           {{ interviewInfo.declared_major }}
         </span>
-
         <span v-if="interviewInfo.minor" class="tag">
           {{ interviewInfo.minor }}
         </span>
@@ -144,7 +143,7 @@ export default {
 .tag-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.1rem;
   align-items: center;
   height: 100%;
   margin-bottom: 0px;
@@ -153,7 +152,7 @@ export default {
 .tag {
   display: inline-flex;
   align-items: center;
-  background-color: #6b4ba8;
+  background-color: #4b2e83;
   color: #ffffff;
   font-size: 0.8rem;
   padding: 0.3rem 0.9rem;
