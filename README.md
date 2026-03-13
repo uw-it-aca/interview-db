@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/interview-db/badge.svg?branch=main)](https://coveralls.io/github/uw-it-aca/interview-db?branch=main)
 
 
+
 App to collect and tag interview data, artifacts, and stories for publishing using the Django Admin app.
 
 ## System Requirements
