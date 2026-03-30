@@ -21,7 +21,7 @@ $btn-padding-x: 0.5rem;
 
 // card styling
 $border-radius: 0.1rem;
-$card-bg: $light;
+$card-bg: $white;
 $card-border-color: $primary;
 $card-cap-bg: $light;
 $card-cap-color: $primary;
@@ -63,6 +63,117 @@ button.btn-card {
 
 button.btn-card:hover {
   background-color: #f6f4f8;
+}
+
+.student-card {
+  width: 100%;
+  border: none;
+  background-color: $white;
+  border-radius: 1rem;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.student-card:hover {
+  box-shadow: 0 1rem 2rem rgba($secondary, 0.25);
+  transform: translateY(-2px);
+}
+
+.card-inner {
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.image-wrapper {
+  flex: 0 0 240px;
+  max-width: 240px;
+}
+
+.student-image {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  filter: drop-shadow(0 .5rem .75rem rgba($secondary, .25));
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.student-name {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: $primary;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  border: 2px solid $success;
+  color: $success;
+  padding: 0.35rem 0.9rem;
+  border-radius: 12
+  px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: transparent;
+}
+
+.tag-filter {
+  border: 1.5px solid $success;
+  color: $success;
+  padding: 0.35rem 0.9rem;
+  border-radius: 12
+  px;
+  font-size: 1rem;
+  font-weight: 400;
+  background-color: transparent;
+}
+
+.pull-quote {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: $primary;
+  margin: 0 0 2rem 0;
+}
+
+.cta-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.read-more {
+  background-color: $success;
+  color: $white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.15s ease;
+}
+
+.read-more:hover {
+  background-color: darken($success, 5%);
+}
+
+.filter-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(130, 114, 82, 0.15);
 }
 
 .interview-filter {
@@ -155,7 +266,7 @@ h6 {
 
 .banner-image {
   width: 100%;
-  height: 250px;
+  height: 450px;
   object-fit: cover;
 }
 
@@ -171,9 +282,9 @@ h6 {
 .title-div {
   position: absolute;
   top: 25%;
-  background-color: $light;
-  border-style: solid;
-  border-color: $primary;
+  //background-color: $light;
+  border: none;
+  //border-color: none;
   border-width: 0.5px;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -237,9 +348,8 @@ h6 {
   .title-div {
     position: absolute;
     top: 40%;
-    background-color: $light;
-    border-style: solid;
-    border-color: $primary;
+    //background-color: $light;
+    border: none;
     border-width: 1px;
     padding-left: 3rem;
     padding-right: 1rem;
