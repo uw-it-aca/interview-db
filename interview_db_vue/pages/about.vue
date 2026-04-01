@@ -17,15 +17,12 @@
         </div>
         <div class="mx-auto p-5">
           <div class="mx-auto mb-5">
-            <h2 class="text-purple fw-bold mb-4">Who We Are</h2>
+            <h2 class="text-purple fw-bold mb-4">What is Husky Voices</h2>
             <p class="mb-4">
-              We collect the real stories of UW students and share them with
-              others on campus.
+              Husky Voices is a growing collection of UW student interviews that highlight the diverse experiences of our undergraduate student body. 
             </p>
             <p class="mb-4">
-              Our team operates out of the
-              <b>Student & Educational Technology Services (SETS)</b> unit within
-              UW-IT.
+              Interviews are collected, edited, and published by student researchers from UWIT's Student Educational Technology Services (SETS) unit. 
             </p>
           </div>
 
