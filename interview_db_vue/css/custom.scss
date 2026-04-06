@@ -236,23 +236,48 @@ h6 {
   background: #4B2E83;
 }
 
+// W Logo
 .w-logo {
-  width: 163px;
+  display: inline-block;
+  width: 120px;
   height: 90px;
   background: url("../images/uw-sprite.svg") no-repeat 0 0 transparent;
+
+  &:hover, &:focus {
+    background: url("../images/uw-sprite-focus.svg") no-repeat 0 0 transparent;
+  }
 }
 
-.w-logo:hover,.w-logo:focus{
-  background: url("../images/uw-sprite-focus.svg") no-repeat 0 0 transparent;
+.wordmark {
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: inline-block;
+    width: 335px;
+    height: 20px;
+    background: url("../images/uw-sprite.svg") no-repeat 0 -432px transparent;
+    vertical-align: middle;
+
+    &:hover, &:focus {
+      background: url("../images/uw-sprite-focus.svg") no-repeat 0 -432px transparent;
+    }
+  }
 }
 
-.nav-list {
-  display: none !important;
+.header-divider {
+  @include media-breakpoint-down(md) {
+    display: none !important;
+  }
 }
 
+// Hamburger
 .hamburger-menu {
   display: inline;
-  font-size: 50px;
+  font-size: 2rem;
+  color: white;
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
 }
 
 // styling for W + Husky Voices title in nav
@@ -282,9 +307,7 @@ h6 {
 .title-div {
   position: absolute;
   top: 25%;
-  //background-color: $light;
   border: none;
-  //border-color: none;
   border-width: 0.5px;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -301,17 +324,6 @@ h6 {
   background: url("../images/footer.jpg") center bottom / cover no-repeat;
   background-color: #4b2e83;
   border-top: 7px solid #d1d1d1;
-}
-
-// uw wordmark
-.wordmark {
-  width: 335px;
-  height: 60px;
-  background: url("../images/uw-sprite.svg") no-repeat 0 -432px transparent;
-}
-
-.wordmark:hover,.wordmark:focus {
-  background: url("../images/uw-sprite-focus.svg") no-repeat 0 -432px transparent;
 }
 
 // clip
@@ -349,13 +361,14 @@ h6 {
   color: #B4A67F !important;
 }
 
+// Active nav link — gold
+.nav a.router-link-active,.nav a.router-link-exact-active {
+  color: #B4A67F !important;
+}
+
 @include media-breakpoint-up(lg) {
   .hamburger-menu {
     display: none;
-  }
-
-  .nav-list {
-    display: flex !important;
   }
 
   .title-logo {

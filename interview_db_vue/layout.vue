@@ -1,82 +1,47 @@
 <template>
   <header class="bg-purple">
-    <nav class="navbar navbar-expand-md py-2 py-md-3">
+    <nav class="navbar navbar-expand-md py-2">
       <div class="container-xxl d-flex align-items-center justify-content-between">
-        <!-- UW branding -->
-         <div class="d-flex align-items-center gap-3 gap-md-4">
-          <router-link to="/" class="d-inline-flex align-items-center" aria-label="Home">
-            <span class="clip" aria-hidden="true">
-              <span class="w-logo"></span>
-            </span>
-          </router-link>
+        
+        <!-- Left: Branding -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- W Logo -->
           <router-link to="/" aria-label="Home" class="d-inline-flex align-items-center">
-            <span class="wordmark" aria-hidden="true"></span>
+            <span class="w-logo"></span>
           </router-link>
+
+          <!-- Wordmark -->
+          <router-link to="/" aria-label="Home" class="d-inline-flex align-items-center">
+            <span class="wordmark"></span>
+          </router-link>
+
+          <!-- Divider -->
+          <span class="text-light opacity-50 fs-5 header-divider">|</span>
+
           <!-- Husky Voices -->
-          <h2 class="mb-0 lh-1 text-light">
-            <router-link to="/" class="nav-link p-0 text-light fw-bold fs-4">
-              <span class="opacity-75 me-2">|</span>Husky Voices
-            </router-link>
-          </h2>
-          <!-- hamburger -->
-          <router-link v-if="mq.mobile || mq.tablet" active-class="active" aria-current="page" to="/menu">
-            <i class="bi bi-list hamburger-menu"></i>
+          <router-link to="/" class="nav-link p-0 text-light">
+            Husky<strong>Voices</strong>
           </router-link>
         </div>
-         <!-- nav links -->
-        <ul class="nav d-none d-md-flex align-items-center gap-4 gap-lg-5 mb-0">
+
+        <!-- Right: Nav Links -->
+        <ul class="nav d-none d-lg-flex align-items-center gap-4 gap-lg-5 mb-0">
           <li class="nav-item">
             <router-link class="nav-link px-0 text-light fw-bold" to="/students">Student Stories</router-link>
           </li>
-          <li>
+          <li class="nav-item">
             <router-link class="nav-link px-0 text-light fw-bold" to="/about">About Us</router-link>
           </li>
         </ul>
+
+        <!-- Hamburger (mobile/tablet only) -->
+        <router-link v-if="mq.mobile | mq.tablet" active-class="active" aria-current="page" to="/menu">
+          <i class="bi bi-list hamburger-menu"></i>
+        </router-link>
+
       </div>
     </nav>
   </header>
-  <!-- <header>
-    <nav class="bg-white p-2">
-      <div class="d-flex flex-md-row text-purple justify-content-between">
-        <div class="d-flex flex-row title-logo">
-          <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/">
-            <img src="./images/purplew.png" class="img-fluid justify-content-start"
-              style="object-fit:contain; width:100%; height:50px" alt="Husky W Logo">
-          </router-link>
-          <h2
-            :class="[mq.mobile ? 'fs-3 d-flex text-center justify-content-center fw-bold' : 'fs-3 d-flex justify-content-start fw-bold',]">
-            <router-link class="flex nav-link text-purple" active-class="active" aria-current="page" to="/">
-              Husky Voices
-            </router-link>
-          </h2>
-          <router-link v-if="mq.mobile || mq.tablet" active-class="active" aria-current="page" to="/menu">
-            <i class="bi bi-list hamburger-menu"></i>
-          </router-link>
-        </div>
-        <ul class="nav mt-2 p-2 col-6 justify-content-end nav-list">
-          <li class="nav-item">
-            <h6>
-              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/students/">Students
-              </router-link>
-            </h6>
-          </li>
-          <li class="nav-item">
-            <h6>
-              <router-link class="nav-link text-purple" active-class="active" aria-current="page"
-                to="/collections">Collections
-              </router-link>
-            </h6>
-          </li>
-          <li class="nav-item">
-            <h6>
-              <router-link class="nav-link text-purple" active-class="active" aria-current="page" to="/about">About
-                Us</router-link>
-            </h6>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header> -->
 
   <main>
     <slot name="title" />
