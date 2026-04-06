@@ -18,32 +18,58 @@
         <div class="mx-auto p-5">
           <div class="mx-auto mb-5">
             <h2 class="text-purple fw-bold mb-4">What is Husky Voices</h2>
-            <p class="mb-4">
+            <p>
               Husky Voices is a growing collection of UW student interviews that highlight the diverse experiences of our undergraduate student body. 
             </p>
-            <p class="mb-4">
+            <p>
               Interviews are collected, edited, and published by student researchers from UWIT's Student Educational Technology Services (SETS) unit. 
             </p>
           </div>
 
           <div class="mx-auto pt-2 mb-5">
-            <h2 class="text-purple fw-bold mb-4">Our Interview Process</h2>
-            <p class="mb-4">1. Meet a stranger</p>
-            <p class="mb-4">2. Have a chat</p>
-            <p class="mb-4">3. Transcribe and share</p>
+            <h2 class="text-purple fw-bold mb-4">Our Mission</h2>
+            <p>Husky Voices helps students find 
+              <strong>direction, support, and inspiration</strong> through the 
+              <strong>stories of their fellow students</strong> 
+              while helping UW decision makers better understand and support students.</p>
           </div>
 
           <div class="mx-auto pt-2 mb-5">
-            <h2 class="text-purple fw-bold mb-4">Help Grow Our Collection</h2>
-            <p class="mb-4">
-              Schedule a 15-30 minute appointment with us to talk about your UW
-              experience.
+            <h2 class="text-purple fw-bold mb-4">What We Learn by Listening</h2>
+            <p>
+              At UWIT, we're committed to designing technology services that reflect and support 
+              the real needs of students. Husky Voices was created to allow student stories to 
+              inform the development of UW technology and support services.
             </p>
-            <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Husky Voices">
-              <button type="button" class="btn btn-gold">
-                Share Your Story <i class="bi bi-chevron-right"></i>
-              </button>
-            </a>
+            <p>
+              Instead of relying solely on abstract data, we talk directly with students to pair 
+              this data with personal experiences. Student stories help us discover new problem areas,
+              give context to the data, and keep our understanding of student life current.
+            </p>
+            <p>
+              Unlike formal research that focuses on what we want to understand, we take inspiration
+              from interviewers and oral historians like Brandon Stanton, Studs Terkel, and Linda Shopes,
+              who let the interviewees lead the conversation. Through this methodology, we give students
+              space to share their current challenges, successes, and hopes in their own words. With a 
+              broader understanding of the student experience, we can better design our services to meet
+              students where they are and support them where it matters most.
+            </p>
+
+            <ul class="list-unstyled">
+              <li>Learn more about the interviewers who inspired our process:</li>
+              <li><a href="https://brandonstanton.com/humans-of-new-york">
+                 Humans of New York - Brandon Stanton</a></li>
+              <li><a href="https://www.amazon.com/Studs-Terkel-Listening-Eric-Simonson/dp/B01MY8YT86/ref=sr_1_26?s=movies-tv&ie=UTF8&qid=1512188629&sr=1-26&keywords=hbo+movies&refinements=p_n_format_browse-bin%3A2650306011">
+                 Talking to America - Studs Terkel</a></li>
+              <li><a href="https://orbiscascade-washington.primo.exlibrisgroup.com/permalink/01ALLIANCE_UW/1juclfo/alma99326078421501451">
+                 The Oral History Reader [UW Library, digital access]</a></li>
+            </ul>
+
+            <ul class="list-unstyled">
+              <li>Understand the process we use to edit interviews:</li>
+              <li><a href="https://www.oralhistoryforum.ca/index.php/ohf/article/view/385/index.html">
+                Editing Oral History for Publication - Linda Shopes</a></li>
+            </ul>
           </div>
 
           <div class="mx-auto pt-2 mb-5">
