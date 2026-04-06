@@ -19,13 +19,14 @@
                 Explore Student Stories <i class="bi bi-chevron-right"></i>
               </button>
             </div>
+      
           </div>
         </div>
         <div class="col-12 col-lg-7 col-md-6 col-xl-7 pr-2 justify-content-center">
           <div class="row justify-content-center mx-auto my-auto">
             <div id="carousel" class="h-100 carousel slide justify-content-center mx-auto col-12 col-lg-8" data-bs-ride="carousel">
               <div class="carousel-inner justify-content-center mx-auto">
-                <div v-for="student, index in randomStudents" :key="student.id">
+                <div v-for="(student, index) in randomStudents" :key="student.id">
                   <div v-if="index == 0" class="carousel-item active justify-content-center">
                     <InterviewListing :interviewInfo="student" :carousel=true class="h-100 justify-content-center mx-auto" />
                   </div>

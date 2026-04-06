@@ -51,7 +51,7 @@
 
           <div class="mx-auto pt-2 mb-5">
             <h2 class="text-purple fw-bold mb-4">
-              Frequently Asked Questions (FAQ)
+              Frequently Asked Questions
             </h2>
 
             <div class="mx-auto pt-2 mb-5">
