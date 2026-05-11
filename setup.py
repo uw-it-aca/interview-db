@@ -30,6 +30,7 @@ setup(
         'django-storages[google]',
         'google-auth',
         'djangorestframework~=3.14',
+        'psycopg[c]',
     ],
     license='Apache License, Version 2.0',
     description=('App to collect and tag interview data, artifacts,'
