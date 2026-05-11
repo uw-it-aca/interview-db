@@ -1,5 +1,4 @@
-// interview.vue
-// full individual student interview page
+// interview.vue // full individual student interview page
 
 <template>
   <div class="interview-page">
@@ -32,9 +31,7 @@
               <span v-if="interviewInfo.standing">
                 {{ interviewInfo.standing + ", studying" }}
               </span>
-              <span v-else>
-                Studying
-              </span>
+              <span v-else> Studying </span>
               {{ " " + interviewInfo.declared_major }}
             </span>
             <span class="interview-meta-date">
@@ -101,24 +98,21 @@
     </div>
 
     <!-- Loading state -->
-    <div v-else class="interview-loading">
-      Loading interview data...
-    </div>
+    <div v-else class="interview-loading">Loading interview data...</div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "Interview",
   inject: ["mq"],
-  components: {
-  },
+  components: {},
   computed: {
     interviewId() {
       const id = this.$route.params.id;
-      if (!id || id === 'students') {
+      if (!id || id === "students") {
         return null;
       }
       const numId = parseInt(id, 10);
@@ -131,11 +125,14 @@ export default {
       this.filtered = this.stories;
       // consider changing to AND filters, not OR
       if (this.filters !== undefined && this.filters.length > 0) {
-        const included = (collection) => this.filters.includes(collection.topic)
-        this.filtered = this.filtered.filter(story => story.topics.some(included))
+        const included = (collection) =>
+          this.filters.includes(collection.topic);
+        this.filtered = this.filtered.filter((story) =>
+          story.topics.some(included)
+        );
       }
       return this.filtered;
-    }
+    },
   },
   data() {
     return {
@@ -148,16 +145,16 @@ export default {
       interviewDate: null,
       image: null,
       altText: null,
-    }
+    };
   },
   watch: {
-    '$route.params.id': {
+    "$route.params.id": {
       handler() {
         if (this.interviewId) {
           this.loadData();
         }
-      }
-    }
+      },
+    },
   },
   methods: {
     async loadData() {
@@ -165,14 +162,21 @@ export default {
       try {
         response = await axios.get("/api/students/" + this.interviewId + "/");
         // Check if response is HTML (error page) instead of JSON
-        if (typeof response.data === 'string' && response.data.trim().startsWith('<!DOCTYPE')) {
+        if (
+          typeof response.data === "string" &&
+          response.data.trim().startsWith("<!DOCTYPE")
+        ) {
           return;
         }
       } catch (error) {
         return;
       }
       this.stories = response.data;
-      if (!Array.isArray(this.stories) || this.stories.length === 0 || !this.stories[0]?.interview) {
+      if (
+        !Array.isArray(this.stories) ||
+        this.stories.length === 0 ||
+        !this.stories[0]?.interview
+      ) {
         return;
       }
       this.interviewInfo = this.stories[0].interview;
@@ -180,10 +184,14 @@ export default {
         return;
       }
       this.studentInfo = this.interviewInfo.student;
-      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString('en-US');
+      this.interviewDate = new Date(this.interviewInfo.date).toLocaleDateString(
+        "en-US"
+      );
 
       // get all topics mentioned in this interview
-      const topics = await axios.get("/api/students/" + this.interviewId + "/topics/");
+      const topics = await axios.get(
+        "/api/students/" + this.interviewId + "/topics/"
+      );
       this.topics = topics.data;
 
       if (this.interviewInfo.image != null) {
@@ -191,7 +199,10 @@ export default {
       }
     },
     async loadImage() {
-      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
+      if (
+        this.interviewInfo.no_identifying_photo &&
+        !this.interviewInfo.image_is_not_identifying
+      ) {
         return;
       }
 
@@ -199,7 +210,10 @@ export default {
 
       // create blob for image
       try {
-        const blob = await axios.get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
+        const blob = await axios.get(
+          "/api/students/" + this.interviewInfo.id + "/image/",
+          { responseType: "blob" }
+        );
         this.image = URL.createObjectURL(blob.data);
       } catch (err) {
         // Image not available or failed to load
@@ -207,7 +221,7 @@ export default {
     },
     clearFilters() {
       this.filters = [];
-    }
+    },
   },
   created() {
     if (this.interviewId) {
@@ -372,15 +386,15 @@ export default {
 
 .btn-outline-success {
   --bs-btn-bg: white !important;
-  --bs-btn-border-color: #1E1E1E !important;
-  --bs-btn-color: #1E1E1E !important;
+  --bs-btn-border-color: #1e1e1e !important;
+  --bs-btn-color: #1e1e1e !important;
 }
 a.active-link {
   text-decoration: none;
   color: #827252;
   white-space: nowrap;
 }
-a.active-link:hover{
+a.active-link:hover {
   color: #827252;
   text-decoration: underline;
 }
