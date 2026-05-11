@@ -27,7 +27,7 @@ $card-cap-bg: $light;
 $card-cap-color: $primary;
 
 @use "sass:map";
-@import "node_modules/bootstrap/scss/bootstrap";
+@use "bootstrap/scss/bootstrap";
 
 // app custom colors
 $custom-colors: (
