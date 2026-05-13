@@ -22,39 +22,8 @@ def vite_manifest(entries_names):
         os.path.join(os.sep, "static", "manifest.json"),
     )
 
-    # Handle missing manifest gracefully during testing
-    if not os.path.exists(manifest_filepath):
-        return [], []  # Return empty scripts and styles
-    
     with open(manifest_filepath) as fp:
         manifest = json.load(fp)
-    _processed = set()
-
-    def _process_entries(names):
-        scripts = []
-        styles = []
-
-        for name in names:
-            if name in _processed:
-                continue
-
-            chunk = manifest[name]
-
-            import_scripts, import_styles = _process_entries(
-                chunk.get("imports", [])
-            )
-            scripts += import_scripts
-            styles += import_styles
-
-            scripts += [chunk["file"]]
-            styles += [css for css in chunk.get("css", [])]
-
-            _processed.add(name)
-
-        return scripts, styles
-
-    return _process_entries(entries_names)
-
     _processed = set()
 
     def _process_entries(names):
