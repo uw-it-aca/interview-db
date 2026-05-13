@@ -26,6 +26,9 @@ $card-border-color: $primary;
 $card-cap-bg: $light;
 $card-cap-color: $primary;
 
+@use "sass:map";
+@import "node_modules/bootstrap/scss/bootstrap";
+
 // app custom colors
 $custom-colors: (
   "background": #F8F9fA,
@@ -37,9 +40,6 @@ $custom-colors: (
 //   text-decoration: none;
 //   color: $white;
 // }
-
-@import "bootstrap/scss/bootstrap";
-@import "bootstrap-icons/font/bootstrap-icons.css";
 
 a.nav-link {
   margin: auto 0.25em;
@@ -432,3 +432,8 @@ $utilities: (
 //   color: $info;
 //   background: $info;
 // }
+
+
+// MARK: import bootstrap and bootstrap-icons last
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
