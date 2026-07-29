@@ -1,20 +1,15 @@
 // interview-listing.vue // shown on full students page
 
 <template>
-  <button
-    type="button"
-    class="btn-card mt-5"
-    style="height=28rem"
-    @click="
-      $router.push({
-        name: 'Students',
-        params: {
-          id: studentInfo.interview.id,
-          singleStudent: JSON.stringify(studentInfo.interview),
-        },
-      })
-    "
-  >
+  <button type="button" class="btn-card mt-5" style="height=28rem" @click="
+    $router.push({
+      name: 'Students',
+      params: {
+        id: studentInfo.interview.id,
+        singleStudent: JSON.stringify(studentInfo.interview),
+      },
+    })
+  ">
     <p class="fs-6 text-end">{{ interviewDate }}</p>
     <div class="collection-card">
       <div class="row p-0 m-0">
@@ -28,17 +23,12 @@
           </h2>
           <div class="row">
             <div class="col-11">
-              <p
-                class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary"
-              >
+              <p class="display-4 fs-6 mx-auto pb-4 border-bottom border-primary">
                 <span v-if="studentInfo.interview.standing">
                   {{ studentInfo.interview.standing + ", studying" }}
                 </span>
                 <span v-else> Studying </span>
-                <span
-                  v-for="(major, index) in studentInfo.interview.major"
-                  :key="major.id"
-                >
+                <span v-for="(major, index) in studentInfo.interview.major" :key="major.id">
                   <span v-if="index != 0">, </span>
                   {{ major.full_title }}
                 </span>
@@ -73,9 +63,7 @@ export default {
   methods: {},
   computed: {
     interviewDate() {
-      return new Date(this.studentInfo.interview.date).toLocaleDateString(
-        "en-US"
-      );
+      return new Date(this.studentInfo.interview.date).toLocaleDateString("en-US");
     },
   },
 };

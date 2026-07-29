@@ -1,12 +1,16 @@
 <template>
-  <div class="student-card" role="button" @click="navigateToInterview">
+  <div
+    class="student-card"
+    role="button"
+    @click="navigateToInterview"
+  >
     <!-- Top tag bar -->
     <div class="tag-bar">
       <div class="tag-row">
         <span v-if="interviewInfo.standing" class="tag">
           {{ interviewInfo.standing }}
         </span>
-        <span style="color: white; margin: 0 4px"> | </span>
+        <span style="color: white; margin: 0 4px;"> | </span>
         <span class="tag">
           {{ interviewInfo.declared_major }}
         </span>
@@ -19,7 +23,12 @@
     <!-- Card body -->
     <div class="card-inner">
       <div class="image-wrapper">
-        <img v-if="image" :src="image" class="student-image" :alt="altText" />
+        <img
+          v-if="image"
+          :src="image"
+          class="student-image"
+          :alt="altText"
+        />
         <img
           v-else
           src="../../images/placeholder.png"
@@ -56,7 +65,7 @@ export default {
   props: {
     interviewInfo: { type: Object, required: true },
     story: { type: String, required: false },
-    carousel: { type: Boolean, required: false },
+    carousel: { type: Boolean, required: false }
   },
 
   data() {
@@ -74,17 +83,13 @@ export default {
     navigateToInterview() {
       if (this.interviewInfo?.id) {
         this.$router.push({
-          name: "Students",
-          params: { id: this.interviewInfo.id },
+          name: 'Students',
+          params: { id: this.interviewInfo.id }
         });
       }
     },
     async loadImage() {
-      if (
-        this.interviewInfo.no_identifying_photo &&
-        !this.interviewInfo.image_is_not_identifying
-      )
-        return;
+      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) return;
       if (!this.interviewInfo.image) return;
 
       this.altText = this.interviewInfo.image_alt_text;
@@ -107,7 +112,7 @@ export default {
     },
     interviewId() {
       return this.interviewInfo.id;
-    },
+    }
   },
 };
 </script>

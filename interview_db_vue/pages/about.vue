@@ -10,7 +10,7 @@
     <template #content>
       <div>
         <div style="position: relative">
-          <img class="banner-image" src="../images/aboutUsImage.png" />
+          <img class="banner-image" src="../images/aboutUsImage.png"/>
           <div class="title-div">
             <h1 class="text-gold fw-bold display-5 mb-0">About Us</h1>
           </div>
@@ -24,8 +24,8 @@
             </p>
             <p class="mb-4">
               Our team operates out of the
-              <b>Student & Educational Technology Services (SETS)</b> unit
-              within UW-IT.
+              <b>Student & Educational Technology Services (SETS)</b> unit within
+              UW-IT.
             </p>
           </div>
 
@@ -42,10 +42,7 @@
               Schedule a 15-30 minute appointment with us to talk about your UW
               experience.
             </p>
-            <a
-              href="mailto:ux@uw.edu?subject=Husky Voices"
-              title="Husky Voices"
-            >
+            <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Husky Voices">
               <button type="button" class="btn btn-gold">
                 Share Your Story <i class="bi bi-chevron-right"></i>
               </button>
@@ -53,7 +50,9 @@
           </div>
 
           <div class="mx-auto pt-2 mb-5">
-            <h2 class="text-purple fw-bold mb-4">Frequently Asked Questions</h2>
+            <h2 class="text-purple fw-bold mb-4">
+              Frequently Asked Questions
+            </h2>
 
             <div class="mx-auto pt-2 mb-5">
               <div class="accordion" id="faq">
@@ -79,8 +78,8 @@
                     <div class="accordion-body">
                       <p>
                         We walk around busy spaces like the HUB Cafeteria or By
-                        George and look for students who look like they might
-                        have a little extra time to talk.
+                        George and look for students who look like they might have
+                        a little extra time to talk.
                       </p>
                     </div>
                   </div>
@@ -133,8 +132,8 @@
                     <div class="accordion-body">
                       <p>
                         We make edits for clarity and concision as well as
-                        re-organize the conversation to make student stories
-                        more readable. We are trained to take special care of
+                        re-organize the conversation to make student stories more
+                        readable. We are trained to take special care of
                         conserving the original interviewee intent.
                       </p>
                     </div>
@@ -161,11 +160,11 @@
                   >
                     <div class="accordion-body">
                       <p>
-                        After each interview, we are obliged to give an
-                        additional form for the students to complete. This form
-                        clarifies whether they only want their information used
-                        for internal UW research or if they are willing to
-                        release their story to be shared.
+                        After each interview, we are obliged to give an additional
+                        form for the students to complete. This form clarifies
+                        whether they only want their information used for internal
+                        UW research or if they are willing to release their story
+                        to be shared.
                       </p>
                     </div>
                   </div>
@@ -173,7 +172,7 @@
               </div>
             </div>
           </div>
-        </div>
+      </div>
       </div>
     </template>
   </layout>

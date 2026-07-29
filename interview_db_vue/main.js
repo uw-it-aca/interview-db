@@ -39,7 +39,7 @@ app.use(Vue3Mq, {
     mobile: 0,
     tablet: 576,
     desktop: 992,
-  },
+  }
 });
 app.component("mq-responsive", MqResponsive);
 
@@ -48,3 +48,4 @@ app.use(router);
 app.use(VueAwesomePaginate);
 
 app.mount("#app");
+

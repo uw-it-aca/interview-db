@@ -31,150 +31,66 @@
                   <StudentFilter @change="loadData" />
                 </div>
 
-                <div
-                  class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column"
-                >
+                <div class="col-sm-12 col-md-12 col-lg-7 mx-auto d-flex flex-column">
                   <div class="row mb-4">
                     <div class="col-6 justify-content-start">
-                      <p
-                        v-if="students.length > 1"
-                        class="align-middle fw-bold opacity-75"
-                      >
-                        {{ students.length + (currentPage - 1) * perPage }} of
-                        {{ totalCount }} Results
+                      <p v-if="students.length > 1" class="align-middle fw-bold opacity-75">{{ students.length + (currentPage - 1) * perPage }} of {{
+                        totalCount }} Results
                       </p>
-                      <p
-                        v-else-if="students.length > 0"
-                        class="align-middle fw-bold opacity-75"
-                      >
-                        1 of 1 Result
-                      </p>
+                      <p v-else-if="students.length > 0" class="align-middle fw-bold opacity-75">1 of 1
+                        Result </p>
                     </div>
 
-                    <div
-                      v-if="mq.tablet || mq.mobile"
-                      class="d-flex justify-content-end col-6"
-                    >
-                      <u
-                        v-if="filtersLength > 0"
-                        class="align-middle fw-bold"
-                        @click="
-                          $router.push({
-                            name: 'Filters',
-                            query: { ...this.$route.query },
-                          })
-                        "
-                        >Filter ({{ filtersLength }})</u
-                      >
-                      <u
-                        v-else
-                        class="align-middle fw-bold"
-                        @click="
-                          $router.push({
-                            name: 'Filters',
-                            query: { ...this.$route.query },
-                          })
-                        "
-                        >Filter</u
-                      >
+                    <div v-if="mq.tablet || mq.mobile" class="d-flex justify-content-end col-6">
+                      <u v-if="filtersLength > 0" class="align-middle fw-bold"
+                        @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter
+                        ({{ filtersLength }})</u>
+                      <u v-else class="align-middle fw-bold"
+                        @click="$router.push({ name: 'Filters', query: { ...this.$route.query } })">Filter</u>
                     </div>
                   </div>
-
+                  
                   <!-- remove filter buttons for mobile -->
-                  <div
-                    v-if="filtersLength > 0 && (mq.mobile || mq.tablet)"
-                    class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start"
-                  >
-                    <button
-                      type="button"
-                      class="btn btn-success me-2 inline-block justify-content-start"
-                      v-for="filter in filters.year"
-                      @click="removeYear(filter)"
-                    >
+                  <div v-if="filtersLength > 0 && (mq.mobile || mq.tablet)"
+                    class="container scroll-group d-flex flex-nowrap mb-4 align-content-start justify-content-start">
+                    <button type="button" class="btn btn-success me-2 inline-block justify-content-start"
+                      v-for="filter in filters.year" @click="removeYear(filter)">
                       <span v-if="filter == 'Senior'">Senior +</span>
                       <span v-else>{{ filter }}</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-x"
-                        viewBox="0 0 16 16"
-                      >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
                         <path
-                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                        />
+                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                       </svg>
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-success me-2 inline-block"
-                      v-for="filter in filters.major"
-                      @click="removeMajor(filter)"
-                    >
-                      {{ filter }}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-x"
-                        viewBox="0 0 16 16"
-                      >
+                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.major"
+                      @click="removeMajor(filter)">{{ filter }}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
                         <path
-                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                        />
+                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                       </svg>
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-success me-2 inline-block"
-                      v-for="filter in filters.topic"
-                      @click="removeTopic(filter)"
-                    >
-                      {{ filter }}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-x"
-                        viewBox="0 0 16 16"
-                      >
+                    <button type="button" class="btn btn-success me-2 inline-block" v-for="filter in filters.topic"
+                      @click="removeTopic(filter)">{{ filter }}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
                         <path
-                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                        />
+                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                       </svg>
                     </button>
                   </div>
 
                   <div v-if="students.length > 0">
-                    <div
-                      class="card-columns justify-content-end"
-                      v-for="student in students"
-                      :key="student.id"
-                    >
-                      <InterviewListing
-                        :interviewInfo="student"
-                        :class="mq.mobile || mq.tablet ? 'mb-3' : 'mb-5'"
-                      />
+                    <div class="card-columns justify-content-end" v-for="student in students" :key="student.id">
+                      <InterviewListing :interviewInfo="student" :class="(mq.mobile || mq.tablet) ? 'mb-3' : 'mb-5'" />
                     </div>
-                    <vue-awesome-paginate
-                      v-if="totalPages > 1"
-                      class="mt-2 justify-content-center d-flex"
-                      v-model="currentPage"
-                      :total-items="totalCount"
-                      :items-per-page="perPage"
-                      :hide-prev-next-when-ends="true"
-                      :on-click="updatePage"
-                    />
+                    <vue-awesome-paginate v-if="totalPages > 1" class="mt-2 justify-content-center d-flex"
+                      v-model="currentPage" :total-items="totalCount" :items-per-page="perPage"
+                      :hide-prev-next-when-ends="true" :on-click="updatePage" />
                   </div>
                   <div v-else-if="students.length == 0">
-                    <p
-                      class="card-columns justify-content-end fw-bold fs-5 mb-5"
-                    >
-                      No matching stories found.
-                    </p>
+                    <p class="card-columns justify-content-end fw-bold fs-5 mb-5">No matching stories found.</p>
                   </div>
                 </div>
               </div>
@@ -191,7 +107,7 @@ import Layout from "../layout.vue";
 import InterviewListing from "../components/student/interview-listing.vue";
 import StudentFilter from "../components/student-filter.vue";
 import Interview from "../components/student/interview.vue";
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   name: "PagesStudents",
@@ -229,27 +145,25 @@ export default {
       immediate: true,
       handler(n) {
         if (n !== undefined) {
-          this.currentPage = JSON.parse(n);
+          this.currentPage = JSON.parse(n)
         }
-      },
+      }
     },
     // makes new api call when query changes
     "$route.query": {
       immediate: true,
       handler(n) {
         this.loadData();
-      },
+      }
     },
     currentPage: {
       handler(newPage, oldPage) {
         // Only update route if currentPage differs from route's page (user clicked pagination)
-        const routePage = this.$route.query.page
-          ? JSON.parse(this.$route.query.page)
-          : 1;
+        const routePage = this.$route.query.page ? JSON.parse(this.$route.query.page) : 1;
         if (newPage !== routePage && oldPage !== undefined) {
           this.updatePage();
         }
-      },
+      }
     },
     // Save scroll position when navigating to interview
     "$route.params.id": {
@@ -258,8 +172,8 @@ export default {
           // Navigating to interview - save scroll position
           this.saveScrollPosition();
         }
-      },
-    },
+      }
+    }
   },
   computed: {
     filter() {
@@ -272,25 +186,20 @@ export default {
       return JSON.parse(this.$route.params.singleStudent);
     },
     filtersLength() {
-      const arr = (obj) =>
-        !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
-      const length = (obj) => (obj === undefined ? 0 : obj.length);
-      return (
-        length(arr(this.filters.year)) +
-        length(arr(this.filters.major)) +
-        length(arr(this.filters.topic))
-      );
+      const arr = (obj) => !Array.isArray(obj) && obj !== undefined ? [obj] : obj;
+      const length = (obj) => obj === undefined ? 0 : obj.length;
+      return length(arr(this.filters.year)) + length(arr(this.filters.major)) + length(arr(this.filters.topic));
     },
   },
   methods: {
     async loadData() {
       const url = this.$route.fullPath;
       const response = await axios.get("/api" + url);
-      this.students = response.data["results"];
-      this.perPage = response.data["page_size"];
-      this.totalCount = response.data["count"];
-      this.totalPages = response.data["page_count"];
-
+      this.students = response.data['results'];
+      this.perPage = response.data['page_size'];
+      this.totalCount = response.data['count'];
+      this.totalPages = response.data['page_count'];
+      
       // restore scroll position if returning from interview detail
       if (!this.interviewId) {
         this.$nextTick(() => {
@@ -302,38 +211,26 @@ export default {
       // parsing then stringifying to make a deep copy so that url query updates with changes
       if (this.$route.query.year !== undefined) {
         if (Array.isArray(this.$route.query.year)) {
-          this.filters.year = JSON.parse(
-            JSON.stringify(this.$route.query.year)
-          );
+          this.filters.year = JSON.parse(JSON.stringify(this.$route.query.year));
         } else {
           this.filters.year = [];
-          this.filters.year.push(
-            JSON.parse(JSON.stringify(this.$route.query.year))
-          );
+          this.filters.year.push(JSON.parse(JSON.stringify(this.$route.query.year)));
         }
       }
       if (this.$route.query.major !== undefined) {
         if (Array.isArray(this.$route.query.major)) {
-          this.filters.major = JSON.parse(
-            JSON.stringify(this.$route.query.major)
-          );
+          this.filters.major = JSON.parse(JSON.stringify(this.$route.query.major));
         } else {
           this.filters.major = [];
-          this.filters.major.push(
-            JSON.parse(JSON.stringify(this.$route.query.major))
-          );
+          this.filters.major.push(JSON.parse(JSON.stringify(this.$route.query.major)));
         }
       }
       if (this.$route.query.topic !== undefined) {
         if (Array.isArray(this.$route.query.topic)) {
-          this.filters.topic = JSON.parse(
-            JSON.stringify(this.$route.query.topic)
-          );
+          this.filters.topic = JSON.parse(JSON.stringify(this.$route.query.topic));
         } else {
           this.filters.topic = [];
-          this.filters.topic.push(
-            JSON.parse(JSON.stringify(this.$route.query.topic))
-          );
+          this.filters.topic.push(JSON.parse(JSON.stringify(this.$route.query.topic)));
         }
       }
     },
@@ -362,30 +259,25 @@ export default {
       const query = {};
       Object.entries(this.filters).forEach(([key, value]) => {
         if (value) {
-          query[key] = value;
+          query[key] = (value);
         }
-      });
-      query["page"] = this.currentPage;
+      })
+      query['page'] = this.currentPage;
       this.$router.replace({ query: query });
     },
     updatePage() {
-      this.$router.push({
-        query: { ...this.$route.query, page: this.currentPage },
-      });
+      this.$router.push({ query: { ...this.$route.query, 'page': this.currentPage } });
     },
     saveScrollPosition() {
-      const scrollY =
-        window.scrollY ||
-        window.pageYOffset ||
-        document.documentElement.scrollTop;
-      sessionStorage.setItem("studentsScrollPosition", scrollY.toString());
+      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      sessionStorage.setItem('studentsScrollPosition', scrollY.toString());
     },
     restoreScrollPosition() {
-      const savedPosition = sessionStorage.getItem("studentsScrollPosition");
+      const savedPosition = sessionStorage.getItem('studentsScrollPosition');
       if (savedPosition) {
         const scrollY = parseInt(savedPosition, 10);
-        window.scrollTo({ top: scrollY, behavior: "instant" });
-        sessionStorage.removeItem("studentsScrollPosition");
+        window.scrollTo({ top: scrollY, behavior: 'instant' });
+        sessionStorage.removeItem('studentsScrollPosition');
       }
     },
   },
@@ -420,7 +312,7 @@ export default {
 }
 
 .active-page {
-  background-color: #4b2e83;
+  background-color: #4B2E83;
   border: none;
   color: white;
 }
