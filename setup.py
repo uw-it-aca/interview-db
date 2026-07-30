@@ -8,7 +8,8 @@ See the README on `GitHub
 """
 
 version_path = 'interview_db/VERSION'
-VERSION = open(os.path.join(os.path.dirname(__file__), version_path)).read()
+with open(os.path.join(os.path.dirname(__file__), version_path)) as f:
+    VERSION = f.read()
 VERSION = VERSION.replace("\n", "")
 
 # allow setup.py to be run from any path

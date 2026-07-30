@@ -33,14 +33,13 @@ class ImagesTest(TestCase):
             pull_quote="Some pull quote",
             other_publishing_restrictions=False
         )
-        image_fh = open("%s/../resources/test_image.png" % TEST_ROOT, 'rb')
-        interview.image = SimpleUploadedFile(
-            name='test_image.png',
-            content=image_fh.read(),
-            content_type='image/png')
+        with open("%s/../resources/test_image.png" % TEST_ROOT, 'rb') as image_fh:
+            interview.image = SimpleUploadedFile(
+                name='test_image.png',
+                content=image_fh.read(),
+                content_type='image/png')
         interview.save()
         self.interview = interview
-        image_fh.close()
 
     def test_get_image(self):
         """
