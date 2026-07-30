@@ -1,10 +1,12 @@
 # Copyright 2026 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
+import json
+
 from django.test import TestCase
 from django.urls import reverse
+
 from interview_db.models import *
-import json
 
 
 class CollectionsTest(TestCase):

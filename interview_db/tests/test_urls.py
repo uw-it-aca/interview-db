@@ -3,6 +3,7 @@
 
 from django.test import TestCase
 from django.urls import resolve
+
 from interview_db.models import *
 
 

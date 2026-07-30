@@ -3,8 +3,9 @@
 
 from django.conf import settings
 from django.contrib import admin
-from django.urls import re_path, path
+from django.urls import path, re_path
 from django.views.generic import TemplateView
+
 from interview_db.views import *
 
 app_name = "interview_db"
