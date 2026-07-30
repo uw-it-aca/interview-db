@@ -283,10 +283,12 @@ class ImageView(APIView):
             return Response('Interview has no image',
                             status=status.HTTP_400_BAD_REQUEST)
 
-        if interview.no_identifying_photo:
-            if interview.image_is_not_identifying is False:
-                return Response('Image not shown for privacy',
-                                status=status.HTTP_400_BAD_REQUEST)
+        if (
+            interview.no_identifying_photo
+            and interview.image_is_not_identifying is False
+        ):
+            return Response('Image not shown for privacy',
+                            status=status.HTTP_400_BAD_REQUEST)
 
         expires = datetime.now(timezone.utc) + timedelta(
             seconds=settings.IMAGE_CACHE_EXPIRES)
