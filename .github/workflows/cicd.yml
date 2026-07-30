@@ -66,6 +66,14 @@ jobs:
 
     needs: context
 
+    permissions:
+      contents: read
+      security-events: write
+      # Coveralls may or may not need the following permissions
+      # pull-requests: write    # For PR comments
+      # statuses: write        # For commit status updates
+      # checks: write          # For check runs
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6
@@ -80,6 +88,7 @@ jobs:
         with:
           app_name: ${DJANGO_APP}
           exclude_paths: 'migrations'
+          ignore: 'RUF012'
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
@@ -92,6 +101,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
+        # Build App Image
       - name: Build App Image
         uses: docker/build-push-action@v7
         with:
@@ -103,6 +113,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
+      # Build Test Image
       - name: Build Test Image
         uses: docker/build-push-action@v7
         with:
@@ -111,26 +122,75 @@ jobs:
           push: false
           load: true
 
+      # Run Python Tests
       - name: Run Tests in Image
         id: tests
         shell: bash
         run: >-
-          docker run -u root -t
-          -v ${PWD}:/coverage
+          docker run --rm -u root -t
+          -v "${PWD}:/coverage"
           -e DJANGO_APP="$DJANGO_APP"
           -e "ENV=localdev" -e "AUTH=SAML_MOCK"
           app-test-container
           bash -c ". ./docker/test.sh"
 
-      - name: Record Test Results
+      # Run Python Coverage and Upload to Coveralls
+      - name: Run Python Coverage and Upload to Coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
           python -m pip install --upgrade pip coverage coveralls==3.3.1
           coverage combine
-          coveralls
+          coveralls --service=github
         continue-on-error: true
+
+# Uncomment if using a Vue frontend and want coverage
+#      # Set up Node.js for Vue
+#      - name: Set up Node.js
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: "24"
+#
+#      # Install Vue Dependencies
+#      - name: Install npm dependencies
+#        run: npm install
+#
+#      # Run Vue Coverage
+#      - name: Run Vue Coverage
+#        run: npm run coverage
+#
+#      # Upload Vue Coverage to Coveralls
+#      - name: Upload Vue Coverage to Coveralls
+#        uses: coverallsapp/github-action@v2
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          path-to-lcov: ./coverage/lcov.info
+#          flag-name: app_name_vue
+#          parallel: true
+#
+#      # Finalize Coveralls Parallel Build
+#      - name: Finish Coveralls Build
+#        uses: coverallsapp/github-action@v2
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          parallel-finished: true
+
+      - name: Run vulnerability scan
+        id: vuln-scan
+        uses: uw-it-aca/actions/container-vuln-scan@main
+        with:
+          image_tag: ${{ needs.context.outputs.image_tag }}
+          severity: 'HIGH,CRITICAL'
+
+#      - name: Fail on vulnerabilities (optional step)
+#        # Remove this entire block if you don't want to fail the build
+#        if: steps.vuln-scan.outputs.vulnerabilities_found == 'true'
+#        shell: bash
+#        run: |
+#          echo "High or critical vulnerabilities found!"
+#          cat ${{ steps.vuln-scan.outputs.results_file }}
+#          exit 1
 
       - name: Push Image to Repository
         if: github.event_name == 'push'
