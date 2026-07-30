@@ -1,14 +1,12 @@
 # Copyright 2026 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 from interview_db.models import *
 from django.contrib.admin.sites import AdminSite
 from interview_db.admin import *
-import mock
-from django.contrib.sessions.middleware import SessionMiddleware
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 

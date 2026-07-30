@@ -2,10 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from django.contrib import admin
-from django import forms
-from django.forms import ModelForm
 from django.conf import settings
-from django.contrib.admin.views.main import ChangeList
 from django.http import HttpResponse, HttpResponseRedirect
 
 from uw_saml.views import LoginView, LogoutView
