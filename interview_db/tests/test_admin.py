@@ -1,12 +1,13 @@
 # Copyright 2026 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
+from django.contrib.admin.sites import AdminSite
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
-from interview_db.models import *
-from django.contrib.admin.sites import AdminSite
+
 from interview_db.admin import *
+from interview_db.models import *
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 

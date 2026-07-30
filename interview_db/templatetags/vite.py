@@ -3,12 +3,13 @@
 
 # PROJECT_ROOT/templatetags/vite.py
 
-import os
 import json
+import os
+
 from django import template
 from django.conf import settings
-from django.utils.safestring import mark_safe
 from django.templatetags.static import static
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 

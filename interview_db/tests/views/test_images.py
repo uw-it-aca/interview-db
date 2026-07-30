@@ -1,14 +1,16 @@
 # Copyright 2026 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
+import json
+from io import BytesIO
+from os.path import abspath, dirname
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
-from interview_db.models import *
-from django.core.files.uploadedfile import SimpleUploadedFile
-from os.path import abspath, dirname
 from PIL import Image
-from io import BytesIO
-import json
+
+from interview_db.models import *
 
 TEST_ROOT = abspath(dirname(__file__))
 

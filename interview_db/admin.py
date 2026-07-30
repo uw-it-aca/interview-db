@@ -1,12 +1,11 @@
 # Copyright 2026 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
-from django.contrib import admin
 from django.conf import settings
+from django.contrib import admin
 from django.http import HttpResponse, HttpResponseRedirect
-
-from uw_saml.views import LoginView, LogoutView
 from uw_saml.utils import is_member_of_group
+from uw_saml.views import LoginView, LogoutView
 
 from .models import *
 

@@ -2,9 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-from django.test import TestCase
-from interview_db.models import *
 import json
+
+from django.test import TestCase
+
+from interview_db.models import *
 
 
 class ModelsTest(TestCase):
