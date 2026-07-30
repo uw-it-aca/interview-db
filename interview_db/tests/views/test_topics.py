@@ -116,6 +116,3 @@ class InterviewTopicsTest(TestCase):
         results = json.loads(response.content)
         stories = results['results']
         self.assertEqual(stories[0]['id'], self.s_joe_2.id)
-
-    def tearDown(self):
-        pass

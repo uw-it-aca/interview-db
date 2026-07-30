@@ -118,5 +118,5 @@ class ModelsTest(TestCase):
             question='How did you choose your major?')
         self.assertEqual(str(col), 'Majors')
 
-    def tearDown(self):
+    def tearDown(self): # noqa: F811
         pass

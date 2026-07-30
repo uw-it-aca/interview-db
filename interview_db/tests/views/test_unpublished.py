@@ -216,5 +216,5 @@ class UnpublishedInterviewsTest(TestCase):
         count = json.loads(response.content)
         self.assertEqual(count, 3)
 
-    def tearDown(self):
+    def tearDown(self): # noqa: F811
         pass
