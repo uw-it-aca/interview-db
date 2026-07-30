@@ -33,7 +33,7 @@ class ImagesTest(TestCase):
             pull_quote="Some pull quote",
             other_publishing_restrictions=False
         )
-        with open("%s/../resources/test_image.png" % TEST_ROOT, 'rb') as image_fh:
+        with open(f"{TEST_ROOT}/../resources/test_image.png", 'rb') as image_fh:
             interview.image = SimpleUploadedFile(
                 name='test_image.png',
                 content=image_fh.read(),
@@ -49,7 +49,7 @@ class ImagesTest(TestCase):
             "id": self.interview.id})
         response = self.client.get(url, follow=True)
         with Image.open(BytesIO(response.content)) as image:
-            orig = Image.open("%s/../resources/test_image.png" % TEST_ROOT)
+            orig = Image.open(f"{TEST_ROOT}/../resources/test_image.png")
             self.assertEqual(image.size[0], orig.size[0])
             self.assertEqual(image.size[1], orig.size[1])
             self.assertEqual(image.format, "PNG")
