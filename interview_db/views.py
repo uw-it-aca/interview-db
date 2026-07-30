@@ -1,19 +1,21 @@
 # Copyright 2026 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
+from datetime import datetime, timedelta, timezone
+
 from django.conf import settings
-from django.views.generic import TemplateView
 from django.db.models import Q
-from django.utils.decorators import method_decorator
 from django.http import HttpResponse
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from uw_saml.decorators import group_required
-from datetime import datetime, timedelta, timezone
-from .serializers import *
+
 from .models import *
+from .serializers import *
 
 admin_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['admin']
 front_end_group = settings.INTERVIEW_DB_AUTHZ_GROUPS['front-end']
@@ -43,7 +45,7 @@ class PageView(TemplateView):
         return context
 
     def render_to_response(self, context, **response_kwargs):
-        response = super(PageView, self).render_to_response(
+        response = super().render_to_response(
             context, **response_kwargs)
         return response
 
@@ -281,20 +283,21 @@ class ImageView(APIView):
             return Response('Interview has no image',
                             status=status.HTTP_400_BAD_REQUEST)
 
-        if interview.no_identifying_photo:
-            if interview.image_is_not_identifying is False:
-                return Response('Image not shown for privacy',
-                                status=status.HTTP_400_BAD_REQUEST)
+        if (
+            interview.no_identifying_photo
+            and interview.image_is_not_identifying is False
+        ):
+            return Response('Image not shown for privacy',
+                            status=status.HTTP_400_BAD_REQUEST)
 
         expires = datetime.now(timezone.utc) + timedelta(
             seconds=settings.IMAGE_CACHE_EXPIRES)
 
         try:
             response = HttpResponse(img, content_type='image/jpeg')
-            response['Cache-Control'] = 'public,max-age={}'.format(
-                settings.IMAGE_CACHE_EXPIRES)
+            response['Cache-Control'] = f'public,max-age={settings.IMAGE_CACHE_EXPIRES}'
             response['Expires'] = expires.strftime('%a, %d %b %Y %H:%M:%S GMT')
-        except IOError:
+        except OSError:
             response = Response('Not found', status=status.HTTP_404_NOT_FOUND)
         return response
 

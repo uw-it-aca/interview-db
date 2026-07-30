@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from rest_framework import serializers
+
 from .models import *
 
 

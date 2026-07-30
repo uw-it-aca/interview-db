@@ -1,10 +1,12 @@
 # Copyright 2026 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
+import json
+
 from django.test import TestCase
 from django.urls import reverse
+
 from interview_db.models import *
-import json
 
 
 class UnpublishedInterviewsTest(TestCase):
@@ -214,5 +216,5 @@ class UnpublishedInterviewsTest(TestCase):
         count = json.loads(response.content)
         self.assertEqual(count, 3)
 
-    def tearDown(self):
+    def tearDown(self): # noqa: F811
         pass

@@ -1,14 +1,16 @@
 # Copyright 2026 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
+import json
+from io import BytesIO
+from os.path import abspath, dirname
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
-from interview_db.models import *
-from django.core.files.uploadedfile import SimpleUploadedFile
-from os.path import abspath, dirname
 from PIL import Image
-from io import BytesIO
-import json
+
+from interview_db.models import *
 
 TEST_ROOT = abspath(dirname(__file__))
 
@@ -31,14 +33,13 @@ class ImagesTest(TestCase):
             pull_quote="Some pull quote",
             other_publishing_restrictions=False
         )
-        image_fh = open("%s/../resources/test_image.png" % TEST_ROOT, 'rb')
-        interview.image = SimpleUploadedFile(
-            name='test_image.png',
-            content=image_fh.read(),
-            content_type='image/png')
+        with open(f"{TEST_ROOT}/../resources/test_image.png", 'rb') as image_fh:
+            interview.image = SimpleUploadedFile(
+                name='test_image.png',
+                content=image_fh.read(),
+                content_type='image/png')
         interview.save()
         self.interview = interview
-        image_fh.close()
 
     def test_get_image(self):
         """
@@ -48,7 +49,7 @@ class ImagesTest(TestCase):
             "id": self.interview.id})
         response = self.client.get(url, follow=True)
         with Image.open(BytesIO(response.content)) as image:
-            orig = Image.open("%s/../resources/test_image.png" % TEST_ROOT)
+            orig = Image.open(f"{TEST_ROOT}/../resources/test_image.png")
             self.assertEqual(image.size[0], orig.size[0])
             self.assertEqual(image.size[1], orig.size[1])
             self.assertEqual(image.format, "PNG")
