@@ -1,3 +1,5 @@
+name: interview-db
+
 services:
   app:
     build:
