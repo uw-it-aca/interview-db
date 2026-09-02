@@ -45,7 +45,7 @@ Update any .env variables for local development purposes
 
 Docker/Docker Compose is used to containerize your local build environment and deploy it to an 'app' container which is exposed to your localhost so you can view your application. Docker Compose creates a 'devtools' container - which is used for local development. Changes made locally are automatically syncd to the 'app' container.
 
-        $ docker-compose up --build
+        $ docker compose up --build
 
 View your application using your specified port number in the .env file
 
