@@ -2,7 +2,7 @@
 // to filter student interviews
 
 <template>
-  <div class="card p-3 border-0 filter-card" :class="(mq.tablet || mq.mobile) ? 'card-100 border-10' : 'card'">
+  <div class="card p-3 border-0 filter-card">
     <div v-if="!mq.tablet && !mq.mobile" class="row m-3">
       <div class="justify-content-end d-flex">
         <a v-if="!emptyFilters" class="text-secondary active-link active-link-hover" @click="clearFilters">
