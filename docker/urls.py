@@ -1,9 +1,11 @@
-from .base_urls import *
-from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls.static import static
+from django.urls import path, re_path
+
 from interview_db.admin import saml_admin_site
+
+from .base_urls import *
 
 urlpatterns += [
     path("admin/", saml_admin_site.urls),

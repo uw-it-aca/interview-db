@@ -52,6 +52,17 @@ const routes = [
 
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
+    // Don't scroll to top when navigating between students list and interview detail
+    // (same route name, only params change) - let the component handle scroll restoration
+    if (to.name === 'Students' && from.name === 'Students') {
+      // If we have a saved position from browser history, use it
+      if (savedPosition) {
+        return savedPosition;
+      }
+      // Otherwise, let the component handle scroll restoration
+      return false;
+    }
+    // For other route changes, scroll to top
     if (to.name != from.name || to.query.page != from.query.page) {
       return { top: 0 }
     }

@@ -3,12 +3,13 @@
 
 # PROJECT_ROOT/templatetags/vite.py
 
-import os
 import json
+import os
+
 from django import template
 from django.conf import settings
-from django.utils.safestring import mark_safe
 from django.templatetags.static import static
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -68,7 +69,7 @@ def vite_styles(*entries_names):
         </head>
     """
     _, styles = vite_manifest(entries_names)
-    styles = map(lambda href: static(href), styles)
+    styles = (static(href) for href in styles)
     as_link_tag = lambda href: f'<link rel="stylesheet" href="{href}" />'
     return mark_safe("\n".join(map(as_link_tag, styles)))
 
@@ -89,6 +90,6 @@ def vite_scripts(*entries_names):
         </body>
     """
     scripts, _ = vite_manifest(entries_names)
-    scripts = map(lambda src: static(src), scripts)
+    scripts = (static(src) for src in scripts)
     as_script_tag = lambda src: f'<script type="module" src="{src}"></script>'
     return mark_safe("\n".join(map(as_script_tag, scripts)))

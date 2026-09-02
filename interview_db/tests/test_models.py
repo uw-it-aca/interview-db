@@ -2,9 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-from django.test import TestCase
-from interview_db.models import *
 import json
+
+from django.test import TestCase
+
+from interview_db.models import *
 
 
 class ModelsTest(TestCase):
@@ -116,5 +118,5 @@ class ModelsTest(TestCase):
             question='How did you choose your major?')
         self.assertEqual(str(col), 'Majors')
 
-    def tearDown(self):
+    def tearDown(self): # noqa: F811
         pass
