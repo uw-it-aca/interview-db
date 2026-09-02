@@ -18,15 +18,8 @@
         <div class="mx-auto p-5">
           <div class="mx-auto mb-5">
             <h2 class="text-purple fw-bold mb-4">Who We Are</h2>
-            <p class="mb-4">
-              We collect the real stories of UW students and share them with
-              others on campus.
-            </p>
-            <p class="mb-4">
-              Our team operates out of the
-              <b>Student & Educational Technology Services (SETS)</b> unit within
-              UW-IT.
-            </p>
+            <p class="mb-4">HuskyVoices is a product of the <a href="https://studentinnovation.uw.edu/">Student Innovation Lab</a> (SIL), housed in UWIT's Student & Educational Technology Services (SETS) unit.</p>
+            <p class="mb-4">SIL's mission is to bring and amplify student voices in UW decision making.</p>
           </div>
 
           <div class="mx-auto pt-2 mb-5">
@@ -42,7 +35,7 @@
               Schedule a 15-30 minute appointment with us to talk about your UW
               experience.
             </p>
-            <a href="mailto:ux@uw.edu?subject=Husky Voices" title="Husky Voices">
+            <a href="mailto:huskyvoices@uw.edu?subject=Appointment Request" title="Email Husky Voices">
               <button type="button" class="btn btn-gold">
                 Share Your Story <i class="bi bi-chevron-right"></i>
               </button>
