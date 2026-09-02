@@ -35,7 +35,7 @@
               Schedule a 15-30 minute appointment with us to talk about your UW
               experience.
             </p>
-            <a href="mailto:huskyvoices@uw.edu?subject=Appointment Request" title="Email Husky Voices">
+            <a href="mailto:huskyvoices@uw.edu?subject=Appointment Request" title="Email HuskyVoices">
               <button type="button" class="btn btn-gold">
                 Share Your Story <i class="bi bi-chevron-right"></i>
               </button>
