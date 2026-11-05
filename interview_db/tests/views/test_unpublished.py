@@ -111,11 +111,6 @@ class UnpublishedInterviewsTest(TestCase):
         coding_no_quote.save()
         self.story_no_quote = story_no_quote
 
-    def tearDown(self):
-        Interview.objects.all().delete()
-        Student.objects.all().delete()
-        Major.objects.all().delete()
-
     def test_no_release_form(self):
         """
         Tests an interview without a signed release form is not published
@@ -216,5 +211,9 @@ class UnpublishedInterviewsTest(TestCase):
         count = json.loads(response.content)
         self.assertEqual(count, 3)
 
-    def tearDown(self): # noqa: F811
-        pass
+    def tearDown(self):
+        Coding.objects.all().delete()
+        Story.objects.all().delete()
+        Interview.objects.all().delete()
+        Student.objects.all().delete()
+        Major.objects.all().delete()
