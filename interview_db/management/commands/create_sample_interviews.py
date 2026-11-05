@@ -5,9 +5,11 @@
 """ Management command to django's manage.py called
     create_sample_interviews that will generate interviews for testing.
 """
-from django.core.management.base import BaseCommand, CommandError
-from interview_db.models import *
 from decimal import *
+
+from django.core.management.base import BaseCommand, CommandError
+
+from interview_db.models import *
 
 
 class Command(BaseCommand):

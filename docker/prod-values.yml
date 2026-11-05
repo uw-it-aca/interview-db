@@ -1,3 +1,9 @@
+gateway:
+  enabled: true
+  hostnames:
+    - huskyvoices.uw.edu
+  maxRequestSize: 5Mi
+
 autoscaling:
   enabled: true
   minReplicas: 2
@@ -70,11 +76,6 @@ externalSecrets:
       data:
         - name: credentials.json
           property: credentials.json
-    - name: huskyvoices.uw.edu-ic-certs
-      externalKey: huskyvoices/prod/ic-certs
-      data:
-        - name: huskyvoices.uw.edu-ic.cert
-          property: huskyvoices.uw.edu-ic.cert
     - name: huskyvoices.uw.edu-uw-idp-cert
       externalKey: idp-cert
       data:
@@ -100,10 +101,6 @@ environmentVariablesSecrets:
     name: DJANGO_SECRET
     secretName: huskyvoices.uw.edu-secrets
     secretKey: django-secret
-  samlSpCertSecret:
-    name: SP_CERT
-    secretName: huskyvoices.uw.edu-ic-certs
-    secretKey: huskyvoices.uw.edu-ic.cert
   samlIdpCertSecret:
     name: IDP_CERT
     secretName: huskyvoices.uw.edu-uw-idp-cert

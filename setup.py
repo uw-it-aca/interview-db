@@ -1,4 +1,5 @@
 import os
+
 from setuptools import setup
 
 README = """
@@ -7,7 +8,8 @@ See the README on `GitHub
 """
 
 version_path = 'interview_db/VERSION'
-VERSION = open(os.path.join(os.path.dirname(__file__), version_path)).read()
+with open(os.path.join(os.path.dirname(__file__), version_path)) as f:
+    VERSION = f.read()
 VERSION = VERSION.replace("\n", "")
 
 # allow setup.py to be run from any path
@@ -30,6 +32,7 @@ setup(
         'django-storages[google]',
         'google-auth',
         'djangorestframework~=3.14',
+        'psycopg[c]',
     ],
     license='Apache License, Version 2.0',
     description=('App to collect and tag interview data, artifacts,'

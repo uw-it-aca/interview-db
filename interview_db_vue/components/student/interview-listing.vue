@@ -1,98 +1,111 @@
-// interview-listing.vue 
-// shown on full students page, individual topic page, or as carousel on home page
-
 <template>
-  <button type="button" class="shadow-sm btn-card mt-5" style="height:fit-content;" @click="$router.push({
-    name: 'Students',
-    params: {
-      id: interviewInfo.id,
-    },
-  })
-    ">
-    <div class="d-flex card-clickable">
-      <div class="row p-0 m-x-0">
-        <div class="col-md-4 col-sm-5 row-xs mx-auto ps-4 img-div shift-up">
-          <img v-if="image" :src="image" style="width:100%; object-fit:cover" class="listing-img img-fluid"
-            :alt="altText" />
-          <img v-else src="../../images/placeholder.png" style="width:100%; object-fit:cover" class="listing-img img-fluid" alt="a placeholder image" />
-        </div>
-
-        <div class="col-md-8 col-sm-7 p-4 m-0">
-          <div class="row">
-            <p v-if="!carousel && !(mq.mobile || mq.tablet)"  class="fs-6 text-end">{{ interviewDate }}</p>
-            <h2 class="card-title fw-bold text-purple" :class="(carousel || (mq.mobile || mq.tablet)) ? 'display-4 fs-3 mb-2' : 'display-6 mb-2'">
-              {{ interviewInfo.student.first_name }}
-            </h2>
-            <p class="pb-4 border-bottom border-primary" :class="(carousel || (mq.mobile || mq.tablet)) ? '' : 'display-4 fs-5'">
-              <span v-if="interviewInfo.standing">
-                {{ interviewInfo.standing + ", studying" }}
-              </span>
-              <span v-else> Studying </span>
-              {{ interviewInfo.declared_major }}
-            </p>
-          </div>
-        </div>
-
-        <div class="card-text px-4">
-          <p v-if=story class="lh-base">"{{ story }}"</p>
-          <p v-else class="lh-base">"{{ interviewInfo.pull_quote }}"</p>
-        </div>
-
-        <div class="d-flex justify-content-end">
-          <p class="text-purple" style="display:inline;">Read More</p>
-          <p>&nbsp;</p>
-          <i class="bi bi-chevron-right"></i>
-        </div>
+  <div
+    class="student-card"
+    role="button"
+    @click="navigateToInterview"
+  >
+    <!-- Top tag bar -->
+    <div class="tag-bar">
+      <div class="tag-row">
+        <span v-if="interviewInfo.standing" class="tag">
+          {{ interviewInfo.standing }}
+        </span>
+        <span style="color: white; margin: 0 4px;"> | </span>
+        <span class="tag">
+          {{ interviewInfo.declared_major }}
+        </span>
+        <span v-if="interviewInfo.minor" class="tag">
+          {{ interviewInfo.minor }}
+        </span>
       </div>
     </div>
-  </button>
+
+    <!-- Card body -->
+    <div class="card-inner">
+      <div class="image-wrapper">
+        <img
+          v-if="image"
+          :src="image"
+          class="student-image"
+          :alt="altText"
+        />
+        <img
+          v-else
+          src="../../images/placeholder.png"
+          class="student-image"
+          alt="placeholder image"
+        />
+      </div>
+
+      <div class="content-wrapper">
+        <blockquote class="pull-quote">
+          “{{ story || interviewInfo.pull_quote }}”
+        </blockquote>
+
+        <button
+          type="button"
+          class="read-more-btn"
+          @click.stop="navigateToInterview"
+        >
+          Read {{ interviewInfo.student.first_name }}'s Story
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
+
 export default {
   name: "StudentListing",
   inject: ["mq"],
+
   props: {
-    interviewInfo: {
-      type: Object,
-      required: true,
-    },
-    story: {
-      type: String,
-      required: false,
-    },
-    carousel: {
-      type: Boolean,
-      required: false,
-    }
+    interviewInfo: { type: Object, required: true },
+    story: { type: String, required: false },
+    carousel: { type: Boolean, required: false }
   },
+
   data() {
     return {
       image: null,
       altText: null,
     };
   },
+
   created() {
     this.loadImage();
   },
+
   methods: {
-    async loadImage() {
-      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) {
-        return;
+    navigateToInterview() {
+      if (this.interviewInfo?.id) {
+        this.$router.push({
+          name: 'Students',
+          params: { id: this.interviewInfo.id }
+        });
       }
-      if (this.interviewInfo.image == null) return;
+    },
+    async loadImage() {
+      if (this.interviewInfo.no_identifying_photo && !this.interviewInfo.image_is_not_identifying) return;
+      if (!this.interviewInfo.image) return;
+
       this.altText = this.interviewInfo.image_alt_text;
 
-      // create blob for image
       try {
-        const blob = await axios.get("/api/students/" + this.interviewInfo.id + "/image/", { responseType: 'blob' });
+        const blob = await axios.get(
+          "/api/students/" + this.interviewInfo.id + "/image/",
+          { responseType: "blob" }
+        );
         this.image = URL.createObjectURL(blob.data);
       } catch (err) {
-        console.log(err);
+        // Image not available or failed to load
       }
     },
   },
+
   computed: {
     interviewDate() {
       return new Date(this.interviewInfo.date).toLocaleDateString("en-US");
@@ -104,5 +117,128 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.student-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  margin-bottom: 2rem;
+}
+
+.student-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.tag-bar {
+  background-color: #4b2e83;
+  padding: 0.5rem 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 0px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #4b2e83;
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 24px;
+  font-weight: 550;
+}
+
+.card-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 1.5rem 2rem;
+  gap: 1.5rem;
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.image-wrapper {
+  flex: 0 0 220px;
+  max-width: 220px;
+}
+
+.student-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+  display: block;
+}
+
+.content-wrapper {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #3d3d3d;
+}
+
+.pull-quote {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0 0 0.75rem 0;
+}
+
+.read-more-btn {
+  align-self: flex-start;
+  background-color: #e7e3d5;
+  color: #4b2e83;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0;
+}
+
+.read-more-btn:hover {
+  background-color: #dcd6c4;
+}
+
+@media (max-width: 768px) {
+  .card-inner {
+    flex-direction: column;
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .image-wrapper {
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+
+  .student-image {
+    max-height: 260px;
+  }
+
+  .student-name {
+    margin-top: 0.75rem;
+  }
+}
 </style>

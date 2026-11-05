@@ -1,40 +1,40 @@
-version: "3.4"
+name: interview-db
 
 services:
   app:
-    environment:
-      ENV:  localdev
-      PORT: 8000
-      AUTH: SAML_MOCK
-    restart: always
-    container_name: interview_db_app
     build:
       context: .
       target: app-container
+    container_name: interview_db_app
     volumes:
       - ./interview_db:/app/interview_db
       - ./docker/settings.py:/app/project/settings.py
       - ./docker/urls.py:/app/project/urls.py
+    environment:
+      ENV: localdev
+      PORT: 8000
+      AUTH: SAML_MOCK
     ports:
-      - "${RUNSERVER_PORT:-8000}:8000"
+      - '${RUNSERVER_PORT:-8000}:8000'
+    restart: always
     stdin_open: true
     tty: true
   node-bundler:
     build:
       context: .
       target: node-bundler
-    restart: always
     container_name: interview_db_node
-    ports:
-      - "${BUNDLE_ANALYZER_PORT:-8888}:8888" # Required when environment.BUNDLE_ANALYZER is true
-    environment:
-      VUE_DEVTOOLS: "True"
-      BUNDLE_ANALYZER: "True"
     volumes:
       - ./interview_db:/app/interview_db # expose main django app so vite can output bundles here
       - ./interview_db_vue:/app/interview_db_vue
       - statics-volume:/static
+    environment:
+      VUE_DEVTOOLS: "True"
+      BUNDLE_ANALYZER: "True"
+    ports:
+      - '${BUNDLE_ANALYZER_PORT:-8888}:8888' # Required when environment.BUNDLE_ANALYZER is true
     command: npm run watch
+    restart: always
     stdin_open: true
     tty: true
 volumes:

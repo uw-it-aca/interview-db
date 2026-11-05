@@ -2,9 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-from django.test import TestCase
-from interview_db.models import *
 import json
+
+from django.test import TestCase
+
+from interview_db.models import *
 
 
 class ModelsTest(TestCase):
@@ -60,11 +62,6 @@ class ModelsTest(TestCase):
                 story=self.story,
             )
 
-    def tearDown(self):
-        Interview.objects.all().delete()
-        Student.objects.all().delete()
-        Major.objects.all().delete()
-
     def test_major_str(self):
         self.assertEqual(str(self.comm), 'COMM')
         self.assertEqual(str(self.hcde), 'HCDE')
@@ -117,4 +114,8 @@ class ModelsTest(TestCase):
         self.assertEqual(str(col), 'Majors')
 
     def tearDown(self):
-        pass
+        Coding.objects.all().delete()
+        Story.objects.all().delete()
+        Interview.objects.all().delete()
+        Student.objects.all().delete()
+        Major.objects.all().delete()

@@ -1,3 +1,9 @@
+gateway:
+  enabled: true
+  hostnames:
+    - test.huskyvoices.uw.edu
+  maxRequestSize: 5Mi
+
 ingress:
   enabled: true
   tls:
@@ -66,11 +72,6 @@ externalSecrets:
       data:
         - name: credentials.json
           property: credentials.json
-    - name: test.huskyvoices.uw.edu-ic-certs
-      externalKey: huskyvoices/test/ic-certs
-      data:
-        - name: test.huskyvoices.uw.edu-ic.cert
-          property: test.huskyvoices.uw.edu-ic.cert
     - name: test.huskyvoices.uw.edu-uw-idp-cert
       externalKey: idp-cert
       data:
@@ -96,10 +97,6 @@ environmentVariablesSecrets:
     name: DJANGO_SECRET
     secretName: test.huskyvoices.uw.edu-secrets
     secretKey: django-secret
-  samlSpCertSecret:
-    name: SP_CERT
-    secretName: test.huskyvoices.uw.edu-ic-certs
-    secretKey: test.huskyvoices.uw.edu-ic.cert
   samlIdpCertSecret:
     name: IDP_CERT
     secretName: test.huskyvoices.uw.edu-uw-idp-cert
