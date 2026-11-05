@@ -62,11 +62,6 @@ class ModelsTest(TestCase):
                 story=self.story,
             )
 
-    def tearDown(self):
-        Interview.objects.all().delete()
-        Student.objects.all().delete()
-        Major.objects.all().delete()
-
     def test_major_str(self):
         self.assertEqual(str(self.comm), 'COMM')
         self.assertEqual(str(self.hcde), 'HCDE')
@@ -118,5 +113,9 @@ class ModelsTest(TestCase):
             question='How did you choose your major?')
         self.assertEqual(str(col), 'Majors')
 
-    def tearDown(self): # noqa: F811
-        pass
+    def tearDown(self):
+        Coding.objects.all().delete()
+        Story.objects.all().delete()
+        Interview.objects.all().delete()
+        Student.objects.all().delete()
+        Major.objects.all().delete()
