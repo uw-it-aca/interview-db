@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "huskyvoices"
+dynamic = ["version"]
+description = "App to collect and tag interview data, artifacts, and stories for publishing"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [
+    {name = "UWIT Student & Educational Technology Services", email = "aca-it@uw.edu"}
+]
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+]
+dependencies = [
+    "django~=5.2",
+    "pillow",
+    "uw-django-saml2~=1.8",
+    "django-pyscss",
+    "django-prometheus",
+    "django-storages[google]",
+    "google-auth",
+    "djangorestframework~=3.14",
+    "psycopg[c]",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+]
+
+[tool.setuptools]
+packages = ["interview_db"]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {file = "interview_db/VERSION"}
+
+[tool.ruff]
+line-length = 88
+exclude = [
+    "interview_db/migrations/*",
+]
+
+[tool.ruff.lint]
+ignore = [
+    "RUF012",  # allow mutable class attributes
+]
+
+[tool.coverage.run]
+source = ["interview-db"]
+parallel = true
+omit = [
+     "interview_db/migrations/*",
+     "interview_db/tests/*"
+]
+
+[tool.coverage.paths]
+source = [
+    "interview_db/",
+    "/app/interview_db/",
+]
