@@ -3,29 +3,12 @@ gateway:
   hostnames:
     - huskyvoices.uw.edu
   maxRequestSize: 5Mi
-
 autoscaling:
   enabled: true
   minReplicas: 2
   maxReplicas: 4
 affinity:
    podsSpanNodes: true
-ingress:
-  enabled: true
-  tls:
-    huskyvoices:
-      secretName: huskyvoices.uw.edu-ingress-cert
-      hosts:
-        - huskyvoices.uw.edu
-  hosts:
-    huskyvoices:
-      host: huskyvoices.uw.edu
-      paths:
-        - "/"
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    nginx.ingress.kubernetes.io/client-body-buffer-size: "16K"
-    nginx.ingress.kubernetes.io/proxy-body-size: "5M"
 lifecycle:
   enabled: true
   preStop:
